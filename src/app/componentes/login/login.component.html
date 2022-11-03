@@ -1,21 +1,39 @@
-<nav class="navbar navbar-dark bg-primary">
-    Sistemas GPR - MECANICA
+<nav class="navbar navbar-dark bg-dark">
+    <span class="titulo">Sistemas GPR - MECANICA</span>
   </nav>
-  <div class="container">
-    <div class="col-lg-5">
-        <form>
-            <div class="mb-3">
-              <label for="usuario" class="form-label">Usuario</label>
-              <input type="usuario" class="form-control" id="usuarioLogin">
+
+    <div class="container">
+        <div class="abs-center">
+          <form [formGroup]="formulario" (ngSubmit)="consultar()" class="border p-3 form">
+
+            <span style="font-size: 25px;">
+                Login
+            </span>
+            <hr>
+
+              <p class="text-danger" *ngIf="!flag">Credenciales incorrectas</p>
+
+            <div class="form-group mb-3">
+              <label for="email" style="font-weight: bold;">Usuario:</label>
+              <input type="email" name="email" id="email" class="form-control" formControlName="usuario">
+              <p class="text-danger" *ngIf="formulario.get('usuario')?.errors?.['required'] && formulario.get('usuario')?.touched">Complete este campo</p>
             </div>
-            <div class="mb-3">
-              <label for="InputPassword" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="passwordLogin">
+            <div class="form-group mb-3">
+              <label for="password" style="font-weight: bold;">Contraseña:</label>
+              <input [type]="changetype?'password':'text'"  name="password" id="password" class="form-control" formControlName="password">
+              
+              <input type="checkbox" (change)="mostrarcontrasenia()" class="form-check-input" id="mostrarcontrasenia">
+            <span class="form-check-label" for="mostrarcontrasenia"> Mostrar</span>
+
+              <p class="text-danger" *ngIf="formulario.get('password')?.errors?.['required'] && formulario.get('password')?.touched">Complete este campo</p>
             </div>
             <button type="submit" class="btn btn-primary">Ingresar</button>
+            <hr>
           </form>
+        </div>
+      </div>
 
-    </div>
+    
+
+
   
-
-  </div>
