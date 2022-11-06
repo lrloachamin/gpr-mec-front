@@ -42,10 +42,7 @@ export class LoginComponent implements OnInit {
       console.log(respuesta)
       this.procesarUsuarios(respuesta)
     })
-   // if(this.formulario)
-    //this.router.navigate(['./home']);
-
-    
+   
   }
 
   procesarUsuarios(resp:any){
@@ -53,10 +50,11 @@ export class LoginComponent implements OnInit {
 
     listusuarios.forEach((element: {
       passwUsuario: any; nombreUsuario: any; 
-}) => {
+  }) => {
       if(element.nombreUsuario==this.formulario.value.usuario){
         if(element.passwUsuario==this.formulario.value.password){
           this.router.navigate(['./home']);
+          localStorage.setItem('usuario',element.nombreUsuario);
           
         }else{
           this.flag=false;

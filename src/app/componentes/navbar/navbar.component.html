@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+	<div class="container-fluid">
+		<a class="navbar-brand">GPR - MECANICA</a>
+
+		<!-- Step 3: Toggle the value of the property when the toggler button is clicked. -->
+		<button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">&#9776;</button>
+
+		<!-- Step 2: Add the ngbCollapse directive to the element below. -->
+		<div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+			<ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+				<li class="nav-item active">
+					<!-- Step 4: Close the menu when a link is clicked. -->
+					<a class="nav-link"  (click)="isMenuCollapsed = true">Usuarios</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" (click)="isMenuCollapsed = true">Tareas</a>
+				</li>
+				
+			</ul>
+            <ul class="navbar-nav d-flex" role="search">
+               
+                <button class="btn btn-primary" (click)="IsLoggedout()" >
+                    Cerrar Sesion  </button>
+             </ul>
+		</div>
+	</div>
+</nav>

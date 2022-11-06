@@ -23,7 +23,7 @@
               <input [type]="changetype?'password':'text'"  name="password" id="password" class="form-control" formControlName="password">
               
               <input type="checkbox" (change)="mostrarcontrasenia()" class="form-check-input" id="mostrarcontrasenia">
-            <span class="form-check-label" for="mostrarcontrasenia"> Mostrar</span>
+            <span class="form-check-label" style="font-size: 13px;" for="mostrarcontrasenia"> Mostrar contraseña</span>
 
               <p class="text-danger" *ngIf="formulario.get('password')?.errors?.['required'] && formulario.get('password')?.touched">Complete este campo</p>
             </div>
