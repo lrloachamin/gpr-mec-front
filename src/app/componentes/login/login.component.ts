@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
   usuarioService:any;
   passwordService:any;
   flag:boolean=true;
+  conf:boolean=true;
+
 
   constructor(private fb:FormBuilder, private _usuario: UsuarioService,private router: Router) { 
     
@@ -40,37 +42,39 @@ export class LoginComponent implements OnInit {
     console.log(this.formulario2);
     this._usuario.obtenerUsuario().subscribe(respuesta=>{
       console.log(respuesta)
-      this.procesarUsuarios(respuesta)
+      this.procesarUsuarios2(respuesta)
     })
    
   }
 
-  procesarUsuarios(resp:any){
+
+  procesarUsuarios2(resp:any){
     let listusuarios=resp.categoryResponse.category
+    this.conf=false;
 
     listusuarios.forEach((element: {
       passwUsuario: any; nombreUsuario: any; 
-  }) => {
+      }) => {
       if(element.nombreUsuario==this.formulario2.value.usuario){
         if(element.passwUsuario==this.formulario2.value.password){
           
           localStorage.setItem('usuario',element.nombreUsuario);
-          console.log("ingres")
-          this.router.navigate(['./home']);
-          
-        }else{
-          this.flag=false;
-          this.router.navigate(['./login']);
-          
-          
+          console.log("ingresa")                  
         }
         
-      }else{
-        this.flag=false;
-        this.router.navigate(['./login']);
-   
       }
+
+
     });
+    if(localStorage.getItem('usuario')!=null){
+      this.router.navigate(['./home']);
+
+    }else{
+      this.flag=false;
+      this.router.navigate(['./login']);
+    }
+
+
 
 
   }
