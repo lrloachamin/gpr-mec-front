@@ -20,6 +20,7 @@ export class UsuarioService {
   IsLoggedin(){
     
     return localStorage.getItem('usuario')!=null;
+  
   }
   
 }
