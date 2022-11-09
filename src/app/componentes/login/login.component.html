@@ -4,7 +4,7 @@
 
     <div class="container">
         <div class="abs-center">
-          <form [formGroup]="formulario" (ngSubmit)="consultar()" class="border p-3 form">
+          <form [formGroup]="formulario2" (ngSubmit)="consultar()" class="border p-3 form">
 
             <span style="font-size: 25px;">
                 Login
@@ -16,7 +16,7 @@
             <div class="form-group mb-3">
               <label for="email" style="font-weight: bold;">Usuario:</label>
               <input type="email" name="email" id="email" class="form-control" formControlName="usuario">
-              <p class="text-danger" *ngIf="formulario.get('usuario')?.errors?.['required'] && formulario.get('usuario')?.touched">Complete este campo</p>
+              <p class="text-danger" *ngIf="formulario2.get('usuario')?.errors?.['required'] && formulario2.get('usuario')?.touched">Complete este campo</p>
             </div>
             <div class="form-group mb-3">
               <label for="password" style="font-weight: bold;">Contraseña:</label>
@@ -25,10 +25,11 @@
               <input type="checkbox" (change)="mostrarcontrasenia()" class="form-check-input" id="mostrarcontrasenia">
             <span class="form-check-label" style="font-size: 13px;" for="mostrarcontrasenia"> Mostrar contraseña</span>
 
-              <p class="text-danger" *ngIf="formulario.get('password')?.errors?.['required'] && formulario.get('password')?.touched">Complete este campo</p>
+              <p class="text-danger" *ngIf="formulario2.get('password')?.errors?.['required'] && formulario2.get('password')?.touched">Complete este campo</p>
             </div>
-            <button type="submit" class="btn btn-primary">Ingresar</button>
+            <button type="submit" class="btn btn-primary"  routerLinkActive="router-link-active" >Ingresar</button>
             <hr>
+            <a [routerLink]="['/registro']">Registrar </a>
           </form>
         </div>
       </div>

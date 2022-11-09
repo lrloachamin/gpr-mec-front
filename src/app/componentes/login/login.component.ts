@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  formulario!: FormGroup;
+  formulario2!: FormGroup;
   visible:boolean=true;
   changetype:boolean=true;
   user:any
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   iniciarFormulario(){
-    this.formulario=this.fb.group({
+    this.formulario2=this.fb.group({
       usuario:['',Validators.required],
       password:['',Validators.required],
     })
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
 
   consultar(){
     
-    console.log(this.formulario);
+    console.log(this.formulario2);
     this._usuario.obtenerUsuario().subscribe(respuesta=>{
       console.log(respuesta)
       this.procesarUsuarios(respuesta)
@@ -51,20 +51,24 @@ export class LoginComponent implements OnInit {
     listusuarios.forEach((element: {
       passwUsuario: any; nombreUsuario: any; 
   }) => {
-      if(element.nombreUsuario==this.formulario.value.usuario){
-        if(element.passwUsuario==this.formulario.value.password){
-          this.router.navigate(['./home']);
+      if(element.nombreUsuario==this.formulario2.value.usuario){
+        if(element.passwUsuario==this.formulario2.value.password){
+          
           localStorage.setItem('usuario',element.nombreUsuario);
+          console.log("ingres")
+          this.router.navigate(['./home']);
           
         }else{
           this.flag=false;
           this.router.navigate(['./login']);
+          
           
         }
         
       }else{
         this.flag=false;
         this.router.navigate(['./login']);
+   
       }
     });
 

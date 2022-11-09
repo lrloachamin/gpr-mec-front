@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { HomeComponent } from './componentes/home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RegistroComponent } from './componentes/registro/registro.component';
 
 
 
@@ -18,6 +19,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NavbarComponent,
     LoginComponent,
     HomeComponent,
+    RegistroComponent,
     
   ],
   imports: [
