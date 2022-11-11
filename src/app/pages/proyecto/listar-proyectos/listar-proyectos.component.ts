@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Proyecto } from 'src/app/models/Proyecto';
 import { ProyectoService } from 'src/app/servicios/proyecto.service';
 
@@ -11,7 +12,8 @@ export class ListarProyectosComponent implements OnInit {
   proyectos: Proyecto[] = [];
   
   constructor(
-    private proyectoService: ProyectoService
+    private proyectoService: ProyectoService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -40,6 +42,10 @@ export class ListarProyectosComponent implements OnInit {
         //this.messageService.add({key: 'gl', severity:'error', summary:'Error', detail:'Error al obtener los pagos pendientes'});
       }
     );
+  }
+
+  navegar(){
+    this.router.navigate(['crear-proyectos']);
   }
 
 }

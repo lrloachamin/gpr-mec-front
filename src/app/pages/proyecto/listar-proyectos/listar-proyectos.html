@@ -1,38 +1,24 @@
-<!--
 <div class="card">
-  <h5>Programar pagos</h5>
-  <p-table [value]="collectionOrders" responsiveLayout="scroll">
+  <h5>Proyectos</h5>
+  <li class="nav-item active">
+    <a class="nav-link" (click)="navegar()">Proyectos</a>
+  </li>
+  <p-table [value]="proyectos">
     <ng-template pTemplate="header">
       <tr>
-        <th>Servicio</th>
-        <th>Monto</th>
-        <th>Fecha de cobro</th>
-        <th>Opciones</th>
+        <th>Proyecto</th>
+        <th>Fecha Creacion</th>
+        <th>Descripcion</th>
+        <th>Estado</th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-collectionOrder>
+    <ng-template pTemplate="body" let-proyecto>
       <tr>
-        <td>{{ collectionOrder.reference }}</td>
-        <td>{{ collectionOrder.amount | currency: "USD" }}</td>
-        <td>{{ collectionOrder.startCollectionDate | date: "dd-MM-yyyy" }}</td>
-        <td>
-          <p-button
-            label="Programar"
-            (click)="schedulePayment(collectionOrder)"
-            icon="pi pi-check"
-            class="p-button-success"
-            styleClass="p-button-sm"
-          ></p-button>
-        </td>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="emptymessage" let-columns>
-      <tr>
-        <td *ngIf="collectionOrders.length == 0">
-          No tienes pagos recurrentes configurados.
-        </td>
+        <td>{{ proyecto.nombreProyecto }}</td>
+        <td>{{ proyecto.fechaCreacionProyecto | date: "dd-MM-yyyy"  }}</td>
+        <td>{{ proyecto.descripcionProyecto }}</td>
+        <td>{{ proyecto.estadoProyecto }}</td>
       </tr>
     </ng-template>
   </p-table>
 </div>
--->

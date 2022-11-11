@@ -21,5 +21,8 @@ export class NavbarComponent implements OnInit {
     return localStorage.removeItem('usuario')
   }
 
+  navegarProyecto(){
+    this.router.navigate(['/listar-proyectos']);
+  }
 
 }
