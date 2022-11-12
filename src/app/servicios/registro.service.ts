@@ -16,6 +16,12 @@ export class RegistroService {
     return this.http.post(url,body)
   }
 
+  obtenerDocentes(){
+    //const url='https://gpr-espe.azurewebsites.net/api/v1/usuario';
+    const url= 'http://localhost:8080/api/v1/docente';
+    return this.http.get(url)
+  }
+
  
   
 }

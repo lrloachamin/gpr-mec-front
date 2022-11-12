@@ -46,12 +46,35 @@
               </div>
               <div class="form-group mb-3">
                 <label for="cargo" style="font-weight: bold;">Cargo:</label>
-                <input type="cargo" name="cargo" id="cargo" class="form-control" formControlName="cargo">
-                <p class="text-danger" *ngIf="formulario.get('cargo')?.errors?.['required'] && formulario.get('cargo')?.touched" >Complete este campo</p>
-              </div>
+                <select class="form-select" formControlName="cargo">
+                    <option>Seleccionar</option>
+                    <option [value]="cargos.codCargo" *ngFor="let cargos of listaCargos">
+                        {{cargos.nombreCargo}}
 
-            <button type="submit" class="btn btn-primary">Ingresar</button>
+                    </option>
+                </select>
+                </div>
+
+            <button type="submit"  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Registrar</button>
 
           </form>
+        </div>
+      </div>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">{{tituloMensajeVal}}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              {{mensaje}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="cerrarModal()" data-bs-dismiss="modal">Cerrar</button>
+
+            </div>
+          </div>
         </div>
       </div>

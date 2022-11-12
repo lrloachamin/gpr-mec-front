@@ -13,6 +13,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { ComponentsModule } from './imports/components.module';
 import { PagesModule } from './imports/pages.module';
+import { DocenteComponent } from './componentes/docente/docente.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 
 
@@ -23,6 +25,8 @@ import { PagesModule } from './imports/pages.module';
     LoginComponent,
     HomeComponent,
     RegistroComponent,
+    DocenteComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,

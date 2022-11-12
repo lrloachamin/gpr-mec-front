@@ -1,18 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { CargoService } from 'src/app/servicios/cargo.service';
 import { RegistroService } from 'src/app/servicios/registro.service';
 
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
+  template:'./confirmacion.component.html',
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent implements OnInit {
 
   formulario!: FormGroup;
-  constructor(private fb:FormBuilder,private _docente: RegistroService) { 
+  listaCargos!: any;
+  mensaje!:any;
+  tituloMensajeVal:any;
+  constructor(private fb:FormBuilder,private _docente: RegistroService, private _scargo: CargoService,private router: Router) { 
     this.iniciarFormulario();
+    this.cargarCargos();
+    this.mensaje="";
   }
+
+  
 
   ngOnInit(): void {
   }
@@ -27,6 +37,18 @@ export class RegistroComponent implements OnInit {
       cargo:['',Validators.required],
     })
     
+  }
+
+  cargarCargos(){
+    this._scargo.obtenerCargos().subscribe(respuesta=>{
+      console.log(respuesta)
+
+      this.procesarCargos(respuesta);
+      
+    })
+  }
+  procesarCargos(resp: any){
+    this.listaCargos=resp.cargoResponse.cargo
   }
 
   guardar(){
@@ -50,10 +72,33 @@ export class RegistroComponent implements OnInit {
     uploaddata.append('codCargo',data.codCargo);
 
     this._docente.registrarUsuario(uploaddata).subscribe((data:any)=>{
-      console.log("correcto");
+      console.log(data);
+      if(data.metadata.code="000"){
+        this.tituloMensajeVal="Usuario Creado Correctamente"
+        this.mensaje="Espere hasta que el administrador acepte sus solicitud! ";
+        
 
+      }else{
+        this.tituloMensajeVal="Error"
+        this.mensaje="Ha ocurrido un error al crear el usuario, Contactese con su administrador!"
+      }
+
+
+    },(error:any)=>{
+      this.tituloMensajeVal="Error"
+      this.mensaje="Ha ocurrido un error al crear el usuario, Contactese con su administrador!"
 
     })
-  }
+  
+
 
 }
+
+cerrarModal(){
+  this.router.navigate(['./login']);
+}
+
+}
+
+
+

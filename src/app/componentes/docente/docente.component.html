@@ -1,0 +1,40 @@
+<app-navbar></app-navbar>
+
+
+<div class="tbdocente">
+
+    <h3>Usuarios</h3>
+    <input
+      type="text"
+      class="form-control inputCedula"
+      placeholder="Buscar por cédula"
+      [(ngModel)]="filterpost"
+      name="filterpost"
+      style="width: 20%;"
+    >
+<table class="table" id="myTable">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Correo</th>
+        <th scope="col">Cargo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let docente of listaDocentes | filter: filterpost">
+        
+        <td>{{docente.cedulaDocente }}</td>
+        <td>{{docente.nombreDocente}}</td>
+        <td>{{docente.apellidoDocente}}</td>
+        <td>{{docente.correoDocente}}</td>
+        <td>{{docente.codCargo.nombreCargo}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+</div>
+
+
