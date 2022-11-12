@@ -3,7 +3,7 @@
 
 <div class="tbdocente">
 
-    <h3>Usuarios</h3>
+    <h3>Aprobación de Usuarios</h3>
     <input
       type="text"
       class="form-control inputCedula"
@@ -20,6 +20,8 @@
         <th scope="col">Apellido</th>
         <th scope="col">Correo</th>
         <th scope="col">Cargo</th>
+        <th scope="col" colspan="1">Estado</th>
+        <th scope="col" colspan="2">Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -30,6 +32,13 @@
         <td>{{docente.apellidoDocente}}</td>
         <td>{{docente.correoDocente}}</td>
         <td>{{docente.codCargo.nombreCargo}}</td>
+        <td *ngIf="docente.codigoUsuario.estadoUsuario=='1' && !cargaaprobado">Aprobado</td>
+        <td *ngIf="docente.codigoUsuario.estadoUsuario=='0' && !cargaaprobado">Pendiente</td>
+        <td *ngIf="cargaaprobado && docente.codigoUsuario.codigoUsuario==codigoUsuario"><img width="50px" height="50px" src="../../../assets/img/cargando.gif"></td>
+        <td *ngIf="cargaaprobado && docente.codigoUsuario.codigoUsuario!=codigoUsuario">Espere...</td>
+        <td><button class="btn btn-primary" (click)="aprobarSolicitud(docente,'1')" [disabled]="docente.codigoUsuario.estadoUsuario=='1' || cargaaprobado">Aprobar</button></td>
+        <td><button class="btn btn-warning" (click)="aprobarSolicitud(docente,'0')" [disabled]="docente.codigoUsuario.estadoUsuario=='0' || cargaaprobado ">Desactivar</button></td>
+        
       </tr>
 
     </tbody>
