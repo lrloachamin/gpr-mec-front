@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Proyecto } from '../models/Proyecto';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { TareaDocente } from '../models/TareaDocente';
+import { Docente } from '../models/Docente';
 
 const URL='https://gpr-espe.azurewebsites.net';
 const TAREA_DOCENE = URL + '/tareaDocente';
@@ -32,6 +33,11 @@ export class TareaService {
   public obtenerProyectoPorId(idProyecto:number){
     return this.http.get<Proyecto>(`${TAREA_DOCENE}/${idProyecto}`);
   }
+
+  public obtenerDocentes(): Observable<Docente[]>{
+    return this.http.get<Docente[]>(`${TAREA_DOCENE}/listarDocentes`); 
+  }
+
 /*
   public editarProyecto(proyecto:Proyecto){
     return this.http.put<Proyecto>(`${PROYECTO}/modificar`, proyecto);
@@ -40,5 +46,5 @@ export class TareaService {
   public cambiarEstadoProyecto(codigoProyecto:any){
     return this.http.put<Proyecto>(`${PROYECTO}/cambiarEstado/${codigoProyecto}`,codigoProyecto);
   }*/
-
+  
 }
