@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+const url='https://gpr-espe.azurewebsites.net/api/v1/usuario';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,13 +14,13 @@ export class UsuarioService {
   }
 
   obtenerUsuario(){
-  // const url='https://gpr-espe.azurewebsites.net/api/v1/usuario';
-   const url= 'http://localhost:8080/api/v1/usuario';
+
+    //const url= 'http://localhost:8080/api/v1/usuario';
     return this.http.get(url); 
   }
 
   actualizarUsuario(body:any ,id:any){
-    const url= 'http://localhost:8080/api/v1/usuario/'+id;
+    //const url= 'http://localhost:8080/api/v1/usuario/'+id;
     return this.http.put(url,body); 
   }
 
