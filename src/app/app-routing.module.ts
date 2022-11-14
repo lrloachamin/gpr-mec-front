@@ -7,6 +7,9 @@ import { RegistroComponent } from './componentes/registro/registro.component';
 import { CrearProyectosComponent } from './pages/proyecto/crear-proyectos/crear-proyectos.component';
 import { EditarProyectoComponent } from './pages/proyecto/editar-proyecto/editar-proyecto.component';
 import { ListarProyectosComponent } from './pages/proyecto/listar-proyectos/listar-proyectos.component';
+import { CrearTareaComponent } from './pages/tarea/crear-tarea/crear-tarea.component';
+import { EditarTareaComponent } from './pages/tarea/editar-tarea/editar-tarea.component';
+import { ListarTareasComponent } from './pages/tarea/listar-tareas/listar-tareas.component';
 import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
@@ -18,6 +21,9 @@ const routes: Routes = [
   {path: 'listar-proyectos', component:ListarProyectosComponent,canActivate:[AuthGuard]},
   {path: 'crear-proyectos', component:CrearProyectosComponent,canActivate:[AuthGuard]},
   {path: 'editar-proyecto', component:EditarProyectoComponent,canActivate:[AuthGuard]},
+  {path: 'listar-tareas', component:ListarTareasComponent,canActivate:[AuthGuard]},
+  {path: 'crear-tarea', component:CrearTareaComponent,canActivate:[AuthGuard]},
+  {path: 'editar-tarea', component:EditarTareaComponent,canActivate:[AuthGuard]},
   {path: '**', component:LoginComponent},
 
 ];

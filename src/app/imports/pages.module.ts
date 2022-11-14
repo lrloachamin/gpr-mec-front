@@ -34,12 +34,21 @@ import { TabViewModule } from 'primeng/tabview';
 import { ListarProyectosComponent } from '../pages/proyecto/listar-proyectos/listar-proyectos.component';
 import { CrearProyectosComponent } from '../pages/proyecto/crear-proyectos/crear-proyectos.component';
 import { EditarProyectoComponent } from '../pages/proyecto/editar-proyecto/editar-proyecto.component';
+import { ListarTareasComponent } from '../pages/tarea/listar-tareas/listar-tareas.component';
+import { CrearTareaComponent } from '../pages/tarea/crear-tarea/crear-tarea.component';
+import { EditarTareaComponent } from '../pages/tarea/editar-tarea/editar-tarea.component';
 
 @NgModule({
     declarations: [
         ListarProyectosComponent,
         CrearProyectosComponent,
-        EditarProyectoComponent
+        EditarProyectoComponent,
+        ListarTareasComponent,
+        CrearTareaComponent,
+        EditarTareaComponent,
+        ListarTareasComponent,
+        CrearTareaComponent,
+        EditarTareaComponent
     ],
     imports: [
         ReactiveFormsModule,

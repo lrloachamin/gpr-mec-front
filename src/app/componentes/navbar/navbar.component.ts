@@ -25,4 +25,8 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/listar-proyectos']);
   }
 
+  navegarTareas(){
+    this.router.navigate(['/listar-tareas']);
+  }
+
 }
