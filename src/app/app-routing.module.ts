@@ -22,7 +22,7 @@ const routes: Routes = [
   {path: 'crear-proyectos', component:CrearProyectosComponent,canActivate:[AuthGuard]},
   {path: 'editar-proyecto', component:EditarProyectoComponent,canActivate:[AuthGuard]},
   {path: 'listar-tareas', component:ListarTareasComponent,canActivate:[AuthGuard]},
-  {path: 'crear-tarea', component:CrearTareaComponent,canActivate:[AuthGuard]},
+  {path: 'crear-tareas', component:CrearTareaComponent,canActivate:[AuthGuard]},
   {path: 'editar-tarea', component:EditarTareaComponent,canActivate:[AuthGuard]},
   {path: '**', component:LoginComponent},
 
