@@ -15,6 +15,7 @@ import { ComponentsModule } from './imports/components.module';
 import { PagesModule } from './imports/pages.module';
 import { DocenteComponent } from './componentes/docente/docente.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { ProyectoService } from './servicios/proyecto.service';
 
 
 
@@ -38,7 +39,7 @@ import { FilterPipe } from './pipes/filter.pipe';
     ComponentsModule,
     PagesModule
   ],
-  providers: [],
+  providers: [ProyectoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

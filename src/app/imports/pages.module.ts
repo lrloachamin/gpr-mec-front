@@ -32,10 +32,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TabViewModule } from 'primeng/tabview';
 import { ListarProyectosComponent } from '../pages/proyecto/listar-proyectos/listar-proyectos.component';
+import { CrearProyectosComponent } from '../pages/proyecto/crear-proyectos/crear-proyectos.component';
+import { EditarProyectoComponent } from '../pages/proyecto/editar-proyecto/editar-proyecto.component';
 
 @NgModule({
     declarations: [
-        ListarProyectosComponent
+        ListarProyectosComponent,
+        CrearProyectosComponent,
+        EditarProyectoComponent
     ],
     imports: [
         ReactiveFormsModule,

@@ -1,6 +1,7 @@
 export type Proyecto = {
+  codigoProyecto?: number,
   nombreProyecto?: string;
-  fechaCreacionProyecto?: Date,
+  fechaCreacionproyecto?: Date,
   descripcionProyecto?: string;
   estadoProyecto?: string;
 };

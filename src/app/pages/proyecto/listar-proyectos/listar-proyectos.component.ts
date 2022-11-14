@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Proyecto } from 'src/app/models/Proyecto';
 import { ProyectoService } from 'src/app/servicios/proyecto.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-listar-proyectos',
@@ -9,15 +10,20 @@ import { ProyectoService } from 'src/app/servicios/proyecto.service';
 })
 export class ListarProyectosComponent implements OnInit {
 
+  getProyectos$: Observable<Proyecto[]>;
   proyectos: Proyecto[] = [];
   
   constructor(
     private proyectoService: ProyectoService,
     private router: Router,
-  ) { }
+  ) {
+    this.getProyectos$ = this.proyectoService.obtenerProyectos();
+  }
 
   ngOnInit(): void {
    // this.getDataAccount();
+   this.getProyectos();
+   console.log(this.proyectos)
   }
 
   /*getDataAccount() {
@@ -32,8 +38,8 @@ export class ListarProyectosComponent implements OnInit {
       );
   }*/
 
-  getProyecto() {
-    this.proyectoService.obtenerProyectos().subscribe(
+  getProyectos() {
+    /*this.proyectoService.obtenerProyectos().subscribe(
       res => {
         console.log(res);
         this.proyectos = res;
@@ -41,11 +47,26 @@ export class ListarProyectosComponent implements OnInit {
       err => {
         //this.messageService.add({key: 'gl', severity:'error', summary:'Error', detail:'Error al obtener los pagos pendientes'});
       }
-    );
+    );*/
+    this.getProyectos$.subscribe(proyectos =>{
+      this.proyectos = proyectos;  
+    });
   }
 
-  navegar(){
+  navegarCrearProyecto(){
     this.router.navigate(['crear-proyectos']);
   }
 
+  editar(proy:Proyecto){
+    this.proyectoService.setProyecto(proy);
+    this.router.navigate(['editar-proyecto']);
+  }
+
+  cambiarEstado(proy:Proyecto){
+    this.proyectoService.cambiarEstadoProyecto(proy.codigoProyecto)
+    .subscribe(data=>{
+      confirm("Se cambio el estado del Proyecto:"+proy.nombreProyecto);
+      this.getProyectos();
+    })
+  }
 }
