@@ -11,8 +11,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 export class NavbarComponent implements OnInit {
 
   public isMenuCollapsed = true;
+  usuario:any
 
-  constructor(private router:Router) { }
+  constructor(private router:Router) { 
+    this.usuario=localStorage.getItem('usuario')
+  }
 
   ngOnInit(): void {
   }
