@@ -8,14 +8,15 @@
         <div class="form-group">
           <label for="">Nombre de la Tarea:</label>
           <input 
-            [(ngModel)]="tarea.codigoTarea.nombreTarea" 
-            name="nombreTarea" 
+            [(ngModel)]="tarea.nombreTarea" 
+            name="nombreTareas" 
             type="text" 
             class="form-control"
             required/>
         </div>
         <div class="form-group">
           <label for="">Proyecto:</label>
+            <!--
             <p-dropdown 
             [options]="proyectos" 
             name="proyecto" 
@@ -26,11 +27,17 @@
             [showClear]="true"
             >
             </p-dropdown>
+            -->
+            <p>
+              <select name="proyecto" [(ngModel)]="tarea.codigoProyecto">
+              <option [ngValue]="proyecto" *ngFor="let proyecto of proyectos">{{proyecto.nombreProyecto}}</option>
+              </select>
+            </p>
         </div>
         <div class="form-group">
           <label for="">Fecha de Entrega:</label>
           <input 
-            [(ngModel)]="tarea.codigoTarea.fechaCreaciontarea" 
+            [(ngModel)]="tareaDocente.fechaEntrega" 
             name="fechaCreaciontarea" 
             type="date" 
             class="form-control"
@@ -38,20 +45,14 @@
         </div>
         <div class="form-group">
           <label for="">Prioridad de la tarea:</label>
-          <p-dropdown 
-          [options]="validTypes" 
-          name="typeAccount" 
-          [(ngModel)]="tarea.prioridadTarea"
-          optionValue="id" 
-          optionLabel="name" 
-          placeholder="Prioridad" 
-          [showClear]="true">
-          </p-dropdown>
+          <select name="prioridad" [(ngModel)]="tareaDocente.codigoDocente">
+            <option [ngValue]="prioridad.id" *ngFor="let prioridad of prioridades">{{prioridad.name}}</option>
+          </select>
         </div>
         <div class="form-group">
           <label for="">Indicador:</label>
           <input 
-            [(ngModel)]="tarea.descripicionTarea"
+            [(ngModel)]="tareaDocente.descripcionTareadocente"
             name="descripicionTarea" 
             type="text" 
             class="form-control"
@@ -59,6 +60,7 @@
         </div>
         <div class="form-group">
           <label for="">Persona Asignada:</label>
+          <!--
           <p-dropdown 
             [options]="docentes" 
             name="docente" 
@@ -69,6 +71,12 @@
             [showClear]="true"
             >
           </p-dropdown>
+          -->
+          <p>
+            <select name="miselect" [(ngModel)]="tareaDocente.codigoDocente" multiple="multiple">
+            <option [ngValue]="docente" *ngFor="let docente of docentes">{{docente.nombreDocente}}</option>
+            </select>
+          </p>
         </div>
         <button type="submit" class="btn btn-danger">Guardar</button>
       </form>

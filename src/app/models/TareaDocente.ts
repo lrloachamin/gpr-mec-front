@@ -3,11 +3,11 @@ import { Tarea } from "./Tarea";
 
 export type TareaDocente = {
     codigoTareaDocente?: number,
-    fechaEntrega?: string;
-    archivoTareaDocente?: Date,
-    indicadorTareadocente?: string;
+    fechaEntrega?: Date;
+    archivoTareaDocente?: string,
+    indicadorTareadocente?: number;
     descripcionTareadocente?: string;
     estadoTareaDocente?: string;
     codigoDocente?: Docente;
-    codigoTarea: Tarea;
+    codigoTarea?: Tarea;
 };
