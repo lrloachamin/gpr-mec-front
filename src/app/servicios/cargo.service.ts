@@ -11,7 +11,7 @@ export class CargoService {
   
   obtenerCargos(){
     //const url='https://gpr-espe.azurewebsites.net/api/v1/usuario';
-     const url= 'http://localhost:8080/api/v1/cargos';
+     const url= 'https://gpr-espe.azurewebsites.net/api/v1/cargos';
      return this.http.get(url); 
    }
 

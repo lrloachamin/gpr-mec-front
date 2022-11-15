@@ -10,13 +10,13 @@
 			<ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
 				<li class="nav-item active">
 					<!-- Step 4: Close the menu when a link is clicked. -->
-					<a class="nav-link"  (click)="isMenuCollapsed = true">Usuarios</a>
+					<a class="nav-link" [routerLink]="['/docentes']" (click)="isMenuCollapsed = true" >Usuarios</a>
 				</li>
 				<li class="nav-item active">
-					<a class="nav-link" (click)="navegarProyecto()">Proyectos</a>
+					<a class="nav-link" *ngIf="usuario!='admin'" (click)="navegarProyecto()">Proyectos</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" (click)="navegarTareas()">Tareas</a>
+					<a class="nav-link" *ngIf="usuario!='admin'" (click)="navegarTareas()">Tareas</a>
 				</li>
 				
 			</ul>

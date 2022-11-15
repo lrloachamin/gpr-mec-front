@@ -20,8 +20,8 @@ export class UsuarioService {
   }
 
   actualizarUsuario(body:any ,id:any){
-    //const url= 'http://localhost:8080/api/v1/usuario/'+id;
-    return this.http.put(url,body); 
+    const url2= 'https://gpr-espe.azurewebsites.net/api/v1/usuario/'+id;
+    return this.http.put(url2,body); 
   }
 
   IsLoggedin(){
