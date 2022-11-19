@@ -5,6 +5,7 @@ import { Docente } from 'src/app/models/Docente';
 import { Proyecto } from 'src/app/models/Proyecto';
 import { Tarea } from 'src/app/models/Tarea';
 import { TareaDocente } from 'src/app/models/TareaDocente';
+import { TareaDocenteProyecto } from 'src/app/models/TareaDocenteProyecto';
 import { ProyectoService } from 'src/app/servicios/proyecto.service';
 import { TareaService } from 'src/app/servicios/tarea.service';
 
@@ -38,6 +39,7 @@ export class CrearTareaComponent implements OnInit {
   proyectos: Proyecto[] = [];
   docentes: Docente[] = [];
   prioridades: any[];
+  tareaDocenteProyecto: TareaDocenteProyecto = {};
   constructor(
     private router:Router,
     private tareaService:TareaService,
@@ -66,10 +68,12 @@ export class CrearTareaComponent implements OnInit {
   }
 
   save(){
-    this.tareaService.crearTarea(this.tareaDocente)
+    this.tareaDocenteProyecto.tarea = this.tarea;
+    this.tareaDocenteProyecto.tareaDocente = this.tareaDocente;
+    this.tareaService.crearTarea(this.tareaDocenteProyecto)
     .subscribe(data=>{
-      confirm("Se agrego con éxito!!");
-      this.router.navigate(["listar-proyectos"]);
+      confirm("Se creo la tarea!!");
+      this.router.navigate(["listar-tareas"]);
     })
   }
 

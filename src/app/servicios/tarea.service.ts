@@ -4,6 +4,7 @@ import { Proyecto } from '../models/Proyecto';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { TareaDocente } from '../models/TareaDocente';
 import { Docente } from '../models/Docente';
+import { TareaDocenteProyecto } from '../models/TareaDocenteProyecto';
 
 const URL='https://gpr-espe.azurewebsites.net';
 const TAREA_DOCENE = URL + '/tareaDocente';
@@ -22,7 +23,7 @@ export class TareaService {
     return this.http.get<TareaDocente[]>(`${TAREA_DOCENE}/listarTareas`); 
   }
 
-  public crearTarea(tarea:TareaDocente){
+  public crearTarea(tarea:TareaDocenteProyecto){
     return this.http.post<Proyecto>(TAREA_DOCENE,tarea); 
   }
 
