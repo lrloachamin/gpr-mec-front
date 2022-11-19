@@ -16,6 +16,12 @@ import { PagesModule } from './imports/pages.module';
 import { DocenteComponent } from './componentes/docente/docente.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { ProyectoService } from './servicios/proyecto.service';
+import { CrearProyectosComponent } from './pages/proyecto/crear-proyectos/crear-proyectos.component';
+import { EditarProyectoComponent } from './pages/proyecto/editar-proyecto/editar-proyecto.component';
+import { ListarProyectosComponent } from './pages/proyecto/listar-proyectos/listar-proyectos.component';
+import { ListarTareasComponent } from './pages/tarea/listar-tareas/listar-tareas.component';
+import { CrearTareaComponent } from './pages/tarea/crear-tarea/crear-tarea.component';
+import { EditarTareaComponent } from './pages/tarea/editar-tarea/editar-tarea.component';
 
 
 
@@ -28,6 +34,12 @@ import { ProyectoService } from './servicios/proyecto.service';
     RegistroComponent,
     DocenteComponent,
     FilterPipe,
+    ListarProyectosComponent,
+    CrearProyectosComponent,
+    EditarProyectoComponent,
+    ListarTareasComponent,
+    CrearTareaComponent,
+    EditarTareaComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,9 +47,9 @@ import { ProyectoService } from './servicios/proyecto.service';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgbModule,
-    ComponentsModule,
-    PagesModule
+    NgbModule
+    //ComponentsModule
+    //PagesModule
   ],
   providers: [ProyectoService],
   bootstrap: [AppComponent]

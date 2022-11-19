@@ -40,15 +40,12 @@ import { EditarTareaComponent } from '../pages/tarea/editar-tarea/editar-tarea.c
 
 @NgModule({
     declarations: [
-        ListarProyectosComponent,
+        /*ListarProyectosComponent,
         CrearProyectosComponent,
         EditarProyectoComponent,
         ListarTareasComponent,
         CrearTareaComponent,
-        EditarTareaComponent,
-        ListarTareasComponent,
-        CrearTareaComponent,
-        EditarTareaComponent
+        EditarTareaComponent,*/
     ],
     imports: [
         ReactiveFormsModule,
