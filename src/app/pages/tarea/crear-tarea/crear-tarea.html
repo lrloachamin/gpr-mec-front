@@ -17,18 +17,6 @@
         </div>
         <div class="form-group">
           <label for="">Proyecto:</label>
-            <!--
-            <p-dropdown 
-            [options]="proyectos" 
-            name="proyecto" 
-            [(ngModel)]="tarea.codigoTarea.codigoProyecto"
-            optionValue="codigoProyecto" 
-            optionLabel="nombreProyecto" 
-            placeholder="Proyectos" 
-            [showClear]="true"
-            >
-            </p-dropdown>
-            -->
             <p>
               <select name="proyecto" [(ngModel)]="tarea.codigoProyecto">
               <option [ngValue]="proyecto" *ngFor="let proyecto of proyectos">{{proyecto.nombreProyecto}}</option>
@@ -61,18 +49,6 @@
         </div>
         <div class="form-group">
           <label for="">Persona Asignada:</label>
-          <!--
-          <p-dropdown 
-            [options]="docentes" 
-            name="docente" 
-            [(ngModel)]="tarea.codigoDocente"
-            optionValue="codigoDocente" 
-            optionLabel="nombreDocente" 
-            placeholder="Docentes" 
-            [showClear]="true"
-            >
-          </p-dropdown>
-          -->
           <p>
             <select name="miselect" [(ngModel)]="tareaDocente.codigoDocente" multiple="multiple">
             <option [ngValue]="docente" *ngFor="let docente of docentes">{{docente.nombreDocente}}</option>
