@@ -50,7 +50,7 @@
         <div class="form-group">
           <label for="">Persona Asignada:</label>
           <p>
-            <select name="miselect" [(ngModel)]="tareaDocente.codigoDocente" multiple="multiple">
+            <select name="miselect" [(ngModel)]="tareaDocente.codigoDocente">
             <option [ngValue]="docente" *ngFor="let docente of docentes">{{docente.nombreDocente}}</option>
             </select>
           </p>
