@@ -6,7 +6,8 @@ import { TareaDocente } from '../models/TareaDocente';
 import { Docente } from '../models/Docente';
 import { TareaDocenteProyecto } from '../models/TareaDocenteProyecto';
 
-const URL='https://gpr-espe.azurewebsites.net';
+//const URL='https://gpr-espe.azurewebsites.net';
+const URL='http://localhost:8080';
 const TAREA_DOCENE = URL + '/tareaDocente';
 
 @Injectable({

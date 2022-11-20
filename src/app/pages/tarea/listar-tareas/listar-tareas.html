@@ -23,11 +23,11 @@
           <tr *ngFor="let tarea of tareas">
             <td>{{ tarea.codigoTarea?.nombreTarea }}</td>
             <td>{{ tarea.codigoTarea?.descripicionTarea }}</td>
-            <td>{{ tarea.codigoDocente?.nombreDocente }} {{ tarea.codigoDocente?.apellidoDocente }}  tarea.codigoDocente?.nombreDocente }} {{ tarea.codigoDocente?.apellidoDocente }}</td>
+            <td>{{ tarea.codigoDocente?.nombreDocente }} {{ tarea.codigoDocente?.apellidoDocente }} </td>
             <td>{{ tarea.codigoTarea?.fechaCreaciontarea| date: "dd-MM-yyyy" }}</td>
             <td>{{ tarea.codigoTarea?.codigoProyecto?.nombreProyecto }}</td>
             <td>
-              <button (click)="editar(tarea)" class="btn btn-warning">Editar</button>
+              <button (click)="editarTarea(tarea)" class="btn btn-warning">Editar</button>
             </td> 
           </tr>
         </tbody>

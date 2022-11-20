@@ -36,7 +36,7 @@ export class ListarTareasComponent implements OnInit {
     this.router.navigate(['crear-tareas']);
   }
 
-  editar(tareaDocente:TareaDocente){
+  editarTarea(tareaDocente:TareaDocente){
     this.tareaService.setTarea(tareaDocente);
     this.router.navigate(['editar-tarea']);
   }
