@@ -70,6 +70,7 @@ export class CrearTareaComponent implements OnInit {
   save(){
     this.tareaDocenteProyecto.tarea = this.tarea;
     this.tareaDocenteProyecto.tareaDocente = this.tareaDocente;
+    console.log(this.tareaDocenteProyecto);
     this.tareaService.crearTarea(this.tareaDocenteProyecto)
     .subscribe(data=>{
       confirm("Se creo la tarea!!");
