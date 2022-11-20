@@ -5,7 +5,7 @@ export type Tarea = {
   nombreTarea?: string;
   fechaCreaciontarea?: Date,
   prioridadTarea?: string;
-  descripicionTarea?: string;
+  descripicionTarea?: string;//indicador numerico,etc
   estadoTarea?: string;
   codigoProyecto?: Proyecto;
 };

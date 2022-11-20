@@ -34,14 +34,14 @@
         </div>
         <div class="form-group">
           <label for="">Prioridad de la tarea:</label>
-          <select name="prioridad" [(ngModel)]="tareaDocente.codigoDocente">
+          <select name="prioridad" [(ngModel)]="tarea.prioridadTarea">
             <option [ngValue]="prioridad.id" *ngFor="let prioridad of prioridades">{{prioridad.name}}</option>
           </select>
         </div>
         <div class="form-group">
           <label for="">Indicador:</label>
           <input 
-            [(ngModel)]="tareaDocente.descripcionTareadocente"
+            [(ngModel)]="tarea.descripicionTarea"
             name="descripicionTarea" 
             type="text" 
             class="form-control"
