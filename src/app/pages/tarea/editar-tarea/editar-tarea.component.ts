@@ -5,6 +5,7 @@ import { Proyecto } from 'src/app/models/Proyecto';
 import { ProyectoService } from 'src/app/servicios/proyecto.service';
 import { TareaService } from 'src/app/servicios/tarea.service';
 import { DatePipe } from '@angular/common'
+import { TareaDocente } from 'src/app/models/TareaDocente';
 
 const prioridadTarea: any[] = [
   {
@@ -50,7 +51,6 @@ export class EditarTareaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.tareaDocente);
     this.getProyectos();
   }
 
@@ -70,6 +70,10 @@ export class EditarTareaComponent implements OnInit {
 
   back() {
     this.router.navigate(['listar-tareas']);
+  }
+
+  compararNombres( tareaDocente1:TareaDocente, tareaDocente2:TareaDocente) {
+    return tareaDocente1.codigoTarea?.codigoProyecto===tareaDocente2.codigoTarea?.codigoProyecto;
   }
 
 }

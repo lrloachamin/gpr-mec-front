@@ -18,7 +18,7 @@
         <div class="form-group">
           <label for="">Proyecto:</label>
             <p>
-              <select name="proyecto" [(ngModel)]="tareaDocente.codigoTarea.codigoProyecto">
+              <select name="proyecto" [(ngModel)]="tareaDocente.codigoTarea.codigoProyecto" [compareWith]="compararNombres">
               <option [ngValue]="proyecto" *ngFor="let proyecto of proyectos">{{proyecto.nombreProyecto}}</option>
               </select>
             </p>
