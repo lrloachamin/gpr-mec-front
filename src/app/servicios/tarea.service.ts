@@ -8,7 +8,7 @@ import { TareaDocenteProyecto } from '../models/TareaDocenteProyecto';
 
 const URL='https://gpr-espe.azurewebsites.net';
 //const URL='http://localhost:8080';
-const TAREA_DOCENE = URL + '/tareaDocente';
+const TAREA_DOCENTE = URL + '/tareaDocente';
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +21,11 @@ export class TareaService {
   constructor(private http: HttpClient) { }
 
   public obtenerTareas(): Observable<TareaDocente[]>{
-    return this.http.get<TareaDocente[]>(`${TAREA_DOCENE}/listarTareas`); 
+    return this.http.get<TareaDocente[]>(`${TAREA_DOCENTE}/listarTareas`); 
   }
 
   public crearTarea(tarea:TareaDocenteProyecto){
-    return this.http.post<Proyecto>(TAREA_DOCENE,tarea); 
+    return this.http.post<Proyecto>(TAREA_DOCENTE,tarea); 
   }
 
   public setTarea(tarea: TareaDocente) {
@@ -33,18 +33,17 @@ export class TareaService {
   }
 
   public obtenerProyectoPorId(idProyecto:number){
-    return this.http.get<Proyecto>(`${TAREA_DOCENE}/${idProyecto}`);
+    return this.http.get<Proyecto>(`${TAREA_DOCENTE}/${idProyecto}`);
   }
 
   public obtenerDocentes(): Observable<Docente[]>{
-    return this.http.get<Docente[]>(`${TAREA_DOCENE}/listarDocentes`); 
+    return this.http.get<Docente[]>(`${TAREA_DOCENTE}/listarDocentes`); 
   }
-
-/*
-  public editarProyecto(proyecto:Proyecto){
-    return this.http.put<Proyecto>(`${PROYECTO}/modificar`, proyecto);
+  
+  public editarTarea(tareaDocente:TareaDocente){
+    return this.http.put<Proyecto>(`${TAREA_DOCENTE}/modificar`, tareaDocente);
   }
-
+  /*
   public cambiarEstadoProyecto(codigoProyecto:any){
     return this.http.put<Proyecto>(`${PROYECTO}/cambiarEstado/${codigoProyecto}`,codigoProyecto);
   }*/

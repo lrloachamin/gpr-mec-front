@@ -61,11 +61,11 @@ export class EditarTareaComponent implements OnInit {
   }
 
   save(){
-    /*this.tareaService.editarTarea(this.proyecto)
+    this.tareaService.editarTarea(this.tareaDocente)
     .subscribe(data=>{
       confirm("Se editaron los datos con éxito!!");
-      this.router.navigate(["listar-proyectos"]);
-    })*/
+      this.router.navigate(["listar-tareas"]);
+    })
   }
 
   back() {

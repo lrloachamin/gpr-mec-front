@@ -23,7 +23,6 @@ export class ListarProyectosComponent implements OnInit {
   ngOnInit(): void {
    // this.getDataAccount();
    this.getProyectos();
-   console.log(this.proyectos)
   }
 
   /*getDataAccount() {
