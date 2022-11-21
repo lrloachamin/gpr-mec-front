@@ -22,6 +22,7 @@ import { ListarProyectosComponent } from './pages/proyecto/listar-proyectos/list
 import { ListarTareasComponent } from './pages/tarea/listar-tareas/listar-tareas.component';
 import { CrearTareaComponent } from './pages/tarea/crear-tarea/crear-tarea.component';
 import { EditarTareaComponent } from './pages/tarea/editar-tarea/editar-tarea.component';
+import { ListarTareasDocenteComponent } from './pages/tarea-docente/listar-tareas-docente/listar-tareas-docente.component';
 
 
 
@@ -40,6 +41,7 @@ import { EditarTareaComponent } from './pages/tarea/editar-tarea/editar-tarea.co
     ListarTareasComponent,
     CrearTareaComponent,
     EditarTareaComponent,
+    ListarTareasDocenteComponent
   ],
   imports: [
     BrowserModule,

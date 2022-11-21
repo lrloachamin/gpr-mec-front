@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import{FormGroup,FormBuilder,Validators} from '@angular/forms'
 import{UsuarioService} from '../../servicios/usuario.service'
 import { Router } from '@angular/router';
+import { Docente } from 'src/app/models/Docente';
 
 
 @Component({
@@ -19,10 +20,12 @@ export class LoginComponent implements OnInit {
   passwordService:any;
   flag:boolean=true;
   conf:boolean=true;
+  docente: any;
 
-
-  constructor(private fb:FormBuilder, private _usuario: UsuarioService,private router: Router) { 
-    
+  constructor(
+    private fb:FormBuilder, 
+    private _usuario: UsuarioService,
+    private router: Router) { 
     this.iniciarFormulario();
   }
 
@@ -53,13 +56,25 @@ export class LoginComponent implements OnInit {
     this.conf=false;
 
     listusuarios.forEach((element: {
-      passwUsuario: any; nombreUsuario: any; 
+      passwUsuario: any; nombreUsuario: any; codigoUsuario: any;
       }) => {
       if(element.nombreUsuario==this.formulario2.value.usuario){
         if(element.passwUsuario==this.formulario2.value.password){
           
           localStorage.setItem('usuario',element.nombreUsuario);
-          console.log("ingresa")                  
+          console.log("ingresa");
+          if(element.nombreUsuario!='admin'){
+            this.docente = this._usuario.obtenerDocente(element.codigoUsuario).subscribe({
+              next: (res) => {
+                if(res) {
+                  this.docente =res;
+                  this._usuario.setCodigoDocente(this.docente);
+                  console.log(this.docente.codigoDocente);
+                  localStorage.setItem('codigoDocente',this.docente.codigoDocente);
+                }
+              }
+            });
+          }                  
         }
         
       }
@@ -83,6 +98,5 @@ export class LoginComponent implements OnInit {
     this.changetype=!this.changetype;
  
   }
-
 
 }

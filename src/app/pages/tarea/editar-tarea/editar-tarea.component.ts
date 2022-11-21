@@ -46,9 +46,7 @@ export class EditarTareaComponent implements OnInit {
           this.back();
         }
         //this.tareaDocente.fechaEntrega = new Date(this.tareaDocente.fechaEntrega);
-        console.log(this.tareaDocente.fechaEntrega);
         this.tareaDocente.fechaEntrega = this.pipe.transform(this.tareaDocente.fechaEntrega, 'yyyy-MM-ddTHH:mm:ss');
-        console.log(this.tareaDocente);
       });
   }
 

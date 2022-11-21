@@ -24,6 +24,10 @@ export class TareaService {
     return this.http.get<TareaDocente[]>(`${TAREA_DOCENTE}/listarTareas`); 
   }
 
+  public obtenerTareasPorDocente(codigoDocente:number): Observable<TareaDocente[]>{
+    return this.http.get<TareaDocente[]>(`${TAREA_DOCENTE}/listarTareaAsignadaPorDocente/${codigoDocente}`); 
+  }
+
   public crearTarea(tarea:TareaDocenteProyecto){
     return this.http.post<Proyecto>(TAREA_DOCENTE,tarea); 
   }

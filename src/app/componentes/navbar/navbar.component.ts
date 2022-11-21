@@ -32,4 +32,7 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/listar-tareas']);
   }
 
+  navegarTareasDocente(){
+    this.router.navigate(['/listar-tareas-docente']);
+  }
 }
