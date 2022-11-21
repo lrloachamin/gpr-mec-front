@@ -44,7 +44,7 @@ export class UsuarioService {
 
   obtenerUsuarioPorNombre(nombreUsuario:any){
 
-    const url3= 'https://gpr-espe.azurewebsites.net/api/v1/usuario/'+nombreUsuario;
+    const url3= 'https://gpr-espe.azurewebsites.net/api/v1/usuarionombre/'+nombreUsuario;
     return this.http.get(url3); 
   }
   
