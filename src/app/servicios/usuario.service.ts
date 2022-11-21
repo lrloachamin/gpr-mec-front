@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { DocenteComponent } from '../componentes/docente/docente.component';
 import { Docente } from '../models/Docente';
 
-const url='http://localhost:8080/api/v1/usuario';
+const url='https://gpr-espe.azurewebsites.net/api/v1/usuario';
 
 @Injectable({
   providedIn: 'root'
