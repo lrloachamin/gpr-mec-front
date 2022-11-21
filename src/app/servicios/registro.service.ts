@@ -22,6 +22,12 @@ export class RegistroService {
     return this.http.get(url)
   }
 
+  obtenerUsuarioPorIDEspe(idEspe:any){
+
+    const url4= 'https://gpr-espe.azurewebsites.net/api/v1/usuarioid/'+idEspe;
+    return this.http.get(url4); 
+  }
+
  
   
 }

@@ -16,9 +16,15 @@ export class RegistroComponent implements OnInit {
   listaCargos!: any;
   mensaje!:any;
   tituloMensajeVal:any;
+  validadorCedula:any;
+  cedulaI:any;
+  idEspeI:any;
+  validadorIdEspe:any;
   constructor(private fb:FormBuilder,private _docente: RegistroService, private _scargo: CargoService,private router: Router) { 
     this.iniciarFormulario();
     this.cargarCargos();
+    this.validadorCedula=true;
+    this.validadorIdEspe=true;
     this.mensaje="";
   }
 
@@ -33,7 +39,7 @@ export class RegistroComponent implements OnInit {
       apellidos:['',Validators.required],
       cedula:['',Validators.required],
       telefono:['',Validators.required],
-      correo:['',Validators.required],
+      correo:['',[Validators.required,Validators.email]],
       cargo:['',Validators.required],
     })
     
@@ -96,6 +102,70 @@ export class RegistroComponent implements OnInit {
 
 cerrarModal(){
   this.router.navigate(['./login']);
+}
+
+
+validadorDeCedula(cedula: String) {
+  
+  let cedulaCorrecta = false;
+  if (cedula.length == 10)
+  {    
+      let tercerDigito = parseInt(cedula.substring(2, 3));
+      if (tercerDigito < 6) {
+          let coefValCedula = [2, 1, 2, 1, 2, 1, 2, 1, 2];       
+          let verificador = parseInt(cedula.substring(9, 10));
+          let suma:number = 0;
+          let digito:number = 0;
+          for (let i = 0; i < (cedula.length - 1); i++) {
+              digito = parseInt(cedula.substring(i, i + 1)) * coefValCedula[i];      
+              suma += ((parseInt((digito % 10)+'') + (parseInt((digito / 10)+''))));
+          }
+          suma= Math.round(suma);
+          if ((Math.round(suma % 10) == 0) && (Math.round(suma % 10)== verificador)) {
+              cedulaCorrecta = true;
+          } else if ((10 - (Math.round(suma % 10))) == verificador) {
+              cedulaCorrecta = true;
+          } else {
+              cedulaCorrecta = false;
+          }
+      } else {
+          cedulaCorrecta = false;
+      }
+  } else {
+      cedulaCorrecta = false;
+  }
+this.validadorCedula= cedulaCorrecta;
+
+}
+
+
+validarUsuarioRepetido(idespe:String){
+  this._docente.obtenerUsuarioPorIDEspe(idespe).subscribe(respuesta=>{
+   
+    this.procesarDocentesID(respuesta,idespe);
+    
+  })
+
+}
+procesarDocentesID(resp: any,idEspe:String){
+
+  let listusuarios=resp.docenteResponse.docente
+
+if(listusuarios!=null){
+    listusuarios.forEach((element: {
+      idDocente: any
+      }) => {
+        if(idEspe=element.idDocente){
+          this.validadorIdEspe=false;
+        }else{
+          this.validadorIdEspe=true;
+
+        }
+    });
+  }else{
+    this.validadorIdEspe=true;
+  }
+
 }
 
 }

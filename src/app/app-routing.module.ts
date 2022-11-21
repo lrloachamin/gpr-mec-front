@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DocenteComponent } from './componentes/docente/docente.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { LoginComponent } from './componentes/login/login.component';
+import { PaginasValidadorComponent } from './componentes/paginas-validador/paginas-validador.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { CrearProyectosComponent } from './pages/proyecto/crear-proyectos/crear-proyectos.component';
 import { EditarProyectoComponent } from './pages/proyecto/editar-proyecto/editar-proyecto.component';
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'crear-tareas', component:CrearTareaComponent,canActivate:[AuthGuard]},
   {path: 'editar-tarea', component:EditarTareaComponent,canActivate:[AuthGuard]},
   {path: 'listar-tareas-docente', component:ListarTareasDocenteComponent,canActivate:[AuthGuard]},
+  {path: 'pagina-validador', component:PaginasValidadorComponent,canActivate:[AuthGuard]},
   {path: '**', component:LoginComponent},
 
 ];

@@ -56,12 +56,13 @@ export class LoginComponent implements OnInit {
     this.conf=false;
 
     listusuarios.forEach((element: {
-      passwUsuario: any; nombreUsuario: any; codigoUsuario: any;
+      passwUsuario: any; nombreUsuario: any; codigoUsuario: any;estadoUsuario: any
       }) => {
       if(element.nombreUsuario==this.formulario2.value.usuario){
         if(element.passwUsuario==this.formulario2.value.password){
           
           localStorage.setItem('usuario',element.nombreUsuario);
+          localStorage.setItem('est', element.estadoUsuario);
           console.log("ingresa");
           if(element.nombreUsuario!='admin'){
             this.docente = this._usuario.obtenerDocente(element.codigoUsuario).subscribe({
@@ -81,11 +82,17 @@ export class LoginComponent implements OnInit {
 
 
     });
-    if(localStorage.getItem('usuario')!=null){
-      this.router.navigate(['./home']);
+    if (localStorage.getItem('usuario') != null) {
+      if (localStorage.getItem('est') == '0') {
+        this.router.navigate(['./pagina-validador']);
 
-    }else{
-      this.flag=false;
+      } else {
+        this.router.navigate(['./home']);
+      }
+
+
+    } else {
+      this.flag = false;
       this.router.navigate(['./login']);
     }
 

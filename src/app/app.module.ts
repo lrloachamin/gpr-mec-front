@@ -23,6 +23,7 @@ import { ListarTareasComponent } from './pages/tarea/listar-tareas/listar-tareas
 import { CrearTareaComponent } from './pages/tarea/crear-tarea/crear-tarea.component';
 import { EditarTareaComponent } from './pages/tarea/editar-tarea/editar-tarea.component';
 import { ListarTareasDocenteComponent } from './pages/tarea-docente/listar-tareas-docente/listar-tareas-docente.component';
+import { PaginasValidadorComponent } from './componentes/paginas-validador/paginas-validador.component';
 
 
 
@@ -41,7 +42,8 @@ import { ListarTareasDocenteComponent } from './pages/tarea-docente/listar-tarea
     ListarTareasComponent,
     CrearTareaComponent,
     EditarTareaComponent,
-    ListarTareasDocenteComponent
+    ListarTareasDocenteComponent,
+    PaginasValidadorComponent
   ],
   imports: [
     BrowserModule,

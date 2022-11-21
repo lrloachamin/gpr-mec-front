@@ -41,5 +41,11 @@ export class UsuarioService {
   public setCodigoDocente(codigoDocente: DocenteComponent) {
     this.codigoDocente$$.next(codigoDocente);
   }
+
+  obtenerUsuarioPorNombre(nombreUsuario:any){
+
+    const url3= 'https://gpr-espe.azurewebsites.net/api/v1/usuario/'+nombreUsuario;
+    return this.http.get(url3); 
+  }
   
 }
