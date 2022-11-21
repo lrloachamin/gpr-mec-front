@@ -46,7 +46,9 @@ export class EditarTareaComponent implements OnInit {
           this.back();
         }
         //this.tareaDocente.fechaEntrega = new Date(this.tareaDocente.fechaEntrega);
-        this.tareaDocente.fechaEntrega = this.pipe.transform(this.tareaDocente.fechaEntrega, 'yyyy-MM-dd');
+        console.log(this.tareaDocente.fechaEntrega);
+        this.tareaDocente.fechaEntrega = this.pipe.transform(this.tareaDocente.fechaEntrega, 'yyyy-MM-ddTHH:mm:ss');
+        console.log(this.tareaDocente);
       });
   }
 
@@ -61,6 +63,7 @@ export class EditarTareaComponent implements OnInit {
   }
 
   save(){
+    console.log(this.tareaDocente);
     this.tareaService.editarTarea(this.tareaDocente)
     .subscribe(data=>{
       confirm("Se editaron los datos con éxito!!");
@@ -72,8 +75,11 @@ export class EditarTareaComponent implements OnInit {
     this.router.navigate(['listar-tareas']);
   }
 
-  compararNombres( tareaDocente1:TareaDocente, tareaDocente2:TareaDocente) {
-    return tareaDocente1.codigoTarea?.codigoProyecto===tareaDocente2.codigoTarea?.codigoProyecto;
+  compararNombres( proyecto1:Proyecto, proyecto2:Proyecto) {
+    if (proyecto1==null || proyecto2==null) {
+      return false;
+    }
+    return proyecto1.nombreProyecto===proyecto2.nombreProyecto;
   }
 
 }
