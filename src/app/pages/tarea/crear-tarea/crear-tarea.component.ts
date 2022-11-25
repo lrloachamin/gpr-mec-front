@@ -72,13 +72,13 @@ export class CrearTareaComponent implements OnInit {
     this.tareaDocenteProyecto.tarea = this.tarea;
     this.tareaDocenteProyecto.tareaDocente = this.tareaDocente;
     console.log(this.tareaDocenteProyecto);
-    console.log(this.this.docentesAsignados);
+    console.log(this.docentesAsignados);
     /*this.tareaService.crearTarea(this.tareaDocenteProyecto)
     .subscribe(data=>{
       confirm("Se creo la tarea!!");
       this.router.navigate(["listar-tareas"]);
     })
-    /*
+    */
   }
 
   getValidPrioridades() {
