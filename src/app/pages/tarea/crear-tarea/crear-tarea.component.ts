@@ -38,6 +38,7 @@ export class CrearTareaComponent implements OnInit {
   tarea: Tarea = {};
   proyectos: Proyecto[] = [];
   docentes: Docente[] = [];
+  docentesAsignados: TareaDocente[] = [];
   prioridades: any[];
   tareaDocenteProyecto: TareaDocenteProyecto = {};
   constructor(
@@ -71,17 +72,27 @@ export class CrearTareaComponent implements OnInit {
     this.tareaDocenteProyecto.tarea = this.tarea;
     this.tareaDocenteProyecto.tareaDocente = this.tareaDocente;
     console.log(this.tareaDocenteProyecto);
-    this.tareaService.crearTarea(this.tareaDocenteProyecto)
+    console.log(this.this.docentesAsignados);
+    /*this.tareaService.crearTarea(this.tareaDocenteProyecto)
     .subscribe(data=>{
       confirm("Se creo la tarea!!");
       this.router.navigate(["listar-tareas"]);
     })
+    /*
   }
 
   getValidPrioridades() {
     this.prioridades.forEach(prioridades => {
             this.validTypes.push(prioridades);
     });
+  }
+  
+  agregarElementos(){
+    this.docentesAsignados.push(this.tareaDocente);
+  }
+
+  eliminarElementos(){
+    this.docentesAsignados=this.docentesAsignados.filter((item) => item !== this.tareaDocente );
   }
 
 }
