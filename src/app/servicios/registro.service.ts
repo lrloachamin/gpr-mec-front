@@ -11,20 +11,20 @@ export class RegistroService {
   }
 
   registrarUsuario(body :any){
-    const url='https://gpr-espe.azurewebsites.net/api/v1/docentes';
-    //const url= 'http://localhost:8080/api/v1/docentes';
+   // const url='https://gpr-espe.azurewebsites.net/api/v1/docentes';
+  const url= 'http://localhost:8080/api/v1/docentes';
     return this.http.post(url,body)
   }
 
   obtenerDocentes(){
-   const url='https://gpr-espe.azurewebsites.net/api/v1/docente';
-    //const url= 'http://localhost:8080/api/v1/docente';
+   //const url='https://gpr-espe.azurewebsites.net/api/v1/docente';
+    const url= 'http://localhost:8080/api/v1/docente';
     return this.http.get(url)
   }
 
   obtenerUsuarioPorIDEspe(idEspe:any){
-
-    const url4= 'https://gpr-espe.azurewebsites.net/api/v1/usuarioid/'+idEspe;
+    const url4= 'http://localhost:8080/api/v1/usuarioid/'+idEspe;
+   // const url4= 'https://gpr-espe.azurewebsites.net/api/v1/usuarioid/'+idEspe;
     return this.http.get(url4); 
   }
 
