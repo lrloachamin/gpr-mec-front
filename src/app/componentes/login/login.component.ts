@@ -43,11 +43,19 @@ export class LoginComponent implements OnInit {
   consultar(){
     
     console.log(this.formulario2);
+    /*
     this._usuario.obtenerUsuario().subscribe(respuesta=>{
       console.log(respuesta)
       this.procesarUsuarios2(respuesta)
     })
+
+
+    */
    
+    this._usuario.login(this.formulario2.value.usuario,this.formulario2.value.password).subscribe(respuesta=>{
+      console.log(respuesta)
+      this.procesarUsuarios2(respuesta)
+    })
   }
 
 
@@ -58,8 +66,10 @@ export class LoginComponent implements OnInit {
     listusuarios.forEach((element: {
       passwUsuario: any; nombreUsuario: any; codigoUsuario: any;estadoUsuario: any
       }) => {
-      if(element.nombreUsuario==this.formulario2.value.usuario){
-        if(element.passwUsuario==this.formulario2.value.password){
+        console.log(element.nombreUsuario)
+        if(element.nombreUsuario!=null){
+     // if(element.nombreUsuario==this.formulario2.value.usuario){
+       // if(element.passwUsuario==this.formulario2.value.password){
           
           localStorage.setItem('usuario',element.nombreUsuario);
           localStorage.setItem('est', element.estadoUsuario);
@@ -75,10 +85,12 @@ export class LoginComponent implements OnInit {
                 }
               }
             });
-          }                  
+          }  
         }
+          
+       // }
         
-      }
+     // }
 
 
     });

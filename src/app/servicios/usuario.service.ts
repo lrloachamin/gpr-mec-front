@@ -24,6 +24,13 @@ export class UsuarioService {
     return this.http.get(url); 
   }
 
+  
+  login(user:any,pass:any){
+
+    const url= 'http://localhost:8080/api/v1/login/'+user+'/'+pass;
+    return this.http.get(url); 
+  }
+
   actualizarUsuario(body:any ,id:any){
     const url2= 'https://gpr-espe.azurewebsites.net/api/v1/usuario/'+id;
     return this.http.put(url2,body); 
