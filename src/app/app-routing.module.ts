@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CambiarContraseniaComponent } from './componentes/cambiar-contrasenia/cambiar-contrasenia.component';
 import { DocenteComponent } from './componentes/docente/docente.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { LoginComponent } from './componentes/login/login.component';
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path: 'editar-tarea', component:EditarTareaComponent,canActivate:[AuthGuard]},
   {path: 'listar-tareas-docente', component:ListarTareasDocenteComponent,canActivate:[AuthGuard]},
   {path: 'pagina-validador', component:PaginasValidadorComponent,canActivate:[AuthGuard]},
+  {path: 'cambiar-contrasenia', component:CambiarContraseniaComponent},
   {path: '**', component:LoginComponent},
 
 ];

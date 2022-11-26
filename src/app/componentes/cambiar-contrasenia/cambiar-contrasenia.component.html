@@ -1,0 +1,31 @@
+<nav class="navbar navbar-dark bg-dark">
+    <span class="titulo">Sistemas GPR - MECANICA</span>
+</nav>
+
+<div class="container">
+    <div class="abs-center">
+        <form [formGroup]="formularioContrasenia" (ngSubmit)="cambiarContrasenia()" class="border p-3 form">
+
+            <span style="font-size: 25px;">
+                Cambio de Contraseña
+            </span>
+            <hr>
+            <div class="form-group mb-3">
+                <label for="passwordAnt" style="font-weight: bold;">Contraseña Antigua:</label>
+                <input type="password" name="passwordAnt" id="passwordAnt" class="form-control"
+                    formControlName="passwordAnt">
+            </div>
+            <div class="form-group mb-3">
+                <label for="passwordNew" style="font-weight: bold;">Contraseña Nueva:</label>
+                <input type="password" name="passwordNew" id="passwordNew" class="form-control"
+                    formControlName="passwordNew">
+            </div>
+            <div class="form-group mb-3">
+                <label for="passwordConf" style="font-weight: bold;">Confirmar Contraseña</label>
+                <input type="password" name="passwordConf" id="passwordConf" class="form-control"
+                    formControlName="passwordConf">
+            </div>
+            <button type="submit" class="btn btn-primary" routerLinkActive="router-link-active">Guardar</button>
+        </form>
+    </div>
+</div>

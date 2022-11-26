@@ -32,7 +32,8 @@ export class UsuarioService {
   }
 
   actualizarUsuario(body:any ,id:any){
-    const url2= 'https://gpr-espe.azurewebsites.net/api/v1/usuario/'+id;
+    const url2= 'http://localhost:8080/api/v1/usuario/'+id;
+   // const url2= 'https://gpr-espe.azurewebsites.net/api/v1/usuario/'+id;
     return this.http.put(url2,body); 
   }
 
@@ -51,7 +52,8 @@ export class UsuarioService {
 
   obtenerUsuarioPorNombre(nombreUsuario:any){
 
-    const url3= 'https://gpr-espe.azurewebsites.net/api/v1/usuarionombre/'+nombreUsuario;
+    const url3= 'http://localhost:8080/api/v1/usuarionombre/'+nombreUsuario;
+    //const url3= 'https://gpr-espe.azurewebsites.net/api/v1/usuarionombre/'+nombreUsuario;
     return this.http.get(url3); 
   }
   
