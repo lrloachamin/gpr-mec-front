@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { TareaDocente } from '../models/TareaDocente';
 import { Docente } from '../models/Docente';
 import { TareaDocenteProyecto } from '../models/TareaDocenteProyecto';
+import { Indicador } from '../models/Indicador';
 
 const URL='https://gpr-espe.azurewebsites.net';
 //const URL='http://localhost:8080';
@@ -42,6 +43,10 @@ export class TareaService {
 
   public obtenerDocentes(): Observable<Docente[]>{
     return this.http.get<Docente[]>(`${TAREA_DOCENTE}/listarDocentes`); 
+  }
+
+  public obtenerIndicadores(): Observable<Indicador[]>{
+    return this.http.get<Indicador[]>(`${TAREA_DOCENTE}/listarIndicadores`); 
   }
   
   public editarTarea(tareaDocente:TareaDocente){

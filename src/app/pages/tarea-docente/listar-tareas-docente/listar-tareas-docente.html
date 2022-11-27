@@ -20,7 +20,7 @@
           <tr *ngFor="let tarea of tareas">
             <td>{{ tarea.codigoTarea?.nombreTarea }}</td>
             <td>{{ tarea.codigoTarea?.descripicionTarea }}</td>
-            <td>{{ tarea.fechaEntrega| date: "dd-MM-yyyy HH:mm" }}</td>
+            <td>{{ tarea.codigoTarea?.fechaEntregaTarea| date: "dd-MM-yyyy HH:mm" }}</td>
             <td>{{ tarea.codigoTarea?.codigoProyecto?.nombreProyecto }}</td>
             <td>{{ tarea.codigoTarea?.estadoTarea }}</td>
             <td>

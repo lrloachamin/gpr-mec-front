@@ -1,7 +1,7 @@
 export type Docente = {
-  codigoDocente?: number,
+  codigoDocente?: number;
   idDocente?: string;
-  nombreDocente?: string,
+  nombreDocente?: string;
   apellidoDocente?: string;
   cedulaDocente?: string;
   telefonoDocente?: string;

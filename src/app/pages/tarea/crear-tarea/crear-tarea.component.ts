@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Docente } from 'src/app/models/Docente';
+import { Indicador } from 'src/app/models/Indicador';
 import { Proyecto } from 'src/app/models/Proyecto';
 import { Tarea } from 'src/app/models/Tarea';
 import { TareaDocente } from 'src/app/models/TareaDocente';
@@ -36,10 +37,14 @@ export class CrearTareaComponent implements OnInit {
   validTypes: any[] = [];
   tareaDocente: TareaDocente = {};
   tarea: Tarea = {};
+  indicador: Indicador= {};
+  indicadores: Indicador[]= [];
   proyectos: Proyecto[] = [];
   docentes: Docente[] = [];
   docentesAsignados: any[] = [];
+  indicadoresAsignados: any[] = [];
   prioridades: any[];
+  getIndicadores$: Observable<Indicador[]>;
   tareaDocenteProyecto: TareaDocenteProyecto = {};
   constructor(
     private router:Router,
@@ -49,11 +54,14 @@ export class CrearTareaComponent implements OnInit {
       this.getProyectos$ = this.proyectoService.obtenerProyectos();
       this.getDocentes$ = this.tareaService.obtenerDocentes();
       this.prioridades = prioridadTarea;
+      this.getIndicadores$ = this.tareaService.obtenerIndicadores();
+      
   }
 
   ngOnInit(): void {
     this.getProyectos();
     this.getDocentes();
+    this.getIndicadores();
   }
 
   getProyectos() {
@@ -68,19 +76,24 @@ export class CrearTareaComponent implements OnInit {
     });
   }
 
+  getIndicadores(){
+    this.getIndicadores$.subscribe(indicadores =>{
+      this.indicadores = indicadores;  
+    });
+  }
+
   save(){
-    //this.tareaDocenteProyecto.tarea = this.tarea;
-    //this.tareaDocenteProyecto.tareaDocente = this.tareaDocente;
-    this.tareaDocente.codigoTarea = this.tarea;
+    this.tareaDocenteProyecto.tarea = this.tarea;
+    this.tareaDocenteProyecto.docentes = this.docentesAsignados;
+    this.tareaDocenteProyecto.indicadors = this.indicadores;
+    //this.tareaDocente.codigoTarea = this.tarea;
     //console.log(this.tareaDocenteProyecto);
-    console.log("Data al guardar:")
-    console.log(this.docentesAsignados);
-    /*this.tareaService.crearTarea(this.tareaDocenteProyecto)
+    this.tareaService.crearTarea(this.tareaDocenteProyecto)
     .subscribe(data=>{
       confirm("Se creo la tarea!!");
       this.router.navigate(["listar-tareas"]);
     })
-    */
+    
   }
 
   getValidPrioridades() {
@@ -90,7 +103,6 @@ export class CrearTareaComponent implements OnInit {
   }
   
   agregarElementos(){
-    console.log(this.docentesAsignados);
     this.docentesAsignados.push(this.tareaDocente.codigoDocente);
   }
 
@@ -98,4 +110,11 @@ export class CrearTareaComponent implements OnInit {
     this.docentesAsignados=this.docentesAsignados.filter((item) => item !== this.tareaDocente.codigoDocente );
   }
 
+  agregarIndicador(){
+    this.indicadoresAsignados.push(this.indicador);
+  }
+
+  eliminarIndicador(){
+    this.indicadoresAsignados=this.indicadoresAsignados.filter((item) => item !== this.indicador );
+  }
 }

@@ -26,7 +26,7 @@
         <div class="form-group">
           <label for="">Fecha de Entrega:</label>
           <input 
-            [(ngModel)]="tareaDocente.fechaEntrega" 
+            [(ngModel)]="tarea.fechaEntregaTarea" 
             name="fechaCreaciontarea" 
             type="datetime-local" 
             class="form-control"
@@ -47,6 +47,20 @@
             class="form-control"
             required/>
         </div>
+        <div class="form-group">
+          <label for="">Indicador:</label>
+          <p>
+            <select name="indicador" [(ngModel)]="indicador">
+            <option [ngValue]="ind" *ngFor="let ind of indicadores">{{ind.nombreIndicador}}</option>
+            </select>
+          </p>
+        </div>
+        <h2>Indicadores:</h2>
+          <ul>
+            <li *ngFor="let i of indicadoresAsignados">
+              <span>{{i.nombreIndicador}}</span>
+            </li>
+          </ul>
         <div class="form-group">
           <label for="">Persona Asignada:</label>
           <p>

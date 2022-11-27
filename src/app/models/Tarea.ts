@@ -1,11 +1,12 @@
 import { Proyecto } from "./Proyecto";
 
 export type Tarea = {
-  codigoTarea?: number,
+  codigoTarea?: number;
   nombreTarea?: string;
-  fechaCreaciontarea?: Date,
+  fechaCreaciontarea?: Date;
   prioridadTarea?: string;
   descripicionTarea?: string;//indicador numerico,etc
   estadoTarea?: string;
   codigoProyecto?: Proyecto;
+  fechaEntregaTarea?: Date;
 };
