@@ -55,7 +55,6 @@ export class CrearTareaComponent implements OnInit {
       this.getDocentes$ = this.tareaService.obtenerDocentes();
       this.prioridades = prioridadTarea;
       this.getIndicadores$ = this.tareaService.obtenerIndicadores();
-      
   }
 
   ngOnInit(): void {
@@ -85,9 +84,7 @@ export class CrearTareaComponent implements OnInit {
   save(){
     this.tareaDocenteProyecto.tarea = this.tarea;
     this.tareaDocenteProyecto.docentes = this.docentesAsignados;
-    this.tareaDocenteProyecto.indicadors = this.indicadores;
-    //this.tareaDocente.codigoTarea = this.tarea;
-    //console.log(this.tareaDocenteProyecto);
+    this.tareaDocenteProyecto.indicadors = this.indicadoresAsignados;
     this.tareaService.crearTarea(this.tareaDocenteProyecto)
     .subscribe(data=>{
       confirm("Se creo la tarea!!");
