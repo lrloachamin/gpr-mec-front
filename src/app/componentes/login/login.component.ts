@@ -83,7 +83,10 @@ export class LoginComponent implements OnInit {
       if (localStorage.getItem('est') == '0') {
         this.router.navigate(['./pagina-validador']);
 
-      } else {
+      }else if(localStorage.getItem('est') == '2'){
+        this.router.navigate(['./cambiar-contrasenia']);
+      }     
+      else {
         this.router.navigate(['./home']);
       }
 

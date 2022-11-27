@@ -13,6 +13,10 @@ export class CambiarContraseniaComponent implements OnInit {
   
   listaDocentes:any;
   nombreUsuario:any;
+  passwordNewI:any;
+  passwordConf:any;
+  validaroPass:any;
+
 
   formularioContrasenia!: FormGroup;
 
@@ -22,12 +26,25 @@ export class CambiarContraseniaComponent implements OnInit {
     
     this.nombreUsuario=localStorage.getItem('usuario');
     this.cargarDocentes();
+    this.validaroPass=true;
     
     
    
   }
 
   ngOnInit(): void {
+    
+  }
+  validadorContrasenia(passwordNewA:any,passwordConA:any){
+    console.log(passwordConA)
+    if(passwordConA!=undefined){
+      if(passwordNewA===passwordConA ){
+        this.validaroPass=true;
+      }else{
+        this.validaroPass=false;
+  
+      }
+    }
     
   }
 
@@ -51,11 +68,12 @@ export class CambiarContraseniaComponent implements OnInit {
     passwUsuario: this.formularioContrasenia.value.passwordNew,
     fechaCreUsu: this.listaDocentes.fechaCreUsu,
     fechaModUsuario: this.listaDocentes.fechaModUsuario,
-    estadoUsuario: this.listaDocentes.estadoUsuario
+    estadoUsuario: '1'
   }
   console.log(usuariodata)
 
   this._usuario.actualizarUsuario(usuariodata,this.listaDocentes.codigoUsuario).subscribe(respuesta=>{
+    this.router.navigate(['./home']);
 
   },(error:any)=>{
     console.log(error)
