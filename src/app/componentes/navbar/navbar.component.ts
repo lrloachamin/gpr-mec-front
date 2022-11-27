@@ -35,4 +35,7 @@ export class NavbarComponent implements OnInit {
   navegarTareasDocente(){
     this.router.navigate(['/listar-tareas-docente']);
   }
+  navegarPerfil(){
+    this.router.navigate(['/actualizar-docente']);
+  }
 }
