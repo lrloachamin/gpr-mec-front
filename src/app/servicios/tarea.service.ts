@@ -16,13 +16,13 @@ const TAREA_DOCENTE = URL + '/tareaDocente';
 })
 export class TareaService {
 
-  private tareas$$ = new BehaviorSubject<TareaDocente | null>(null);
+  private tareas$$ = new BehaviorSubject<TareaDocenteProyecto | null>(null);
   tareas$ = this.tareas$$.asObservable();
 
   constructor(private http: HttpClient) { }
 
-  public obtenerTareas(): Observable<TareaDocente[]>{
-    return this.http.get<TareaDocente[]>(`${TAREA_DOCENTE}/listarTareas`); 
+  public obtenerTareas(): Observable<TareaDocenteProyecto[]>{
+    return this.http.get<TareaDocenteProyecto[]>(`${TAREA_DOCENTE}/listarTareas`); 
   }
 
   public obtenerTareasPorDocente(codigoDocente:number): Observable<TareaDocente[]>{
@@ -33,7 +33,7 @@ export class TareaService {
     return this.http.post<Proyecto>(TAREA_DOCENTE,tarea); 
   }
 
-  public setTarea(tarea: TareaDocente) {
+  public setTarea(tarea: TareaDocenteProyecto) {
     this.tareas$$.next(tarea);
   }
 

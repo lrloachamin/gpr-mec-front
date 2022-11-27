@@ -5,6 +5,9 @@ import { ProyectoService } from 'src/app/servicios/proyecto.service';
 import { Observable } from 'rxjs';
 import { TareaDocente } from 'src/app/models/TareaDocente';
 import { TareaService } from 'src/app/servicios/tarea.service';
+import { TareaDocenteProyecto } from 'src/app/models/TareaDocenteProyecto';
+import { Docente } from 'src/app/models/Docente';
+import { Indicador } from 'src/app/models/Indicador';
 
 @Component({
   selector: 'app-listar-tareas',
@@ -12,9 +15,8 @@ import { TareaService } from 'src/app/servicios/tarea.service';
 })
 export class ListarTareasComponent implements OnInit {
 
-  getTareas$: Observable<TareaDocente[]>;
-  tareas: TareaDocente[] = [];
-  
+  getTareas$: Observable<TareaDocenteProyecto[]>;
+  tareasDocenteProyecto: TareaDocenteProyecto[] = [];
   constructor(
     private tareaService: TareaService,
     private router: Router,
@@ -28,7 +30,7 @@ export class ListarTareasComponent implements OnInit {
 
   getTareas() {
     this.getTareas$.subscribe(tareas =>{
-      this.tareas = tareas;  
+      this.tareasDocenteProyecto = tareas;  
     });
   }
 
@@ -36,8 +38,8 @@ export class ListarTareasComponent implements OnInit {
     this.router.navigate(['crear-tareas']);
   }
 
-  editarTarea(tareaDocente:TareaDocente){
-    this.tareaService.setTarea(tareaDocente);
+  editarTarea(tareaDocenteProyecto:TareaDocenteProyecto){
+    this.tareaService.setTarea(tareaDocenteProyecto);
     this.router.navigate(['editar-tarea']);
   }
 }

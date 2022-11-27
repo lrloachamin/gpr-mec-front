@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { TareaDocente } from 'src/app/models/TareaDocente';
 import { TareaService } from 'src/app/servicios/tarea.service';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
+import { TareaDocenteProyecto } from 'src/app/models/TareaDocenteProyecto';
 
 @Component({
   selector: 'app-listar-tareas',
@@ -49,8 +50,9 @@ export class ListarTareasDocenteComponent implements OnInit {
     this.router.navigate(['crear-tareas']);
   }
 
-  editarTarea(tareaDocente:TareaDocente){
-    this.tareaService.setTarea(tareaDocente);
+  editarTarea(tareaDocenteProyecto:TareaDocenteProyecto){
+    //tareaDocente TareaDocente
+    this.tareaService.setTarea(tareaDocenteProyecto);
     this.router.navigate(['editar-tarea']);
   }
 }

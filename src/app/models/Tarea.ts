@@ -1,4 +1,5 @@
 import { Proyecto } from "./Proyecto";
+import { TareaDocente } from "./TareaDocente";
 
 export type Tarea = {
   codigoTarea?: number;
@@ -9,4 +10,5 @@ export type Tarea = {
   estadoTarea?: string;
   codigoProyecto?: Proyecto;
   fechaEntregaTarea?: Date;
+  tareaDocenteList?:TareaDocente[] ;
 };

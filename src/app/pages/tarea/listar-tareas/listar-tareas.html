@@ -13,19 +13,19 @@
           <tr>
             <th>Tarea</th>
             <th>Indicador</th>
-            <th>Responsable</th>
             <th>Fecha Límite de Entrega</th>
+            <!--<th>Responsable</th>-->
             <th>Proyecto</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let tarea of tareas">
-            <td>{{ tarea.codigoTarea?.nombreTarea }}</td>
-            <td>{{ tarea.codigoTarea?.descripicionTarea }}</td>
-            <td>{{ tarea.codigoDocente?.nombreDocente }} {{ tarea.codigoDocente?.apellidoDocente }} </td>
-            <td>{{ tarea.codigoTarea?.fechaEntregaTarea| date: "dd-MM-yyyy HH:mm" }}</td>
-            <td>{{ tarea.codigoTarea?.codigoProyecto?.nombreProyecto }}</td>
+          <tr *ngFor="let tarea of tareasDocenteProyecto">
+            <td>{{ tarea.tarea?.nombreTarea }}</td>
+            <td>{{ tarea.tarea?.descripicionTarea }}</td>
+            <td>{{ tarea.tarea?.fechaEntregaTarea| date: "dd-MM-yyyy HH:mm" }}</td>
+            <!--<td>{{ tarea.codigoDocente?.nombreDocente }} {{ tarea.codigoDocente?.apellidoDocente }} </td>-->
+            <td>{{ tarea.tarea?.codigoProyecto?.nombreProyecto }}</td>
             <td>
               <button (click)="editarTarea(tarea)" class="btn btn-warning">Editar</button>
             </td> 
