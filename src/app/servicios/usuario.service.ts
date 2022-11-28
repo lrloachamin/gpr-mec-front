@@ -4,7 +4,8 @@ import { BehaviorSubject } from 'rxjs';
 import { DocenteComponent } from '../componentes/docente/docente.component';
 import { Docente } from '../models/Docente';
 
-const url='https://gpr-espe.azurewebsites.net/api/v1/usuario';
+const urlH='https://gpr-espe.azurewebsites.net/api/v1/';
+//const urlH="http://localhost:8080/api/v1/"
 
 @Injectable({
   providedIn: 'root'
@@ -20,20 +21,24 @@ export class UsuarioService {
 
   obtenerUsuario(){
 
-    //const url= 'http://localhost:8080/api/v1/usuario';
+    const url= urlH+'usuario';
     return this.http.get(url); 
   }
 
   
   login(user:any,pass:any){
 
-    const url= 'http://localhost:8080/api/v1/login/'+user+'/'+pass;
+    const url= urlH+'login/'+user+'/'+pass;
     return this.http.get(url); 
   }
 
   actualizarUsuario(body:any ,id:any){
-    const url2= 'http://localhost:8080/api/v1/usuario/'+id;
-   // const url2= 'https://gpr-espe.azurewebsites.net/api/v1/usuario/'+id;
+    const url2= urlH+'usuario/'+id;
+    return this.http.put(url2,body); 
+  }
+
+  actualizarDocente(body:any ,id:any){
+    const url2= urlH+'updatedocente/'+id;
     return this.http.put(url2,body); 
   }
 
@@ -52,7 +57,7 @@ export class UsuarioService {
 
   obtenerUsuarioPorNombre(nombreUsuario:any){
 
-    const url3= 'http://localhost:8080/api/v1/usuarionombre/'+nombreUsuario;
+    const url3= urlH+'usuarionombre/'+nombreUsuario;
     //const url3= 'https://gpr-espe.azurewebsites.net/api/v1/usuarionombre/'+nombreUsuario;
     return this.http.get(url3); 
   }

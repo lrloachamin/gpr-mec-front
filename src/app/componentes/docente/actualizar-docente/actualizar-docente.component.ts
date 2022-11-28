@@ -25,19 +25,18 @@ export class ActualizarDocenteComponent implements OnInit {
   cedulaI: any;
   idEspeI: any;
   validadorIdEspe: any;
+  selectedId:any;
+  mensajeConfirmacion:any
 
   listaDocentes: any;
   listaCargos!: any;
   nombreUsuario: any
   s: any;
   formularioActDoc!: FormGroup;
-  constructor(private fb: FormBuilder, private _usuario: UsuarioService, private _docente: RegistroService, private _validaciones: ValidacionesService,private _scargo: CargoService) {
-    
+  constructor(private fb: FormBuilder, private _usuario: UsuarioService, private _docente: RegistroService, private _validaciones: ValidacionesService,private _scargo: CargoService) { 
    
     this.validadorCedula=true;
-   
-
-
+    this.mensajeConfirmacion=false;
   }
 
   ngOnInit(): void {
@@ -57,18 +56,10 @@ export class ActualizarDocenteComponent implements OnInit {
       cedula: ['', Validators.required],
       telefono: ['', Validators.required],
       correo: ['', [Validators.required, Validators.email]],
-      cargo:['',Validators.required]
+      cargo:['']
     })
-
- 
-
-
   }
 
-  actualizarDocente() {
-    this.cargarDocentes();
-    
-  }
   cargarDocentes() {
 
     this._usuario.obtenerUsuarioPorNombre(this.nombreUsuario).subscribe(respuesta => {
@@ -84,8 +75,9 @@ export class ActualizarDocenteComponent implements OnInit {
     this.docCedula=this.listaDocentes.cedulaDocente;
     this.docTelefono=this.listaDocentes.telefonoDocente;
     this.docCorreo=this.listaDocentes.correoDocente;
-    this.docCargo=this.listaDocentes.codCargo.codCargo;
-    console.log(this.listaDocentes)
+    this.docCargo=this.listaDocentes.codCargo
+    this.selectedId=this.docCargo.codCargo;
+    console.log(this.docCargo.codCargo)
   }
 
   validadorDeCedula(cedula: String) {
@@ -96,14 +88,40 @@ export class ActualizarDocenteComponent implements OnInit {
 
   cargarCargos(){
     this._scargo.obtenerCargos().subscribe(respuesta=>{
-      console.log(respuesta)
-
       this.procesarCargos(respuesta);
       
     })
   }
   procesarCargos(resp: any){
     this.listaCargos=resp.cargoResponse.cargo
+  }
+
+  actualizarDocente(){
+    
+   var usuariodata={
+
+    codigoDocente: this.listaDocentes.codigoDocente,
+    idDocente: this.listaDocentes.idDocente,
+    nombreDocente: this.formularioActDoc.value.nombres,
+    apellidoDocente: this.formularioActDoc.value.apellidos,
+    cedulaDocente: this.formularioActDoc.value.cedula,
+    telefonoDocente: this.formularioActDoc.value.telefono,
+    correoDocente: this.formularioActDoc.value.correo,
+    codCargo:this.formularioActDoc.value.cargo
+  }
+  console.log("data"+usuariodata.codCargo.codCargo)
+  
+  this._usuario.actualizarDocente(usuariodata,this.listaDocentes.codigoDocente).subscribe(respuesta=>{
+    alert("Usuario actualizado con éxito!")
+    location.reload();
+    
+  },(error:any)=>{
+    alert("Ha ocurrido un problema, contactese con su adminitrador!")
+    console.log(error)
+  })
+  
+
+
   }
 
   
