@@ -26,6 +26,7 @@ import { ListarTareasDocenteComponent } from './pages/tarea-docente/listar-tarea
 import { PaginasValidadorComponent } from './componentes/paginas-validador/paginas-validador.component';
 import { CambiarContraseniaComponent } from './componentes/cambiar-contrasenia/cambiar-contrasenia.component';
 import { ActualizarDocenteComponent } from './componentes/docente/actualizar-docente/actualizar-docente.component';
+import { RealizarTareaComponent } from './pages/tarea-docente/realizar-tarea-docente/realizar-tarea.component';
 
 
 
@@ -46,6 +47,7 @@ import { ActualizarDocenteComponent } from './componentes/docente/actualizar-doc
     CrearTareaComponent,
     EditarTareaComponent,
     ListarTareasDocenteComponent,
+    RealizarTareaComponent,
     PaginasValidadorComponent,
     CambiarContraseniaComponent,
     ActualizarDocenteComponent,

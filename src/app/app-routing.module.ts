@@ -11,6 +11,7 @@ import { CrearProyectosComponent } from './pages/proyecto/crear-proyectos/crear-
 import { EditarProyectoComponent } from './pages/proyecto/editar-proyecto/editar-proyecto.component';
 import { ListarProyectosComponent } from './pages/proyecto/listar-proyectos/listar-proyectos.component';
 import { ListarTareasDocenteComponent } from './pages/tarea-docente/listar-tareas-docente/listar-tareas-docente.component';
+import { RealizarTareaComponent } from './pages/tarea-docente/realizar-tarea-docente/realizar-tarea.component';
 import { CrearTareaComponent } from './pages/tarea/crear-tarea/crear-tarea.component';
 import { EditarTareaComponent } from './pages/tarea/editar-tarea/editar-tarea.component';
 import { ListarTareasComponent } from './pages/tarea/listar-tareas/listar-tareas.component';
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path: 'crear-tareas', component:CrearTareaComponent,canActivate:[AuthGuard]},
   {path: 'editar-tarea', component:EditarTareaComponent,canActivate:[AuthGuard]},
   {path: 'listar-tareas-docente', component:ListarTareasDocenteComponent,canActivate:[AuthGuard]},
+  {path: 'realizar-tarea-docente', component:RealizarTareaComponent,canActivate:[AuthGuard]},
   {path: 'pagina-validador', component:PaginasValidadorComponent,canActivate:[AuthGuard]},
   {path: 'cambiar-contrasenia', component:CambiarContraseniaComponent},
   {path: 'actualizar-docente', component:ActualizarDocenteComponent},

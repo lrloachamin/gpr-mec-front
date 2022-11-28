@@ -1,5 +1,6 @@
 import { Docente } from "./Docente";
 import { Tarea } from "./Tarea";
+import { TareaIndicador } from "./TareaIndicador";
 
 export type TareaDocente = {
     codigoTareaDocente?: number;
@@ -8,5 +9,6 @@ export type TareaDocente = {
     estadoTareaDocente?: string;
     codigoDocente?: Docente;
     codigoTarea?: Tarea;
+    tareaIndicadorList?:TareaIndicador[];
     //private List<TareaIndicador> tareaIndicadorList;
 };

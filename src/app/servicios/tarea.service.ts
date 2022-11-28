@@ -6,9 +6,10 @@ import { TareaDocente } from '../models/TareaDocente';
 import { Docente } from '../models/Docente';
 import { TareaDocenteProyecto } from '../models/TareaDocenteProyecto';
 import { Indicador } from '../models/Indicador';
+import { TareaIndicador } from '../models/TareaIndicador';
 
-const URL='https://gpr-espe.azurewebsites.net';
-//const URL='http://localhost:8080';
+//const URL='https://gpr-espe.azurewebsites.net';
+const URL='http://localhost:8080';
 const TAREA_DOCENTE = URL + '/tareaDocente';
 
 @Injectable({
@@ -18,6 +19,8 @@ export class TareaService {
 
   private tareas$$ = new BehaviorSubject<TareaDocenteProyecto | null>(null);
   tareas$ = this.tareas$$.asObservable();
+  private tareaDocente$$ = new BehaviorSubject<TareaDocente | null>(null);
+  tareaDocente$ = this.tareaDocente$$.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -29,12 +32,20 @@ export class TareaService {
     return this.http.get<TareaDocente[]>(`${TAREA_DOCENTE}/listarTareaAsignadaPorDocente/${codigoDocente}`); 
   }
 
+  public obtenerIndicadoresTarea(codigoTareaDocente:number): Observable<TareaIndicador[]>{
+    return this.http.get<TareaIndicador[]>(`${TAREA_DOCENTE}/listarIndicadoresPorTarea/${codigoTareaDocente}`); 
+  }
+
   public crearTarea(tarea:TareaDocenteProyecto){
     return this.http.post<Proyecto>(TAREA_DOCENTE,tarea); 
   }
 
   public setTarea(tarea: TareaDocenteProyecto) {
     this.tareas$$.next(tarea);
+  }
+
+  public setTareaDocente(tarea: TareaDocente) {
+    this.tareaDocente$$.next(tarea);
   }
 
   public obtenerProyectoPorId(idProyecto:number){
@@ -52,9 +63,13 @@ export class TareaService {
   public editarTarea(tareaDocente:TareaDocente){
     return this.http.put<Proyecto>(`${TAREA_DOCENTE}/modificar`, tareaDocente);
   }
+
+  public guardarTareaAsignadaAlDocente(tareaIndicadors:TareaIndicador[]){
+    return this.http.put<Proyecto>(`${TAREA_DOCENTE}/guardarTareaAsignadaAlProfesor`,tareaIndicadors); 
+  }
   /*
   public cambiarEstadoProyecto(codigoProyecto:any){
     return this.http.put<Proyecto>(`${PROYECTO}/cambiarEstado/${codigoProyecto}`,codigoProyecto);
-  }*/
-  
+  }
+  */
 }

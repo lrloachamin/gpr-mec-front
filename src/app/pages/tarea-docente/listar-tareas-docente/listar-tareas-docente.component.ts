@@ -30,7 +30,7 @@ export class ListarTareasDocenteComponent implements OnInit {
     
     //this.getTareas$ = this.tareaService.obtenerTareasPorDocente(this.docente.codigoDocente);
     this.codigoDocente=localStorage.getItem('codigoDocente');
-    console.log(this.codigoDocente);
+    //console.log(this.codigoDocente);
     //this.getTareas$ = this.tareaService.obtenerTareasPorDocente(this.docente.codigoDocente);
     this.getTareas$ = this.tareaService.obtenerTareasPorDocente(this.codigoDocente);
 
@@ -46,13 +46,15 @@ export class ListarTareasDocenteComponent implements OnInit {
     });
   }
 
-  navegarCrearTarea(){
-    this.router.navigate(['crear-tareas']);
+  realizarTarea(tareaDocente:TareaDocente){
+    //tareaDocente TareaDocente
+    this.tareaService.setTareaDocente(tareaDocente);
+    this.router.navigate(['realizar-tarea-docente']);
   }
 
-  editarTarea(tareaDocenteProyecto:TareaDocenteProyecto){
+  /*editarTarea(tareaDocenteProyecto:TareaDocenteProyecto){
     //tareaDocente TareaDocente
     this.tareaService.setTarea(tareaDocenteProyecto);
     this.router.navigate(['editar-tarea']);
-  }
+  }*/
 }
