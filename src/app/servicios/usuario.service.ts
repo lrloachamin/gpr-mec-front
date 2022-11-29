@@ -4,8 +4,8 @@ import { BehaviorSubject } from 'rxjs';
 import { DocenteComponent } from '../componentes/docente/docente.component';
 import { Docente } from '../models/Docente';
 
-const urlH='https://gpr-espe.azurewebsites.net/api/v1/';
-//const urlH="http://localhost:8080/api/v1/"
+//const urlH='https://gpr-espe.azurewebsites.net/api/v1/';
+const urlH="http://localhost:8080/api/v1/"
 
 @Injectable({
   providedIn: 'root'

@@ -73,6 +73,7 @@ export class CambiarContraseniaComponent implements OnInit {
   console.log(usuariodata)
 
   this._usuario.actualizarUsuario(usuariodata,this.listaDocentes.codigoUsuario).subscribe(respuesta=>{
+    alert("Contraseña actualizada con éxito!")
     this.router.navigate(['./home']);
 
   },(error:any)=>{
