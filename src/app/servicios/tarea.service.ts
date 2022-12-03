@@ -60,7 +60,7 @@ export class TareaService {
     return this.http.get<Indicador[]>(`${TAREA_DOCENTE}/listarIndicadores`); 
   }
   
-  public editarTarea(tareaDocente:TareaDocente){
+  public editarTarea(tareaDocente:TareaDocenteProyecto){
     return this.http.put<Proyecto>(`${TAREA_DOCENTE}/modificar`, tareaDocente);
   }
 

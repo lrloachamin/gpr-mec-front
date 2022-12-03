@@ -13,7 +13,7 @@
 					<a class="nav-link" [routerLink]="['/docentes']"  *ngIf="usuario=='admin'" (click)="isMenuCollapsed = true" >Usuarios</a>
 				</li>
 				<li class="nav-item active">
-					<a class="nav-link" *ngIf="usuario!='admin'" (click)="navegarProyecto()">Proyectos</a>
+					<a class="nav-link" *ngIf="usuario=='admin'" (click)="navegarProyecto()">Proyectos</a>
 				</li>
 				<li class="nav-item active">
 					<a class="nav-link" *ngIf="usuario!='admin'" (click)="navegarPerfil()">Cuenta</a>

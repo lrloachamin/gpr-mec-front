@@ -94,12 +94,14 @@ export class EditarTareaComponent implements OnInit {
   }
 
   save(){
-    //console.log(this.tareaDocente);
-    /*this.tareaService.editarTarea(this.tareaDocente)
+    this.tareaDocenteProyecto.tarea = this.tarea;
+    this.tareaDocenteProyecto.docentes = this.docentesAsignados;
+    this.tareaDocenteProyecto.indicadors = this.indicadoresAsignados;
+    this.tareaService.editarTarea(this.tareaDocenteProyecto)
     .subscribe(data=>{
       confirm("Se editaron los datos con éxito!!");
       this.router.navigate(["listar-tareas"]);
-    })*/
+    })
   }
 
   back() {
