@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div class="container">
+<div class="container col-md-4">
   <div class="card">
     <div class="card-header">
       <h3>Crear Tarea</h3>
@@ -8,29 +8,20 @@
       <form (ngSubmit)="f.form.valid && save()" #f="ngForm">
         <div class="form-group">
           <label for="">Nombre de la Tarea:</label>
-          <input 
-            [(ngModel)]="tarea.nombreTarea" 
-            name="nombreTareas" 
-            type="text" 
-            class="form-control"
-            required/>
+          <input [(ngModel)]="tarea.nombreTarea" name="nombreTareas" type="text" class="form-control" required />
         </div>
         <div class="form-group">
           <label for="">Proyecto:</label>
-            <p>
-              <select name="proyecto" [(ngModel)]="tarea.codigoProyecto">
+          <p>
+            <select name="proyecto" [(ngModel)]="tarea.codigoProyecto">
               <option [ngValue]="proyecto" *ngFor="let proyecto of proyectos">{{proyecto.nombreProyecto}}</option>
-              </select>
-            </p>
+            </select>
+          </p>
         </div>
         <div class="form-group">
           <label for="">Fecha de Entrega:</label>
-          <input 
-            [(ngModel)]="tarea.fechaEntregaTarea" 
-            name="fechaCreaciontarea" 
-            type="datetime-local" 
-            class="form-control"
-            required/>
+          <input [(ngModel)]="tarea.fechaEntregaTarea" name="fechaCreaciontarea" type="datetime-local"
+            class="form-control" required />
         </div>
         <div class="form-group">
           <label for="">Prioridad de la tarea:</label>
@@ -38,48 +29,53 @@
             <option [ngValue]="prioridad.id" *ngFor="let prioridad of prioridades">{{prioridad.name}}</option>
           </select>
         </div>
-        <!--<div class="form-group">
-          <label for="">Indicador:</label>
-          <input 
-            [(ngModel)]="tarea.descripicionTarea"
-            name="descripicionTarea" 
-            type="text" 
-            class="form-control"
-            required/>
-        </div>-->
-        <div class="form-group">
+        <input type="button" (click)="visualizarIndicador()" class="" value="Agregar Indicador" />
+        <div class="form-group" *ngIf="ckequearIndicador">
           <label for="">Indicador:</label>
           <p>
             <select name="indicador" [(ngModel)]="indicador">
-            <option [ngValue]="ind" *ngFor="let ind of indicadores">{{ind.nombreIndicador}}</option>
+              <option [ngValue]="ind" *ngFor="let ind of indicadores">{{ind.nombreIndicador}}</option>
+            </select>
+          </p>
+          <label for="">Descripción del Indicador:</label>
+          <input [(ngModel)]="descripcionIndicador" name="descripcionIndicador" type="text" class="form-control"
+            required />
+          <input type="button" (click)="agregarIndicador()" class="btn btn-danger" value="Guardar" />
+        </div>
+        <div class="form-group">
+          <h2>Indicadores:</h2>
+          <ul>
+            <li *ngFor="let i of indicadoresAsignados">
+              <span> {{i.nombreIndicador}} </span>
+              <span> {{i.descripcionIndicador}} </span>
+            </li>
+          </ul>
+          <input type="button" (click)="eliminarIndicador()" class="btn btn-danger" value="Quitar Indicador" />
+        </div>
+        <div class="form-group">
+          <label for="">Cargos:</label>
+          <p>
+            <select name="miselect" [(ngModel)]="cargo" (change)="buscarDocentesPorCargo()">
+              <option [ngValue]="carg" *ngFor="let carg of cargos">{{carg.nombreCargo}}</option>
             </select>
           </p>
         </div>
-        <h2>Indicadores:</h2>
-          <ul>
-            <li *ngFor="let i of indicadoresAsignados">
-              <span>{{i.nombreIndicador}}</span>
-            </li>
-          </ul>
-          <input type="button" (click)="agregarIndicador()" class="btn btn-danger" value="Agregar Indicador"/>
-          <input type="button" (click)="eliminarIndicador()" class="btn btn-danger" value="Quitar Indicador"/>
-        
         <div class="form-group">
           <label for="">Persona Asignada:</label>
           <p>
             <select name="miselect" [(ngModel)]="tareaDocente.codigoDocente">
-            <option [ngValue]="docente" *ngFor="let docente of docentes">{{docente.nombreDocente}}</option>
+              <option [ngValue]="docente" *ngFor="let docente of docentes">{{docente.nombreDocente}}</option>
             </select>
           </p>
         </div>
-          <h2>DOCENTES ASIGNADOS:</h2>
-          <ul class="heroes">
-            <li *ngFor="let d of docentesAsignados">
-              <span>{{d.nombreDocente}}</span>
-            </li>
-          </ul>
-        <input type="button" (click)="agregarElementos()" class="btn btn-danger" value="Agregar Elemento"/>
-        <input type="button" (click)="eliminarElementos()" class="btn btn-danger" value="Quitar Elemento"/>
+        <h2>DOCENTES ASIGNADOS:</h2>
+        <ul class="heroes">
+          <li *ngFor="let d of docentesAsignados">
+            <span>{{d.nombreDocente}}</span>
+          </li>
+        </ul>
+        <input type="button" (click)="agregarElementos()" class="btn btn-danger" value="Agregar Elemento" />
+        <input type="button" (click)="eliminarElementos()" class="btn btn-danger" value="Quitar Elemento" />
         <button type="submit" class="btn btn-danger">Guardar</button>
       </form>
     </div>

@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Cargo } from 'src/app/models/Cargo';
 import { Docente } from 'src/app/models/Docente';
 import { Indicador } from 'src/app/models/Indicador';
 import { Proyecto } from 'src/app/models/Proyecto';
 import { Tarea } from 'src/app/models/Tarea';
 import { TareaDocente } from 'src/app/models/TareaDocente';
 import { TareaDocenteProyecto } from 'src/app/models/TareaDocenteProyecto';
+import { CargoService } from 'src/app/servicios/cargo.service';
 import { ProyectoService } from 'src/app/servicios/proyecto.service';
 import { TareaService } from 'src/app/servicios/tarea.service';
 
@@ -33,6 +35,7 @@ const prioridadTarea: any[] = [
 export class CrearTareaComponent implements OnInit {
   //tarea: TareaDocente = {};
   getProyectos$: Observable<Proyecto[]>;
+  descripcionIndicador: string="";
   getDocentes$: Observable<Docente[]>;
   validTypes: any[] = [];
   tareaDocente: TareaDocente = {};
@@ -46,26 +49,40 @@ export class CrearTareaComponent implements OnInit {
   prioridades: any[];
   getIndicadores$: Observable<Indicador[]>;
   tareaDocenteProyecto: TareaDocenteProyecto = {};
+  ckequearIndicador: Boolean= false;
+  getCargos$: Observable<Cargo[]>;
+  cargos: Cargo[]=[];
+  cargo: Cargo = {};
+
   constructor(
     private router:Router,
+    private cargoService:CargoService,
     private tareaService:TareaService,
     private proyectoService: ProyectoService
     ) {
       this.getProyectos$ = this.proyectoService.obtenerProyectos();
-      this.getDocentes$ = this.tareaService.obtenerDocentes();
+      this.getCargos$ = this.cargoService.obtenerCargosModel();
+      this.getDocentes$ = new Observable;
       this.prioridades = prioridadTarea;
       this.getIndicadores$ = this.tareaService.obtenerIndicadores();
   }
 
   ngOnInit(): void {
     this.getProyectos();
-    this.getDocentes();
+    this.getCargos();
+    //this.getDocentes();
     this.getIndicadores();
   }
 
   getProyectos() {
     this.getProyectos$.subscribe(proyectos =>{
       this.proyectos = proyectos;
+    });
+  }
+
+  getCargos() {
+    this.getCargos$.subscribe(cargos =>{
+      this.cargos = cargos;
     });
   }
 
@@ -108,10 +125,24 @@ export class CrearTareaComponent implements OnInit {
   }
 
   agregarIndicador(){
+    this.indicador.descripcionIndicador = this.descripcionIndicador;
+    this.descripcionIndicador = "";
     this.indicadoresAsignados.push(this.indicador);
+    this.ckequearIndicador = false;
   }
 
   eliminarIndicador(){
     this.indicadoresAsignados=this.indicadoresAsignados.filter((item) => item !== this.indicador );
+  }
+
+  visualizarIndicador(){
+    this.ckequearIndicador = true;
+  }
+
+  buscarDocentesPorCargo(){
+    this.getDocentes$ = this.tareaService.obtenerDocentesPorCargo(this.cargo.codCargo);
+    this.getDocentes$.subscribe(docentes =>{
+      this.docentes = docentes;  
+    });
   }
 }

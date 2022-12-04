@@ -7,6 +7,7 @@ import { Docente } from '../models/Docente';
 import { TareaDocenteProyecto } from '../models/TareaDocenteProyecto';
 import { Indicador } from '../models/Indicador';
 import { TareaIndicador } from '../models/TareaIndicador';
+import { Cargo } from '../models/Cargo';
 
 //const URL='https://gpr-espe.azurewebsites.net';
 const URL='http://localhost:8080';
@@ -54,6 +55,10 @@ export class TareaService {
 
   public obtenerDocentes(): Observable<Docente[]>{
     return this.http.get<Docente[]>(`${TAREA_DOCENTE}/listarDocentes`); 
+  }
+
+  public obtenerDocentesPorCargo(idCargo:any): Observable<Docente[]>{
+    return this.http.get<Docente[]>(`${TAREA_DOCENTE}/listarDocentesPorCargo/${idCargo}`); 
   }
 
   public obtenerIndicadores(): Observable<Indicador[]>{

@@ -10,6 +10,8 @@ import { Indicador } from 'src/app/models/Indicador';
 import { TareaDocenteProyecto } from 'src/app/models/TareaDocenteProyecto';
 import { Docente } from 'src/app/models/Docente';
 import { Tarea } from 'src/app/models/Tarea';
+import { Cargo } from 'src/app/models/Cargo';
+import { CargoService } from 'src/app/servicios/cargo.service';
 
 const prioridadTarea: any[] = [
   {
@@ -45,13 +47,20 @@ export class EditarTareaComponent implements OnInit {
   docente: Docente = {};
   tarea: Tarea = {};
   indicador: Indicador= {};
+  ckequearIndicador: Boolean= false;
+  getCargos$: Observable<Cargo[]>;
+  cargos: Cargo[]=[];
+  cargo: Cargo = {};
+  descripcionIndicador: string="";
 
   constructor(
     private router:Router,
+    private cargoService:CargoService,
     private tareaService:TareaService,
     private proyectoService: ProyectoService
     ) {
       this.getProyectos$ = this.proyectoService.obtenerProyectos();
+      this.getCargos$ = this.cargoService.obtenerCargosModel();
       this.prioridades = prioridadTarea;
       this.tareaService.tareas$.subscribe((res) => {
         this.tareaDocenteProyecto = res;
@@ -71,8 +80,15 @@ export class EditarTareaComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProyectos();
-    this.getDocentes();
+    this.getCargos();
+    //this.getDocentes();
     this.getIndicadores();
+  }
+
+  getCargos() {
+    this.getCargos$.subscribe(cargos =>{
+      this.cargos = cargos;
+    });
   }
 
   getProyectos() {
@@ -129,6 +145,17 @@ export class EditarTareaComponent implements OnInit {
 
   eliminarIndicador(){
     this.indicadoresAsignados=this.indicadoresAsignados.filter((item) => item.codigoIndicador !== this.indicador.codigoIndicador );
+  }
+
+  visualizarIndicador(){
+    this.ckequearIndicador = true;
+  }
+
+  buscarDocentesPorCargo(){
+    this.getDocentes$ = this.tareaService.obtenerDocentesPorCargo(this.cargo.codCargo);
+    this.getDocentes$.subscribe(docentes =>{
+      this.docentes = docentes;  
+    });
   }
 
 }
