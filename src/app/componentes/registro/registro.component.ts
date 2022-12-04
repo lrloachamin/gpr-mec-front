@@ -106,6 +106,7 @@ cerrarModal(){
 
 
 validadorDeCedula(cedula: String) {
+
   
   let cedulaCorrecta = false;
   if (cedula.length == 10)
@@ -135,6 +136,7 @@ validadorDeCedula(cedula: String) {
       cedulaCorrecta = false;
   }
 this.validadorCedula= cedulaCorrecta;
+  
 
 }
 

@@ -21,7 +21,7 @@
         <th scope="col">Correo</th>
         <th scope="col">Cargo</th>
         <th scope="col" colspan="1">Estado</th>
-        <th scope="col" colspan="2">Acciones</th>
+        <th scope="col" colspan="3">Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -39,7 +39,7 @@
         <td *ngIf="cargaaprobado && docente.codigoUsuario.codigoUsuario!=codigoUsuario">Espere...</td>
         <td><button class="btn btn-primary" (click)="aprobarSolicitud(docente,'2')" [disabled]="docente.codigoUsuario.estadoUsuario=='1' || docente.codigoUsuario.estadoUsuario=='2' || cargaaprobado">Aprobar</button></td>
         <td><button class="btn btn-warning" (click)="aprobarSolicitud(docente,'0')" [disabled]="docente.codigoUsuario.estadoUsuario=='0' || cargaaprobado ">Desactivar</button></td>
-        
+        <td><button class="btn btn-secondary" (click)="actualizarDocente(docente)">Editar </button></td>
       </tr>
 
     </tbody>

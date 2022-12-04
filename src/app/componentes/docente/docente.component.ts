@@ -46,6 +46,14 @@ export class DocenteComponent implements OnInit {
     })
   }
 
+  actualizarDocente(data:any){
+    console.log(data.codigoUsuario.nombreUsuario)
+    localStorage.setItem('usuarioAct',data.codigoUsuario.nombreUsuario);
+    this.router.navigate(['./actualizar-docente']);
+
+
+  }
+
   ngOnInit(): void {
   }
 

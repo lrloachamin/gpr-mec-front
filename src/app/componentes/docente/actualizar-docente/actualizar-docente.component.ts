@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ValidacionesService } from 'src/app/services/validaciones.service';
 import { CargoService } from 'src/app/servicios/cargo.service';
 import { RegistroService } from 'src/app/servicios/registro.service';
@@ -19,6 +20,7 @@ export class ActualizarDocenteComponent implements OnInit {
   docTelefono: any;
   docCorreo: any;
   docCargo:any;
+  docIdEspe:any;
 
   //variables de validacion
   validadorCedula: any;
@@ -31,16 +33,31 @@ export class ActualizarDocenteComponent implements OnInit {
   listaDocentes: any;
   listaCargos!: any;
   nombreUsuario: any
+  tipoUsuario:any;
+  docCorreo2:any;
   s: any;
   formularioActDoc!: FormGroup;
-  constructor(private fb: FormBuilder, private _usuario: UsuarioService, private _docente: RegistroService, private _validaciones: ValidacionesService,private _scargo: CargoService) { 
+  constructor(private fb: FormBuilder,
+     private _usuario: UsuarioService, 
+     private _docente: RegistroService,
+      private _validaciones: ValidacionesService,
+      private _scargo: CargoService,
+      private router: Router) { 
    
     this.validadorCedula=true;
     this.mensajeConfirmacion=false;
   }
 
   ngOnInit(): void {
-    this.nombreUsuario = localStorage.getItem('usuario');
+
+    this.tipoUsuario=localStorage.getItem('usuario')
+    if(this.tipoUsuario==="admin"){
+      this.nombreUsuario = localStorage.getItem('usuarioAct');
+    }else{
+      this.nombreUsuario = localStorage.getItem('usuario');
+    }
+    
+    
     this.cargarCargos();
     this.cargarDocentes();
    
@@ -54,6 +71,7 @@ export class ActualizarDocenteComponent implements OnInit {
       nombres: ['', Validators.required],
       apellidos: ['', Validators.required],
       cedula: ['', Validators.required],
+      id: ['', Validators.required],
       telefono: ['', Validators.required],
       correo: ['', [Validators.required, Validators.email]],
       cargo:['']
@@ -76,6 +94,7 @@ export class ActualizarDocenteComponent implements OnInit {
     this.docTelefono=this.listaDocentes.telefonoDocente;
     this.docCorreo=this.listaDocentes.correoDocente;
     this.docCargo=this.listaDocentes.codCargo
+    this.docIdEspe=this.listaDocentes.idDocente
     this.selectedId=this.docCargo.codCargo;
     console.log(this.docCargo.codCargo)
   }
@@ -101,7 +120,7 @@ export class ActualizarDocenteComponent implements OnInit {
    var usuariodata={
 
     codigoDocente: this.listaDocentes.codigoDocente,
-    idDocente: this.listaDocentes.idDocente,
+    idDocente: this.formularioActDoc.value.id,
     nombreDocente: this.formularioActDoc.value.nombres,
     apellidoDocente: this.formularioActDoc.value.apellidos,
     cedulaDocente: this.formularioActDoc.value.cedula,
@@ -121,6 +140,13 @@ export class ActualizarDocenteComponent implements OnInit {
   })
   
 
+
+  }
+
+  cancelarActualizar(){
+    this.router.navigate(['./docentes']);
+
+    return localStorage.removeItem('usuarioAct');
 
   }
 
