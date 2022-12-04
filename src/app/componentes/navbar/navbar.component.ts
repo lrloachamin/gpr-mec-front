@@ -38,4 +38,7 @@ export class NavbarComponent implements OnInit {
   navegarPerfil(){
     this.router.navigate(['/actualizar-docente']);
   }
+  navegarUsuarioPerfil(){
+    this.router.navigate(['/usuario-perfil']);
+  }
 }

@@ -27,6 +27,7 @@ import { PaginasValidadorComponent } from './componentes/paginas-validador/pagin
 import { CambiarContraseniaComponent } from './componentes/cambiar-contrasenia/cambiar-contrasenia.component';
 import { ActualizarDocenteComponent } from './componentes/docente/actualizar-docente/actualizar-docente.component';
 import { RealizarTareaComponent } from './pages/tarea-docente/realizar-tarea-docente/realizar-tarea.component';
+import { UsuarioPerfilComponent } from './componentes/usuario-perfil/usuario-perfil.component';
 
 
 
@@ -51,6 +52,7 @@ import { RealizarTareaComponent } from './pages/tarea-docente/realizar-tarea-doc
     PaginasValidadorComponent,
     CambiarContraseniaComponent,
     ActualizarDocenteComponent,
+    UsuarioPerfilComponent,
   ],
   imports: [
     BrowserModule,

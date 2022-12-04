@@ -1,0 +1,28 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+    <div class="abs-center">
+      
+  
+        <span style="font-size: 25px;">
+            Usuario por Perfil
+        </span>
+        <hr>
+        <select (change)="asignarDocentesCheck()" [(ngModel)]="perfil">
+            <option [value]="1">Selecccinar</option>
+            <option [value]="2" >Docenete</option>
+        </select>
+        <div *ngFor="let item of dataDocentes">
+            <input type="checkbox" [(ngModel)]="item.isSelected"><span>{{item.nombreUsuario}}</span>
+
+
+        </div>
+
+        <button (click)="asignarDocentesCheck()">Axtivar</button>
+       
+
+
+    
+    </div>
+  </div>
+  

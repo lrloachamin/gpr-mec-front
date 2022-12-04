@@ -7,6 +7,7 @@ import { HomeComponent } from './componentes/home/home.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { PaginasValidadorComponent } from './componentes/paginas-validador/paginas-validador.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
+import { UsuarioPerfilComponent } from './componentes/usuario-perfil/usuario-perfil.component';
 import { CrearProyectosComponent } from './pages/proyecto/crear-proyectos/crear-proyectos.component';
 import { EditarProyectoComponent } from './pages/proyecto/editar-proyecto/editar-proyecto.component';
 import { ListarProyectosComponent } from './pages/proyecto/listar-proyectos/listar-proyectos.component';
@@ -34,6 +35,7 @@ const routes: Routes = [
   {path: 'pagina-validador', component:PaginasValidadorComponent,canActivate:[AuthGuard]},
   {path: 'cambiar-contrasenia', component:CambiarContraseniaComponent},
   {path: 'actualizar-docente', component:ActualizarDocenteComponent},
+  {path: 'usuario-perfil', component:UsuarioPerfilComponent,canActivate:[AuthGuard]},
   {path: '**', component:LoginComponent},
 
 ];
