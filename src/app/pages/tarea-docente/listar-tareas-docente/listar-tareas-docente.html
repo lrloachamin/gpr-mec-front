@@ -22,8 +22,10 @@
             <td>{{ tarea.codigoTarea?.prioridadTarea }}</td>
             <td>{{ tarea.codigoTarea?.fechaEntregaTarea| date: "dd-MM-yyyy HH:mm" }}</td>
             <td>{{ tarea.codigoTarea?.codigoProyecto?.nombreProyecto }}</td>
-            <td *ngIf="tarea.codigoTarea?.estadoTarea=='A'">ACTIVO</td>
-            <td *ngIf="tarea.codigoTarea?.estadoTarea=='I'">INACTIVO</td>
+            <td *ngIf="tarea.codigoTarea?.estadoTarea=='A'">ASIGNADO</td>
+            <td *ngIf="tarea.codigoTarea?.estadoTarea=='E'">EN REVISIÓN</td>
+            <td *ngIf="tarea.codigoTarea?.estadoTarea=='H'">ACEPTADO</td>
+            <td *ngIf="tarea.codigoTarea?.estadoTarea=='D'">DENEGADO</td>
             <td>
               <button (click)="realizarTarea(tarea)" class="btn btn-warning">Realizar</button>
             </td> 

@@ -28,7 +28,11 @@ import { CambiarContraseniaComponent } from './componentes/cambiar-contrasenia/c
 import { ActualizarDocenteComponent } from './componentes/docente/actualizar-docente/actualizar-docente.component';
 import { RealizarTareaComponent } from './pages/tarea-docente/realizar-tarea-docente/realizar-tarea.component';
 import { UsuarioPerfilComponent } from './componentes/usuario-perfil/usuario-perfil.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -60,7 +64,12 @@ import { UsuarioPerfilComponent } from './componentes/usuario-perfil/usuario-per
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    BrowserAnimationsModule,
+    MatProgressBarModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
     //ComponentsModule
     //PagesModule
   ],
