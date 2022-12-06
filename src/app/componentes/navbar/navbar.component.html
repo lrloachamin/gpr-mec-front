@@ -21,6 +21,11 @@
 				<li class="nav-item">
 					<a class="nav-link" *ngIf="usuario=='admin'" (click)="navegarTareas()">Tareas</a>
 				</li>
+
+				<li class="nav-item">
+					<a class="nav-link" *ngIf="usuario=='admin'" (click)="navegarTareasDocenteEntregadas()">Tareas Entregadas</a>
+				</li>
+
 				<li class="nav-item">
 					<a class="nav-link" *ngIf="usuario=='admin'" (click)="navegarUsuarioPerfil()">Usuario por Perfil</a>
 				</li>

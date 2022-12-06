@@ -41,4 +41,8 @@ export class NavbarComponent implements OnInit {
   navegarUsuarioPerfil(){
     this.router.navigate(['/usuario-perfil']);
   }
+  navegarTareasDocenteEntregadas(){
+    this.router.navigate(['/tareas-entregadas']);
+  }
+
 }
