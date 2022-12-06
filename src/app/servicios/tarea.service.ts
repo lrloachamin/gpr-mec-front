@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Proyecto } from '../models/Proyecto';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -8,6 +8,7 @@ import { TareaDocenteProyecto } from '../models/TareaDocenteProyecto';
 import { Indicador } from '../models/Indicador';
 import { TareaIndicador } from '../models/TareaIndicador';
 import { Cargo } from '../models/Cargo';
+import { TareaIndicadorFile } from '../models/TareaIndicadorFile';
 
 //const URL='https://gpr-espe.azurewebsites.net';
 const URL='http://localhost:8080';
@@ -70,7 +71,22 @@ export class TareaService {
   }
 
   public guardarTareaAsignadaAlDocente(tareaIndicadors:TareaIndicador[]){
-    return this.http.put<Proyecto>(`${TAREA_DOCENTE}/guardarTareaAsignadaAlProfesor`,tareaIndicadors); 
+    return this.http.put<String>(`${TAREA_DOCENTE}/guardarTareaAsignadaAlProfesor`,tareaIndicadors); 
+  }
+
+  
+  public guardarArchivoTareaAsignadaAlDocente(file:File,codigoTareaDocente:any): Observable<HttpEvent<any>>{
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+    formData.append('codigoTareaDocente', codigoTareaDocente);
+    console.log(formData);
+    const req = new HttpRequest('PUT', `${TAREA_DOCENTE}/guardarArchivoTareaAsignadaAlProfesor`, formData, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+    return this.http.request(req);
+
+    //return this.http.put<Proyecto>(`${TAREA_DOCENTE}/guardarTareaAsignadaAlProfesor`,tareaIndicadors); 
   }
   /*
   public cambiarEstadoProyecto(codigoProyecto:any){

@@ -48,7 +48,7 @@ export class ListarTareasDocenteComponent implements OnInit {
 
   realizarTarea(tareaDocente:TareaDocente){
     //tareaDocente TareaDocente
-    //this.tareaService.setTareaDocente(tareaDocente);
+    this.tareaService.setTareaDocente(tareaDocente);
     this.router.navigate(['realizar-tarea-docente']);
   }
 
