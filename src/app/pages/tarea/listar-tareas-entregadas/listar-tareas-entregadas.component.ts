@@ -31,7 +31,7 @@ export class ListarTareasEntregadasComponent implements OnInit {
   }
 
   revisarTarea(tareaDocente:TareaDocente){
-    //this.tareaService.setTarea(tareaDocenteProyecto);
-    //this.router.navigate(['editar-tarea']);
+    this.tareaService.setTareaDocente(tareaDocente);
+    this.router.navigate(['revisar-tarea-entregada']);
   }
 }

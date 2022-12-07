@@ -34,8 +34,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import { ListarTareasEntregadasComponent } from './pages/tarea/listar-tareas-entregadas/listar-tareas-entregadas.component';
-
-
+import { RevisarTareaComponent } from './pages/tarea/revisar-tarea-entregada/revisar-tarea.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +57,8 @@ import { ListarTareasEntregadasComponent } from './pages/tarea/listar-tareas-ent
     CambiarContraseniaComponent,
     ActualizarDocenteComponent,
     UsuarioPerfilComponent,
-    ListarTareasEntregadasComponent
+    ListarTareasEntregadasComponent,
+    RevisarTareaComponent
   ],
   imports: [
     BrowserModule,

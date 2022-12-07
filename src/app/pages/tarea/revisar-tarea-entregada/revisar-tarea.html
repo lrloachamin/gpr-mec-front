@@ -1,0 +1,57 @@
+<app-navbar></app-navbar>
+<div class="container col-md-4">
+  <div class="card">
+    <div class="card-header">
+      <h3>Realizar Tarea</h3>
+    </div>
+    <div class="card-body">
+       <div class="form-group">
+          <label for="">Nombre de la Tarea:</label>
+          <span *ngIf="tarea">{{ tarea.nombreTarea }}</span>
+        </div>
+        <div class="form-group">
+          <label for="">Proyecto:</label>
+          <span *ngIf="tarea">{{ tarea.codigoProyecto?.nombreProyecto }}</span>
+        </div>
+        <div class="form-group">
+          <label for="">Fecha de Entrega:</label>
+          <span *ngIf="tarea">{{ tarea.fechaEntregaTarea }}</span>
+        </div>
+        <div class="form-group">
+          <label for="">Prioridad de la tarea:</label>
+          <span *ngIf="tarea">{{ tarea.prioridadTarea }}</span>
+        </div>
+        <h2>Indicadores:</h2>
+        <ul>
+          <li *ngFor="let i of indicadoresAsignados">
+            <span>Descripción de Indicador:{{ i.descripcionTareaIndicador}}<br/></span>
+            <span>Tipo de Variable: {{ i.indicadorCODIGOINDICADOR.nombreIndicador }} <br/></span>
+            <span>Valor ingresado: {{ i.valorIndicador }}</span>
+          </li>
+        </ul>
+        <div id="box4">
+          <mat-card>
+              <mat-card-header>
+                  <mat-card-title>Lista de Archivos</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                  <ul>
+                      <li *ngFor="let file of fileInfos | async">
+                          <a href="{{file.url}}">{{file.name}}</a>
+                          <!--<mat-icon (click)="deleteFile(file.name)">delete</mat-icon>-->
+                      </li>
+                  </ul>
+              </mat-card-content>
+          </mat-card>
+      </div>
+        <button type="submit" class="btn btn-danger" (click)="aprobarTarea()">Aprobar tarea</button>
+        <button type="button" class="btn btn-danger" (click)="denegarTarea()">Denegar tarea</button>
+        
+      <div *ngIf="checkButton">
+        <input type="text" [(ngModel)]="tareaDocente.descripcionTareadocente" name="descripcionTareadocente" type="text" class="form-control"/>
+        <input type="button" class="btn btn-danger" (click)="denegarTareaDocente()" value="rechazarTarea"/>
+      </div>
+    </div>
+  </div>
+</div>
+

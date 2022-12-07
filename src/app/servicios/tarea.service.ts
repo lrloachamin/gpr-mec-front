@@ -78,7 +78,6 @@ export class TareaService {
     return this.http.put<String>(`${TAREA_DOCENTE}/guardarTareaAsignadaAlProfesor`,tareaIndicadors); 
   }
 
-  
   public guardarArchivoTareaAsignadaAlDocente(file:File,codigoTareaDocente:any): Observable<HttpEvent<any>>{
     const formData: FormData = new FormData();
     formData.append('file', file);
@@ -92,6 +91,15 @@ export class TareaService {
 
     //return this.http.put<Proyecto>(`${TAREA_DOCENTE}/guardarTareaAsignadaAlProfesor`,tareaIndicadors); 
   }
+
+  public aprobarTareaDocente(tareaDocente:TareaDocente){
+    return this.http.put<String>(`${TAREA_DOCENTE}/aprobarTareaDocente`,tareaDocente); 
+  }
+
+  public denegarTareaDocente(tareaDocente:TareaDocente){
+    return this.http.put<String>(`${TAREA_DOCENTE}/denegarTareaDocente`,tareaDocente); 
+  }
+
   /*
   public cambiarEstadoProyecto(codigoProyecto:any){
     return this.http.put<Proyecto>(`${PROYECTO}/cambiarEstado/${codigoProyecto}`,codigoProyecto);
