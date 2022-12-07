@@ -185,6 +185,16 @@
             required />
           <input type="button" (click)="agregarIndicador()" class="btn btn-danger" value="Guardar" />
         </div>
+        <input type="button" (click)="visualizarPanelEliminar()" class="" value="Eliminar Indicador" />
+        <div class="form-group" *ngIf="checkPanelEliminar">
+          <label for="">Indicador a Eliminar:</label>
+          <p>
+            <select name="indicador" [(ngModel)]="indicador">
+              <option [ngValue]="ind" *ngFor="let ind of indicadoresAsignados">{{ind.nombreIndicador}} ---- {{ind.descripcionIndicador}</option>
+            </select>
+          </p>
+          <input type="button" (click)="eliminarIndicador()" class="" value="Eliminar Indicador" />
+        </div>
         <div class="form-group">
           <h2>Indicadores:</h2>
           <ul>
@@ -193,7 +203,6 @@
               <span> {{i.descripcionIndicador}} </span>
             </li>
           </ul>
-          <input type="button" (click)="eliminarIndicador()" class="btn btn-danger" value="Quitar Indicador" />
         </div>
         <div class="form-group">
           <label for="">Cargos:</label>

@@ -53,6 +53,8 @@ export class EditarTareaComponent implements OnInit {
   cargo: Cargo = {};
   descripcionIndicador: string="";
 
+  checkPanelEliminar:Boolean = false;
+
   constructor(
     private router:Router,
     private cargoService:CargoService,
@@ -146,11 +148,18 @@ export class EditarTareaComponent implements OnInit {
   }
 
   agregarIndicador(){
+    this.indicador.descripcionIndicador = this.descripcionIndicador;
+    this.descripcionIndicador = "";
     this.indicadoresAsignados.push(this.indicador);
+    this.ckequearIndicador = false;
   }
 
   eliminarIndicador(){
-    this.indicadoresAsignados=this.indicadoresAsignados.filter((item) => item.codigoIndicador !== this.indicador.codigoIndicador );
+    this.indicadoresAsignados=this.indicadoresAsignados.filter((item) => item.codigoIndicador !== this.indicador.codigoIndicador && item.descripcionIndicador !== this.indicador.descripcionIndicador);
+  }
+
+  visualizarPanelEliminar(){
+    this.checkPanelEliminar = true;
   }
 
   visualizarIndicador(){
