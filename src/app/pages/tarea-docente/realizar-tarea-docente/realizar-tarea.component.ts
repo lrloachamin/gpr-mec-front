@@ -115,6 +115,7 @@ export class RealizarTareaComponent implements OnInit {
           this.back();
         }
         this.tarea = this.tareaDocente.codigoTarea;
+        console.log(this.tarea);
       });
       this.getIndicadorTarea$ = this.tareaService.obtenerIndicadoresTarea(this.tareaDocente.codigoTareaDocente);
     }

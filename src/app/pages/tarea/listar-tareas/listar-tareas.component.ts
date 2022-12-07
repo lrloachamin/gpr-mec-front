@@ -31,6 +31,7 @@ export class ListarTareasComponent implements OnInit {
   getTareas() {
     this.getTareas$.subscribe(tareas =>{
       this.tareasDocenteProyecto = tareas;  
+      console.log(this.tareasDocenteProyecto);
     });
   }
 
