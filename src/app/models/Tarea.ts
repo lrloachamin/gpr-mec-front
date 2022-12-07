@@ -9,6 +9,6 @@ export type Tarea = {
   descripicionTarea?: string;//indicador numerico,etc
   estadoTarea?: string;
   codigoProyecto?: Proyecto;
-  fechaEntregaTarea?: Date;
+  fechaEntregaTarea?: Date |null|string;
   tareaDocenteList?:TareaDocente[] ;
 };

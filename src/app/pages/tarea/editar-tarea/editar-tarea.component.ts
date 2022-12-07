@@ -33,6 +33,7 @@ const prioridadTarea: any[] = [
   templateUrl: './editar-tarea.html'
 })
 export class EditarTareaComponent implements OnInit {
+  pipe = new DatePipe('en-US');
   getProyectos$: Observable<Proyecto[]>;
   proyectos: Proyecto[] = [];
   prioridades: any[];
@@ -40,7 +41,6 @@ export class EditarTareaComponent implements OnInit {
   indicadores: Indicador[]= [];
   indicadoresAsignados: any[] = [];
   tareaDocenteProyecto: any = {};
-  //pipe = new DatePipe('en-US');
   getDocentes$: Observable<Docente[]>;
   docentes: Docente[] = [];
   docentesAsignados: any[] = [];
@@ -79,6 +79,12 @@ export class EditarTareaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
+    if(this.tarea.fechaEntregaTarea){
+      console.log(this.tarea.fechaEntregaTarea);
+      //this.tarea.fechaEntregaTarea = new Date(this.tarea.fechaEntregaTarea);
+      this.tarea.fechaEntregaTarea = this.pipe.transform(this.tarea.fechaEntregaTarea, 'yyyy-MM-ddTHH:mm:ss','UTC');
+    }
     this.getProyectos();
     this.getCargos();
     //this.getDocentes();
