@@ -49,6 +49,7 @@ export class RevisarTareaComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.tareaDocente.descripcionTareadocente = "";
     this.fileInfos = this.uploadFilesService.getFiles();
     this.getIndicadorTarea();
   }
@@ -79,7 +80,6 @@ export class RevisarTareaComponent implements OnInit {
   }
 
   aprobarTarea(){
-    console.log(this.tareaDocente);
     /*this.tareaService.aprobarTareaDocente(this.tareaDocente)
     .subscribe(data=>{
       
@@ -91,7 +91,6 @@ export class RevisarTareaComponent implements OnInit {
   }
 
   denegarTarea(){
-    console.log(this.tareaDocente);
     this.checkButton = true;
   }
 
