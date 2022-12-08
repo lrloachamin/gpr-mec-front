@@ -42,6 +42,10 @@ export class TareaService {
     return this.http.get<TareaIndicador[]>(`${TAREA_DOCENTE}/listarIndicadoresPorTarea/${codigoTareaDocente}`); 
   }
 
+  public obtenerTareasAsignadasDocentes(codigoTareaDocente:any):Observable<TareaDocente[]>{
+    return this.http.get<TareaDocente[]>(`${TAREA_DOCENTE}/listarDocentesTareasAsignadas/${codigoTareaDocente}`); 
+  }
+
   public crearTarea(tarea:TareaDocenteProyecto){
     return this.http.post<Proyecto>(TAREA_DOCENTE,tarea); 
   }

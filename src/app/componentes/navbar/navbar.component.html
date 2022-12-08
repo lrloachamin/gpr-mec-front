@@ -31,6 +31,10 @@
 				</li>
 
 				<li class="nav-item">
+					<a class="nav-link" *ngIf="usuario=='admin'" (click)="navegarTareasAsignadasDocentes()">Ver Tareas Asignadas a Docentes</a>
+				</li>
+
+				<li class="nav-item">
 					<a class="nav-link" *ngIf="usuario!='admin'" (click)="navegarTareasDocente()">Tareas Docente</a>
 				</li>
 				

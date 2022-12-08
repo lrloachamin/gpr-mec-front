@@ -44,5 +44,8 @@ export class NavbarComponent implements OnInit {
   navegarTareasDocenteEntregadas(){
     this.router.navigate(['/tareas-entregadas']);
   }
+  navegarTareasAsignadasDocentes(){
+    this.router.navigate(['/tareas-asignadas']);
+  }
 
 }

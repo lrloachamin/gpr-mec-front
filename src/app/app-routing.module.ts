@@ -15,6 +15,7 @@ import { ListarTareasDocenteComponent } from './pages/tarea-docente/listar-tarea
 import { RealizarTareaComponent } from './pages/tarea-docente/realizar-tarea-docente/realizar-tarea.component';
 import { CrearTareaComponent } from './pages/tarea/crear-tarea/crear-tarea.component';
 import { EditarTareaComponent } from './pages/tarea/editar-tarea/editar-tarea.component';
+import { ListarTareasAsignadasComponent } from './pages/tarea/listar-tareas-asignadas/listar-tareas-asignadas.component';
 import { ListarTareasEntregadasComponent } from './pages/tarea/listar-tareas-entregadas/listar-tareas-entregadas.component';
 import { ListarTareasComponent } from './pages/tarea/listar-tareas/listar-tareas.component';
 import { RevisarTareaComponent } from './pages/tarea/revisar-tarea-entregada/revisar-tarea.component';
@@ -40,6 +41,7 @@ const routes: Routes = [
   {path: 'usuario-perfil', component:UsuarioPerfilComponent,canActivate:[AuthGuard]},
   {path: 'tareas-entregadas', component:ListarTareasEntregadasComponent,canActivate:[AuthGuard]},
   {path: 'revisar-tarea-entregada', component:RevisarTareaComponent,canActivate:[AuthGuard]},
+  {path: 'tareas-asignadas', component:ListarTareasAsignadasComponent,canActivate:[AuthGuard]},
   {path: '**', component:LoginComponent},
 
 ];
