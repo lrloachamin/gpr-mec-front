@@ -190,7 +190,7 @@
           <label for="">Indicador a Eliminar:</label>
           <p>
             <select name="indicador" [(ngModel)]="indicador">
-              <option [ngValue]="ind" *ngFor="let ind of indicadoresAsignados">{{ind.nombreIndicador}} ---- {{ind.descripcionIndicador}</option>
+              <option [ngValue]="ind" *ngFor="let ind of indicadoresAsignados">{{ind.nombreIndicador}} ---- {{ind.descripcionIndicador}}</option>
             </select>
           </p>
           <input type="button" (click)="eliminarIndicador()" class="" value="Eliminar Indicador" />
