@@ -24,7 +24,7 @@
                 <span *ngSwitchDefault>({{docente.cantidadTarea}} Tareas)</span>  
               </span>
               <span *ngFor="let tareaDocente of docente.tareaDocenteList"> <!--style="list-style: none;"-->
-                <span><br/>{{ tareaDocente.codigoTarea?.nombreTarea}}</span>
+                <span><br/>- {{ tareaDocente.codigoTarea?.nombreTarea}}</span>
               </span>
             </td>
           </tr>
