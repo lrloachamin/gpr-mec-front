@@ -51,6 +51,11 @@ export class EditarTareaComponent implements OnInit {
   getCargos$: Observable<Cargo[]>;
   cargos: Cargo[]=[];
   cargo: Cargo = {};
+  cargodefault: Cargo = {
+    codCargo:'0',
+    nombreCargo:'Seleccione un cargo'
+  };
+
   descripcionIndicador: string="";
 
   checkPanelEliminar:Boolean = false;
@@ -83,7 +88,6 @@ export class EditarTareaComponent implements OnInit {
   ngOnInit(): void {
     
     if(this.tarea.fechaEntregaTarea){
-      console.log(this.tarea.fechaEntregaTarea);
       //this.tarea.fechaEntregaTarea = new Date(this.tarea.fechaEntregaTarea);
       this.tarea.fechaEntregaTarea = this.pipe.transform(this.tarea.fechaEntregaTarea, 'yyyy-MM-ddTHH:mm:ss','UTC');
     }
@@ -96,6 +100,8 @@ export class EditarTareaComponent implements OnInit {
   getCargos() {
     this.getCargos$.subscribe(cargos =>{
       this.cargos = cargos;
+      this.cargos.unshift(this.cargodefault);
+      this.cargo = this.cargodefault;
     });
   }
 
@@ -154,8 +160,17 @@ export class EditarTareaComponent implements OnInit {
     this.ckequearIndicador = false;
   }
 
+  cancelarIndicador(){
+    this.ckequearIndicador = false;
+  }
+
   eliminarIndicador(){
-    this.indicadoresAsignados=this.indicadoresAsignados.filter((item) => item.codigoIndicador !== this.indicador.codigoIndicador && item.descripcionIndicador !== this.indicador.descripcionIndicador);
+    this.checkPanelEliminar = false;
+    this.indicadoresAsignados=this.indicadoresAsignados.filter((item) => (item.codigoIndicador !== this.indicador.codigoIndicador || item.descripcionIndicador !== this.indicador.descripcionIndicador));
+  }
+
+  cancelarEliminarIndicador(){
+    this.checkPanelEliminar=false;
   }
 
   visualizarPanelEliminar(){
