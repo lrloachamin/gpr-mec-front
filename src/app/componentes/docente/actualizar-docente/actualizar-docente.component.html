@@ -52,7 +52,7 @@
           
           <div class="form-group mb-3">
             <label for="cargo" style="font-weight: bold;">Cargo:</label>
-            <select  class="form-select"  [(ngModel)]="docCargo"  formControlName="cargo">
+            <select [attr.disabled]="validadorCargo ? '' : null" class="form-select"  [(ngModel)]="docCargo"  formControlName="cargo">
                 <option  [ngValue]="cargos" *ngFor="let cargos of listaCargos" [selected]="cargos.codCargo === selectedId">
                     {{cargos.nombreCargo}}
                 </option>
