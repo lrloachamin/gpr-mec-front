@@ -29,6 +29,7 @@ export class ActualizarDocenteComponent implements OnInit {
   validadorIdEspe: any;
   selectedId:any;
   mensajeConfirmacion:any
+  validadorCargo!:boolean;
 
   listaDocentes: any;
   listaCargos!: any;
@@ -53,8 +54,10 @@ export class ActualizarDocenteComponent implements OnInit {
     this.tipoUsuario=localStorage.getItem('usuario')
     if(this.tipoUsuario==="admin"){
       this.nombreUsuario = localStorage.getItem('usuarioAct');
+      this.validadorCargo=false;
     }else{
       this.nombreUsuario = localStorage.getItem('usuario');
+      this.validadorCargo=true;
     }
     
     
