@@ -59,6 +59,25 @@
               type="number" 
               min="0" max="100"
               class="form-control"/>
+              <input 
+              id="ckeck"
+              *ngIf="i.indicadorCODIGOINDICADOR.nombreIndicador=='BOOLEANO'"
+              [(ngModel)]="i.valorIndicador"
+              [name]="i.codigoTareaIndicador"
+              (change)="asignarIndicador(i)" 
+              type="radio" 
+              class="form-control"
+              checked/>
+              <label for="ckeck">Tarea Realizada</label>
+              <input 
+              id="noCheck"
+              *ngIf="i.indicadorCODIGOINDICADOR.nombreIndicador=='BOOLEANO'"
+              [(ngModel)]="i.valorIndicador"
+              [name]="i.codigoTareaIndicador"
+              (change)="asignarIndicador(i)" 
+              type="radio" 
+              class="form-control"/>
+              <label for="noCheck">Tarea no Realizada</label>
             </li>
           </ul>
           
