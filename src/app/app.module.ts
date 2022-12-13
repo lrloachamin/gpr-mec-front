@@ -36,6 +36,9 @@ import {MatIconModule} from '@angular/material/icon';
 import { ListarTareasEntregadasComponent } from './pages/tarea/listar-tareas-entregadas/listar-tareas-entregadas.component';
 import { RevisarTareaComponent } from './pages/tarea/revisar-tarea-entregada/revisar-tarea.component';
 import { ListarTareasAsignadasComponent } from './pages/tarea/listar-tareas-asignadas/listar-tareas-asignadas.component';
+import { ListarTiposProcesosComponent } from './pages/tipoProceso/listar-tipos-procesos/listar-tipos-procesos.component';
+import { EditarTipoProcesoComponent } from './pages/tipoProceso/editar-tipo-proceso/editar-tipo-proceso';
+import { CrearTipoProcesoComponent } from './pages/tipoProceso/crear-tipo-proceso/crear-tipo-proceso.component';
 
 
 @NgModule({
@@ -61,7 +64,10 @@ import { ListarTareasAsignadasComponent } from './pages/tarea/listar-tareas-asig
     UsuarioPerfilComponent,
     ListarTareasEntregadasComponent,
     RevisarTareaComponent,
-    ListarTareasAsignadasComponent
+    ListarTareasAsignadasComponent,
+    ListarTiposProcesosComponent,
+    EditarTipoProcesoComponent,
+    CrearTipoProcesoComponent
   ],
   imports: [
     BrowserModule,

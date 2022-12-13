@@ -19,6 +19,9 @@ import { ListarTareasAsignadasComponent } from './pages/tarea/listar-tareas-asig
 import { ListarTareasEntregadasComponent } from './pages/tarea/listar-tareas-entregadas/listar-tareas-entregadas.component';
 import { ListarTareasComponent } from './pages/tarea/listar-tareas/listar-tareas.component';
 import { RevisarTareaComponent } from './pages/tarea/revisar-tarea-entregada/revisar-tarea.component';
+import { CrearTipoProcesoComponent } from './pages/tipoProceso/crear-tipo-proceso/crear-tipo-proceso.component';
+import { EditarTipoProcesoComponent } from './pages/tipoProceso/editar-tipo-proceso/editar-tipo-proceso';
+import { ListarTiposProcesosComponent } from './pages/tipoProceso/listar-tipos-procesos/listar-tipos-procesos.component';
 import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
@@ -42,8 +45,10 @@ const routes: Routes = [
   {path: 'tareas-entregadas', component:ListarTareasEntregadasComponent,canActivate:[AuthGuard]},
   {path: 'revisar-tarea-entregada', component:RevisarTareaComponent,canActivate:[AuthGuard]},
   {path: 'tareas-asignadas', component:ListarTareasAsignadasComponent,canActivate:[AuthGuard]},
-  {path: '**', component:LoginComponent},
-
+  {path: 'listar-tipos-procesos', component:ListarTiposProcesosComponent,canActivate:[AuthGuard]},
+  {path: 'crear-tipo-proceso', component:CrearTipoProcesoComponent,canActivate:[AuthGuard]},
+  {path: 'editar-tipo-proceso', component:EditarTipoProcesoComponent,canActivate:[AuthGuard]},
+  {path: '**', component:LoginComponent}
 ];
 
 @NgModule({

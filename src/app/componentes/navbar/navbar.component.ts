@@ -47,5 +47,8 @@ export class NavbarComponent implements OnInit {
   navegarTareasAsignadasDocentes(){
     this.router.navigate(['/tareas-asignadas']);
   }
+  navegarTiposProcesos(){
+    this.router.navigate(['/listar-tipos-procesos']);
+  }
 
 }

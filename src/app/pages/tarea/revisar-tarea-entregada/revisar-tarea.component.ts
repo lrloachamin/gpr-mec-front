@@ -90,6 +90,8 @@ export class RevisarTareaComponent implements OnInit {
     })*/
   }
 
+  deleteFile(){}
+
   denegarTarea(){
     this.checkButton = true;
   }
