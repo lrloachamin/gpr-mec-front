@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Proyecto } from 'src/app/models/Proyecto';
+import { TipoProceso } from 'src/app/models/TipoProceso';
 import { ProyectoService } from 'src/app/servicios/proyecto.service';
+import { TipoProcesoService } from 'src/app/servicios/tipo-proceso.service';
 
 @Component({
   selector: 'app-editar-proyecto',
@@ -9,10 +12,13 @@ import { ProyectoService } from 'src/app/servicios/proyecto.service';
 })
 export class EditarProyectoComponent implements OnInit {
   proyecto: any = {};
-
+  getProcesos$: Observable<TipoProceso[]>;
+  tipoProcesos: TipoProceso[]=[];
+  
   constructor(
     private router:Router,
-    private proyectoService:ProyectoService
+    private proyectoService:ProyectoService,
+    private tipoProcesoService: TipoProcesoService
     ) {
       this.proyectoService.proyecto$.subscribe((res) => {
         this.proyecto = res;
@@ -22,9 +28,12 @@ export class EditarProyectoComponent implements OnInit {
           this.getAll();
         }*/
       });
+      this.getProcesos$ = this.tipoProcesoService.obtenerTipoProcesos();
+
   }
 
   ngOnInit(): void {
+    this.getProcesos();
   }
 
   save(){
@@ -39,15 +48,17 @@ export class EditarProyectoComponent implements OnInit {
     this.router.navigate(['listar-proyectos']);
   }
 
-  /*getAll() {
-    this.proyectoService.obtenerProyectoPorId(this.proyecto.codigoProyecto).subscribe({
-      next: (res) => {
-        if(res) {
-          this.collectionsOrder = res;
-          this.loadOptions();
-        }
-      }
+  getProcesos(){
+    this.getProcesos$.subscribe(tipoProcesos =>{
+      this.tipoProcesos = tipoProcesos;
     });
   }
-  */
+
+  compararProcesos( tipoProceso1:TipoProceso, tipoProceso2:TipoProceso) {
+    if (tipoProceso1==null || tipoProceso2==null) {
+      return false;
+    }
+    return tipoProceso1.nombreTipoProceso===tipoProceso2.nombreTipoProceso;
+  }
+
 }

@@ -16,6 +16,14 @@
             required/>
         </div>
         <div class="form-group">
+          <label for="">Proceso:</label>
+          <p>
+            <select name="proceso" [(ngModel)]="proyecto.tipoProceso">
+              <option [ngValue]="tipoProceso" *ngFor="let tipoProceso of tipoProcesos">{{tipoProceso.nombreTipoProceso}}</option>
+            </select>
+          </p>
+        </div>
+        <div class="form-group">
           <label for="">Descripción del Proyecto:</label>
           <input 
             [(ngModel)]="proyecto.descripcionProyecto"

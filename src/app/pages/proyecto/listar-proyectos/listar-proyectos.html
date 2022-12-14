@@ -12,6 +12,7 @@
         <thead>
           <tr>
             <th>Proyecto</th>
+            <th>Proceso</th>
             <th>Fecha Creacion</th>
             <th>Descripción</th>
             <th>Estado</th>
@@ -21,9 +22,13 @@
         <tbody>
           <tr *ngFor="let proyecto of proyectos">
             <td>{{ proyecto.nombreProyecto }}</td>
+            <td>{{ proyecto.tipoProceso?.nombreTipoProceso }}</td>
             <td>{{ proyecto.fechaCreacionproyecto | date: "dd-MM-yyyy"  }}</td>
             <td>{{ proyecto.descripcionProyecto }}</td>
-            <td>{{ proyecto.estadoProyecto }}</td>
+            <td [ngSwitch]="proyecto.estadoProyecto">
+              <span *ngSwitchCase="'ACT'">ACTIVO</span>
+              <span *ngSwitchDefault>INACTIVO</span>
+            </td>
             <td>
               <button (click)="editar(proyecto)" class="btn btn-warning">Editar</button>
               <button (click)="cambiarEstado(proyecto)" class="btn btn-danger" style="margin-left: 10px;">Cambiar Estado</button>
