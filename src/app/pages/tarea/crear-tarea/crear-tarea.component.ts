@@ -54,6 +54,9 @@ export class CrearTareaComponent implements OnInit {
   cargos: Cargo[]=[];
   cargo: Cargo = {};
 
+  selectedFiles: any;
+  imageName = "";
+
   constructor(
     private router:Router,
     private cargoService:CargoService,
@@ -145,4 +148,10 @@ export class CrearTareaComponent implements OnInit {
       this.docentes = docentes;  
     });
   }
+
+  selectFiles(event:any) {
+    this.imageName = event.target.files[0].name;
+    this.selectedFiles = event.target.files;
+  }
+
 }

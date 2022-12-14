@@ -76,6 +76,18 @@
         </ul>
         <input type="button" (click)="agregarElementos()" class="btn btn-danger" value="Agregar Elemento" />
         <input type="button" (click)="eliminarElementos()" class="btn btn-danger" value="Quitar Elemento" />
+        <div id="box2">
+          <label>(Opcional) Archivo Guia</label>
+          <input type="button" id="selectButton" mat-raised-button (click)="fileInput.click()" value="Seleccione el archivo Guía"/>
+  
+          <input #fileInput type="file" hidden (change)="selectFiles($event)" />
+          <span *ngIf="imageName">{{imageName}}</span>
+  
+          <!--<button id="uploadButton" mat-raised-button *ngIf="selectedFiles" [disabled]="!selectedFiles" (click)="uploadFiles()">
+              Subir Archivo
+          </button>-->
+      </div>
+        
         <button type="submit" class="btn btn-danger">Guardar</button>
       </form>
     </div>
