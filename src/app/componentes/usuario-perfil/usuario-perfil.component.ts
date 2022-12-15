@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { throws } from 'assert';
 import { RegistroService } from 'src/app/servicios/registro.service';
 import { UsuarioperfilService } from 'src/app/servicios/usuarioperfil.service';
 
@@ -11,43 +13,45 @@ import { UsuarioperfilService } from 'src/app/servicios/usuarioperfil.service';
 export class UsuarioPerfilComponent implements OnInit {
 
   //variables perfil
-   codPerfil:any;
-   descPerfil:any;
-   ObsPerfil:any;
-   up!:usuarioperfil;
-   perfil:any;
+  codPerfil: any;
+  descPerfil: any;
+  ObsPerfil: any;
+  up!: usuarioperfil;
+  perfil: any;
 
-   listaDocentes:any;
-   listaPerfiles:any;
-   dataDocenteseleccionados!:usuarioperfil[];
-   dataDocenteNoseleccionados!:usuarioperfil[];
-   dataDocenteFinal!:usuarioperfil[];
+  listaDocentes: any;
+  listaPerfiles: any;
+  dataDocenteseleccionados!: usuarioperfil[];
+  dataDocenteNoseleccionados!: usuarioperfil[];
+  dataDocenteFinal!: usuarioperfil[];
+  
 
-   formularioUsuPer!: FormGroup;
+  formularioUsuPer!: FormGroup;
 
   constructor(
     private _docente: RegistroService,
-    private _usuarioperfil:UsuarioperfilService,
-    private fb: FormBuilder
-  ) { 
+    private _usuarioperfil: UsuarioperfilService,
+    private fb: FormBuilder,
+    private router:Router
+  ) {
 
     this.cargarDocentes();
-   
+
 
     this.iniciarFormulario();
-   // this.asignarDocentesCheck();
+    // this.asignarDocentesCheck();
   }
 
   ngOnInit(): void {
-   // this.cargarDocentes();
-   this.cargarPerfiles();
+    // this.cargarDocentes();
+    this.cargarPerfiles();
 
   }
 
-  iniciarFormulario(){
+  iniciarFormulario() {
     this.formularioUsuPer = this.fb.group({
       id: ['', Validators.required],
- 
+
     })
 
   }
@@ -55,97 +59,146 @@ export class UsuarioPerfilComponent implements OnInit {
 
 
 
-  cargarDocentes(){
-    this._docente.obtenerDocentes().subscribe(respuesta=>{
+  cargarDocentes() {
+    this._docente.obtenerDocentes().subscribe(respuesta => {
+
       
       this.procesarDocentes(respuesta);
-      
+
     })
   }
-  procesarDocentes(resp: any){
-    this.listaDocentes=resp.docenteResponse.docente
+  procesarDocentes(resp: any) {
+    this.listaDocentes = resp.docenteResponse.docente
   }
 
-  cargarPerfiles(){
-    this._usuarioperfil.obtenerUsuario().subscribe(respuesta=>{
-      
+  cargarPerfiles() {
+    this._usuarioperfil.obtenerUsuario().subscribe(respuesta => {
+
       this.procesarPerfiles(respuesta);
-      
+
     })
   }
-  procesarPerfiles(resp: any){
-    this.listaPerfiles=resp.perfilResponse.perfil
+  procesarPerfiles(resp: any) {
+    this.listaPerfiles = resp.perfilResponse.perfil
 
     console.log(this.listaPerfiles)
 
 
   }
 
-  asignarDocentesCheck(){
+  asignarDocentesCheck() {
     this.cargarDocentes()
-    //this.cargarPerfiles();
-
-  console.log("combo"+this.perfil.usuperList)
-
-  this.dataDocenteNoseleccionados=new Array();
 
 
-  var usuperList=this.perfil.usuperList
-  this.dataDocenteseleccionados=new Array();
+    this.dataDocenteNoseleccionados = new Array();
+    this.dataDocenteseleccionados = new Array();
 
-  usuperList.forEach((element: {
-    codigoUsuario:any,nombreUsuario:any;
+    var usuperList = this.perfil.usuperList
 
-  }) => {
+    const codiPerfil=this.perfil.codigoPerfil
+    console.log("usuperlist"+this.perfil.usuperList)
 
-    this.up=new usuarioperfil(element.codigoUsuario.codigoUsuario,element.codigoUsuario.nombreUsuario,true);
+
+    usuperList.forEach((element: {
+      codigoUsuario: any, nombreUsuario: any;codigoPerfil:any;codUsuper:any;
+
+    }) => {
+      
+
+      this.up = new usuarioperfil(element.codigoUsuario.codigoUsuario,codiPerfil, element.codUsuper,element.codigoUsuario.nombreUsuario, true);
 
       this.dataDocenteseleccionados.push(this.up)
-     
+
     })
 
     this.listaDocentes.forEach((element: {
-      codigoUsuario:any,nombreDocente:any;apellidoDocente:any;
+      codigoUsuario: any, nombreDocente: any; apellidoDocente: any;
 
     }) => {
       console.log(element)
 
-      this.up=new usuarioperfil(element.codigoUsuario.codigoUsuario,element.codigoUsuario.nombreUsuario,false); 
+      this.up = new usuarioperfil(element.codigoUsuario.codigoUsuario, codiPerfil,"0",element.codigoUsuario.nombreUsuario, false);
 
-      console.log("array"+this.dataDocenteseleccionados);
-      console.log("obj"+this.up);
+      const resultado = this.dataDocenteseleccionados.find(up => up.codigoUsuario === element.codigoUsuario.codigoUsuario)
 
-      const resultado=this.dataDocenteseleccionados.find(up=>up.codigoUsuario===element.codigoUsuario.codigoUsuario)
-     
-      console.log("resultadp"+resultado)
-      if(resultado===undefined){
+      console.log("resultadp" + resultado)
+      if (resultado === undefined) {
         this.dataDocenteNoseleccionados.push(this.up)
 
       }
+
+    })
+
+    console.log(this.dataDocenteNoseleccionados)
+
+
+  }
+
+  guardarUsuarioPerfil(){
+    console.log("entra");
+
     
-       
-      })
+    this.dataDocenteFinal=this.dataDocenteseleccionados.concat(this.dataDocenteNoseleccionados)
 
-      console.log(this.dataDocenteNoseleccionados)
+    this.dataDocenteFinal.forEach(element => {
+      console.log("Docente: "+element.codigoPerfil+element.codigoUsuario+element.codigoUsuper+element.isSelected);
 
+      if(element.isSelected===true){
+        this._usuarioperfil.guardarUsuarioPerfil(element.codigoPerfil,element.codigoUsuario,element.codigoUsuper).subscribe((data:any)=>{
+          console.log(data);
+        
+    
+        },(error:any)=>{
+          
+          console.log(error);
+        })
+  
+
+      } else{
+
+        this._usuarioperfil.quitarrUsuarioPerfil(element.codigoUsuper,element.codigoUsuper).subscribe((data:any)=>{
+          console.log(data);
+    
+    
+        },(error:any)=>{
+          
+          console.log(error);
+        })
+
+      } 
+      
+    });
+
+    alert("Perfiles actualizados con éxito!")
+    location.reload();
+    
+
+    
+ 
 
   }
 
 
 }
 
-class usuarioperfil{
 
-  codigoUsuario!:string;
-  nombreUsuario!:string;
-  isSelected!:boolean;
 
-  constructor(codigoUsuario:string,nombreUsuario:string,isSelected:boolean ){
-    this.codigoUsuario=codigoUsuario
-    this.nombreUsuario=nombreUsuario
-    this.isSelected=isSelected
+class usuarioperfil {
+
+  codigoUsuario!: string;
+  codigoPerfil!: string;
+  codigoUsuper!: string;
+  nombreUsuario!: string;
+  isSelected!: boolean;
+
+  constructor(codigoUsuario: string, codigoPerfil: string,codigoUsuper: string,nombreUsuario: string, isSelected: boolean) {
+    this.codigoUsuario = codigoUsuario
+    this.codigoPerfil=codigoPerfil
+    this.codigoUsuper=codigoUsuper
+    this.nombreUsuario = nombreUsuario
+    this.isSelected = isSelected
 
   }
 
-  
+
 }

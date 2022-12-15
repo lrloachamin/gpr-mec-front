@@ -16,4 +16,17 @@ export class UsuarioperfilService {
     const url= urlH+'perfil';
     return this.http.get(url); 
   }
+  guardarUsuarioPerfil(codigoperfil:any,codigousuario:any,idusuper:any){
+
+    const url= urlH+'usuarioperfil/'+codigoperfil+'/'+codigousuario+'/'+idusuper;
+    return this.http.post(url,null) 
+  }
+
+  quitarrUsuarioPerfil(codigouperfil:any,idusuper:any){
+
+    const url= urlH+'usuarioperfil/'+codigouperfil+'/'+idusuper;
+    return this.http.delete(url)
+  }
+
+
 }
