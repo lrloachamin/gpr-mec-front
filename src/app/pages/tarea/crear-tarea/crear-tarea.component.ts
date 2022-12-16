@@ -105,7 +105,7 @@ export class CrearTareaComponent implements OnInit {
     this.tareaDocenteProyecto.tarea = this.tarea;
     this.tareaDocenteProyecto.docentes = this.docentesAsignados;
     this.tareaDocenteProyecto.indicadors = this.indicadoresAsignados;
-    this.tareaService.crearTarea(this.tareaDocenteProyecto)
+    this.tareaService.crearTarea(this.tareaDocenteProyecto,this.selectedFiles[0])
     .subscribe(data=>{
       confirm("Se creo la tarea!!");
       this.router.navigate(["listar-tareas"]);

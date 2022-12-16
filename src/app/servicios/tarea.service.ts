@@ -46,8 +46,15 @@ export class TareaService {
     return this.http.get<TareaDocente[]>(`${TAREA_DOCENTE}/listarDocentesTareasAsignadas/${codigoTareaDocente}`); 
   }
 
-  public crearTarea(tarea:TareaDocenteProyecto){
-    return this.http.post<Proyecto>(TAREA_DOCENTE,tarea); 
+  public crearTarea(tarea:TareaDocenteProyecto,file:File){
+    const formData: FormData = new FormData();
+    formData.append("tareaDocenteProyecto",JSON.stringify(tarea));
+    formData.append('file', file);
+    /*const req = new HttpRequest('PUT', `${TAREA_DOCENTE}/guardarArchivoTareaAsignadaAlProfesor`, formData, {
+      reportProgress: true,
+      responseType: 'json'
+    });*/
+    return this.http.post<any>(TAREA_DOCENTE,formData); 
   }
 
   public setTarea(tarea: TareaDocenteProyecto) {
