@@ -50,21 +50,11 @@ export class TareaService {
     const formData: FormData = new FormData();
     formData.append("tareaDocenteProyecto",JSON.stringify(tarea));
     formData.append('file', file);
-    /*const req = new HttpRequest('PUT', `${TAREA_DOCENTE}/guardarArchivoTareaAsignadaAlProfesor`, formData, {
-      reportProgress: true,
-      responseType: 'json'
-    });*/
     return this.http.post<any>(`${TAREA_DOCENTE}/crearTareaConArchivo`,formData); 
   }
 
-  public crearTarea(tarea:TareaDocenteProyecto){
-    const formData: FormData = new FormData();
-    formData.append("tareaDocenteProyecto",JSON.stringify(tarea));
-    /*const req = new HttpRequest('PUT', `${TAREA_DOCENTE}/guardarArchivoTareaAsignadaAlProfesor`, formData, {
-      reportProgress: true,
-      responseType: 'json'
-    });*/
-    return this.http.post<any>(`${TAREA_DOCENTE}/crearTarea`,formData); 
+  public crearTarea(tarea:TareaDocenteProyecto){ 
+    return this.http.post<any>(`${TAREA_DOCENTE}/crearTarea`,tarea); 
   }
 
   public setTarea(tarea: TareaDocenteProyecto) {
