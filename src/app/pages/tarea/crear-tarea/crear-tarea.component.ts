@@ -27,6 +27,21 @@ const prioridadTarea: any[] = [
   }
 ]
 
+const pesoTarea: any[] = [
+  {
+    "id": "HORA",
+    "name": "HORAS"
+  },
+  {
+    "id": "DIA",
+    "name": "DÍAS"
+  },
+  {
+    "id": "MES",
+    "name": "MESES"
+  }
+]
+
 @Component({
   selector: 'app-crear-tarea',
   templateUrl: './crear-tarea.html'
@@ -47,6 +62,7 @@ export class CrearTareaComponent implements OnInit {
   docentesAsignados: any[] = [];
   indicadoresAsignados: any[] = [];
   prioridades: any[];
+  pesoTarea: any[];
   getIndicadores$: Observable<Indicador[]>;
   tareaDocenteProyecto: TareaDocenteProyecto = {};
   ckequearIndicador: Boolean= false;
@@ -67,6 +83,7 @@ export class CrearTareaComponent implements OnInit {
       this.getCargos$ = this.cargoService.obtenerCargosModel();
       this.getDocentes$ = new Observable;
       this.prioridades = prioridadTarea;
+      this.pesoTarea = pesoTarea;
       this.getIndicadores$ = this.tareaService.obtenerIndicadores();
   }
 
@@ -105,19 +122,26 @@ export class CrearTareaComponent implements OnInit {
     this.tareaDocenteProyecto.tarea = this.tarea;
     this.tareaDocenteProyecto.docentes = this.docentesAsignados;
     this.tareaDocenteProyecto.indicadors = this.indicadoresAsignados;
-    this.tareaService.crearTarea(this.tareaDocenteProyecto,this.selectedFiles[0])
-    .subscribe(data=>{
-      confirm("Se creo la tarea!!");
-      this.router.navigate(["listar-tareas"]);
-    })
-    
+    if(this.selectedFiles ==undefined){
+      this.tareaService.crearTarea(this.tareaDocenteProyecto)
+      .subscribe(data=>{
+        confirm("Se creo la tarea!!");
+        this.router.navigate(["listar-tareas"]);
+      })
+    }else{
+      this.tareaService.crearTareaConArchivo(this.tareaDocenteProyecto,this.selectedFiles[0])
+      .subscribe(data=>{
+        confirm("Se creo la tarea!!");
+        this.router.navigate(["listar-tareas"]);
+      })
+    }
   }
 
-  getValidPrioridades() {
+  /*getValidPrioridades() {
     this.prioridades.forEach(prioridades => {
             this.validTypes.push(prioridades);
     });
-  }
+  }*/
   
   agregarElementos(){
     this.docentesAsignados.push(this.tareaDocente.codigoDocente);

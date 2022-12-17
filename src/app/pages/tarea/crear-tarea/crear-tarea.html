@@ -29,6 +29,16 @@
             <option [ngValue]="prioridad.id" *ngFor="let prioridad of prioridades">{{prioridad.name}}</option>
           </select>
         </div>
+        <div class="form-group">
+          <label for="">Peso de la tarea:</label>
+          <select name="prioridad" [(ngModel)]="tarea.pesoTarea">
+            <option [ngValue]="peso.id" *ngFor="let peso of pesoTarea">{{peso.name}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="">Peso de la tarea:</label>
+          <input [(ngModel)]="tarea.valorPesoTarea" name="valorPesoTarea" type="number" class="form-control" required />
+        </div>
         <input type="button" (click)="visualizarIndicador()" class="" value="Agregar Indicador" />
         <div class="form-group" *ngIf="ckequearIndicador">
           <label for="">Indicador:</label>

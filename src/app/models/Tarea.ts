@@ -10,5 +10,9 @@ export type Tarea = {
   estadoTarea?: string;
   codigoProyecto?: Proyecto;
   fechaEntregaTarea?: Date |null|string;
+  archivoTarea?: string;
+  nombreArchivoTarea?: string;
+  pesoTarea?: string;
+  valorPesoTarea?:number;
   tareaDocenteList?:TareaDocente[] ;
 };
