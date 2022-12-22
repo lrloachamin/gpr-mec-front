@@ -47,8 +47,7 @@ export class UsuarioService {
   }
 
   public obtenerDocente(codeUser:number){
-    const url2= 'https://gpr-espe.azurewebsites.net/api/v1';
-    return this.http.get<Docente>(`${url2}/obtenerDocente/${codeUser}`);
+    return this.http.get<Docente>(`${urlH}obtenerDocente/${codeUser}`);
   }
 
   public setCodigoDocente(codigoDocente: DocenteComponent) {
