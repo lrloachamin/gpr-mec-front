@@ -31,6 +31,12 @@ export class RegistroService {
     return this.http.get(url4); 
   }
 
+  obtenerDocentePorCedula(cedula:any){
+    const url4= urlH+'catalogodocente/'+cedula;
+    return this.http.get(url4); 
+  }
+
+
  
   
 }

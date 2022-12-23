@@ -36,15 +36,15 @@ export class UsuarioPerfilComponent implements OnInit {
   ) {
 
     this.cargarDocentes();
-
+    this.cargarPerfiles();
 
     this.iniciarFormulario();
     // this.asignarDocentesCheck();
   }
 
   ngOnInit(): void {
-    // this.cargarDocentes();
     this.cargarPerfiles();
+
 
   }
 
@@ -170,7 +170,7 @@ export class UsuarioPerfilComponent implements OnInit {
     });
 
     alert("Perfiles actualizados con éxito!")
-    location.reload();
+    location.reload()
     
 
     
