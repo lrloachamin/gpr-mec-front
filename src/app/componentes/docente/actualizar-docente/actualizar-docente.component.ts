@@ -21,6 +21,10 @@ export class ActualizarDocenteComponent implements OnInit {
   docCorreo: any;
   docCargo:any;
   docIdEspe:any;
+  docSexo:any;
+  docPuestoTrabajo:any;
+
+  comboSexo:any;
 
   //variables de validacion
   validadorCedula: any;
@@ -70,6 +74,8 @@ export class ActualizarDocenteComponent implements OnInit {
   }
 
   iniciarFormulario() {
+
+    this.comboSexo=["Femenino","Masculino","Otro"]
     this.formularioActDoc = this.fb.group({
       nombres: ['', Validators.required],
       apellidos: ['', Validators.required],
@@ -77,7 +83,9 @@ export class ActualizarDocenteComponent implements OnInit {
       id: ['', Validators.required],
       telefono: ['', Validators.required],
       correo: ['', [Validators.required, Validators.email]],
-      cargo:['']
+      cargo:[''],
+      sexo:['',],
+      puesto:['',Validators.required],
     })
   }
 
@@ -98,8 +106,9 @@ export class ActualizarDocenteComponent implements OnInit {
     this.docCorreo=this.listaDocentes.correoDocente;
     this.docCargo=this.listaDocentes.codCargo
     this.docIdEspe=this.listaDocentes.idDocente
+    this.docSexo=this.listaDocentes.sexo;
+    this.docPuestoTrabajo=this.listaDocentes.puestoTrabajoDocente;
     this.selectedId=this.docCargo.codCargo;
-    console.log(this.docCargo.codCargo)
   }
 
   validadorDeCedula(cedula: String) {
@@ -129,6 +138,8 @@ export class ActualizarDocenteComponent implements OnInit {
     cedulaDocente: this.formularioActDoc.value.cedula,
     telefonoDocente: this.formularioActDoc.value.telefono,
     correoDocente: this.formularioActDoc.value.correo,
+    sexo:this.formularioActDoc.value.sexo,
+    puestoTrabajoDocente:this.formularioActDoc.value.puesto,
     codCargo:this.formularioActDoc.value.cargo
   }
   console.log("data"+usuariodata.codCargo.codCargo)
@@ -146,6 +157,7 @@ export class ActualizarDocenteComponent implements OnInit {
 
   }
 
+ 
   cancelarActualizar(){
     this.router.navigate(['./docentes']);
 

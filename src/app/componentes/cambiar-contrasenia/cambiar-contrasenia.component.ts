@@ -98,4 +98,12 @@ export class CambiarContraseniaComponent implements OnInit {
     console.log(this.listaDocentes.passwUsuario)
   }
 
+  validarCadenaContrasenia(){
+    console.log(this.passwordNewI.length)
+    var myRe = new RegExp("^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$");
+    console.log(this.formularioContrasenia)
+
+  }
+
+
 }

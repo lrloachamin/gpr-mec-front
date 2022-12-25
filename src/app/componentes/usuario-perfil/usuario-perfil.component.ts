@@ -81,9 +81,6 @@ export class UsuarioPerfilComponent implements OnInit {
   procesarPerfiles(resp: any) {
     this.listaPerfiles = resp.perfilResponse.perfil
 
-    console.log(this.listaPerfiles)
-
-
   }
 
   asignarDocentesCheck() {
@@ -96,8 +93,6 @@ export class UsuarioPerfilComponent implements OnInit {
     var usuperList = this.perfil.usuperList
 
     const codiPerfil=this.perfil.codigoPerfil
-    console.log("usuperlist"+this.perfil.usuperList)
-
 
     usuperList.forEach((element: {
       codigoUsuario: any, nombreUsuario: any;codigoPerfil:any;codUsuper:any;
@@ -115,13 +110,10 @@ export class UsuarioPerfilComponent implements OnInit {
       codigoUsuario: any, nombreDocente: any; apellidoDocente: any;
 
     }) => {
-      console.log(element)
 
       this.up = new usuarioperfil(element.codigoUsuario.codigoUsuario, codiPerfil,"0",element.codigoUsuario.nombreUsuario, false);
 
       const resultado = this.dataDocenteseleccionados.find(up => up.codigoUsuario === element.codigoUsuario.codigoUsuario)
-
-      console.log("resultadp" + resultado)
       if (resultado === undefined) {
         this.dataDocenteNoseleccionados.push(this.up)
 
@@ -129,13 +121,10 @@ export class UsuarioPerfilComponent implements OnInit {
 
     })
 
-    console.log(this.dataDocenteNoseleccionados)
-
 
   }
 
   guardarUsuarioPerfil(){
-    console.log("entra");
 
     
     this.dataDocenteFinal=this.dataDocenteseleccionados.concat(this.dataDocenteNoseleccionados)
