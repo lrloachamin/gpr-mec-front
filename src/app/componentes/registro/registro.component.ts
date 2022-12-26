@@ -20,6 +20,20 @@ export class RegistroComponent implements OnInit {
   cedulaI:any;
   idEspeI:any;
   validadorIdEspe:any;
+
+  listaCatalogoDocente:any;
+
+  idBannerM:any;
+  nombreDocenteM:any;
+  apellidosDocenteM:any;
+  telefonoDocenteM:any;
+  correoDocenteM:any;
+  sexoDocenteM:any;
+  puestoDocenteM:any;
+
+  comboSexo:any;
+
+
   constructor(private fb:FormBuilder,private _docente: RegistroService, private _scargo: CargoService,private router: Router) { 
     this.iniciarFormulario();
     this.cargarCargos();
@@ -33,6 +47,8 @@ export class RegistroComponent implements OnInit {
   ngOnInit(): void {
   }
   iniciarFormulario(){
+
+    this.comboSexo=["Femenino","Masculino","Otro"]
     this.formulario=this.fb.group({
       id:['',Validators.required],
       nombres:['',Validators.required],
@@ -41,6 +57,8 @@ export class RegistroComponent implements OnInit {
       telefono:['',Validators.required],
       correo:['',[Validators.required,Validators.email]],
       cargo:['',Validators.required],
+      sexo:['',],
+      puesto:['',Validators.required],
     })
     
   }
@@ -65,8 +83,15 @@ export class RegistroComponent implements OnInit {
       cedulaDocente:this.formulario.value.cedula,
       telefonoDocente:this.formulario.value.telefono,
       correoDocente:this.formulario.value.correo,
-      codCargo:this.formulario.value.cargo
+      codCargo:this.formulario.value.cargo,
+      sexo:this.sexoDocenteM,
+      puesto:this.formulario.value.puesto
     }
+
+    console.log(data)
+
+
+
 
     const uploaddata=new FormData();
     uploaddata.append('idDocente',data.idDocente);
@@ -75,7 +100,14 @@ export class RegistroComponent implements OnInit {
     uploaddata.append('cedulaDocente',data.cedulaDocente);
     uploaddata.append('telefonoDocente',data.telefonoDocente);
     uploaddata.append('correoDocente',data.correoDocente);
+    uploaddata.append('sexooDocente',data.sexo);
+    uploaddata.append('puestoDocente',data.puesto);
     uploaddata.append('codCargo',data.codCargo);
+
+
+    
+
+    
 
     this._docente.registrarUsuario(uploaddata).subscribe((data:any)=>{
       console.log(data);
@@ -95,6 +127,8 @@ export class RegistroComponent implements OnInit {
       this.mensaje="Ha ocurrido un error al crear el usuario, Contactese con su administrador!"
 
     })
+
+    
   
 
 
@@ -167,6 +201,33 @@ if(listusuarios!=null){
   }else{
     this.validadorIdEspe=true;
   }
+
+}
+
+
+cargardocentecedula(cedual:String){
+  this._docente.obtenerDocentePorCedula(cedual).subscribe(respuesta=>{
+   
+    this.procesarDocenteCedula(respuesta);
+    
+  })
+
+}
+
+procesarDocenteCedula(resp: any){
+
+
+  this.listaCatalogoDocente = resp.docenteResponse.docente[0]
+  this.idEspeI=this.listaCatalogoDocente.idDocente;
+  this.nombreDocenteM=this.listaCatalogoDocente.nombreDocente;
+  this.apellidosDocenteM=this.listaCatalogoDocente.apellidoDocente;
+  this.telefonoDocenteM=this.listaCatalogoDocente.telefonoDocente;
+  this.correoDocenteM=this.listaCatalogoDocente.correoDocente;
+  this.sexoDocenteM=this.listaCatalogoDocente.sexo
+  this.puestoDocenteM=this.listaCatalogoDocente.puesto
+
+
+
 
 }
 

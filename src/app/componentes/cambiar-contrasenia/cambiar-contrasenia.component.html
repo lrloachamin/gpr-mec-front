@@ -4,12 +4,15 @@
 
 <div class="container">
     <div class="abs-center">
-        <form [formGroup]="formularioContrasenia" (ngSubmit)="cambiarContrasenia()" class="border p-3 form">
+        <form [formGroup]="formularioContrasenia" (ngSubmit)="cambiarContrasenia()" class="border p-3 form" >
 
             <span style="font-size: 25px;">
                 Cambio de Contraseña
             </span>
             <hr>
+            <div class="alert alert-info" role="alert">
+                La nueva contraseña debe tener al menos 8 caracteres, una letra mayuscula y minúscula, un número y un carácter especial.
+              </div>
             <div class="form-group mb-3">
                 <label for="passwordAnt" style="font-weight: bold;">Contraseña Antigua:</label>
                 <input type="password" name="passwordAnt" id="passwordAnt" class="form-control"
@@ -18,10 +21,9 @@
             </div>
             <div class="form-group mb-3">
                 <label for="passwordNew" style="font-weight: bold;">Contraseña Nueva:</label>
-                <input type="password" name="passwordNew" id="passwordNew" class="form-control" [(ngModel)]="passwordNewI" (change)="validadorContrasenia(passwordNewI,passwordConf)"
+                <input pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$" type="password" name="passwordNew" id="passwordNew" class="form-control" [(ngModel)]="passwordNewI" (change)="validadorContrasenia(passwordNewI,passwordConf);validarCadenaContrasenia()"
                     formControlName="passwordNew">
                     <small class="text-danger" *ngIf="formularioContrasenia.get('passwordNew')?.errors?.['required'] && formularioContrasenia.get('passwordNew')?.touched" >Complete este campo</small>
-
             </div>
             <div class="form-group mb-3">
                 <label for="passwordConf" style="font-weight: bold;">Confirmar Contraseña</label>
