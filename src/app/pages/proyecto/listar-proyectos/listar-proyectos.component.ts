@@ -12,12 +12,14 @@ export class ListarProyectosComponent implements OnInit {
 
   getProyectos$: Observable<Proyecto[]>;
   proyectos: Proyecto[] = [];
-  
+  descPerfil: any;  
+
   constructor(
     private proyectoService: ProyectoService,
     private router: Router,
   ) {
     this.getProyectos$ = this.proyectoService.obtenerProyectos();
+    this.descPerfil=localStorage.getItem('descPerfil');
   }
 
   ngOnInit(): void {

@@ -123,6 +123,8 @@ export class CrearTareaComponent implements OnInit {
   }
 
   save(){
+    this.tarea.idDocenteRevisor = localStorage.getItem('idDocenteRevisor');
+    this.tarea.nombreDocenteRevisor = localStorage.getItem('nombreDocenteRevisor');
     this.tareaDocenteProyecto.tarea = this.tarea;
     this.tareaDocenteProyecto.docentes = this.docentesAsignados;
     this.tareaDocenteProyecto.indicadors = this.indicadoresAsignados;

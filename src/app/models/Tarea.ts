@@ -15,7 +15,8 @@ export type Tarea = {
   nombreArchivoTarea?: string;
   pesoTarea?: string;
   valorPesoTarea?:number;
-  idDocenteRevisor?: string;
+  idDocenteRevisor?: string|null;
+  nombreDocenteRevisor?: string|null;
   //codigoTareaPadre:Tarea;
   tareaDocenteList?:TareaDocente[] ;
 };

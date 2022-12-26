@@ -10,6 +10,7 @@
           <tr>
             <th>Tarea</th>
             <th>Prioridad de la Tarea</th>
+            <th>Revisor</th>
             <th>Fecha Límite de Entrega</th>
             <th>Proyecto</th>
             <th>Estado</th>
@@ -20,6 +21,7 @@
           <tr *ngFor="let tarea of tareas">
             <td>{{ tarea.codigoTarea?.nombreTarea }}</td>
             <td>{{ tarea.codigoTarea?.prioridadTarea }}</td>
+            <td>{{ tarea.codigoTarea?.nombreDocenteRevisor }}</td>
             <td>{{ tarea.codigoTarea?.fechaEntregaTarea | date:"short":'+00:00' }}</td>
             <td>{{ tarea.codigoTarea?.codigoProyecto?.nombreProyecto }}</td>
             <td *ngIf="tarea.estadoTareaDocente=='ASIGNADA'">ASIGNADA</td>

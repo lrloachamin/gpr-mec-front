@@ -73,6 +73,7 @@ export class LoginComponent implements OnInit {
                 //this._usuario.setDescPerfil(this.perfil.descPerfil);
                 
                 //console.log(this.docente.codigoDocente);
+                localStorage.setItem('codigoPerfil',this.perfil.codigoPerfil);
                 localStorage.setItem('descPerfil',this.perfil.descPerfil);
                 //console.log(this.perfil.descPerfil)
               }
@@ -87,6 +88,8 @@ export class LoginComponent implements OnInit {
                   this.docente =res;
                   this._usuario.setCodigoDocente(this.docente);
                   localStorage.setItem('codigoDocente',this.docente.codigoDocente);
+                  localStorage.setItem('idDocenteRevisor',this.docente.cedulaDocente);
+                  localStorage.setItem('nombreDocenteRevisor',this.docente.nombreDocente+" "+this.docente.apellidoDocente);
                 }
               }
             });

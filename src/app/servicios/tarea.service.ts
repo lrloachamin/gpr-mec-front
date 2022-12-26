@@ -26,8 +26,8 @@ export class TareaService {
 
   constructor(private http: HttpClient) { }
 
-  public obtenerTareas(): Observable<TareaDocenteProyecto[]>{
-    return this.http.get<TareaDocenteProyecto[]>(`${TAREA_DOCENTE}/listarTareas`); 
+  public obtenerTareas(idDocente:string): Observable<TareaDocenteProyecto[]>{
+    return this.http.get<TareaDocenteProyecto[]>(`${TAREA_DOCENTE}/listarTareas/${idDocente}`); 
   }
 
   public obtenerTareasEntregadas(): Observable<TareaDocente[]>{

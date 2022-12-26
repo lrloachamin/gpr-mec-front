@@ -18,12 +18,14 @@ export class ListarTareasComponent implements OnInit {
   getTareas$: Observable<TareaDocenteProyecto[]>;
   tareasDocenteProyecto: TareaDocenteProyecto[] = [];
   descPerfil:any;
+  cedulaDocenteRevisor:any;
 
   constructor(
     private tareaService: TareaService,
     private router: Router,
   ) {
-    this.getTareas$ = this.tareaService.obtenerTareas();
+    this.cedulaDocenteRevisor = localStorage.getItem('idDocenteRevisor');
+    this.getTareas$ = this.tareaService.obtenerTareas(this.cedulaDocenteRevisor);
     this.descPerfil=localStorage.getItem('descPerfil');
   }
 
