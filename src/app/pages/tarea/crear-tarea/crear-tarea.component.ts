@@ -83,7 +83,6 @@ export class CrearTareaComponent implements OnInit {
     ) {
       
       this.perfil=localStorage.getItem('codigoPerfil');
-      console.log(this.perfil);
       this.getProyectos$ = this.proyectoService.obtenerProyectos();
       this.getCargos$ = this.cargoService.obtenerCargosPorPerfil(this.perfil);
       this.getDocentes$ = new Observable;

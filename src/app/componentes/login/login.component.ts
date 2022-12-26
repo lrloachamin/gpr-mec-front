@@ -84,7 +84,6 @@ export class LoginComponent implements OnInit {
                 if(res) {
                   this.docente =res;
                   this._usuario.setCodigoDocente(this.docente);
-                  console.log(this.docente.codigoDocente);
                   localStorage.setItem('codigoDocente',this.docente.codigoDocente);
                 }
               }
