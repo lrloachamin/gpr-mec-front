@@ -198,4 +198,7 @@ export class RealizarTareaComponent implements OnInit {
       this.fileInfos = this.uploadFilesService.getFiles();
     });
   */}
+
+  crearSubTarea(){
+  }
 }

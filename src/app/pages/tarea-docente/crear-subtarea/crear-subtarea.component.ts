@@ -44,10 +44,10 @@ const pesoTarea: any[] = [
 
 @Component({
   selector: 'app-crear-tarea',
-  templateUrl: './crear-tarea.html'
+  templateUrl: './crear-subtarea.html'
 })
 
-export class CrearTareaComponent implements OnInit {
+export class CrearSubTareaComponent implements OnInit {
   //tarea: TareaDocente = {};
   getProyectos$: Observable<Proyecto[]>;
   descripcionIndicador: string="";
@@ -73,19 +73,14 @@ export class CrearTareaComponent implements OnInit {
   selectedFiles: any;
   imageName = "";
 
-  perfil:any;
-
   constructor(
     private router:Router,
     private cargoService:CargoService,
     private tareaService:TareaService,
     private proyectoService: ProyectoService
     ) {
-      
-      this.perfil=localStorage.getItem('codigoPerfil');
-      console.log(this.perfil);
       this.getProyectos$ = this.proyectoService.obtenerProyectos();
-      this.getCargos$ = this.cargoService.obtenerCargosPorPerfil(this.perfil);
+      this.getCargos$ = this.cargoService.obtenerCargosModel();
       this.getDocentes$ = new Observable;
       this.prioridades = prioridadTarea;
       this.pesoTarea = pesoTarea;
@@ -141,6 +136,12 @@ export class CrearTareaComponent implements OnInit {
       })
     }
   }
+
+  /*getValidPrioridades() {
+    this.prioridades.forEach(prioridades => {
+            this.validTypes.push(prioridades);
+    });
+  }*/
   
   agregarElementos(){
     this.docentesAsignados.push(this.tareaDocente.codigoDocente);
@@ -166,7 +167,7 @@ export class CrearTareaComponent implements OnInit {
   }
 
   buscarDocentesPorCargo(){
-    this.getDocentes$ = this.tareaService.obtenerDocentesPorCargo(this.cargo.codCargo,this.perfil);
+    //this.getDocentes$ = this.tareaService.obtenerDocentesPorCargo(this.cargo.codCargo);
     this.getDocentes$.subscribe(docentes =>{
       this.docentes = docentes;  
     });

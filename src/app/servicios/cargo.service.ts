@@ -24,6 +24,12 @@ export class CargoService {
     return this.http.get<Cargo[]>(`${urlH}cargoModel`); 
   }
 
+  public obtenerCargosPorPerfil(codigoPerfil:any): Observable<Cargo[]>{
+    console.log(codigoPerfil);
+    return this.http.get<Cargo[]>(`${urlH}obtenerCargosPorPerfil/${codigoPerfil}`); 
+    
+  }
+
 }
 
 

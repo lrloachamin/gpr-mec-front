@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { DocenteComponent } from '../componentes/docente/docente.component';
 import { Docente } from '../models/Docente';
+import { Perfil } from '../models/Perfil';
 
 //const urlH='https://gpr-espe.azurewebsites.net/api/v1/';
 const urlH="http://localhost:8080/api/v1/"
@@ -48,6 +49,10 @@ export class UsuarioService {
 
   public obtenerDocente(codeUser:number){
     return this.http.get<Docente>(`${urlH}obtenerDocente/${codeUser}`);
+  }
+
+  public obtenerPerfil(codeUser:number){
+    return this.http.get<Perfil>(`${urlH}obtenerPerfil/${codeUser}`);
   }
 
   public setCodigoDocente(codigoDocente: DocenteComponent) {

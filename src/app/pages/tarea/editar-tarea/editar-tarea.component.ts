@@ -182,7 +182,7 @@ export class EditarTareaComponent implements OnInit {
   }
 
   buscarDocentesPorCargo(){
-    this.getDocentes$ = this.tareaService.obtenerDocentesPorCargo(this.cargo.codCargo);
+    //this.getDocentes$ = this.tareaService.obtenerDocentesPorCargo(this.cargo.codCargo);
     this.getDocentes$.subscribe(docentes =>{
       this.docentes = docentes;  
     });

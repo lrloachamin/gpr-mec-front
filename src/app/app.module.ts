@@ -39,6 +39,7 @@ import { ListarTareasAsignadasComponent } from './pages/tarea/listar-tareas-asig
 import { ListarTiposProcesosComponent } from './pages/tipoProceso/listar-tipos-procesos/listar-tipos-procesos.component';
 import { EditarTipoProcesoComponent } from './pages/tipoProceso/editar-tipo-proceso/editar-tipo-proceso';
 import { CrearTipoProcesoComponent } from './pages/tipoProceso/crear-tipo-proceso/crear-tipo-proceso.component';
+import { CrearSubTareaComponent } from './pages/tarea-docente/crear-subtarea/crear-subtarea.component';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { CrearTipoProcesoComponent } from './pages/tipoProceso/crear-tipo-proces
     ListarTareasAsignadasComponent,
     ListarTiposProcesosComponent,
     EditarTipoProcesoComponent,
-    CrearTipoProcesoComponent
+    CrearTipoProcesoComponent,
+    CrearSubTareaComponent
   ],
   imports: [
     BrowserModule,

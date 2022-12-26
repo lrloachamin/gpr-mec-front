@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   flag:boolean=true;
   conf:boolean=true;
   docente: any;
+  perfil:any;
 
   constructor(
     private fb:FormBuilder, 
@@ -58,12 +59,25 @@ export class LoginComponent implements OnInit {
     listusuarios.forEach((element: {
       passwUsuario: any; nombreUsuario: any; codigoUsuario: any;estadoUsuario: any
       }) => {
-        console.log(element.nombreUsuario)
+        //console.log(element.nombreUsuario)
         if(element.nombreUsuario!=null){
-          
           localStorage.setItem('usuario',element.nombreUsuario);
           localStorage.setItem('est', element.estadoUsuario);
-          console.log("ingresa");
+          //console.log("ingresa");
+          
+          //obtenerperfilUsuario
+          this.perfil = this._usuario.obtenerPerfil(element.codigoUsuario).subscribe({
+            next: (res) => {
+              if(res) {
+                this.perfil =res;
+                //this._usuario.setCodigoDocente(this.docente);
+                //console.log(this.docente.codigoDocente);
+                localStorage.setItem('codigoPerfil',this.perfil.codigoPerfil);
+              }
+            }
+          });
+
+          localStorage.setItem('codUsuario',element.codigoUsuario);
           if(element.nombreUsuario!='admin'){
             this.docente = this._usuario.obtenerDocente(element.codigoUsuario).subscribe({
               next: (res) => {
