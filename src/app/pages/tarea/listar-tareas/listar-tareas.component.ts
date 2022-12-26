@@ -17,11 +17,14 @@ export class ListarTareasComponent implements OnInit {
 
   getTareas$: Observable<TareaDocenteProyecto[]>;
   tareasDocenteProyecto: TareaDocenteProyecto[] = [];
+  descPerfil:any;
+
   constructor(
     private tareaService: TareaService,
     private router: Router,
   ) {
     this.getTareas$ = this.tareaService.obtenerTareas();
+    this.descPerfil=localStorage.getItem('descPerfil');
   }
 
   ngOnInit(): void {

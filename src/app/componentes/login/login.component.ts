@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
 
   consultar(){
     
-    console.log(this.formulario2);
+    //console.log(this.formulario2);
 
     this._usuario.login(this.formulario2.value.usuario,this.formulario2.value.password).subscribe(respuesta=>{
       console.log(respuesta)
@@ -70,9 +70,11 @@ export class LoginComponent implements OnInit {
             next: (res) => {
               if(res) {
                 this.perfil =res;
-                //this._usuario.setCodigoDocente(this.docente);
+                //this._usuario.setDescPerfil(this.perfil.descPerfil);
+                
                 //console.log(this.docente.codigoDocente);
-                localStorage.setItem('codigoPerfil',this.perfil.codigoPerfil);
+                localStorage.setItem('descPerfil',this.perfil.descPerfil);
+                //console.log(this.perfil.descPerfil)
               }
             }
           });

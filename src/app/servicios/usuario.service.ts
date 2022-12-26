@@ -15,6 +15,8 @@ export class UsuarioService {
 
   private codigoDocente$$ = new BehaviorSubject<DocenteComponent | null>(null);
   codigoDocente$ = this.codigoDocente$$.asObservable();
+  private descPerfil$$ = new BehaviorSubject<String | null>(null);
+  descPerfil$ = this.codigoDocente$$.asObservable();
 
   constructor(private http: HttpClient) { 
 
@@ -57,6 +59,10 @@ export class UsuarioService {
 
   public setCodigoDocente(codigoDocente: DocenteComponent) {
     this.codigoDocente$$.next(codigoDocente);
+  }
+
+  public setDescPerfil(descPerfil: String) {
+    this.descPerfil$$.next(descPerfil);
   }
 
   obtenerUsuarioPorNombre(nombreUsuario:any){
