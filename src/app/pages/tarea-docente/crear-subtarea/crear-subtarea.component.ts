@@ -49,7 +49,6 @@ const pesoTarea: any[] = [
 
 export class CrearSubTareaComponent implements OnInit {
   //tarea: TareaDocente = {};
-  getProyectos$: Observable<Proyecto[]>;
   descripcionIndicador: string="";
   getDocentes$: Observable<Docente[]>;
   validTypes: any[] = [];
@@ -72,32 +71,41 @@ export class CrearSubTareaComponent implements OnInit {
 
   selectedFiles: any;
   imageName = "";
+  perfil:any;
 
   constructor(
     private router:Router,
     private cargoService:CargoService,
-    private tareaService:TareaService,
-    private proyectoService: ProyectoService
+    private tareaService:TareaService
     ) {
-      this.getProyectos$ = this.proyectoService.obtenerProyectos();
-      this.getCargos$ = this.cargoService.obtenerCargosModel();
+      this.perfil=localStorage.getItem('codigoPerfil');
+      this.getCargos$ = this.cargoService.obtenerCargosPorPerfil(this.perfil);
       this.getDocentes$ = new Observable;
       this.prioridades = prioridadTarea;
       this.pesoTarea = pesoTarea;
       this.getIndicadores$ = this.tareaService.obtenerIndicadores();
+      /*this.tareaService.proyecto$.subscribe((res) => {
+        this.tarea.codigoProyecto = res;
+        if (this.tarea.codigoProyecto== null) {
+          this.back();
+        }
+      });*/
+      this.tareaService.tarea$.subscribe((res) => {
+        this.tarea.codigoTareaPadre = res;
+        this.tarea.codigoProyecto = this.tarea.codigoTareaPadre?.codigoProyecto;
+        if (this.tarea.codigoTareaPadre== null) {
+          this.back();
+        }
+      });
   }
 
   ngOnInit(): void {
-    this.getProyectos();
     this.getCargos();
-    //this.getDocentes();
     this.getIndicadores();
   }
 
-  getProyectos() {
-    this.getProyectos$.subscribe(proyectos =>{
-      this.proyectos = proyectos;
-    });
+  back() {
+    this.router.navigate(['listar-tareas']);
   }
 
   getCargos() {
@@ -119,6 +127,8 @@ export class CrearSubTareaComponent implements OnInit {
   }
 
   save(){
+    this.tarea.idDocenteRevisor = localStorage.getItem('idDocenteRevisor');
+    this.tarea.nombreDocenteRevisor = localStorage.getItem('nombreDocenteRevisor');
     this.tareaDocenteProyecto.tarea = this.tarea;
     this.tareaDocenteProyecto.docentes = this.docentesAsignados;
     this.tareaDocenteProyecto.indicadors = this.indicadoresAsignados;
@@ -136,12 +146,6 @@ export class CrearSubTareaComponent implements OnInit {
       })
     }
   }
-
-  /*getValidPrioridades() {
-    this.prioridades.forEach(prioridades => {
-            this.validTypes.push(prioridades);
-    });
-  }*/
   
   agregarElementos(){
     this.docentesAsignados.push(this.tareaDocente.codigoDocente);
@@ -167,7 +171,7 @@ export class CrearSubTareaComponent implements OnInit {
   }
 
   buscarDocentesPorCargo(){
-    //this.getDocentes$ = this.tareaService.obtenerDocentesPorCargo(this.cargo.codCargo);
+    this.getDocentes$ = this.tareaService.obtenerDocentesPorCargo(this.cargo.codCargo,this.perfil);
     this.getDocentes$.subscribe(docentes =>{
       this.docentes = docentes;  
     });

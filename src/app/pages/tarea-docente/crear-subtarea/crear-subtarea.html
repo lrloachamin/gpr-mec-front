@@ -12,11 +12,7 @@
         </div>
         <div class="form-group">
           <label for="">Proyecto:</label>
-          <p>
-            <select name="proyecto" [(ngModel)]="tarea.codigoProyecto">
-              <option [ngValue]="proyecto" *ngFor="let proyecto of proyectos">{{proyecto.nombreProyecto}}</option>
-            </select>
-          </p>
+          <p>{{tarea.codigoProyecto?.nombreProyecto}}</p>
         </div>
         <div class="form-group">
           <label for="">Fecha de Entrega:</label>
@@ -93,10 +89,6 @@
           </p>
           <input #fileInput type="file" hidden (change)="selectFiles($event)" />
           <span *ngIf="imageName">{{imageName}}</span>
-  
-          <!--<button id="uploadButton" mat-raised-button *ngIf="selectedFiles" [disabled]="!selectedFiles" (click)="uploadFiles()">
-              Subir Archivo
-          </button>-->
       </div>
       <div class="form-group">
         <label for="">Observación (Opcional:</label>

@@ -9,7 +9,7 @@ export type Tarea = {
   observacionTarea?: string;
   descripicionTarea?: string;//indicador numerico,etc
   estadoTarea?: string;
-  codigoProyecto?: Proyecto;
+  codigoProyecto?: Proyecto |null;
   fechaEntregaTarea?: Date |null|string;
   archivoTarea?: string;
   nombreArchivoTarea?: string;
@@ -17,6 +17,6 @@ export type Tarea = {
   valorPesoTarea?:number;
   idDocenteRevisor?: string|null;
   nombreDocenteRevisor?: string|null;
-  //codigoTareaPadre:Tarea;
+  codigoTareaPadre?:Tarea|null;
   tareaDocenteList?:TareaDocente[] ;
 };

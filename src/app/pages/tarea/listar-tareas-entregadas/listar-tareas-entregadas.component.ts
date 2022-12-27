@@ -13,11 +13,14 @@ export class ListarTareasEntregadasComponent implements OnInit {
 
   getTareasDocente$: Observable<TareaDocente[]>;
   tareasDocente: TareaDocente[] = [];
+  cedulaDocenteRevisor:any;
+
   constructor(
     private tareaService: TareaService,
     private router: Router,
   ) {
-    this.getTareasDocente$ = this.tareaService.obtenerTareasEntregadas();
+    this.cedulaDocenteRevisor = localStorage.getItem('idDocenteRevisor');
+    this.getTareasDocente$ = this.tareaService.obtenerTareasEntregadas(this.cedulaDocenteRevisor);
   }
 
   ngOnInit(): void {

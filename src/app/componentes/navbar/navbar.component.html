@@ -19,11 +19,11 @@
 					<a class="nav-link" *ngIf="usuario!='admin'" (click)="navegarPerfil()">Cuenta</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" *ngIf="usuario!='admin'" (click)="navegarTareas()">Tareas</a>
+					<a class="nav-link" *ngIf="usuario!='admin'" (click)="navegarTareas()">Tareas Creadas</a>
 				</li>
 
 				<li class="nav-item">
-					<a class="nav-link" *ngIf="usuario=='admin'" (click)="navegarTareasDocenteEntregadas()">Tareas Entregadas</a>
+					<a class="nav-link" *ngIf="usuario!='admin'" (click)="navegarTareasDocenteEntregadas()">Tareas Entregadas</a>
 				</li>
 
 				<li class="nav-item">
@@ -31,7 +31,7 @@
 				</li>
 
 				<li class="nav-item">
-					<a class="nav-link" *ngIf="usuario=='admin'" (click)="navegarTareasAsignadasDocentes()">Ver Tareas Asignadas a Docentes</a>
+					<a class="nav-link" *ngIf="usuario!='admin'" (click)="navegarTareasAsignadasDocentes()">Ver Tareas Asignadas a Docentes</a>
 				</li>
 
 				<li class="nav-item">

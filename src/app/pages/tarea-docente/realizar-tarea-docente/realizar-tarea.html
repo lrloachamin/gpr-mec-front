@@ -110,8 +110,23 @@
               <span>{{message}}</span>
           </div>
       
-          <!--
           <div id="box4">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Archivo Guía</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <ul *ngIf="fileModelClass!=null">
+                        <li>
+                            <a href="{{fileModelClass.url}}">{{fileModelClass.name}}</a>
+                            <mat-icon (click)="deleteFile(fileModelClass.name)">delete</mat-icon>
+                        </li>
+                    </ul>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+          <!--<div id="box4">
               <mat-card>
                   <mat-card-header>
                       <mat-card-title>Lista de Archivos</mat-card-title>
@@ -125,11 +140,10 @@
                       </ul>
                   </mat-card-content>
               </mat-card>
-          </div>
-        -->
+          </div>-->
           <button type="submit" class="btn btn-danger">Guardar</button>
       </form>
-      <button (click)="crearSubTarea()" class="btn btn-danger">Crear SubTarea</button>
+      <button (click)="crearSubTarea()" *ngIf="descPerfil=='Planificador de Docencia'" class="btn btn-danger">Crear SubTarea</button>
     </div>
   </div>
 </div>

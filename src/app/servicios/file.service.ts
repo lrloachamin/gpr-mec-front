@@ -28,6 +28,10 @@ export class UploadFilesService {
     return this.http.get(`${this.baseUrl}/files`);
   }
 
+  getFileModel(codigoTareaDocente:number){
+    return this.http.get(`${this.baseUrl}/fileDocenteTarea/${codigoTareaDocente}`);
+  }
+
   deleteFile(filename: string){
     return this.http.get(`${this.baseUrl}/delete/${filename}`);
   }

@@ -9,6 +9,7 @@ import { Indicador } from '../models/Indicador';
 import { TareaIndicador } from '../models/TareaIndicador';
 import { Cargo } from '../models/Cargo';
 import { TareaIndicadorFile } from '../models/TareaIndicadorFile';
+import { Tarea } from '../models/Tarea';
 
 //const URL='https://gpr-espe.azurewebsites.net';
 const URL='http://localhost:8080';
@@ -23,6 +24,10 @@ export class TareaService {
   tareas$ = this.tareas$$.asObservable();
   private tareaDocente$$ = new BehaviorSubject<TareaDocente | null>(null);
   tareaDocente$ = this.tareaDocente$$.asObservable();
+  private proyecto$$ = new BehaviorSubject<Proyecto | null>(null);
+  proyecto$ = this.proyecto$$.asObservable();
+  private tarea$$ = new BehaviorSubject<Tarea | null>(null);
+  tarea$ = this.tarea$$.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -30,8 +35,8 @@ export class TareaService {
     return this.http.get<TareaDocenteProyecto[]>(`${TAREA_DOCENTE}/listarTareas/${idDocente}`); 
   }
 
-  public obtenerTareasEntregadas(): Observable<TareaDocente[]>{
-    return this.http.get<TareaDocente[]>(`${TAREA_DOCENTE}/listarTareasEntregadas`); 
+  public obtenerTareasEntregadas(idDocente:string): Observable<TareaDocente[]>{
+    return this.http.get<TareaDocente[]>(`${TAREA_DOCENTE}/listarTareasEntregadas/${idDocente}`); 
   }
 
   public obtenerTareasPorDocente(codigoDocente:number): Observable<TareaDocente[]>{
@@ -63,6 +68,14 @@ export class TareaService {
 
   public setTareaDocente(tarea: TareaDocente) {
     this.tareaDocente$$.next(tarea);
+  }
+
+  public setProyecto(proyecto: Proyecto) {
+    this.proyecto$$.next(proyecto);
+  }
+
+  public setTareaModel(tarea: Tarea) {
+    this.tarea$$.next(tarea);
   }
 
   public obtenerProyectoPorId(idProyecto:number){

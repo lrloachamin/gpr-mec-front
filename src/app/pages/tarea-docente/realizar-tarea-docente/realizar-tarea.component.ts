@@ -99,9 +99,11 @@ export class RealizarTareaComponent implements OnInit {
   progressInfo:any = [];
   message = '';
   imageName = "";
+  descPerfil:any;
 
-  fileInfos: Observable<any>= new Observable;
-
+  //fileInfos: Observable<any>= new Observable;
+  fileModel$: Observable<any>= new Observable;
+  fileModelClass:any={}
   tareaIndicadorFile: TareaIndicadorFile={};
 
   constructor(
@@ -109,6 +111,7 @@ export class RealizarTareaComponent implements OnInit {
     private router:Router,
     private tareaService:TareaService
     ) {
+      this.descPerfil=localStorage.getItem('descPerfil');
       this.tareaService.tareaDocente$.subscribe((res) => {
         this.tareaDocente = res;
         if (this.tareaDocente == null) {
@@ -117,11 +120,13 @@ export class RealizarTareaComponent implements OnInit {
         this.tarea = this.tareaDocente.codigoTarea;
       });
       this.getIndicadorTarea$ = this.tareaService.obtenerIndicadoresTarea(this.tareaDocente.codigoTareaDocente);
+      this.fileModel$ = this.uploadFilesService.getFileModel(this.tareaDocente.codigoTareaDocente);
     }
 
   ngOnInit(): void {
-    this.fileInfos = this.uploadFilesService.getFiles();
+    //this.fileInfos = this.uploadFilesService.getFiles();
     this.getIndicadorTarea();
+    this.getFileModel();
   }
 
   getIndicadorTarea() {
@@ -132,15 +137,22 @@ export class RealizarTareaComponent implements OnInit {
     });
   }
 
+  getFileModel() {
+    this.fileModel$.subscribe(res =>{
+      this.fileModelClass = res;
+    });
+  }
+
   save(){
     this.tareaIndicadorFile.file = this.selectedFiles[0];
     this.tareaIndicadorFile.tareaIndicador = this.tareaIndicadors;
-    this.tareaService.guardarTareaAsignadaAlDocente(this.tareaIndicadors)
+    /*this.tareaService.guardarTareaAsignadaAlDocente(this.tareaIndicadors)
     .subscribe(data=>{
       confirm("Se guardaron sus datos con éxito!!");
       this.router.navigate(["listar-tareas-docente"]);
-    })
-    this.tareaService.guardarArchivoTareaAsignadaAlDocente(this.selectedFiles[0],this.tareaDocente.codigoTareaDocente)
+    })*/
+
+    /*this.tareaService.guardarArchivoTareaAsignadaAlDocente(this.selectedFiles[0],this.tareaDocente.codigoTareaDocente)
     .subscribe(
     event => {
       
@@ -148,6 +160,24 @@ export class RealizarTareaComponent implements OnInit {
     err => {
       
     });
+    */
+    //
+    if(this.selectedFiles ==undefined){
+      this.tareaService.guardarTareaAsignadaAlDocente(this.tareaIndicadors)
+      .subscribe(data=>{
+        confirm("Se guardaron sus datos con éxito!!");
+        this.router.navigate(["listar-tareas-docente"]);
+      })
+    }else{
+      this.tareaService.guardarTareaAsignadaAlDocente(this.tareaIndicadors)
+      .subscribe(data=>{
+      })
+      this.tareaService.guardarArchivoTareaAsignadaAlDocente(this.selectedFiles[0],this.tareaDocente.codigoTareaDocente)
+      .subscribe(data=>{
+        confirm("Se guardaron sus datos con éxito!!");
+        this.router.navigate(["listar-tareas-docente"]);
+      })
+    }
   }
 
   back() {
@@ -167,6 +197,7 @@ export class RealizarTareaComponent implements OnInit {
     this.selectedFiles = event.target.files;
   }
 
+  /*
   upload(index:any, file:any) {
     this.progressInfo[index] = { value: 0, fileName: file.name };
 
@@ -184,13 +215,14 @@ export class RealizarTareaComponent implements OnInit {
         this.message = 'No se puede subir el archivo ' + file.name;
       });
   }
+  */
 
-  uploadFiles() {
+  /*uploadFiles() {
     this.message = '';
     for (let i = 0; i < this.selectedFiles.length; i++) {
       this.upload(i, this.selectedFiles[i]);
     }
-  }
+  }*/
 
   deleteFile(filename: string) {/*
     this.uploadFilesService.deleteFile(filename).subscribe(res => {
@@ -200,5 +232,7 @@ export class RealizarTareaComponent implements OnInit {
   */}
 
   crearSubTarea(){
+    this.tareaService.setTareaModel(this.tarea);
+    this.router.navigate(['crear-subTarea']);
   }
 }
