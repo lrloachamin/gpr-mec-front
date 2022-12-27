@@ -110,21 +110,38 @@
               <span>{{message}}</span>
           </div>
       
-          <div id="box4">
+          <div id="box4" *ngIf="tarea.nombreArchivoTarea!=null || tarea.nombreArchivoTarea!=''">
             <mat-card>
                 <mat-card-header>
                     <mat-card-title>Archivo Guía</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                    <ul *ngIf="fileModelClass!=null">
+                    <ul >
                         <li>
-                            <a href="{{fileModelClass.url}}">{{fileModelClass.name}}</a>
-                            <mat-icon (click)="deleteFile(fileModelClass.name)">delete</mat-icon>
+                          <mat-icon>archive</mat-icon>
+                          <a href="{{fileModelClassGuia.url}}">{{fileModelClassGuia.name}}</a>
+                            
                         </li>
                     </ul>
                 </mat-card-content>
             </mat-card>
-        </div>
+          </div>
+
+          <div id="box4" *ngIf="tareaDocente.archivoTareaDocente!=null ||tareaDocente.archivoTareaDocente!=''">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Archivo Subido</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <ul >
+                        <li>
+                            <mat-icon>picture_as_pdf</mat-icon>
+                            <a href="{{fileModelClass.url}}">{{fileModelClass.name}}</a>
+                        </li>
+                    </ul>
+                </mat-card-content>
+            </mat-card>
+          </div>
 
           <!--<div id="box4">
               <mat-card>

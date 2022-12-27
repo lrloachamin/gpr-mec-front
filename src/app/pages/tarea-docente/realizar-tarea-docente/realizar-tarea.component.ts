@@ -103,7 +103,9 @@ export class RealizarTareaComponent implements OnInit {
 
   //fileInfos: Observable<any>= new Observable;
   fileModel$: Observable<any>= new Observable;
+  fileModelGuia$: Observable<any>= new Observable;
   fileModelClass:any={}
+  fileModelClassGuia:any={}
   tareaIndicadorFile: TareaIndicadorFile={};
 
   constructor(
@@ -120,12 +122,14 @@ export class RealizarTareaComponent implements OnInit {
         this.tarea = this.tareaDocente.codigoTarea;
       });
       this.getIndicadorTarea$ = this.tareaService.obtenerIndicadoresTarea(this.tareaDocente.codigoTareaDocente);
+      this.fileModelGuia$ = this.uploadFilesService.getFileGuia(this.tarea.codigoTarea);
       this.fileModel$ = this.uploadFilesService.getFileModel(this.tareaDocente.codigoTareaDocente);
     }
 
   ngOnInit(): void {
     //this.fileInfos = this.uploadFilesService.getFiles();
     this.getIndicadorTarea();
+    this.getFileGuia();
     this.getFileModel();
   }
 
@@ -140,6 +144,12 @@ export class RealizarTareaComponent implements OnInit {
   getFileModel() {
     this.fileModel$.subscribe(res =>{
       this.fileModelClass = res;
+    });
+  }
+
+  getFileGuia() {
+    this.fileModelGuia$.subscribe(res =>{
+      this.fileModelClassGuia = res;
     });
   }
 

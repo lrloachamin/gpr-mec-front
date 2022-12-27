@@ -29,7 +29,12 @@ export class RevisarTareaComponent implements OnInit {
   message = '';
   imageName = "";
 
-  fileInfos: Observable<any>= new Observable;
+  fileModel$: Observable<any>= new Observable;
+  fileModelGuia$: Observable<any>= new Observable;
+  fileModelClass:any={}
+  fileModelClassGuia:any={}
+
+  //fileInfos: Observable<any>= new Observable;
 
   tareaIndicadorFile: TareaIndicadorFile={};
 
@@ -46,12 +51,16 @@ export class RevisarTareaComponent implements OnInit {
         this.tarea = this.tareaDocente.codigoTarea;
       });
       this.getIndicadorTarea$ = this.tareaService.obtenerIndicadoresTarea(this.tareaDocente.codigoTareaDocente);
+      this.fileModelGuia$ = this.uploadFilesService.getFileGuia(this.tarea.codigoTarea);
+      this.fileModel$ = this.uploadFilesService.getFileModel(this.tareaDocente.codigoTareaDocente);
     }
 
   ngOnInit(): void {
     this.tareaDocente.descripcionTareadocente = "";
-    this.fileInfos = this.uploadFilesService.getFiles();
+    //this.fileInfos = this.uploadFilesService.getFiles();
     this.getIndicadorTarea();
+    this.getFileGuia();
+    this.getFileModel();
   }
 
   getIndicadorTarea() {
@@ -59,6 +68,18 @@ export class RevisarTareaComponent implements OnInit {
       tareasIndicador.forEach(t => {
         this.indicadoresAsignados.push(t);
       });
+    });
+  }
+
+  getFileModel() {
+    this.fileModel$.subscribe(res =>{
+      this.fileModelClass = res;
+    });
+  }
+
+  getFileGuia() {
+    this.fileModelGuia$.subscribe(res =>{
+      this.fileModelClassGuia = res;
     });
   }
 

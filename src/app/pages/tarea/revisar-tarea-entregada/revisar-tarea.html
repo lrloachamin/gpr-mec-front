@@ -33,6 +33,39 @@
             <span>Valor ingresado: {{ i.valorIndicador }}</span>
           </li>
         </ul>
+        <div id="box4" *ngIf="tarea.nombreArchivoTarea!=null || tarea.nombreArchivoTarea!=''">
+          <mat-card>
+              <mat-card-header>
+                  <mat-card-title>Archivo Guía</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                  <ul >
+                      <li>
+                        <mat-icon>archive</mat-icon>
+                        <a href="{{fileModelClassGuia.url}}">{{fileModelClassGuia.name}}</a>
+                          
+                      </li>
+                  </ul>
+              </mat-card-content>
+          </mat-card>
+        </div>
+
+        <div id="box4" *ngIf="tareaDocente.archivoTareaDocente!=null ||tareaDocente.archivoTareaDocente!=''">
+          <mat-card>
+              <mat-card-header>
+                  <mat-card-title>Archivo Subido</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                  <ul >
+                      <li>
+                          <mat-icon>picture_as_pdf</mat-icon>
+                          <a href="{{fileModelClass.url}}">{{fileModelClass.name}}</a>
+                      </li>
+                  </ul>
+              </mat-card-content>
+          </mat-card>
+        </div>
+        <!--
         <div id="box4">
           <mat-card>
               <mat-card-header>
@@ -42,12 +75,11 @@
                   <ul>
                       <li *ngFor="let file of fileInfos | async">
                           <a href="{{file.url}}">{{file.name}}</a>
-                          <!--<mat-icon (click)="deleteFile(file.name)">delete</mat-icon>-->
                       </li>
                   </ul>
               </mat-card-content>
           </mat-card>
-      </div>
+      </div>-->
         <button type="submit" class="btn btn-danger" (click)="aprobarTarea()">Aprobar tarea</button>
         <button type="button" class="btn btn-danger" (click)="denegarTarea()">Denegar tarea</button>
         

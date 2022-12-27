@@ -32,6 +32,10 @@ export class UploadFilesService {
     return this.http.get(`${this.baseUrl}/fileDocenteTarea/${codigoTareaDocente}`);
   }
 
+  getFileGuia(codigoTarea:any){
+    return this.http.get(`${this.baseUrl}/fileTarea/${codigoTarea}`);
+  }
+
   deleteFile(filename: string){
     return this.http.get(`${this.baseUrl}/delete/${filename}`);
   }
