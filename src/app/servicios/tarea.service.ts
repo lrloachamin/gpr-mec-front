@@ -102,16 +102,17 @@ export class TareaService {
     return this.http.put<String>(`${TAREA_DOCENTE}/guardarTareaAsignadaAlProfesor`,tareaIndicadors); 
   }
 
-  public guardarArchivoTareaAsignadaAlDocente(file:File,codigoTareaDocente:any): Observable<HttpEvent<any>>{
+  public guardarArchivoTareaAsignadaAlDocente(file:File,tareaIndicadors:TareaIndicador[]): Observable<HttpEvent<any>>{
     const formData: FormData = new FormData();
     formData.append('file', file);
-    formData.append('codigoTareaDocente', codigoTareaDocente);
-    console.log(formData);
+    formData.append('tareaIndicadors', JSON.stringify(tareaIndicadors));
+    return this.http.put<any>(`${TAREA_DOCENTE}/guardarArchivoTareaAsignadaAlProfesor`,formData); 
+    /*console.log(formData);
     const req = new HttpRequest('PUT', `${TAREA_DOCENTE}/guardarArchivoTareaAsignadaAlProfesor`, formData, {
       reportProgress: true,
       responseType: 'json'
     });
-    return this.http.request(req);
+    return this.http.request(req);*/
 
     //return this.http.put<Proyecto>(`${TAREA_DOCENTE}/guardarTareaAsignadaAlProfesor`,tareaIndicadors); 
   }

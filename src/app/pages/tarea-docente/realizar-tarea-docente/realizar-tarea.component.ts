@@ -154,7 +154,6 @@ export class RealizarTareaComponent implements OnInit {
   }
 
   save(){
-    this.tareaIndicadorFile.file = this.selectedFiles[0];
     this.tareaIndicadorFile.tareaIndicador = this.tareaIndicadors;
     /*this.tareaService.guardarTareaAsignadaAlDocente(this.tareaIndicadors)
     .subscribe(data=>{
@@ -179,10 +178,11 @@ export class RealizarTareaComponent implements OnInit {
         this.router.navigate(["listar-tareas-docente"]);
       })
     }else{
+      this.tareaIndicadorFile.file = this.selectedFiles[0];
       this.tareaService.guardarTareaAsignadaAlDocente(this.tareaIndicadors)
       .subscribe(data=>{
       })
-      this.tareaService.guardarArchivoTareaAsignadaAlDocente(this.selectedFiles[0],this.tareaDocente.codigoTareaDocente)
+      this.tareaService.guardarArchivoTareaAsignadaAlDocente(this.selectedFiles[0],this.tareaIndicadors)
       .subscribe(data=>{
         confirm("Se guardaron sus datos con éxito!!");
         this.router.navigate(["listar-tareas-docente"]);

@@ -71,15 +71,15 @@ export class CrearSubTareaComponent implements OnInit {
 
   selectedFiles: any;
   imageName = "";
-  perfil:any;
+  codCargo:any;
 
   constructor(
     private router:Router,
     private cargoService:CargoService,
     private tareaService:TareaService
     ) {
-      this.perfil=localStorage.getItem('codigoPerfil');
-      this.getCargos$ = this.cargoService.obtenerCargosPorPerfil(this.perfil);
+      this.codCargo=localStorage.getItem('codCargo');
+      this.getCargos$ = this.cargoService.obtenerCargosPorPerfil(this.codCargo);
       this.getDocentes$ = new Observable;
       this.prioridades = prioridadTarea;
       this.pesoTarea = pesoTarea;
@@ -171,7 +171,7 @@ export class CrearSubTareaComponent implements OnInit {
   }
 
   buscarDocentesPorCargo(){
-    this.getDocentes$ = this.tareaService.obtenerDocentesPorCargo(this.cargo.codCargo,this.perfil);
+    this.getDocentes$ = this.tareaService.obtenerDocentesPorCargo(this.cargo.codCargo);
     this.getDocentes$.subscribe(docentes =>{
       this.docentes = docentes;  
     });
