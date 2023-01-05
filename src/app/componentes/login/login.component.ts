@@ -90,7 +90,7 @@ export class LoginComponent implements OnInit {
                   localStorage.setItem('codigoDocente',this.docente.codigoDocente);
                   localStorage.setItem('idDocenteRevisor',this.docente.cedulaDocente);
                   localStorage.setItem('nombreDocenteRevisor',this.docente.nombreDocente+" "+this.docente.apellidoDocente);
-                  localStorage.setItem('codCargo',this.docente.codCargo.codCargo)
+                  localStorage.setItem('codCargo',this.docente.codCargo.codCargo);
                 }
               }
             });
