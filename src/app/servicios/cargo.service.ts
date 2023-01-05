@@ -15,7 +15,6 @@ export class CargoService {
 
   
   obtenerCargos(){
-
      const url= urlH+'cargos';
      return this.http.get(url); 
    }
@@ -24,9 +23,8 @@ export class CargoService {
     return this.http.get<Cargo[]>(`${urlH}cargoModel`); 
   }
 
-  public obtenerCargosPorPerfil(codigoPerfil:any): Observable<Cargo[]>{
-    return this.http.get<Cargo[]>(`${urlH}obtenerCargosPorPerfil/${codigoPerfil}`); 
-    
+  public obtenerCargosPorPerfil(codCargo:any): Observable<Cargo[]>{
+    return this.http.get<Cargo[]>(`${urlH}obtenerCargosPorCodCargo/${codCargo}`); 
   }
 
 }

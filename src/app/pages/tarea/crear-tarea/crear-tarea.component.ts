@@ -73,7 +73,7 @@ export class CrearTareaComponent implements OnInit {
   selectedFiles: any;
   imageName = "";
 
-  perfil:any;
+  codCargo:any;
 
   constructor(
     private router:Router,
@@ -82,9 +82,9 @@ export class CrearTareaComponent implements OnInit {
     private proyectoService: ProyectoService
     ) {
       
-      this.perfil=localStorage.getItem('codigoPerfil');
+      this.codCargo=localStorage.getItem('codCargo');
       this.getProyectos$ = this.proyectoService.obtenerProyectos();
-      this.getCargos$ = this.cargoService.obtenerCargosPorPerfil(this.perfil);
+      this.getCargos$ = this.cargoService.obtenerCargosPorPerfil(this.codCargo);
       this.getDocentes$ = new Observable;
       this.prioridades = prioridadTarea;
       this.pesoTarea = pesoTarea;
@@ -167,7 +167,7 @@ export class CrearTareaComponent implements OnInit {
   }
 
   buscarDocentesPorCargo(){
-    this.getDocentes$ = this.tareaService.obtenerDocentesPorCargo(this.cargo.codCargo,this.perfil);
+    this.getDocentes$ = this.tareaService.obtenerDocentesPorCargo(this.cargo.codCargo);
     this.getDocentes$.subscribe(docentes =>{
       this.docentes = docentes;  
     });
