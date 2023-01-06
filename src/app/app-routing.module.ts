@@ -18,6 +18,7 @@ import { CrearTareaComponent } from './pages/tarea/crear-tarea/crear-tarea.compo
 import { EditarTareaComponent } from './pages/tarea/editar-tarea/editar-tarea.component';
 import { ListarTareasAsignadasComponent } from './pages/tarea/listar-tareas-asignadas/listar-tareas-asignadas.component';
 import { ListarTareasEntregadasComponent } from './pages/tarea/listar-tareas-entregadas/listar-tareas-entregadas.component';
+import { ListarTareasRevisarComponent } from './pages/tarea/listar-tareas-revisar/listar-tareas-revisar.component';
 import { ListarTareasComponent } from './pages/tarea/listar-tareas/listar-tareas.component';
 import { RevisarTareaComponent } from './pages/tarea/revisar-tarea-entregada/revisar-tarea.component';
 import { CrearTipoProcesoComponent } from './pages/tipoProceso/crear-tipo-proceso/crear-tipo-proceso.component';
@@ -50,6 +51,7 @@ const routes: Routes = [
   {path: 'crear-tipo-proceso', component:CrearTipoProcesoComponent,canActivate:[AuthGuard]},
   {path: 'editar-tipo-proceso', component:EditarTipoProcesoComponent,canActivate:[AuthGuard]},
   {path: 'crear-subTarea', component:CrearSubTareaComponent,canActivate:[AuthGuard]},
+  {path: 'listar-tareas-revisar', component:ListarTareasRevisarComponent,canActivate:[AuthGuard]},
   {path: '**', component:LoginComponent}
 ];
 

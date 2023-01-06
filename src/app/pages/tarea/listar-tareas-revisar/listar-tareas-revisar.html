@@ -1,0 +1,44 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h3>Tareas por Revisar</h3>
+    </div>
+    <div class="card-body">
+      <table class="table table-hover text-center">
+        <thead>
+          <tr>
+            <th>Creado</th>
+            <th>Proceso</th>
+            <th>Proyecto</th>
+            <th>Tarea</th>
+            <th>Prioridad</th>
+            <th>Peso</th>
+            <th>Fecha de Inicio</th>
+            <th>Fecha de Vencimiento</th>
+            <!--<th>Indicadores</th>-->
+            <th>Responsable</th>
+            <th>Evidencia</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tarea of tareasDocente">
+            <td>{{ tarea.codigoTarea?.nombreDocenteRevisor }}</td>
+            <td>{{ tarea.codigoTarea?.codigoProyecto?.tipoProceso?.nombreTipoProceso }}</td>
+            <td>{{ tarea.codigoTarea?.codigoProyecto?.nombreProyecto }}</td>
+            <td>{{ tarea.codigoTarea?.nombreTarea }}</td>
+            <td>{{ tarea.codigoTarea?.prioridadTarea }}</td>
+            <td>{{ tarea.codigoTarea?.valorPesoTarea }} {{ tarea.codigoTarea?.pesoTarea }} </td>
+            <td>{{ tarea.codigoTarea?.fechaCreaciontarea | date:"short":'+00:00' }}</td>
+            <td>{{ tarea.codigoTarea?.fechaEntregaTarea | date:"short":'+00:00' }}</td>
+            <td>{{ tarea.codigoDocente?.nombreDocente }} {{ tarea.codigoDocente?.apellidoDocente }} </td>
+            <td *ngIf="tarea.codigoTarea?.nombreArchivoTarea!=null || tarea.codigoTarea?.nombreArchivoTarea!=''">
+              <mat-icon>picture_as_pdf</mat-icon>
+              <a href="" style="text-decoration: none;">{{tarea.nombreArchivoTareaDocente}}</a> 
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

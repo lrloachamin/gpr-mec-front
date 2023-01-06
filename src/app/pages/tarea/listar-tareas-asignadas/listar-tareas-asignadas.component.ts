@@ -39,7 +39,6 @@ export class ListarTareasAsignadasComponent implements OnInit {
       this.getTareasDocente(t);  
       //t.tareaDocenteList = this.tareaDocentes;
       });
-      //console.log(this.docentes);
     });
   }
 
@@ -65,16 +64,20 @@ export class ListarTareasAsignadasComponent implements OnInit {
           }
         }
       });
-      if(sum==0)
+      if(sum==0){
         t.cargaHoraria=0;
-      else if(sum>0 && sum<=72)
+      }else if(sum>0 && sum<=72){
         t.cargaHoraria=25;
-      else if(sum>72 && sum<=120)
+        t.claseEstiloProgress="verde";
+      }else if(sum>72 && sum<=120){
         t.cargaHoraria=50;
-      else if(sum>120 && sum<=168)
+        t.claseEstiloProgress="amarillo";
+      }else if(sum>120 && sum<=168){
         t.cargaHoraria=75;
-      else
+      }else{
         t.cargaHoraria=100;
+        t.claseEstiloProgress="rojo";
+      }
     })
   }    
 }

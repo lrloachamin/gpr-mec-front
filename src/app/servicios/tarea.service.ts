@@ -51,6 +51,10 @@ export class TareaService {
     return this.http.get<TareaDocente[]>(`${TAREA_DOCENTE}/listarDocentesTareasAsignadas/${codigoTareaDocente}`); 
   }
 
+  public obtenerTodasTareasRevisar():Observable<TareaDocente[]>{
+    return this.http.get<TareaDocente[]>(`${TAREA_DOCENTE}/listarTodasTareasRevisar`); 
+  }
+
   public crearTareaConArchivo(tarea:TareaDocenteProyecto,file:File){
     const formData: FormData = new FormData();
     formData.append("tareaDocenteProyecto",JSON.stringify(tarea));

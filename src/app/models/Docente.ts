@@ -13,4 +13,5 @@ export type Docente = {
   tareaDocenteList?: TareaDocente[];
   cantidadTarea?: number;
   cargaHoraria?: number;
+  claseEstiloProgress?: string;
 };
