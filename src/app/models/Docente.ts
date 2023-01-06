@@ -12,4 +12,5 @@ export type Docente = {
   codCargo?:Cargo;
   tareaDocenteList?: TareaDocente[];
   cantidadTarea?: number;
+  cargaHoraria?: number;
 };

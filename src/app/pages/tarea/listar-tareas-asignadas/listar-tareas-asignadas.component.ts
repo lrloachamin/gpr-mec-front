@@ -7,7 +7,8 @@ import { Docente } from 'src/app/models/Docente';
 
 @Component({
   selector: 'app-listar-tareas-asignadas',
-  templateUrl: './listar-tareas-asignadas.html'
+  templateUrl: './listar-tareas-asignadas.html',
+  styleUrls: ['./listar-tareas-asignadas.component.css']
 })
 export class ListarTareasAsignadasComponent implements OnInit {
 
@@ -15,6 +16,8 @@ export class ListarTareasAsignadasComponent implements OnInit {
   docentes: Docente[] = [];
   getTareaDocente$: Observable<TareaDocente[]>;
   tareaDocentes: any[] = [];
+  pesoTarea:any;
+
   constructor(
     private tareaService: TareaService,
     private router: Router,
@@ -44,7 +47,34 @@ export class ListarTareasAsignadasComponent implements OnInit {
     this.getTareaDocente$.subscribe(tareaDocentes =>{
       t.tareaDocenteList = tareaDocentes;
       t.cantidadTarea = tareaDocentes.length;
-      //console.log(t.tareaDocenteList);
+      var sum=0;
+      var pesoTransformado;
+      t.tareaDocenteList.forEach(tareaDocent => {
+        if(tareaDocent.codigoTarea?.pesoTarea == "HORA"){
+          if(tareaDocent.codigoTarea?.valorPesoTarea)
+            sum+=tareaDocent.codigoTarea?.valorPesoTarea; 
+        }else if(tareaDocent.codigoTarea?.pesoTarea == "DIA"){
+          if(tareaDocent.codigoTarea?.valorPesoTarea){
+            pesoTransformado=tareaDocent.codigoTarea?.valorPesoTarea*24;
+            sum+=pesoTransformado; 
+          }
+        }else if(tareaDocent.codigoTarea?.pesoTarea == "MES"){
+          if(tareaDocent.codigoTarea?.valorPesoTarea){
+            pesoTransformado=tareaDocent.codigoTarea?.valorPesoTarea*720;
+            sum+=pesoTransformado; 
+          }
+        }
+      });
+      if(sum==0)
+        t.cargaHoraria=0;
+      else if(sum>0 && sum<=72)
+        t.cargaHoraria=25;
+      else if(sum>72 && sum<=120)
+        t.cargaHoraria=50;
+      else if(sum>120 && sum<=168)
+        t.cargaHoraria=75;
+      else
+        t.cargaHoraria=100;
     })
   }    
 }

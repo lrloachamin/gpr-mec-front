@@ -11,6 +11,7 @@
             <th>Cargo</th>
             <th>Docente</th>
             <th>Tareas</th>
+            <th>Carga Horaria</th>
           </tr>
         </thead>
         <tbody>
@@ -27,6 +28,7 @@
                 <span><br/>- {{ tareaDocente.codigoTarea?.nombreTarea}}</span>
               </span>
             </td>
+            <td><progress max="100" value="{{ docente.cargaHoraria}}" class="rojo"></progress></td>
           </tr>
         </tbody>
       </table>
