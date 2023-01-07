@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TareaDocente } from 'src/app/models/TareaDocente';
 import { TareaService } from 'src/app/servicios/tarea.service';
+import * as $ from 'jquery' 
 
 @Component({
   selector: 'app-listar-tareas-revisar',
@@ -21,6 +22,24 @@ export class ListarTareasRevisarComponent implements OnInit {
 
   ngOnInit(): void {
    this.getTareas();
+    $(".search").keyup(function(){
+      rastreator($(this));
+    });
+    $(".search").keydown(function(){
+        rastreator($(this));
+    });
+    function rastreator(elem:any){
+        var rastrear="#datos tbody tr ."+elem.attr("busqueda");
+        var contenido=elem.val();
+        $(rastrear).each(function(){
+            var texto=$(this).text();
+            if(texto.startsWith(contenido)){
+                $(this).parents("tr").show();
+            }else{
+                $(this).parents("tr").hide();
+            }
+        });
+    }
   }
 
   getTareas() {

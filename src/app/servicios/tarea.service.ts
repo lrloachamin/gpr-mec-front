@@ -52,7 +52,7 @@ export class TareaService {
   }
 
   public obtenerTodasTareasRevisar():Observable<TareaDocente[]>{
-    return this.http.get<TareaDocente[]>(`${TAREA_DOCENTE}/listarTodasTareasRevisar`); 
+    return this.http.get<TareaDocente[]>(`${TAREA_DOCENTE}/listarTodasTareasRevisadas`); 
   }
 
   public crearTareaConArchivo(tarea:TareaDocenteProyecto,file:File){

@@ -101,14 +101,14 @@ export class RevisarTareaComponent implements OnInit {
   }
 
   aprobarTarea(){
-    /*this.tareaService.aprobarTareaDocente(this.tareaDocente)
+    this.tareaService.aprobarTareaDocente(this.tareaDocente)
     .subscribe(data=>{
       
       this.router.navigate(["tareas-entregadas"]);
     },
     err => {
       console.log("hubo un error");
-    })*/
+    })
   }
 
   deleteFile(){}

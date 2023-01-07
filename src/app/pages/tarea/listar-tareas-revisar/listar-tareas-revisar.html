@@ -5,33 +5,33 @@
       <h3>Tareas por Revisar</h3>
     </div>
     <div class="card-body">
-      <table class="table table-hover text-center">
+      <table id="datos" class="table table-hover text-center">
         <thead>
           <tr>
-            <th>Creado</th>
-            <th>Proceso</th>
-            <th>Proyecto</th>
-            <th>Tarea</th>
-            <th>Prioridad</th>
-            <th>Peso</th>
-            <th>Fecha de Inicio</th>
-            <th>Fecha de Vencimiento</th>
+            <th>Creado <input type="text" class="search form-control-sm form-control" busqueda="buscador_nombre_creador"/></th>
+            <th>Proceso <input type="text" class="search form-control-sm form-control" busqueda="buscador_proceso"/></th>
+            <th>Proyecto <input type="text" class="search form-control-sm form-control" busqueda="buscador_proyecto"/></th>
+            <th>Tarea <input type="text" class="search form-control-sm form-control" busqueda="buscador_tarea"/></th>
+            <th>Prioridad <input type="text" class="search form-control-sm form-control" busqueda="buscador_prioridad"/></th>
+            <th>Peso <input type="text" class="search form-control-sm form-control" busqueda="buscador_peso"/></th>
+            <th>Fecha de Inicio <input type="text" class="search form-control-sm form-control" busqueda="buscador_fecha_inicio"/></th>
+            <th>Fecha de Vencimiento <input type="text" class="search form-control-sm form-control" busqueda="buscador_fecha_vencimiento"/></th>
             <!--<th>Indicadores</th>-->
-            <th>Responsable</th>
+            <th>Responsable <input type="text" class="search form-control-sm form-control" busqueda="buscador_responsable"/></th>
             <th>Evidencia</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let tarea of tareasDocente">
-            <td>{{ tarea.codigoTarea?.nombreDocenteRevisor }}</td>
-            <td>{{ tarea.codigoTarea?.codigoProyecto?.tipoProceso?.nombreTipoProceso }}</td>
-            <td>{{ tarea.codigoTarea?.codigoProyecto?.nombreProyecto }}</td>
-            <td>{{ tarea.codigoTarea?.nombreTarea }}</td>
-            <td>{{ tarea.codigoTarea?.prioridadTarea }}</td>
-            <td>{{ tarea.codigoTarea?.valorPesoTarea }} {{ tarea.codigoTarea?.pesoTarea }} </td>
-            <td>{{ tarea.codigoTarea?.fechaCreaciontarea | date:"short":'+00:00' }}</td>
-            <td>{{ tarea.codigoTarea?.fechaEntregaTarea | date:"short":'+00:00' }}</td>
-            <td>{{ tarea.codigoDocente?.nombreDocente }} {{ tarea.codigoDocente?.apellidoDocente }} </td>
+            <td class="buscador_nombre_creador">{{ tarea.codigoTarea?.nombreDocenteRevisor }}</td>
+            <td class="buscador_proceso">{{ tarea.codigoTarea?.codigoProyecto?.tipoProceso?.nombreTipoProceso }}</td>
+            <td class="buscador_proyecto">{{ tarea.codigoTarea?.codigoProyecto?.nombreProyecto }}</td>
+            <td class="buscador_tarea">{{ tarea.codigoTarea?.nombreTarea }}</td>
+            <td class="buscador_prioridad">{{ tarea.codigoTarea?.prioridadTarea }}</td>
+            <td class="buscador_peso">{{ tarea.codigoTarea?.valorPesoTarea }} {{ tarea.codigoTarea?.pesoTarea }} </td>
+            <td class="buscador_fecha_inicio">{{ tarea.codigoTarea?.fechaCreaciontarea | date:"short":'+00:00' }}</td>
+            <td class="buscador_fecha_vencimiento">{{ tarea.codigoTarea?.fechaEntregaTarea | date:"short":'+00:00' }}</td>
+            <td class="buscador_responsable">{{ tarea.codigoDocente?.nombreDocente }} {{ tarea.codigoDocente?.apellidoDocente }} </td>
             <td *ngIf="tarea.codigoTarea?.nombreArchivoTarea!=null || tarea.codigoTarea?.nombreArchivoTarea!=''">
               <mat-icon>picture_as_pdf</mat-icon>
               <a href="" style="text-decoration: none;">{{tarea.nombreArchivoTareaDocente}}</a> 

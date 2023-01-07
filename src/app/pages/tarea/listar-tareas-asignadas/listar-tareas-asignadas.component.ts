@@ -73,6 +73,7 @@ export class ListarTareasAsignadasComponent implements OnInit {
         t.cargaHoraria=50;
         t.claseEstiloProgress="amarillo";
       }else if(sum>120 && sum<=168){
+        t.claseEstiloProgress="amarillo";
         t.cargaHoraria=75;
       }else{
         t.cargaHoraria=100;
