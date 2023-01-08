@@ -15,43 +15,43 @@
   </ng-container>
 
   <ng-container matColumnDef="revisor">
-    <th mat-header-cell *matHeaderCellDef> Creador de la tarea 
+    <th mat-header-cell *matHeaderCellDef> <mat-icon>supervisor_account</mat-icon> Creador de la tarea 
       <mat-form-field>
         <input matInput formControlName="revisor">
         <mat-placeholder>Revisor</mat-placeholder>
       </mat-form-field>
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.revisor}} </td>
+    <td mat-cell *matCellDef="let element"> <mat-icon>account_circle</mat-icon> {{element.revisor}} </td>
   </ng-container>
 
   <ng-container matColumnDef="proceso">
-    <th mat-header-cell *matHeaderCellDef> Proceso 
+    <th mat-header-cell *matHeaderCellDef><mat-icon> scatter_plot</mat-icon> Proceso 
       <mat-form-field>
         <input matInput formControlName="proceso">
         <mat-placeholder>Proceso</mat-placeholder>
       </mat-form-field>
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.proceso}} </td>
+    <td mat-cell *matCellDef="let element"><mat-icon> scatter_plot</mat-icon> {{element.proceso}} </td>
   </ng-container>
 
   <ng-container matColumnDef="proyecto">
-    <th mat-header-cell *matHeaderCellDef> Proyecto 
+    <th mat-header-cell *matHeaderCellDef> <mat-icon>folder</mat-icon> Proyecto 
       <mat-form-field>
         <input matInput formControlName="proyecto">
         <mat-placeholder>Proyecto</mat-placeholder>
       </mat-form-field>
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.proyecto}} </td>
+    <td mat-cell *matCellDef="let element"><mat-icon>folder_open</mat-icon> {{element.proyecto}} </td>
   </ng-container>
 
   <ng-container matColumnDef="tarea">
-    <th mat-header-cell *matHeaderCellDef> Tarea 
+    <th mat-header-cell *matHeaderCellDef><mat-icon>assignment</mat-icon> Tarea 
       <mat-form-field>
         <input matInput formControlName="tarea">
         <mat-placeholder>Tarea</mat-placeholder>
       </mat-form-field>
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.tarea}} </td>
+    <td mat-cell *matCellDef="let element"><mat-icon>assignment_ind</mat-icon>{{element.tarea}} </td>
   </ng-container>
 
   <ng-container matColumnDef="prioridad">
@@ -75,33 +75,33 @@
   </ng-container>
 
   <ng-container matColumnDef="fechaInicio">
-    <th mat-header-cell *matHeaderCellDef> fecha de Inicio 
+    <th mat-header-cell *matHeaderCellDef> <mat-icon>calendar_today</mat-icon> fecha de Inicio 
       <mat-form-field>
         <input matInput formControlName="fechaInicio">
         <mat-placeholder>fecha de Inicio</mat-placeholder>
       </mat-form-field>
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.fechaInicio | date:"short":'+00:00'}} </td>
+    <td mat-cell *matCellDef="let element"><mat-icon>event</mat-icon>  {{element.fechaInicio | date:"short":'+00:00'}} </td>
   </ng-container>
 
   <ng-container matColumnDef="fechaVencimiento">
-    <th mat-header-cell *matHeaderCellDef> fecha de Vencimiento 
+    <th mat-header-cell *matHeaderCellDef> <mat-icon>calendar_today</mat-icon> fecha de Vencimiento 
       <mat-form-field>
         <input matInput formControlName="fechaVencimiento">
         <mat-placeholder>fecha de Vencimiento</mat-placeholder>
       </mat-form-field>
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.fechaVencimiento | date:"short":'+00:00'}} </td>
+    <td mat-cell *matCellDef="let element"><mat-icon>event</mat-icon> {{element.fechaVencimiento | date:"short":'+00:00'}} </td>
   </ng-container>
 
   <ng-container matColumnDef="responsable">
-    <th mat-header-cell *matHeaderCellDef> Persona Responsable de la Tarea
+    <th mat-header-cell *matHeaderCellDef><mat-icon>person</mat-icon> Persona Responsable de la Tarea
       <mat-form-field>
         <input matInput formControlName="responsable">
         <mat-placeholder>Responsable de la Tarea</mat-placeholder>
       </mat-form-field>
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.responsable}} </td>
+    <td mat-cell *matCellDef="let element"> <mat-icon>person_outline</mat-icon>{{element.responsable}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
