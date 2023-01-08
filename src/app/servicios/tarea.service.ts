@@ -28,6 +28,8 @@ export class TareaService {
   proyecto$ = this.proyecto$$.asObservable();
   private tarea$$ = new BehaviorSubject<Tarea | null>(null);
   tarea$ = this.tarea$$.asObservable();
+  private tareasDocente$$ = new BehaviorSubject<any[]  |undefined>(undefined);
+  tareasDocente$ = this.tareasDocente$$.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -80,6 +82,10 @@ export class TareaService {
 
   public setTareaModel(tarea: Tarea) {
     this.tarea$$.next(tarea);
+  }
+
+  public setTareasDocenteModel(tareaDocente: any[]) {
+    this.tareasDocente$$.next(tareaDocente);
   }
 
   public obtenerProyectoPorId(idProyecto:number){

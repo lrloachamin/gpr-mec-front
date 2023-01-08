@@ -41,6 +41,10 @@ import { EditarTipoProcesoComponent } from './pages/tipoProceso/editar-tipo-proc
 import { CrearTipoProcesoComponent } from './pages/tipoProceso/crear-tipo-proceso/crear-tipo-proceso.component';
 import { CrearSubTareaComponent } from './pages/tarea-docente/crear-subtarea/crear-subtarea.component';
 import { ListarTareasRevisarComponent } from './pages/tarea/listar-tareas-revisar/listar-tareas-revisar.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTableModule } from '@angular/material/table';
+import { NgxAbstractControlAsModule } from 'ngx-abstract-control-as';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -85,6 +89,10 @@ import { ListarTareasRevisarComponent } from './pages/tarea/listar-tareas-revisa
     MatButtonModule,
     MatCardModule,
     MatIconModule,
+    MatFormFieldModule,
+    MatTableModule,
+    NgxAbstractControlAsModule,
+    MatInputModule
     //ComponentsModule
     //PagesModule
   ],
