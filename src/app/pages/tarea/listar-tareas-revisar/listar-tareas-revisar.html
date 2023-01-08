@@ -16,32 +16,28 @@
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-  <!-- Position Column -->
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef> No. </th>
     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
   </ng-container>
 
   <ng-container matColumnDef="revisor">
-    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <th mat-header-cell *matHeaderCellDef> Creador de la tarea </th>
     <td mat-cell *matCellDef="let element"> {{element.revisor}} </td>
   </ng-container>
 
-  <!-- Name Column -->
   <ng-container matColumnDef="proceso">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <th mat-header-cell *matHeaderCellDef> Proceso </th>
     <td mat-cell *matCellDef="let element"> {{element.proceso}} </td>
   </ng-container>
 
-  <!-- Weight Column -->
   <ng-container matColumnDef="proyecto">
-    <th mat-header-cell *matHeaderCellDef> Weight </th>
+    <th mat-header-cell *matHeaderCellDef> Proyecto </th>
     <td mat-cell *matCellDef="let element"> {{element.proyecto}} </td>
   </ng-container>
 
-  <!-- Symbol Column -->
   <ng-container matColumnDef="tarea">
-    <th mat-header-cell *matHeaderCellDef> Symbol </th>
+    <th mat-header-cell *matHeaderCellDef> Tarea </th>
     <td mat-cell *matCellDef="let element"> {{element.tarea}} </td>
   </ng-container>
 
@@ -56,17 +52,17 @@
   </ng-container>
 
   <ng-container matColumnDef="fechaInicio">
-    <th mat-header-cell *matHeaderCellDef> fecha Inicio </th>
+    <th mat-header-cell *matHeaderCellDef> fecha de Inicio </th>
     <td mat-cell *matCellDef="let element"> {{element.fechaInicio | date:"short":'+00:00'}} </td>
   </ng-container>
 
   <ng-container matColumnDef="fechaVencimiento">
-    <th mat-header-cell *matHeaderCellDef> fecha Vencimiento </th>
+    <th mat-header-cell *matHeaderCellDef> fecha de Vencimiento </th>
     <td mat-cell *matCellDef="let element"> {{element.fechaVencimiento | date:"short":'+00:00'}} </td>
   </ng-container>
 
   <ng-container matColumnDef="responsable">
-    <th mat-header-cell *matHeaderCellDef> responsable </th>
+    <th mat-header-cell *matHeaderCellDef> Persona Responsable de la Tarea</th>
     <td mat-cell *matCellDef="let element"> {{element.responsable}} </td>
   </ng-container>
 
