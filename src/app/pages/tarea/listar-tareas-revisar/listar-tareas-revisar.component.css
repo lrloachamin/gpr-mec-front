@@ -11,6 +11,11 @@ table th{
 }
 
 .mat-form-field {
+  display: block;
   font-size: 14px;
-  width: 100%;
+  width: 90%;
+}
+
+.numberCss{
+  width: 70px;
 }

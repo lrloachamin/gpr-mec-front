@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TareaDocente } from 'src/app/models/TareaDocente';
 import { TareaService } from 'src/app/servicios/tarea.service';
-import {MatTableDataSource} from '@angular/material/table';
-import {FormBuilder, AbstractControl} from '@angular/forms';
-//
+import { MatTableDataSource } from '@angular/material/table';
+import { FormBuilder, AbstractControl } from '@angular/forms';
+/*import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';*/
+
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -22,17 +24,17 @@ export class ListarTareasRevisarComponent implements OnInit {
 
   //getTareasDocente$: Observable<TareaDocente[]>;
   //tareasDocente: TareaDocente[] = [];
-  tareasDocente:any[]| undefined = [] ;
-  cedulaDocenteRevisor:any;
-  dataTable:any | null;//[] = [];
-  data:any;
+  tareasDocente: any[] | undefined = [];
+  cedulaDocenteRevisor: any;
+  dataTable: any | null;//[] = [];
+  data: any;
   //sum:number=0;
 
   //
-  displayedColumns: string[] = ['id','revisor', 'proceso', 'proyecto', 'tarea','prioridad','peso','fechaInicio','fechaVencimiento','responsable'];
+  displayedColumns: string[] = ['id', 'revisor', 'proceso', 'proyecto', 'tarea', 'prioridad', 'peso', 'fechaInicio', 'fechaVencimiento', 'responsable'];
   //dataSource = new MatTableDataSource(ELEMENT_DATA);
-  dataSource:any;
-  
+  dataSource: any;
+
   readonly formControl: AbstractControl;
   //
 
@@ -49,78 +51,67 @@ export class ListarTareasRevisarComponent implements OnInit {
       
       
     });*/
-    if(localStorage.getItem('dataTable')!=null){
-      this.data= localStorage.getItem('dataTable');
-      this.dataTable =JSON.parse(this.data);
-      this.dataSource = new MatTableDataSource(this.dataTable); 
+    if (localStorage.getItem('dataTable') != null) {
+      this.data = localStorage.getItem('dataTable');
+      this.dataTable = JSON.parse(this.data);
+      this.dataSource = new MatTableDataSource(this.dataTable);
     }
-      
-    
+
+
     //this.getTareas();
-    
+
     this.dataSource.filterPredicate = ((data, filter) => {
-      console.log(data)
-      const a = !filter.revisor || data.revisor === filter.revisor;
-      const b = !filter.proceso || data.proceso.toLowerCase().includes(filter.proceso);
-      const c = !filter.proyecto || data.proyecto === filter.proyecto;
-      return a && b && c;
-    }) as (PeriodicElement:any, string:any) => boolean;
+      const a = !filter.id || data.id === filter.id;
+      const b = !filter.revisor || data.revisor.toLowerCase().includes(filter.revisor);
+      const c = !filter.proceso || data.proceso.toLowerCase().includes(filter.proceso);
+      const d = !filter.proyecto || data.proyecto.toLowerCase().includes(filter.proyecto);
+      const e = !filter.tarea || data.tarea.toLowerCase().includes(filter.tarea);
+      const f = !filter.prioridad || data.prioridad.toLowerCase().includes(filter.prioridad);
+      const g = !filter.peso || data.peso.toLowerCase().includes(filter.peso);
+      const h = !filter.fechaInicio || data.revisor.fechaInicio().includes(filter.fechaInicio);
+      const i = !filter.fechaVencimiento || data.fechaVencimiento.toLowerCase().includes(filter.fechaVencimiento);
+      const j = !filter.responsable || data.responsable.toLowerCase().includes(filter.responsable);
+      return a && b && c && d && e && f && g && h && i && j;
+    }) as (PeriodicElement: any, string: any) => boolean;
 
     this.formControl = formBuilder.group({
+      id: '',
       revisor: '',
       proceso: '',
       proyecto: '',
+      tarea: '',
+      prioridad: '',
+      peso: '',
+      fechaInicio: '',
+      fechaVencimiento: '',
+      responsable: ''
     })
     this.formControl.valueChanges.subscribe(value => {
-      const filter = {...value, proceso: value.proceso.trim().toLowerCase()} as string;
+      console.log(value);
+      
+      const filter = {
+        ...value, revisor: value.revisor.trim().toLowerCase(), proceso: value.proceso.trim().toLowerCase(),
+        proyecto: value.proyecto.trim().toLowerCase(), tarea: value.tarea.trim().toLowerCase(),
+        prioridad: value.prioridad.trim().toLowerCase(), peso: value.peso.trim().toLowerCase(),
+        responsable: value.responsable.trim().toLowerCase()
+      } as string;
       this.dataSource.filter = filter;
     });
   }
 
   ngOnInit(): void {
-    
-   //this.getTareas();
-   /*
-    $(".search").keyup(function(){
-      rastreator($(this));
-    });
-    $(".search").keydown(function(){
-        rastreator($(this));
-    });
-    function rastreator(elem:any){
-        var rastrear="#datos tbody tr ."+elem.attr("busqueda");
-        var contenido=elem.val();
-        $(rastrear).each(function(){
-            var texto=$(this).text();
-            if(texto.startsWith(contenido)){
-                $(this).parents("tr").show();
-            }else{
-                $(this).parents("tr").hide();
-            }
-        });
-    }*/
   }
 
-  /*getTareas() {
-    this.getTareasDocente$.subscribe(tareas =>{
-      this.tareasDocente = tareas;  
-      this.tareasDocente.forEach(tareaDocent => {
-          let objetoTarea = {
-            "revisor":tareaDocent.codigoTarea?.nombreDocenteRevisor,
-            "proceso":tareaDocent.codigoTarea?.codigoProyecto?.tipoProceso?.nombreTipoProceso,
-            "proyecto":tareaDocent.codigoTarea?.codigoProyecto?.nombreProyecto,
-            "tarea":tareaDocent.codigoTarea?.nombreTarea, 
-            "prioridad":tareaDocent.codigoTarea?.prioridadTarea,
-            "peso":tareaDocent.codigoTarea?.valorPesoTarea+" "+ tareaDocent.codigoTarea?.pesoTarea,
-            "fechaInicio":tareaDocent.codigoTarea?.nombreDocenteRevisor, 
-            "fechaVencimiento":tareaDocent.codigoTarea?.nombreDocenteRevisor, 
-            "responsable":tareaDocent.codigoDocente?.nombreDocente +" "+ tareaDocent.codigoDocente?.apellidoDocente
-          }
-          this.dataTable.push(objetoTarea);
-      });
-      console.log(this.dataTable);
-      console.log(ELEMENT_DATA2);
-      //this.dataSource = new MatTableDataSource(this.dataTable);
-    });
-  }*/
+  convertirDataPdf(){
+    /*var data = document.getElementById("dataPdf");
+    if(data)
+      html2canvas(data).then(canvas=>{
+        var imgWidth = 208;
+        var imgHeigth = canvas.height * imgWidth / canvas.width;
+        let pdf = new jsPDF('p','mm','a4');
+        var position =0;
+        pdf.save('Data.pdf');
+      })
+      */
+  }
 }
