@@ -7,6 +7,7 @@ export type TareaDocente = {
     archivoTareaDocente?: string;
     descripcionTareadocente?: string;
     estadoTareaDocente?: string;
+    nombreArchivoTareaDocente?: string;
     codigoDocente?: Docente;
     codigoTarea?: Tarea;
     tareaIndicadorList?:TareaIndicador[];

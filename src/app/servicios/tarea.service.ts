@@ -28,6 +28,8 @@ export class TareaService {
   proyecto$ = this.proyecto$$.asObservable();
   private tarea$$ = new BehaviorSubject<Tarea | null>(null);
   tarea$ = this.tarea$$.asObservable();
+  private tareasDocente$$ = new BehaviorSubject<any[]  |undefined>(undefined);
+  tareasDocente$ = this.tareasDocente$$.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -49,6 +51,10 @@ export class TareaService {
 
   public obtenerTareasAsignadasDocentes(codigoTareaDocente:any):Observable<TareaDocente[]>{
     return this.http.get<TareaDocente[]>(`${TAREA_DOCENTE}/listarDocentesTareasAsignadas/${codigoTareaDocente}`); 
+  }
+
+  public obtenerTodasTareasRevisar():Observable<TareaDocente[]>{
+    return this.http.get<TareaDocente[]>(`${TAREA_DOCENTE}/listarTodasTareasRevisadas`); 
   }
 
   public crearTareaConArchivo(tarea:TareaDocenteProyecto,file:File){
@@ -78,6 +84,10 @@ export class TareaService {
     this.tarea$$.next(tarea);
   }
 
+  public setTareasDocenteModel(tareaDocente: any[]) {
+    this.tareasDocente$$.next(tareaDocente);
+  }
+
   public obtenerProyectoPorId(idProyecto:number){
     return this.http.get<Proyecto>(`${TAREA_DOCENTE}/${idProyecto}`);
   }
@@ -98,14 +108,18 @@ export class TareaService {
     return this.http.put<Proyecto>(`${TAREA_DOCENTE}/modificar`, tareaDocente);
   }
 
-  public guardarTareaAsignadaAlDocente(tareaIndicadors:TareaIndicador[]){
-    return this.http.put<String>(`${TAREA_DOCENTE}/guardarTareaAsignadaAlProfesor`,tareaIndicadors); 
+  public guardarTareaAsignadaAlDocente(tareaIndicadors:TareaIndicador[],codigoTareaDocente:any){
+    const formData: FormData = new FormData();
+    formData.append('tareaIndicadors', JSON.stringify(tareaIndicadors));
+    formData.append('codigoTareaDocente', codigoTareaDocente);
+    return this.http.put<String>(`${TAREA_DOCENTE}/guardarTareaAsignadaAlProfesor`,formData); 
   }
 
-  public guardarArchivoTareaAsignadaAlDocente(file:File,tareaIndicadors:TareaIndicador[]): Observable<HttpEvent<any>>{
+  public guardarArchivoTareaAsignadaAlDocente(file:File,tareaIndicadors:TareaIndicador[],codigoTareaDocente:any): Observable<HttpEvent<any>>{
     const formData: FormData = new FormData();
     formData.append('file', file);
     formData.append('tareaIndicadors', JSON.stringify(tareaIndicadors));
+    formData.append('codigoTareaDocente', codigoTareaDocente);
     return this.http.put<any>(`${TAREA_DOCENTE}/guardarArchivoTareaAsignadaAlProfesor`,formData); 
     /*console.log(formData);
     const req = new HttpRequest('PUT', `${TAREA_DOCENTE}/guardarArchivoTareaAsignadaAlProfesor`, formData, {

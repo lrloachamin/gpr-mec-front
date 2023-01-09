@@ -1,0 +1,117 @@
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { TareaDocente } from 'src/app/models/TareaDocente';
+import { TareaService } from 'src/app/servicios/tarea.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { FormBuilder, AbstractControl } from '@angular/forms';
+/*import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';*/
+
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
+
+@Component({
+  selector: 'app-listar-tareas-revisar',
+  templateUrl: './listar-tareas-revisar.html',
+  styleUrls: ['./listar-tareas-revisar.component.css']
+})
+
+export class ListarTareasRevisarComponent implements OnInit {
+
+  //getTareasDocente$: Observable<TareaDocente[]>;
+  //tareasDocente: TareaDocente[] = [];
+  tareasDocente: any[] | undefined = [];
+  cedulaDocenteRevisor: any;
+  dataTable: any | null;//[] = [];
+  data: any;
+  //sum:number=0;
+
+  //
+  displayedColumns: string[] = ['id', 'revisor', 'proceso', 'proyecto', 'tarea', 'prioridad', 'peso', 'fechaInicio', 'fechaVencimiento', 'responsable'];
+  //dataSource = new MatTableDataSource(ELEMENT_DATA);
+  dataSource: any;
+
+  readonly formControl: AbstractControl;
+  //
+
+  constructor(
+    private tareaService: TareaService,
+    //
+    formBuilder: FormBuilder
+  ) {
+    //this.getTareasDocente$ = this.tareaService.obtenerTodasTareasRevisar();
+    //
+    /*this.tareaService.tareasDocente$.subscribe((res) => {
+      this.tareasDocente = res;
+      console.log(this.tareasDocente);
+      
+      
+    });*/
+    if (localStorage.getItem('dataTable') != null) {
+      this.data = localStorage.getItem('dataTable');
+      this.dataTable = JSON.parse(this.data);
+      this.dataSource = new MatTableDataSource(this.dataTable);
+    }
+
+
+    //this.getTareas();
+
+    this.dataSource.filterPredicate = ((data, filter) => {
+      const a = !filter.id || data.id === filter.id;
+      const b = !filter.revisor || data.revisor.toLowerCase().includes(filter.revisor);
+      const c = !filter.proceso || data.proceso.toLowerCase().includes(filter.proceso);
+      const d = !filter.proyecto || data.proyecto.toLowerCase().includes(filter.proyecto);
+      const e = !filter.tarea || data.tarea.toLowerCase().includes(filter.tarea);
+      const f = !filter.prioridad || data.prioridad.toLowerCase().includes(filter.prioridad);
+      const g = !filter.peso || data.peso.toLowerCase().includes(filter.peso);
+      const h = !filter.fechaInicio || data.revisor.fechaInicio().includes(filter.fechaInicio);
+      const i = !filter.fechaVencimiento || data.fechaVencimiento.toLowerCase().includes(filter.fechaVencimiento);
+      const j = !filter.responsable || data.responsable.toLowerCase().includes(filter.responsable);
+      return a && b && c && d && e && f && g && h && i && j;
+    }) as (PeriodicElement: any, string: any) => boolean;
+
+    this.formControl = formBuilder.group({
+      id: '',
+      revisor: '',
+      proceso: '',
+      proyecto: '',
+      tarea: '',
+      prioridad: '',
+      peso: '',
+      fechaInicio: '',
+      fechaVencimiento: '',
+      responsable: ''
+    })
+    this.formControl.valueChanges.subscribe(value => {
+      console.log(value);
+      
+      const filter = {
+        ...value, revisor: value.revisor.trim().toLowerCase(), proceso: value.proceso.trim().toLowerCase(),
+        proyecto: value.proyecto.trim().toLowerCase(), tarea: value.tarea.trim().toLowerCase(),
+        prioridad: value.prioridad.trim().toLowerCase(), peso: value.peso.trim().toLowerCase(),
+        responsable: value.responsable.trim().toLowerCase()
+      } as string;
+      this.dataSource.filter = filter;
+    });
+  }
+
+  ngOnInit(): void {
+  }
+
+  convertirDataPdf(){
+    /*var data = document.getElementById("dataPdf");
+    if(data)
+      html2canvas(data).then(canvas=>{
+        var imgWidth = 208;
+        var imgHeigth = canvas.height * imgWidth / canvas.width;
+        let pdf = new jsPDF('p','mm','a4');
+        var position =0;
+        pdf.save('Data.pdf');
+      })
+      */
+  }
+}

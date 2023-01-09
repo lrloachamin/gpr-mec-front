@@ -40,6 +40,11 @@ import { ListarTiposProcesosComponent } from './pages/tipoProceso/listar-tipos-p
 import { EditarTipoProcesoComponent } from './pages/tipoProceso/editar-tipo-proceso/editar-tipo-proceso';
 import { CrearTipoProcesoComponent } from './pages/tipoProceso/crear-tipo-proceso/crear-tipo-proceso.component';
 import { CrearSubTareaComponent } from './pages/tarea-docente/crear-subtarea/crear-subtarea.component';
+import { ListarTareasRevisarComponent } from './pages/tarea/listar-tareas-revisar/listar-tareas-revisar.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTableModule } from '@angular/material/table';
+import { NgxAbstractControlAsModule } from 'ngx-abstract-control-as';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -69,7 +74,8 @@ import { CrearSubTareaComponent } from './pages/tarea-docente/crear-subtarea/cre
     ListarTiposProcesosComponent,
     EditarTipoProcesoComponent,
     CrearTipoProcesoComponent,
-    CrearSubTareaComponent
+    CrearSubTareaComponent,
+    ListarTareasRevisarComponent
   ],
   imports: [
     BrowserModule,
@@ -83,6 +89,10 @@ import { CrearSubTareaComponent } from './pages/tarea-docente/crear-subtarea/cre
     MatButtonModule,
     MatCardModule,
     MatIconModule,
+    MatFormFieldModule,
+    MatTableModule,
+    NgxAbstractControlAsModule,
+    MatInputModule
     //ComponentsModule
     //PagesModule
   ],

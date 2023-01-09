@@ -84,5 +84,8 @@ export class NavbarComponent implements OnInit {
   navegarTiposProcesos(){
     this.router.navigate(['/listar-tipos-procesos']);
   }
+  navegarListarTareasRevisar(){
+    this.router.navigate(['/listar-tareas-revisar']);
+  }
 
 }

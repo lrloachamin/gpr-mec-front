@@ -3,6 +3,9 @@ import{FormGroup,FormBuilder,Validators} from '@angular/forms'
 import{UsuarioService} from '../../servicios/usuario.service'
 import { Router } from '@angular/router';
 import { Docente } from 'src/app/models/Docente';
+import { Observable } from 'rxjs';
+import { TareaDocente } from 'src/app/models/TareaDocente';
+import { TareaService } from 'src/app/servicios/tarea.service';
 
 
 @Component({
@@ -23,14 +26,46 @@ export class LoginComponent implements OnInit {
   docente: any;
   perfil:any;
 
+  getTareasDocente$: Observable<TareaDocente[]>;
+  tareasDocente: TareaDocente[] = [];
+  dataTable:any[] = [];
+
   constructor(
     private fb:FormBuilder, 
     private _usuario: UsuarioService,
-    private router: Router) { 
+    private router: Router,
+    private tareaService: TareaService
+    ) { 
     this.iniciarFormulario();
+    this.getTareasDocente$ = this.tareaService.obtenerTodasTareasRevisar();
   }
 
   ngOnInit(): void {
+  }
+
+  getTareas() {
+    this.getTareasDocente$.subscribe(tareas =>{
+      this.tareasDocente = tareas; 
+      var cont=0;
+      this.tareasDocente.forEach(tareaDocent => {
+        cont++;
+        let objetoTarea = {
+          "id":cont,
+          "revisor":tareaDocent.codigoTarea?.nombreDocenteRevisor,
+          "proceso":tareaDocent.codigoTarea?.codigoProyecto?.tipoProceso?.nombreTipoProceso,
+          "proyecto":tareaDocent.codigoTarea?.codigoProyecto?.nombreProyecto,
+          "tarea":tareaDocent.codigoTarea?.nombreTarea, 
+          "prioridad":tareaDocent.codigoTarea?.prioridadTarea,
+          "peso":tareaDocent.codigoTarea?.valorPesoTarea+" "+ tareaDocent.codigoTarea?.pesoTarea,
+          "fechaInicio":tareaDocent.codigoTarea?.fechaCreaciontarea, 
+          "fechaVencimiento":tareaDocent.codigoTarea?.fechaEntregaTarea, 
+          "responsable":tareaDocent.codigoDocente?.nombreDocente +" "+ tareaDocent.codigoDocente?.apellidoDocente
+        }
+        this.dataTable.push(objetoTarea);
+      });
+      //this.tareaService.setTareasDocenteModel(this.dataTable);
+      localStorage.setItem('dataTable', JSON.stringify(this.dataTable));
+    });
   }
 
   iniciarFormulario(){
@@ -61,6 +96,7 @@ export class LoginComponent implements OnInit {
       }) => {
         //console.log(element.nombreUsuario)
         if(element.nombreUsuario!=null){
+          this.getTareas();
           localStorage.setItem('usuario',element.nombreUsuario);
           localStorage.setItem('est', element.estadoUsuario);
           //console.log("ingresa");
