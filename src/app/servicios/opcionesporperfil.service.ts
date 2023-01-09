@@ -11,7 +11,7 @@ export class OpcionesporperfilService {
   constructor(private http: HttpClient) { }
 
   obtenerOpcionesPerfil(id:any){
-console.log("entras")
+
     const url= urlH+'opcionperfil/'+id;
     return this.http.get(url); 
   }
