@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { OpcionesporperfilService } from 'src/app/servicios/opcionesporperfil.service';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 
 
@@ -15,13 +16,30 @@ export class NavbarComponent implements OnInit {
   usuario:any;
   descPerfil:any;
 
-  constructor(private router:Router,private usuarioService: UsuarioService) { 
+  menus: any;
+
+  constructor(private router:Router,private usuarioService: UsuarioService,private _opcionperfil: OpcionesporperfilService) { 
     this.usuario=localStorage.getItem('usuario');
     //this.descPerfil=localStorage.getItem('descPerfil');
     /*this.usuarioService.descPerfil$.subscribe((res) => {
       this.descPerfil = res;
       console.log(this.descPerfil);
       });*/
+
+
+  }
+
+
+  cargarOpcionesPerfil(id:any) {
+    this._opcionperfil.obtenerOpcionesPerfil(id).subscribe(respuesta => {
+
+      
+      this.procesarOpcionesPerfil(respuesta);
+
+    })
+  }
+  procesarOpcionesPerfil(resp: any) {
+    this.menus = resp.opcionPerfilResponse.opcper
   }
 
   ngOnInit(): void {
@@ -29,6 +47,10 @@ export class NavbarComponent implements OnInit {
       setTimeout('document.location.reload()',1500);*/
   }
   IsLoggedout(){
+    this.cargarOpcionesPerfil("1");
+    console.log(this.menus)
+
+
     this.router.navigate(['./login']);
     localStorage.removeItem('descPerfil');
     localStorage.removeItem('codigoDocente');

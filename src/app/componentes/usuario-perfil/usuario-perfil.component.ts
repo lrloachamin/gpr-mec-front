@@ -38,13 +38,13 @@ export class UsuarioPerfilComponent implements OnInit {
     this.cargarDocentes();
     this.cargarPerfiles();
 
-    this.iniciarFormulario();
+    
     // this.asignarDocentesCheck();
   }
 
   ngOnInit(): void {
-    this.cargarPerfiles();
-
+ 
+    this.iniciarFormulario();
 
   }
 
