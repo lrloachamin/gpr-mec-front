@@ -4,8 +4,9 @@ import { TareaDocente } from 'src/app/models/TareaDocente';
 import { TareaService } from 'src/app/servicios/tarea.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormBuilder, AbstractControl } from '@angular/forms';
-/*import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';*/
+import jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
+import {formatDate} from '@angular/common';
 
 export interface PeriodicElement {
   name: string;
@@ -21,7 +22,6 @@ export interface PeriodicElement {
 })
 
 export class ListarTareasRevisarComponent implements OnInit {
-
   //getTareasDocente$: Observable<TareaDocente[]>;
   //tareasDocente: TareaDocente[] = [];
   tareasDocente: any[] | undefined = [];
@@ -103,15 +103,54 @@ export class ListarTareasRevisarComponent implements OnInit {
   }
 
   convertirDataPdf(){
+    /*
+    var doc = new jspdf('landscape', 'pt', 'a4');
+    var margin =10;
+    var scale = (doc.internal.pageSize.width-margin*2)/document.body.scrollWidth;
+    const DATA = document.getElementById('dataPdf');
+    if(DATA)
+      doc.html(DATA,{
+        x:margin,
+        y:margin,
+        html2canvas:{
+          scale:scale,
+        },
+        callback:function(doc){
+          doc.output('dataurlnewwindow',{filename:'dataPdf.pdf'})
+        }
+      })
+    */  
+    const DATA = document.getElementById('dataPdf');
+    const doc = new jspdf('p', 'pt', 'a4');
+    const options = {
+      background: 'white',
+      scale: 3
+    };
+    if(DATA){
+      html2canvas(DATA, options).then((canvas) => {
+
+        const img = canvas.toDataURL('image/PNG');
+
+        // Add image Canvas to PDF
+        const bufferX = 15;
+        const bufferY = 15;
+        const imgProps = (doc as any).getImageProperties(img);
+        const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        doc.addImage(img, 'PNG', bufferX, bufferY, pdfWidth, pdfHeight, undefined, 'FAST');
+        return doc;
+      }).then((docResult) => {
+        docResult.save(`${formatDate(new Date(), 'yyyy/MM/dd', 'en')}_reporteTarea.pdf`);
+      });
+    } 
     /*var data = document.getElementById("dataPdf");
     if(data)
       html2canvas(data).then(canvas=>{
         var imgWidth = 208;
         var imgHeigth = canvas.height * imgWidth / canvas.width;
-        let pdf = new jsPDF('p','mm','a4');
+        let pdf = new jspdf('p','mm','a4');
         var position =0;
         pdf.save('Data.pdf');
-      })
-      */
+      })*/
   }
 }

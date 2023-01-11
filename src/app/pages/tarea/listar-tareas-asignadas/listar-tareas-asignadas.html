@@ -16,9 +16,9 @@
         </thead>
         <tbody>
           <tr *ngFor="let docente of docentes">
-            <td>{{ docente.codCargo?.nombreCargo }}</td>
-            <td>{{ docente.nombreDocente }}  {{ docente.apellidoDocente }}</td>
-            <td>
+            <td *ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'">{{ docente.codCargo?.nombreCargo }}</td>
+            <td *ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'">{{ docente.nombreDocente }}  {{ docente.apellidoDocente }}</td>
+            <td *ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'">
               <span [ngSwitch]="docente.cantidadTarea">
                 <span *ngSwitchCase="0">(Ningúna Tarea)</span>
                 <span *ngSwitchCase="1">({{docente.cantidadTarea}} Tarea)</span>
@@ -28,7 +28,7 @@
                 <span><br/>- {{ tareaDocente.codigoTarea?.nombreTarea}}</span>
               </span>
             </td>
-            <td><progress max="100" value="{{ docente.cargaHoraria}}" class="{{ docente.claseEstiloProgress}}"></progress></td>
+            <td *ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'"><progress max="100" value="{{ docente.cargaHoraria}}" class="{{ docente.claseEstiloProgress}}"></progress></td>
           </tr>
         </tbody>
       </table>

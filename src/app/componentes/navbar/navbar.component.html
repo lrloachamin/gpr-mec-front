@@ -38,16 +38,16 @@
 					  <li><a class="dropdown-item" (click)="navegarTareasDocenteEntregadas()">Tareas Entregadas</a></li>
 					  <li><a class="dropdown-item" (click)="navegarTareasAsignadasDocentes()">Ver Tareas Asignadas a Docentes</a></li>
 					  <li><a class="dropdown-item" (click)="navegarTareasDocente()">Tareas por Realizar</a></li>
+					  <li><a class="dropdown-item" (click)="navegarListarTareasRevisar()">Reporte de Tareas Realizadas</a></li>
 					</ul>
 				  </li>
 			</ul>
-			
-	
 		</div>
+		
+	<span style="color: azure;">Bienvenido: {{usuario}}</span> 
 	</div>
 	<ul class="navbar-nav d-flex" role="search">
-               
-		<button class="btn btn-primary" (click)="IsLoggedout()" style="width: 140px; margin-right: 10px;" >
+        <button class="btn btn-primary" (click)="IsLoggedout()" style="width: 140px; margin-right: 10px;" >
 			Cerrar Sesion  </button>
 	 </ul>
 </nav>

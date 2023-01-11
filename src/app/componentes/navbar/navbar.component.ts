@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
   public isMenuCollapsed = true;
   usuario:any;
   descPerfil:any;
+  nombreDocenteRevisor:any;
 
   menus: any;
 
