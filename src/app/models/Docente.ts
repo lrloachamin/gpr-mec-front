@@ -10,6 +10,7 @@ export type Docente = {
   telefonoDocente?: string;
   correoDocente?: string;
   codCargo?:Cargo;
+  numLogueo?: number;
   tareaDocenteList?: TareaDocente[];
   cantidadTarea?: number;
   cargaHoraria?: number;

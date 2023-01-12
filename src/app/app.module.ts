@@ -45,6 +45,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { NgxAbstractControlAsModule } from 'ngx-abstract-control-as';
 import { MatInputModule } from '@angular/material/input';
+import { ListarLogueoUsuariosComponent } from './pages/usuario/listar-logueo-usuarios/listar-logueo-usuarios.component';
+import { PasswordOlvidadoComponent } from './pages/usuario/password-olvidado/password-olvidado.component';
 
 
 @NgModule({
@@ -75,7 +77,9 @@ import { MatInputModule } from '@angular/material/input';
     EditarTipoProcesoComponent,
     CrearTipoProcesoComponent,
     CrearSubTareaComponent,
-    ListarTareasRevisarComponent
+    ListarTareasRevisarComponent,
+    ListarLogueoUsuariosComponent,
+    PasswordOlvidadoComponent
   ],
   imports: [
     BrowserModule,

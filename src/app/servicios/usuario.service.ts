@@ -35,6 +35,10 @@ export class UsuarioService {
     return this.http.get(url); 
   }
 
+  resetearPassword(email:string){
+    return this.http.put<any>(`${urlH}resetearPassword`, email);
+  }
+
   actualizarUsuario(body:any ,id:any){
     const url2= urlH+'usuario/'+id;
     return this.http.put(url2,body); 

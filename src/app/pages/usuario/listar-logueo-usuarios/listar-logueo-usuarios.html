@@ -1,0 +1,26 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h3>Tareas</h3>
+    </div>
+    <div class="card-body">
+      <table class="table table-hover text-center">
+        <thead>
+          <tr>
+            <th>Cargo</th>
+            <th>Docente</th>
+            <th>Logueos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let docente of docentes">
+            <td *ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'">{{ docente.codCargo?.nombreCargo }}</td>
+            <td *ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'">{{ docente.nombreDocente }}  {{ docente.apellidoDocente }}</td>
+            <td *ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'"><progress max="100" value="{{ docente.numLogueo}}" class="{{ docente.claseEstiloProgress}}"></progress></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

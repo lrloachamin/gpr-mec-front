@@ -88,5 +88,7 @@ export class NavbarComponent implements OnInit {
   navegarListarTareasRevisar(){
     this.router.navigate(['/listar-tareas-revisar']);
   }
-
+  navegarLogueosRealizados(){
+    this.router.navigate(['/listar-logueo-usuarios']);
+  }
 }

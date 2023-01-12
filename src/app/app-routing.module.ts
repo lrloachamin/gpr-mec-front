@@ -24,12 +24,15 @@ import { RevisarTareaComponent } from './pages/tarea/revisar-tarea-entregada/rev
 import { CrearTipoProcesoComponent } from './pages/tipoProceso/crear-tipo-proceso/crear-tipo-proceso.component';
 import { EditarTipoProcesoComponent } from './pages/tipoProceso/editar-tipo-proceso/editar-tipo-proceso';
 import { ListarTiposProcesosComponent } from './pages/tipoProceso/listar-tipos-procesos/listar-tipos-procesos.component';
+import { ListarLogueoUsuariosComponent } from './pages/usuario/listar-logueo-usuarios/listar-logueo-usuarios.component';
+import { PasswordOlvidadoComponent } from './pages/usuario/password-olvidado/password-olvidado.component';
 import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
  {path: '', redirectTo:'/login' ,pathMatch:'full'},
   {path: 'login', component:LoginComponent},
   {path: 'registro', component:RegistroComponent},
+  {path: 'password-olvidado', component:PasswordOlvidadoComponent},
   {path: 'home', component:HomeComponent,canActivate:[AuthGuard]},
   {path: 'docentes', component:DocenteComponent,canActivate:[AuthGuard]},
   {path: 'listar-proyectos', component:ListarProyectosComponent,canActivate:[AuthGuard]},
@@ -52,6 +55,7 @@ const routes: Routes = [
   {path: 'editar-tipo-proceso', component:EditarTipoProcesoComponent,canActivate:[AuthGuard]},
   {path: 'crear-subTarea', component:CrearSubTareaComponent,canActivate:[AuthGuard]},
   {path: 'listar-tareas-revisar', component:ListarTareasRevisarComponent,canActivate:[AuthGuard]},
+  {path: 'listar-logueo-usuarios', component:ListarLogueoUsuariosComponent,canActivate:[AuthGuard]},
   {path: '**', component:LoginComponent}
 ];
 
