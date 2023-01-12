@@ -10,6 +10,7 @@
           <tr>
             <th>Cargo</th>
             <th>Docente</th>
+            <th>Cantidad</th>
             <th>Logueos</th>
           </tr>
         </thead>
@@ -17,6 +18,7 @@
           <tr *ngFor="let docente of docentes">
             <td *ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'">{{ docente.codCargo?.nombreCargo }}</td>
             <td *ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'">{{ docente.nombreDocente }}  {{ docente.apellidoDocente }}</td>
+            <td *ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'" >{{ docente.numLogueo}} <span *ngIf="docente.numLogueo==null">0</span></td>
             <td *ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'"><progress max="100" value="{{ docente.numLogueo}}" class="{{ docente.claseEstiloProgress}}"></progress></td>
           </tr>
         </tbody>
