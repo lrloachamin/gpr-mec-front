@@ -91,4 +91,7 @@ export class NavbarComponent implements OnInit {
   navegarLogueosRealizados(){
     this.router.navigate(['/listar-logueo-usuarios']);
   }
+  navegarListarTareasCargos(){
+    this.router.navigate(['/listar-cargos']);
+  }
 }

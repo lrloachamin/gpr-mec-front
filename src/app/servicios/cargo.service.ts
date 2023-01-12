@@ -27,6 +27,10 @@ export class CargoService {
     return this.http.get<Cargo[]>(`${urlH}obtenerCargosPorCodCargo/${codCargo}`); 
   }
 
+  public crearCargo(cargo:Cargo){
+    return this.http.post<Cargo>(urlH+"crearCargo",cargo); 
+  }
+
 }
 
 

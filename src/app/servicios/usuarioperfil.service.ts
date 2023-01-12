@@ -1,30 +1,33 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Perfil } from '../models/Perfil';
 
-const urlH="http://localhost:8080/api/v1/"
+const urlH = "http://localhost:8080/api/v1/"
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioperfilService {
 
-  
-
   constructor(private http: HttpClient) { }
 
-  obtenerUsuario(){
-
-    const url= urlH+'perfil';
-    return this.http.get(url); 
-  }
-  guardarUsuarioPerfil(codigoperfil:any,codigousuario:any,idusuper:any){
-
-    const url= urlH+'usuarioperfil/'+codigoperfil+'/'+codigousuario+'/'+idusuper;
-    return this.http.post(url,null) 
+  obtenerUsuario() {
+    const url = urlH + 'perfil';
+    return this.http.get(url);
   }
 
-  quitarrUsuarioPerfil(codigouperfil:any,idusuper:any){
+  obtenerPerfiles() {
+    const url = urlH + 'listarPerfiles';
+    return this.http.get<Perfil[]>(`${url}listarPerfiles`); 
+  }
 
-    const url= urlH+'usuarioperfil/'+codigouperfil+'/'+idusuper;
+  guardarUsuarioPerfil(codigoperfil: any, codigousuario: any, idusuper: any) {
+    const url = urlH + 'usuarioperfil/' + codigoperfil + '/' + codigousuario + '/' + idusuper;
+    return this.http.post(url, null)
+  }
+
+  quitarrUsuarioPerfil(codigouperfil: any, idusuper: any) {
+
+    const url = urlH + 'usuarioperfil/' + codigouperfil + '/' + idusuper;
     return this.http.delete(url)
   }
 

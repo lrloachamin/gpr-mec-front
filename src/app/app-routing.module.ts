@@ -8,6 +8,9 @@ import { LoginComponent } from './componentes/login/login.component';
 import { PaginasValidadorComponent } from './componentes/paginas-validador/paginas-validador.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { UsuarioPerfilComponent } from './componentes/usuario-perfil/usuario-perfil.component';
+import { CrearCargoComponent } from './pages/cargo/crear-cargo/crear-cargo.component';
+import { EditarCargoComponent } from './pages/cargo/editar-cargo/editar-cargo.component';
+import { ListarCargoComponent } from './pages/cargo/listar-cargo/listar-cargo.component';
 import { CrearProyectosComponent } from './pages/proyecto/crear-proyectos/crear-proyectos.component';
 import { EditarProyectoComponent } from './pages/proyecto/editar-proyecto/editar-proyecto.component';
 import { ListarProyectosComponent } from './pages/proyecto/listar-proyectos/listar-proyectos.component';
@@ -56,6 +59,9 @@ const routes: Routes = [
   {path: 'crear-subTarea', component:CrearSubTareaComponent,canActivate:[AuthGuard]},
   {path: 'listar-tareas-revisar', component:ListarTareasRevisarComponent,canActivate:[AuthGuard]},
   {path: 'listar-logueo-usuarios', component:ListarLogueoUsuariosComponent,canActivate:[AuthGuard]},
+  {path: 'listar-cargos', component:ListarCargoComponent,canActivate:[AuthGuard]},
+  {path: 'crear-cargo', component:CrearCargoComponent,canActivate:[AuthGuard]},
+  {path: 'editar-cargo', component:EditarCargoComponent,canActivate:[AuthGuard]},
   {path: '**', component:LoginComponent}
 ];
 
