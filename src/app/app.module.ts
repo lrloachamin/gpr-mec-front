@@ -47,6 +47,9 @@ import { NgxAbstractControlAsModule } from 'ngx-abstract-control-as';
 import { MatInputModule } from '@angular/material/input';
 import { ListarLogueoUsuariosComponent } from './pages/usuario/listar-logueo-usuarios/listar-logueo-usuarios.component';
 import { PasswordOlvidadoComponent } from './pages/usuario/password-olvidado/password-olvidado.component';
+import { CrearCargoComponent } from './pages/cargo/crear-cargo/crear-cargo.component';
+import { EditarCargoComponent } from './pages/cargo/editar-cargo/editar-cargo.component';
+import { ListarCargoComponent } from './pages/cargo/listar-cargo/listar-cargo.component';
 
 
 @NgModule({
@@ -79,7 +82,10 @@ import { PasswordOlvidadoComponent } from './pages/usuario/password-olvidado/pas
     CrearSubTareaComponent,
     ListarTareasRevisarComponent,
     ListarLogueoUsuariosComponent,
-    PasswordOlvidadoComponent
+    PasswordOlvidadoComponent,
+    CrearCargoComponent,
+    EditarCargoComponent,
+    ListarCargoComponent
   ],
   imports: [
     BrowserModule,

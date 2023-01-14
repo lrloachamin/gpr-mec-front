@@ -1,0 +1,96 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h3>Editar Datos de Proyecto</h3>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="f.form.valid && save()" #f="ngForm">
+        <div class="form-group">
+          <label for="">Nombre del Proyecto:</label>
+          <input 
+            [(ngModel)]="proyecto.nombreProyecto" 
+            name="nombreProyecto" 
+            type="text" 
+            class="form-control"
+            required/>
+        </div>
+        <div class="form-group">
+          <label for="">Proceso:</label>
+          <p>
+            <select name="proceso" [(ngModel)]="proyecto.tipoProceso" [compareWith]="compararProcesos">
+              <option [ngValue]="tipoProceso" *ngFor="let tipoProceso of tipoProcesos">{{tipoProceso.nombreTipoProceso}}</option>
+            </select>
+          </p>
+        </div>
+        <div class="form-group">
+          <label for="">Descripción del Proyecto:</label>
+          <input 
+            [(ngModel)]="proyecto.descripcionProyecto"
+            name="descripcionProyecto" 
+            type="text" 
+            class="form-control"
+            required/>
+        </div>
+        <button type="submit" class="btn btn-danger">Guardar</button>
+      </form>
+    </div>
+  </div>
+</div>
+<!--
+<div class="card">
+  <h5>Nuevo Proyecto</h5>
+  <div class="p-fluid">
+    <div class="field mt-3 px-7">
+      <div class="flex flex-column">
+        <div class="flex flex-row justify-content-between mt-5">
+          <div class="flex flex-row">
+            <p class="pt-3 mr-5">Nombre del Proyecto:</p>
+            <input pInputText id="name" type="text" />
+          </div>
+          <div class="w-2rem"></div>
+          <div class="flex flex-row">
+            <p class="pt-3 mr-5">Descripcion</p>
+            <input pInputText id="username" type="text" />
+          </div>
+        </div>
+        <div class="h-2rem"></div>
+        <div class="flex flex-row justify-content-between">
+          <button pButton pRipple label="Ingresar" class="m-auto w-2">Crear Proyecto</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h5>Nuevo Proyecto</h5>
+  <div class="p-fluid">
+      <div class="field mt-3 px-7">
+          <form (ngSubmit)="f.form.valid && save()" #f="ngForm">
+              <div class="flex flex-column">
+                  <div class="grid p-fluid">
+                      <div class="field col-6 md:col-2">
+                          <p style="text-align:right;" class="pt-3 mr-2" for="integeronly">Nombre del Proyecto: </p>
+                      </div>
+                      <div class="field col-6 md:col-4">
+                          <input type="text" name="name" [(ngModel)]="proyecto.nombreProyecto" pInputText
+                          placeholder="Nombre de la cuenta" required>
+                      </div>
+                      <div class="field col-6 md:col-2">
+                          <p style="text-align:right;" class="pt-3 mr-2" for="integeronly">Descripcion: </p>
+                      </div>
+                      <div class="field col-6 md:col-10">
+                          <input type="text" name="name" [(ngModel)]="proyecto.descripcionProyecto" pInputText
+                              placeholder="Nombre de la cuenta" required>
+                      </div>
+                  </div>
+                  <div class="flex flex-row justify-content-between">
+                      <button type="submit" pButton pRipple label="Guardar Configuración" class="m-auto w-3" [disabled]="!existTypes"></button>
+                  </div>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+-->
