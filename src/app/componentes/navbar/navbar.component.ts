@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { timeStamp } from 'console';
 import { OpcionesporperfilService } from 'src/app/servicios/opcionesporperfil.service';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 
@@ -12,15 +13,27 @@ import { UsuarioService } from 'src/app/servicios/usuario.service';
 })
 export class NavbarComponent implements OnInit {
 
+  //Menus
+
+  menusAdministrativo: any;
+  menusCuenta: any;
+  menusTareas: any;
+  menusReportes: any;
+
+
+
+
   public isMenuCollapsed = true;
-  usuario:any;
-  descPerfil:any;
-  nombreDocenteRevisor:any;
+  usuario: any;
+  descPerfil: any;
+  nombreDocenteRevisor: any;
 
   menus: any;
 
-  constructor(private router:Router,private usuarioService: UsuarioService,private _opcionperfil: OpcionesporperfilService) { 
-    this.usuario=localStorage.getItem('usuario');
+  constructor(private router: Router, private usuarioService: UsuarioService, private _opcionperfil: OpcionesporperfilService) {
+    this.usuario = localStorage.getItem('usuario');
+    
+    this.agregarMenus();
     //this.descPerfil=localStorage.getItem('descPerfil');
     /*this.usuarioService.descPerfil$.subscribe((res) => {
       this.descPerfil = res;
@@ -31,25 +44,74 @@ export class NavbarComponent implements OnInit {
   }
 
 
-  cargarOpcionesPerfil(id:any) {
+  cargarOpcionesPerfil(id: any) {
     this._opcionperfil.obtenerOpcionesPerfil(id).subscribe(respuesta => {
 
-      
+
       this.procesarOpcionesPerfil(respuesta);
 
     })
   }
   procesarOpcionesPerfil(resp: any) {
     this.menus = resp.opcionPerfilResponse.opcper
+
+    
+    
+    this.menus.forEach((element: {
+      codigoOpcion: any
+
+    }) => {
+
+
+      
+
+      switch(element.codigoOpcion.codSistema.descriSistema) {
+        case "Administrativo":
+          this.menusAdministrativo.push(element.codigoOpcion.descOpcion)
+          break;
+        case "Tareas":
+          this.menusTareas.push(element.codigoOpcion.descOpcion)
+          break;
+        case "Cuenta":
+          this.menusCuenta.push(element.codigoOpcion.descOpcion)
+            break;
+
+        case "Reportes":
+          this.menusReportes.push(element.codigoOpcion.descOpcion)
+          break;
+
+        default:
+          break;
+      }
+     
+
+    })
+
+    console.log(this.menusCuenta)
+
+  }
+
+  agregarMenus() {
+
+
+    this.cargarOpcionesPerfil("1")
+
+    this.cargarOpcionesPerfil("1")
+
+    var listmenu = this.menus;
+
+
+
+
   }
 
   ngOnInit(): void {
+    this.cargarOpcionesPerfil("1")
     /*if(this.descPerfil==null)
       setTimeout('document.location.reload()',1500);*/
   }
-  IsLoggedout(){
-    this.cargarOpcionesPerfil("1");
-    console.log(this.menus)
+  IsLoggedout() {
+
 
 
     this.router.navigate(['./login']);
@@ -59,36 +121,36 @@ export class NavbarComponent implements OnInit {
     return localStorage.removeItem('usuario')
   }
 
-  navegarProyecto(){
+  navegarProyecto() {
     this.router.navigate(['/listar-proyectos']);
   }
 
-  navegarTareas(){
+  navegarTareas() {
     this.router.navigate(['/listar-tareas']);
   }
 
-  navegarTareasDocente(){
+  navegarTareasDocente() {
     this.router.navigate(['/listar-tareas-docente']);
   }
-  navegarPerfil(){
+  navegarPerfil() {
     this.router.navigate(['/actualizar-docente']);
   }
-  navegarUsuarioPerfil(){
+  navegarUsuarioPerfil() {
     this.router.navigate(['/usuario-perfil']);
   }
-  navegarTareasDocenteEntregadas(){
+  navegarTareasDocenteEntregadas() {
     this.router.navigate(['/tareas-entregadas']);
   }
-  navegarTareasAsignadasDocentes(){
+  navegarTareasAsignadasDocentes() {
     this.router.navigate(['/tareas-asignadas']);
   }
-  navegarTiposProcesos(){
+  navegarTiposProcesos() {
     this.router.navigate(['/listar-tipos-procesos']);
   }
-  navegarListarTareasRevisar(){
+  navegarListarTareasRevisar() {
     this.router.navigate(['/listar-tareas-revisar']);
   }
-  navegarLogueosRealizados(){
+  navegarLogueosRealizados() {
     this.router.navigate(['/listar-logueo-usuarios']);
   }
 }
