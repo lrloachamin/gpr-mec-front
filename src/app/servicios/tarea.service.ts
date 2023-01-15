@@ -11,8 +11,8 @@ import { Cargo } from '../models/Cargo';
 import { TareaIndicadorFile } from '../models/TareaIndicadorFile';
 import { Tarea } from '../models/Tarea';
 
-//const URL='https://gpr-espe.azurewebsites.net';
-const URL='http://localhost:8080';
+//const URL='http://localhost:8080';
+const URL="https://gpr-mec-espe.azurewebsites.net"
 const TAREA_DOCENTE = URL + '/tareaDocente';
 
 @Injectable({

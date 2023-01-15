@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { timeStamp } from 'console';
@@ -6,34 +6,39 @@ import { OpcionesporperfilService } from 'src/app/servicios/opcionesporperfil.se
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 
 
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit{
 
   //Menus
+  menusAdministrativo!: menus[];
+  menusCuenta!: menus[];
+  menusTareas!: menus[];
+  menusReportes!: menus[];
+  objmenu!:menus;
 
-  menusAdministrativo: any;
-  menusCuenta: any;
-  menusTareas: any;
-  menusReportes: any;
-
-
-
+  
 
   public isMenuCollapsed = true;
   usuario: any;
+  codigo:any;
   descPerfil: any;
   nombreDocenteRevisor: any;
+
+  codigousuario:any;
 
   menus: any;
 
   constructor(private router: Router, private usuarioService: UsuarioService, private _opcionperfil: OpcionesporperfilService) {
-    this.usuario = localStorage.getItem('usuario');
     
-    this.agregarMenus();
+   
+    
+   
+    this.usuario=localStorage.getItem('usuario');
     //this.descPerfil=localStorage.getItem('descPerfil');
     /*this.usuarioService.descPerfil$.subscribe((res) => {
       this.descPerfil = res;
@@ -43,8 +48,21 @@ export class NavbarComponent implements OnInit {
 
   }
 
+  
+  cargarPerfil(){
+    this.codigousuario=localStorage.getItem('codUsuario');
+    this.usuarioService.obtenerPerfil(this.codigousuario).subscribe(resp=>{
+      this.cargarOpcionesPerfil(resp.codigoPerfil)
+
+
+
+
+    })
+  } 
 
   cargarOpcionesPerfil(id: any) {
+
+
     this._opcionperfil.obtenerOpcionesPerfil(id).subscribe(respuesta => {
 
 
@@ -52,7 +70,16 @@ export class NavbarComponent implements OnInit {
 
     })
   }
+
+
+ 
   procesarOpcionesPerfil(resp: any) {
+
+    this.menusAdministrativo=new Array()
+    this.menusTareas=new Array()
+    this.menusCuenta=new Array()
+    this.menusReportes=new Array()
+
     this.menus = resp.opcionPerfilResponse.opcper
 
     
@@ -61,99 +88,77 @@ export class NavbarComponent implements OnInit {
       codigoOpcion: any
 
     }) => {
-
-
-      
+    
 
       switch(element.codigoOpcion.codSistema.descriSistema) {
         case "Administrativo":
-          this.menusAdministrativo.push(element.codigoOpcion.descOpcion)
+          this.objmenu=new menus(element.codigoOpcion.descOpcion,element.codigoOpcion.urlOpcion)
+          this.menusAdministrativo.push(this.objmenu)
           break;
         case "Tareas":
-          this.menusTareas.push(element.codigoOpcion.descOpcion)
+          this.objmenu=new menus(element.codigoOpcion.descOpcion,element.codigoOpcion.urlOpcion)
+          this.menusTareas.push(this.objmenu)
           break;
         case "Cuenta":
-          this.menusCuenta.push(element.codigoOpcion.descOpcion)
+          this.objmenu=new menus(element.codigoOpcion.descOpcion,element.codigoOpcion.urlOpcion)
+          this.menusCuenta.push(this.objmenu)
             break;
 
         case "Reportes":
-          this.menusReportes.push(element.codigoOpcion.descOpcion)
+          this.objmenu=new menus(element.codigoOpcion.descOpcion,element.codigoOpcion.urlOpcion)
+          this.menusReportes.push(this.objmenu)
           break;
 
         default:
           break;
       }
+     console.log(this.menusAdministrativo)
      
 
     })
-
+    /*
+    console.log(this.menusAdministrativo)
+    console.log(this.menusTareas)
     console.log(this.menusCuenta)
+    console.log(this.menusReportes)
+    */
+    
 
   }
 
   agregarMenus() {
-
-
-    this.cargarOpcionesPerfil("1")
-
-    this.cargarOpcionesPerfil("1")
-
-    var listmenu = this.menus;
-
-
-
-
+    this.cargarPerfil();
   }
 
   ngOnInit(): void {
-    this.cargarOpcionesPerfil("1")
+   
+    this.agregarMenus();
     /*if(this.descPerfil==null)
       setTimeout('document.location.reload()',1500);*/
   }
+
   IsLoggedout() {
-
-
 
     this.router.navigate(['./login']);
     localStorage.removeItem('descPerfil');
     localStorage.removeItem('codigoDocente');
-    //localStorage.clear();
+    localStorage.removeItem('codigoPerfil');
+ 
     return localStorage.removeItem('usuario')
   }
 
-  navegarProyecto() {
-    this.router.navigate(['/listar-proyectos']);
+
+}
+
+class menus {
+
+  nombre!: string;
+  url!: string;
+
+  constructor(nombre: string, url: string) {
+    this.nombre = nombre
+    this.url=url
+
   }
 
-  navegarTareas() {
-    this.router.navigate(['/listar-tareas']);
-  }
-
-  navegarTareasDocente() {
-    this.router.navigate(['/listar-tareas-docente']);
-  }
-  navegarPerfil() {
-    this.router.navigate(['/actualizar-docente']);
-  }
-  navegarUsuarioPerfil() {
-    this.router.navigate(['/usuario-perfil']);
-  }
-  navegarTareasDocenteEntregadas() {
-    this.router.navigate(['/tareas-entregadas']);
-  }
-  navegarTareasAsignadasDocentes() {
-    this.router.navigate(['/tareas-asignadas']);
-  }
-  navegarTiposProcesos() {
-    this.router.navigate(['/listar-tipos-procesos']);
-  }
-  navegarListarTareasRevisar() {
-    this.router.navigate(['/listar-tareas-revisar']);
-  }
-  navegarLogueosRealizados() {
-    this.router.navigate(['/listar-logueo-usuarios']);
-  }
-  navegarListarTareasCargos(){
-    this.router.navigate(['/listar-cargos']);
-  }
 }

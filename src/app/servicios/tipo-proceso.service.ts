@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 import { TipoProceso } from '../models/TipoProceso';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-//const URL='https://gpr-espe.azurewebsites.net';
-const URL='http://localhost:8080';
+
+const URL="https://gpr-mec-espe.azurewebsites.net/api/v1/"
+//const URL='http://localhost:8080';
 const TIPO_PROCESO = URL + '/tipoProceso';
 
 @Injectable({

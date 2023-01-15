@@ -60,7 +60,7 @@ export class UsuarioPerfilComponent implements OnInit {
 
 
   cargarDocentes() {
-    this._docente.obtenerDocentes().subscribe(respuesta => {
+    this._docente.obtenerUsuariosUnicos().subscribe(respuesta => {
 
       
       this.procesarDocentes(respuesta);
