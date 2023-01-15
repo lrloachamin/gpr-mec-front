@@ -17,9 +17,9 @@ form{
 form{
     text-align: center;
     margin: auto;
-    width: 50%;
-    max-width: 325px;
-    min-width: 325px;
+    width: 75%;
+    /*max-width: 325px;
+    min-width: 325px;*/
     padding:0 30px 30px 30px;
     opacity: .85;
     box-shadow: 0px 0px 10px rgb(32, 31, 30),0px 0px 30px white;/* borde de dos colores*/
@@ -55,4 +55,26 @@ form{
       width: 100%;
     }
 }
+
+/*
+@media (max-widht:768px){
+    form{
+        width: 70%;
+    }
+    
+    .imageLeft{
+        transform: scale(0.45);
+        transform-origin: 0 0;  
+    }
+}
+
+@media (max-widht:480px){
+    form{
+        width: 70%;
+    }
+    .imageLeft{
+        transform: scale(0.45);
+        transform-origin: 0 0;  
+    }
+}*/
 
