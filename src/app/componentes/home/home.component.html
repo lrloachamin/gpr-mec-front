@@ -1,18 +1,4 @@
 <app-navbar></app-navbar>
-<p>home works!</p>
+<p>Bienvenido</p>
 
-<tbody *ngIf="feedbacks.length">
-    <ng-container *ngFor="let fd of feedbacks;let i=index">
-        <tr>
-            <td>{{ i }}</td>
-            <td>{{fd}}</td>
-            <td colspan="2">
-                <ul>
-                    <div *ngFor="let obj of results[i]">
-                        <td>Test: {{obj.score}}</td>
-                    </div>
-                </ul>
-            </td>
-        </tr>
-    </ng-container>
-</tbody>
+

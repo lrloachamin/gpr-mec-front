@@ -96,6 +96,8 @@ export class LoginComponent implements OnInit {
     let listusuarios=resp.categoryResponse.category
     this.conf=false;
 
+    console.log(listusuarios)
+
     listusuarios.forEach((element: {
       passwUsuario: any; nombreUsuario: any; codigoUsuario: any;estadoUsuario: any
       }) => {
@@ -114,6 +116,7 @@ export class LoginComponent implements OnInit {
                 //this._usuario.setDescPerfil(this.perfil.descPerfil);
                 
                 //console.log(this.docente.codigoDocente);
+                
                 localStorage.setItem('codigoPerfil',this.perfil.codigoPerfil);
                 localStorage.setItem('descPerfil',this.perfil.descPerfil);
                 //console.log(this.perfil.descPerfil)
@@ -121,6 +124,7 @@ export class LoginComponent implements OnInit {
             }
           });
 
+         
           localStorage.setItem('codUsuario',element.codigoUsuario);
           if(element.nombreUsuario!='admin'){
             this.docente = this._usuario.obtenerDocente(element.codigoUsuario).subscribe({

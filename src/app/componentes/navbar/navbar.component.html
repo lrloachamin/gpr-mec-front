@@ -9,14 +9,15 @@
 		<div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
 			<ul class="navbar-nav">
 				
-				<li class="nav-item dropdown">
+				<li  class="nav-item dropdown">
 					<a class="nav-link active dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 					  Administrativo
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-					  <li><a class="dropdown-item" [routerLink]="['/docentes']" >Usuarios</a></li>
-					  <li><a class="dropdown-item" (click)="navegarUsuarioPerfil()">Usuarios por Perfil</a></li>
-					  <li><a class="dropdown-item" (click)="navegarLogueosRealizados()">Logueos realizados</a></li>
+						<li *ngFor="let item of menusAdministrativo">
+							<a class="dropdown-item" routerLink="{{item.url}}" >{{item.nombre}}</a>
+							
+						</li>
 					</ul>
 				  </li>
 
@@ -25,24 +26,37 @@
 					  Perfil
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-					  <li><a class="dropdown-item" (click)="navegarPerfil()" >Cuenta</a></li>
+						<li *ngFor="let item of menusCuenta">
+							<a class="dropdown-item" routerLink="{{item.url}}" >{{item.nombre}}</a>
+							
+						</li>
 					</ul>
 				  </li>
-				   <li class="nav-item dropdown">
+
+				  <li  class="nav-item dropdown">
 					<a class="nav-link active dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 					  Tareas
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-					  <li><a class="dropdown-item" (click)="navegarProyecto()">Proyectos</a></li>
-					  <li><a class="dropdown-item" (click)="navegarTiposProcesos()">Procesos</a></li>
-					  <li><a class="dropdown-item" (click)="navegarTareas()">Tareas Creadas</a></li>
-					  <li><a class="dropdown-item" (click)="navegarTareasDocenteEntregadas()">Tareas Entregadas</a></li>
-					  <li><a class="dropdown-item" (click)="navegarTareasAsignadasDocentes()">Ver Tareas Asignadas a Docentes</a></li>
-					  <li><a class="dropdown-item" (click)="navegarTareasDocente()">Tareas por Realizar</a></li>
-					  <li><a class="dropdown-item" (click)="navegarListarTareasRevisar()">Reporte de Tareas Realizadas</a></li>
-					  <li><a class="dropdown-item" (click)="navegarListarTareasCargos()">Cargos</a></li>
+						<li *ngFor="let item of menusTareas">
+							<a class="dropdown-item" routerLink="{{item.url}}" >{{item.nombre}}</a>
+							
+						</li>
 					</ul>
 				  </li>
+
+				  <li class="nav-item dropdown">
+					<a class="nav-link active dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					  Reporte
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+						<li *ngFor="let item of menusReportes">
+							<a class="dropdown-item" routerLink="{{item.url}}">{{item.nombre}}</a>
+							
+						</li>
+					</ul>
+				  </li>
+
 			</ul>
 		</div>
 		
