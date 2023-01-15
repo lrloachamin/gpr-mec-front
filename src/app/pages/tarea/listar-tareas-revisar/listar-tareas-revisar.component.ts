@@ -31,7 +31,7 @@ export class ListarTareasRevisarComponent implements OnInit {
   //sum:number=0;
 
   //
-  displayedColumns: string[] = ['id', 'revisor', 'proceso', 'proyecto', 'tarea', 'prioridad', 'peso', 'fechaInicio', 'fechaVencimiento', 'responsable'];
+  displayedColumns: string[] = ['id', 'revisor', 'proceso', 'proyecto', 'tarea','tareaIndicadors', 'prioridad', 'peso', 'fechaInicio', 'fechaVencimiento', 'responsable','pdf'];
   //dataSource = new MatTableDataSource(ELEMENT_DATA);
   dataSource: any;
 

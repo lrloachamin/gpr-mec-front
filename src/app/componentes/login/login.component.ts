@@ -6,6 +6,7 @@ import { Docente } from 'src/app/models/Docente';
 import { Observable } from 'rxjs';
 import { TareaDocente } from 'src/app/models/TareaDocente';
 import { TareaService } from 'src/app/servicios/tarea.service';
+import { TareasRealizadas } from 'src/app/models/TareasRealizadas';
 
 
 @Component({
@@ -26,8 +27,8 @@ export class LoginComponent implements OnInit {
   docente: any;
   perfil:any;
 
-  getTareasDocente$: Observable<TareaDocente[]>;
-  tareasDocente: TareaDocente[] = [];
+  getTareasDocente$: Observable<TareasRealizadas[]>;
+  tareasDocente: TareasRealizadas[] = [];
   dataTable:any[] = [];
 
   constructor(
@@ -47,19 +48,23 @@ export class LoginComponent implements OnInit {
     this.getTareasDocente$.subscribe(tareas =>{
       this.tareasDocente = tareas; 
       var cont=0;
+      console.log(this.tareasDocente);
       this.tareasDocente.forEach(tareaDocent => {
         cont++;
         let objetoTarea = {
           "id":cont,
-          "revisor":tareaDocent.codigoTarea?.nombreDocenteRevisor,
-          "proceso":tareaDocent.codigoTarea?.codigoProyecto?.tipoProceso?.nombreTipoProceso,
-          "proyecto":tareaDocent.codigoTarea?.codigoProyecto?.nombreProyecto,
-          "tarea":tareaDocent.codigoTarea?.nombreTarea, 
-          "prioridad":tareaDocent.codigoTarea?.prioridadTarea,
-          "peso":tareaDocent.codigoTarea?.valorPesoTarea+" "+ tareaDocent.codigoTarea?.pesoTarea,
-          "fechaInicio":tareaDocent.codigoTarea?.fechaCreaciontarea, 
-          "fechaVencimiento":tareaDocent.codigoTarea?.fechaEntregaTarea, 
-          "responsable":tareaDocent.codigoDocente?.nombreDocente +" "+ tareaDocent.codigoDocente?.apellidoDocente
+          "revisor":tareaDocent.nombreDocenteRevisor,
+          "proceso":tareaDocent.tipoProceso,
+          "proyecto":tareaDocent.nombreTarea,
+          "tarea":tareaDocent.nombreTarea, 
+          "prioridad":tareaDocent.prioridadTarea,
+          "peso":tareaDocent.pesoTarea,
+          "fechaInicio":tareaDocent.fechaCreaciontarea, 
+          "fechaVencimiento":tareaDocent.fechaEntregaTarea, 
+          "responsable":tareaDocent.responsable,
+          "tareaIndicadors":tareaDocent.tareaIndicadors,
+          "nombreArchivo":tareaDocent.nombreArchivo,
+          "urlArchivo":tareaDocent.urlArchivo
         }
         this.dataTable.push(objetoTarea);
       });

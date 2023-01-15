@@ -10,6 +10,7 @@ import { TareaIndicador } from '../models/TareaIndicador';
 import { Cargo } from '../models/Cargo';
 import { TareaIndicadorFile } from '../models/TareaIndicadorFile';
 import { Tarea } from '../models/Tarea';
+import { TareasRealizadas } from '../models/TareasRealizadas';
 
 //const URL='https://gpr-espe.azurewebsites.net';
 const URL='http://localhost:8080';
@@ -53,8 +54,8 @@ export class TareaService {
     return this.http.get<TareaDocente[]>(`${TAREA_DOCENTE}/listarDocentesTareasAsignadas/${codigoTareaDocente}`); 
   }
 
-  public obtenerTodasTareasRevisar():Observable<TareaDocente[]>{
-    return this.http.get<TareaDocente[]>(`${TAREA_DOCENTE}/listarTodasTareasRevisadas`); 
+  public obtenerTodasTareasRevisar():Observable<TareasRealizadas[]>{
+    return this.http.get<TareasRealizadas[]>(`${TAREA_DOCENTE}/listarTodasTareasRevisadas`); 
   }
 
   public crearTareaConArchivo(tarea:TareaDocenteProyecto,file:File){
