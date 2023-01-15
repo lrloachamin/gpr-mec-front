@@ -2,15 +2,20 @@
   <span class="titulo">Sistemas GPR - MECANICA</span>
 </nav>
 
-<div class="container">
-  <div class="abs-center">
+  <div class="row" >
+    <div class="col-8">
+      <img src="https://www.ultimasnoticias.ec/files/article_main/uploads/2019/06/19/5d0a45cf4c6de.jpeg" alt="" width="100%" height="100%">
+    </div>
+  <div class="abs-center col-4" style="display: flex;">
     <form [formGroup]="formulario2" (ngSubmit)="consultar()" class="border p-3 form">
-
-      <span style="font-size: 25px;">
+      <div class="imagenUsuario">
+        <img src="https://cdn-icons-png.flaticon.com/512/64/64572.png">
+    </div>
+    <!--<span style="font-size: 25px;">
         Login
       </span>
       <hr>
-
+    -->
       <p class="text-danger" *ngIf="!flag">Credenciales incorrectas</p>
 
       <div class="form-group mb-3">

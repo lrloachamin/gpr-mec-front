@@ -8,6 +8,7 @@ table {
 
 table th{
   text-align: center;
+  background-color: black;
 }
 
 .mat-form-field {
@@ -27,4 +28,7 @@ mat-icon{
 a{
   text-decoration: none;
   color: white;
+}
+.color-input{
+  color: rgb(215, 235, 219);
 }
