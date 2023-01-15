@@ -9,11 +9,8 @@ const urlH="https://gpr-mec-espe.azurewebsites.net/api/v1/"
   providedIn: 'root'
 })
 
-
 export class RegistroService {
   constructor(private http: HttpClient) { 
-
-
   }
 
   registrarUsuario(body :any){
