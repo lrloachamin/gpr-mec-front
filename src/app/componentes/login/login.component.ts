@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit {
     this.getTareasDocente$.subscribe(tareas =>{
       this.tareasDocente = tareas; 
       var cont=0;
-      console.log(this.tareasDocente);
       this.tareasDocente.forEach(tareaDocent => {
         cont++;
         let objetoTarea = {
@@ -86,7 +85,7 @@ export class LoginComponent implements OnInit {
     //console.log(this.formulario2);
 
     this._usuario.login(this.formulario2.value.usuario,this.formulario2.value.password).subscribe(respuesta=>{
-      console.log(respuesta)
+      //console.log(respuesta)
       this.procesarUsuarios2(respuesta)
     })
   }
@@ -96,7 +95,7 @@ export class LoginComponent implements OnInit {
     let listusuarios=resp.categoryResponse.category
     this.conf=false;
 
-    console.log(listusuarios)
+    //console.log(listusuarios)
 
     listusuarios.forEach((element: {
       passwUsuario: any; nombreUsuario: any; codigoUsuario: any;estadoUsuario: any
