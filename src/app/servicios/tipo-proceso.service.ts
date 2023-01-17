@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 const URL="https://gpr-mec-espe.azurewebsites.net/api/v1/"
 //const URL='http://localhost:8080';
-const TIPO_PROCESO = URL + '/tipoProceso';
+const TIPO_PROCESO = URL + 'tipoProceso';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class TipoProcesoService {
   constructor(private http: HttpClient) { }
 
   public obtenerTipoProcesos(): Observable<TipoProceso[]>{
-    return this.http.get<TipoProceso[]>(`${TIPO_PROCESO}listarTiposProcesos`); 
+    return this.http.get<TipoProceso[]>(`${TIPO_PROCESO}/listarTiposProcesos`); 
   }
 
   public crear<TipoProceso>(tipoProceso:TipoProceso){
@@ -31,7 +31,7 @@ export class TipoProcesoService {
   }
 
   public editarTipoProceso(tipoProceso:TipoProceso){
-    return this.http.put<TipoProceso>(`${TIPO_PROCESO}modificar`, tipoProceso);
+    return this.http.put<TipoProceso>(`${TIPO_PROCESO}/modificar`, tipoProceso);
   }
 
 }
