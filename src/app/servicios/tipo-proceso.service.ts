@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 const URL="https://gpr-mec-espe.azurewebsites.net/api/v1/"
 //const URL='http://localhost:8080';
-const TIPO_PROCESO = URL + 'tipoProceso';
+const TIPO_PROCESO = URL + 'https://gpr-mec-espe.azurewebsites.net/tipoProceso';
 
 @Injectable({
   providedIn: 'root'
