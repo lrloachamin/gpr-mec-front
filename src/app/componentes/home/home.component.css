@@ -23,6 +23,7 @@ app-navbar {
     margin: auto;
     overflow: hidden;
     border-radius: 7px;
+	box-shadow: 0px 0px 7px rgb(32, 31, 30),0px 0px 30px white;
 }
 
 .slider-frame ul {
