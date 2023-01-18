@@ -3,16 +3,13 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Cargo } from 'src/app/models/Cargo';
 import { Perfil } from 'src/app/models/Perfil';
-import { Proyecto } from 'src/app/models/Proyecto';
-import { TipoProceso } from 'src/app/models/TipoProceso';
 import { CargoService } from 'src/app/servicios/cargo.service';
-import { ProyectoService } from 'src/app/servicios/proyecto.service';
-import { TipoProcesoService } from 'src/app/servicios/tipo-proceso.service';
 import { UsuarioperfilService } from 'src/app/servicios/usuarioperfil.service';
 
 @Component({
   selector: 'app-crear-cargo',
-  templateUrl: './crear-cargo.html'
+  templateUrl: './crear-cargo.html',
+  styleUrls:['./crear-cargo.component.css']
 })
 export class CrearCargoComponent implements OnInit {
   cargo: Cargo = {};
@@ -45,15 +42,17 @@ export class CrearCargoComponent implements OnInit {
   getPerfiles(){
     this.getPerfiles$.subscribe(perfiles =>{
       this.perfiles = perfiles;
+      console.log(this.perfiles);
     });
   }
 
-  save(){
-    this.cargoService.crearCargo(this.cargo)
+  save(){ 
+    console.log(this.cargo);
+    /*this.cargoService.crearCargo(this.cargo)
     .subscribe(data=>{
       confirm("Se agrego con éxito!!");
       this.router.navigate(["listar-proyectos"]);
-    })
+    })*/
   }
 
 }

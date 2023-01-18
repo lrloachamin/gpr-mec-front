@@ -1,41 +1,29 @@
 <app-navbar></app-navbar>
 <div class="container">
-  <div class="card">
-    <div class="card-header">
-      <h3>Agregar Cargo</h3>
-    </div>
-    <div class="card-body">
+  <div class="row justify-content-center">
+    <div class="col-md-5" style="margin: auto;">
+      <h2 style="text-align: center;"><mat-icon>assignment_ind</mat-icon> Agregar Cargo</h2>
       <form (ngSubmit)="f.form.valid && save()" #f="ngForm">
         <div class="form-group">
-          <label for="">Nombre del Cargo:</label>
-          <input 
-            [(ngModel)]="cargo.nombreCargo" 
-            name="nombreCargo" 
-            type="text" 
-            class="form-control"
-            required/>
+          <label for="nombreCargo"> <mat-icon>card_travel</mat-icon>Nombre del Cargo:</label>
+          <input [(ngModel)]="cargo.nombreCargo" id="nombreCargo" name="nombreCargo" type="text" class="form-control" required />
         </div>
         <div class="form-group">
-          <label for="">Descripción del Cargo:</label>
-          <input 
-            [(ngModel)]="cargo.descriCargo"
-            name="descriCargo" 
-            type="text" 
-            class="form-control"
-            required/>
+          <label for="descriCargo"><mat-icon>description</mat-icon>Descripción del Cargo:</label>
+          <input [(ngModel)]="cargo.descriCargo" id="descriCargo" name="descriCargo" type="text" class="form-control" required />
         </div>
-        <div class="form-group">
+        <!--<div class="form-group">
           <label for="">:</label>
           <p>
             <select name="codCargoPadre" [(ngModel)]="cargo.codCargoPadre">
               <option [ngValue]="cargoModel" *ngFor="let cargoModel of cargos">{{cargoModel.nombreCargo}}</option>
             </select>
           </p>
-        </div>
+        </div>-->
         <div class="form-group">
-          <label for="">:</label>
+          <label for="accountPerfil"><mat-icon>account_circle</mat-icon> Perfil del cargo:</label>
           <p>
-            <select name="codCargoPadre" [(ngModel)]="cargo.codPerfilPadre">
+            <select name="codCargoPadre" [(ngModel)]="cargo.codPerfilPadre" id="accountPerfil" class="form-select">
               <option [ngValue]="perfil.codigoPerfil" *ngFor="let perfil of perfiles">{{perfil.descPerfil}}</option>
             </select>
           </p>
