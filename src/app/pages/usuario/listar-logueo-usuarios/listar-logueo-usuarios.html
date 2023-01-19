@@ -1,28 +1,27 @@
 <app-navbar></app-navbar>
 <div class="container">
-  <div class="card">
-    <div class="card-header">
-      <h3>Tareas</h3>
-    </div>
-    <div class="card-body">
-      <table class="table table-hover text-center">
-        <thead>
-          <tr>
-            <th>Cargo</th>
-            <th>Docente</th>
-            <th>Cantidad</th>
-            <th>Logueos</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let docente of docentes">
-            <td *ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'">{{ docente.codCargo?.nombreCargo }}</td>
-            <td *ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'">{{ docente.nombreDocente }}  {{ docente.apellidoDocente }}</td>
-            <td *ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'" >{{ docente.numLogueo}} <span *ngIf="docente.numLogueo==null">0</span></td>
-            <td *ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'"><progress max="100" value="{{ docente.numLogueo}}" class="{{ docente.claseEstiloProgress}}"></progress></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <h2 style="text-align: center;">Logueos Realizados</h2>
+  <div class="table-responsive">
+    <table class="table table-hover text-center table-sm">
+      <thead class="table-dark">
+        <tr>
+          <th>Cargo</th>
+          <th>Docente</th>
+          <th>Cantidad</th>
+          <th>Logueos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let docente of docentes"><!--*ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'"-->
+          <td >{{ docente.codCargo?.nombreCargo }}</td>
+          <td>{{ docente.nombreDocente }} {{
+            docente.apellidoDocente }}</td>
+          <td>{{ docente.numLogueo}} <span
+              *ngIf="docente.numLogueo==null">0</span></td>
+          <td><progress max="100"
+              value="{{ docente.numLogueo}}" class="{{ docente.claseEstiloProgress}}"></progress></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

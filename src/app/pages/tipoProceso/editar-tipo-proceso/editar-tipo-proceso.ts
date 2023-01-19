@@ -5,7 +5,8 @@ import { TipoProcesoService } from 'src/app/servicios/tipo-proceso.service';
 
 @Component({
   selector: 'app-editar-tipo-proceso',
-  templateUrl: './editar-tipo-proceso.html'
+  templateUrl: './editar-tipo-proceso.html',
+  styleUrls:['./editar-tipo-proceso.css']
 })
 export class EditarTipoProcesoComponent implements OnInit {
   tipoProceso: any = {};

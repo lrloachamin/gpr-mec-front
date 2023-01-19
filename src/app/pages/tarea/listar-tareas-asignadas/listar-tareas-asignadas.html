@@ -1,37 +1,35 @@
 <app-navbar></app-navbar>
 <div class="container">
-  <div class="card">
-    <div class="card-header">
-      <h3>Tareas</h3>
-    </div>
-    <div class="card-body">
-      <table class="table table-hover text-center">
-        <thead>
-          <tr>
-            <th>Cargo</th>
-            <th>Docente</th>
-            <th>Tareas</th>
-            <th>Carga Horaria</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let docente of docentes">
-            <td *ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'">{{ docente.codCargo?.nombreCargo }}</td>
-            <td *ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'">{{ docente.nombreDocente }}  {{ docente.apellidoDocente }}</td>
-            <td *ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'">
-              <span [ngSwitch]="docente.cantidadTarea">
-                <span *ngSwitchCase="0">(Ningúna Tarea)</span>
-                <span *ngSwitchCase="1">({{docente.cantidadTarea}} Tarea)</span>
-                <span *ngSwitchDefault>({{docente.cantidadTarea}} Tareas)</span>  
-              </span>
-              <span *ngFor="let tareaDocente of docente.tareaDocenteList"> <!--style="list-style: none;"-->
-                <span><br/>- {{ tareaDocente.codigoTarea?.nombreTarea}}</span>
-              </span>
-            </td>
-            <td *ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'"><progress max="100" value="{{ docente.cargaHoraria}}" class="{{ docente.claseEstiloProgress}}"></progress></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <h2 style="text-align: center;">Tareas</h2>
+  <div class="table-responsive">
+    <table class="table table-hover text-center table-sm">
+      <thead class="table-dark">
+        <tr>
+          <th>Cargo</th>
+          <th>Docente</th>
+          <th>Tareas</th>
+          <th>Carga Horaria</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let docente of docentes">
+          <td *ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'">{{ docente.codCargo?.nombreCargo }}</td>
+          <td *ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'">{{ docente.nombreDocente }} {{
+            docente.apellidoDocente }}</td>
+          <td *ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'">
+            <span [ngSwitch]="docente.cantidadTarea">
+              <span *ngSwitchCase="0">(Ningúna Tarea)</span>
+              <span *ngSwitchCase="1">({{docente.cantidadTarea}} Tarea)</span>
+              <span *ngSwitchDefault>({{docente.cantidadTarea}} Tareas)</span>
+            </span>
+            <span *ngFor="let tareaDocente of docente.tareaDocenteList"> <!--style="list-style: none;"-->
+              <span><br />- {{ tareaDocente.codigoTarea?.nombreTarea}}</span>
+            </span>
+          </td>
+          <td *ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'"><progress max="100"
+              value="{{ docente.cargaHoraria}}" class="{{ docente.claseEstiloProgress}}"></progress></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

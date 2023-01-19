@@ -1,38 +1,31 @@
 <app-navbar></app-navbar>
 <div class="container">
-  <div class="card">
-    <div class="card-header">
-      <h3>Agregar Proyecto</h3>
-    </div>
-    <div class="card-body">
+  <div class="row justify-content-center">
+    <div class="col-md-5" style="margin: auto;">
+      <h2 style="text-align: center;"><mat-icon>device_hub</mat-icon> Agregar Proyecto</h2>
       <form (ngSubmit)="f.form.valid && save()" #f="ngForm">
         <div class="form-group">
-          <label for="">Nombre del Proyecto:</label>
-          <input 
-            [(ngModel)]="proyecto.nombreProyecto" 
-            name="nombreProyecto" 
-            type="text" 
-            class="form-control"
-            required/>
+          <label for="nombreProyecto"><mat-icon>assignment</mat-icon>Nombre del Proyecto:</label>
+          <input [(ngModel)]="proyecto.nombreProyecto" id="nombreProyecto" name="nombreProyecto" type="text"
+            class="form-control" required />
         </div>
         <div class="form-group">
-          <label for="">Proceso:</label>
+          <label for="procesoProyecto"><mat-icon> scatter_plot</mat-icon>Proceso:</label>
           <p>
-            <select name="proceso" [(ngModel)]="proyecto.tipoProceso">
-              <option [ngValue]="tipoProceso" *ngFor="let tipoProceso of tipoProcesos">{{tipoProceso.nombreTipoProceso}}</option>
+            <select name="proceso" [(ngModel)]="proyecto.tipoProceso" id="procesoProyecto" class="form-select">
+              <option [ngValue]="tipoProceso" *ngFor="let tipoProceso of tipoProcesos">{{tipoProceso.nombreTipoProceso}}
+              </option>
             </select>
           </p>
         </div>
         <div class="form-group">
-          <label for="">Descripción del Proyecto:</label>
-          <input 
-            [(ngModel)]="proyecto.descripcionProyecto"
-            name="descripcionProyecto" 
-            type="text" 
-            class="form-control"
-            required/>
+          <label for="descripcionProyecto"><mat-icon>description</mat-icon>Descripción del Proyecto:</label>
+          <input [(ngModel)]="proyecto.descripcionProyecto" id="descripcionProyecto" name="descripcionProyecto"
+            type="text" class="form-control" required />
         </div>
-        <button type="submit" class="btn btn-danger">Guardar</button>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-sm form-control">Guardar</button>
+        </div>
       </form>
     </div>
   </div>

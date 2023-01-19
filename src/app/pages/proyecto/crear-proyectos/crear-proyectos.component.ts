@@ -8,7 +8,8 @@ import { TipoProcesoService } from 'src/app/servicios/tipo-proceso.service';
 
 @Component({
   selector: 'app-crear-proyectos',
-  templateUrl: './crear-proyectos.html'
+  templateUrl: './crear-proyectos.html',
+  styleUrls:['./crear-proyecto.component.css']
 })
 export class CrearProyectosComponent implements OnInit {
   proyecto: Proyecto = {};

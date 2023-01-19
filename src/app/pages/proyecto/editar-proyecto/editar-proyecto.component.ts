@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Proyecto } from 'src/app/models/Proyecto';
 import { TipoProceso } from 'src/app/models/TipoProceso';
 import { ProyectoService } from 'src/app/servicios/proyecto.service';
 import { TipoProcesoService } from 'src/app/servicios/tipo-proceso.service';
 
 @Component({
   selector: 'app-editar-proyecto',
-  templateUrl: './editar-proyecto.html'
+  templateUrl: './editar-proyecto.html',
+  styleUrls:['./editar-proyecto.component.css']
 })
 export class EditarProyectoComponent implements OnInit {
   proyecto: any = {};
@@ -24,9 +24,7 @@ export class EditarProyectoComponent implements OnInit {
         this.proyecto = res;
         if (this.proyecto == null) {
           this.back();
-        }/* else {
-          this.getAll();
-        }*/
+        }
       });
       this.getProcesos$ = this.tipoProcesoService.obtenerTipoProcesos();
 
