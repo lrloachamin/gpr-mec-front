@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Cargo } from 'src/app/models/Cargo';
+import { CargoDocente } from 'src/app/models/CargoDocente';
 import { ValidacionesService } from 'src/app/services/validaciones.service';
 import { CargoDocenteService } from 'src/app/servicios/cargo-docente.service';
 import { CargoService } from 'src/app/servicios/cargo.service';
@@ -100,7 +101,7 @@ export class ActualizarDocenteComponent implements OnInit {
   }
   procesarDocentes(resp: any) {
     this.listaDocentes = resp.docenteResponse.docente[0]
-    console.log(this.listaDocentes);
+    //console.log(this.listaDocentes);
     this.docNombres = this.listaDocentes.nombreDocente;
     this.docApellidos = this.listaDocentes.apellidoDocente
     this.docCedula = this.listaDocentes.cedulaDocente;
@@ -118,7 +119,7 @@ export class ActualizarDocenteComponent implements OnInit {
             cargo.checked = true;
         })
       });
-      //console.log(this.listaCargos);
+      //console.log(this.cargosAsignados);
     })
 
     //this.selectedId=this.docCargo.codCargo;
@@ -145,8 +146,18 @@ export class ActualizarDocenteComponent implements OnInit {
 
   actualizarDocente() {
 
-    var usuariodata = {
+    var cargoDocenteListData: CargoDocente[] = [];
+    this.cargosAsignados.forEach(data => {
+      let cDocente: CargoDocente = {
+        codigoCargoDocente: undefined,
+        fechaActCargoDocente: undefined,
+        codigoDocente: undefined,
+        codCargo: data
+      };
+      cargoDocenteListData.push(cDocente);
+    })
 
+    var usuariodata = {
       codigoDocente: this.listaDocentes.codigoDocente,
       idDocente: this.formularioActDoc.value.id,
       nombreDocente: this.formularioActDoc.value.nombres,
@@ -156,18 +167,19 @@ export class ActualizarDocenteComponent implements OnInit {
       correoDocente: this.formularioActDoc.value.correo,
       sexo: this.formularioActDoc.value.sexo,
       puestoTrabajoDocente: this.formularioActDoc.value.puesto,
-      cargosAsignados:this.cargosAsignados
+      cargoDocenteList: cargoDocenteListData
     }
-    //console.log("data" + usuariodata.codCargo.codCargo)
-    console.log(usuariodata);
-    /*this._usuario.actualizarDocente(usuariodata, this.listaDocentes.codigoDocente).subscribe(respuesta => {
+    this._usuario.actualizarDocente(usuariodata, this.listaDocentes.codigoDocente).subscribe(respuesta => {
       alert("Usuario actualizado con éxito!")
       location.reload();
 
     }, (error: any) => {
       alert("Ha ocurrido un problema, contactese con su adminitrador!")
       console.log(error)
-    })*/
+    })
+
+    //console.log("data" + usuariodata.codCargo.codCargo)
+
   }
 
 

@@ -112,7 +112,7 @@ export class NavbarComponent implements OnInit{
         default:
           break;
       }
-     console.log(this.menusAdministrativo)
+     //console.log(this.menusAdministrativo)
      
 
     })
