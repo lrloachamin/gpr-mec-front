@@ -1,4 +1,5 @@
 import { Cargo } from "./Cargo";
+import { CargoDocente } from "./CargoDocente";
 import { TareaDocente } from "./TareaDocente";
 
 export type Docente = {
@@ -15,4 +16,5 @@ export type Docente = {
   cantidadTarea?: number;
   cargaHoraria?: number;
   claseEstiloProgress?: string;
+  cargoDocenteList?:CargoDocente;
 };

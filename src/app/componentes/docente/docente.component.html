@@ -14,7 +14,7 @@
           <th scope="col">Nombre</th>
           <th scope="col">Apellido</th>
           <th scope="col">Correo</th>
-          <th scope="col">Cargo</th>
+          <!--<th scope="col">Cargo</th>-->
           <th scope="col" colspan="1">Estado</th>
           <th scope="col" colspan="3">Acciones</th>
         </tr>
@@ -26,7 +26,7 @@
           <td>{{docente.nombreDocente}}</td>
           <td>{{docente.apellidoDocente}}</td>
           <td>{{docente.correoDocente}}</td>
-          <td>{{docente.codCargo.nombreCargo}}</td>
+          <!--<td>{{docente.codCargo.nombreCargo}}</td>-->
           <td *ngIf="docente.codigoUsuario.estadoUsuario=='1' && !cargaaprobado">Aprobado</td>
           <td *ngIf="docente.codigoUsuario.estadoUsuario=='0' && !cargaaprobado">Pendiente</td>
           <td *ngIf="docente.codigoUsuario.estadoUsuario=='2' && !cargaaprobado">Cambio Contraseña</td>

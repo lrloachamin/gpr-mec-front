@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Cargo } from 'src/app/models/Cargo';
 import { CargoService } from 'src/app/servicios/cargo.service';
 import { RegistroService } from 'src/app/servicios/registro.service';
 
@@ -13,13 +14,14 @@ import { RegistroService } from 'src/app/servicios/registro.service';
 export class RegistroComponent implements OnInit {
 
   formulario!: FormGroup;
-  listaCargos!: any;
+  listaCargos!: Cargo[];
   mensaje!:any;
   tituloMensajeVal:any;
   validadorCedula:any;
   cedulaI:any;
   idEspeI:any;
   validadorIdEspe:any;
+  cargosAsignados: any[] = [];
 
   listaCatalogoDocente:any;
 
@@ -56,7 +58,7 @@ export class RegistroComponent implements OnInit {
       cedula:['',Validators.required],
       telefono:['',Validators.required],
       correo:['',[Validators.required,Validators.email]],
-      cargo:['',Validators.required],
+      //cargo:['',Validators.required],
       sexo:['',],
       puesto:['',Validators.required],
     })
@@ -72,10 +74,20 @@ export class RegistroComponent implements OnInit {
     })
   }
   procesarCargos(resp: any){
-    this.listaCargos=resp.cargoResponse.cargo
+    this.listaCargos=resp.cargoResponse.cargo;
+    this.listaCargos.forEach(cargo => {
+      cargo.checked=false;
+    });
+    console.log("Data booeam");
+    console.log(this.listaCargos);
   }
 
   guardar(){
+    if(this.cargosAsignados.length==0){
+      this.tituloMensajeVal="Error"
+      this.mensaje="Debe seleccionar algún cargo ";
+    }else{
+    
     let data={
       idDocente:this.formulario.value.id,
       nombreDocente:this.formulario.value.nombres,
@@ -83,7 +95,7 @@ export class RegistroComponent implements OnInit {
       cedulaDocente:this.formulario.value.cedula,
       telefonoDocente:this.formulario.value.telefono,
       correoDocente:this.formulario.value.correo,
-      codCargo:this.formulario.value.cargo,
+      cargosAsignados:this.cargosAsignados,
       sexo:this.sexoDocenteM,
       puesto:this.formulario.value.puesto
     }
@@ -102,36 +114,23 @@ export class RegistroComponent implements OnInit {
     uploaddata.append('correoDocente',data.correoDocente);
     uploaddata.append('sexooDocente',data.sexo);
     uploaddata.append('puestoDocente',data.puesto);
-    uploaddata.append('codCargo',data.codCargo);
-
-
-    
-
-    
+    uploaddata.append('cargosAsignados',JSON.stringify(data.cargosAsignados));
 
     this._docente.registrarUsuario(uploaddata).subscribe((data:any)=>{
-      console.log(data);
+      //console.log(data);
       if(data.metadata.code="000"){
         this.tituloMensajeVal="Usuario Creado Correctamente"
         this.mensaje="Espere hasta que el administrador acepte sus solicitud! ";
-        
-
       }else{
         this.tituloMensajeVal="Error"
         this.mensaje="Ha ocurrido un error al crear el usuario, Contactese con su administrador!"
       }
-
-
     },(error:any)=>{
       this.tituloMensajeVal="Error"
       this.mensaje="Ha ocurrido un error al crear el usuario, Contactese con su administrador!"
 
     })
-
-    
-  
-
-
+  }
 }
 
 cerrarModal(){
@@ -207,16 +206,11 @@ if(listusuarios!=null){
 
 cargardocentecedula(cedual:String){
   this._docente.obtenerDocentePorCedula(cedual).subscribe(respuesta=>{
-   
     this.procesarDocenteCedula(respuesta);
-    
   })
-
 }
 
 procesarDocenteCedula(resp: any){
-
-
   this.listaCatalogoDocente = resp.docenteResponse.docente[0]
   this.idEspeI=this.listaCatalogoDocente.idDocente;
   this.nombreDocenteM=this.listaCatalogoDocente.nombreDocente;
@@ -225,12 +219,15 @@ procesarDocenteCedula(resp: any){
   this.correoDocenteM=this.listaCatalogoDocente.correoDocente;
   this.sexoDocenteM=this.listaCatalogoDocente.sexo
   this.puestoDocenteM=this.listaCatalogoDocente.puesto
-
-
-
-
 }
 
+cambiarCheckCargo(cargo:Cargo){
+  cargo.checked = !cargo.checked; 
+  if (!cargo.checked)
+  this.cargosAsignados=this.cargosAsignados.filter((item) => item !== cargo);
+  else
+    this.cargosAsignados.push(cargo);
+  }
 }
 
 

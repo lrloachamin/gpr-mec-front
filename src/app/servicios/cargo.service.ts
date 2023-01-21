@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cargo } from '../models/Cargo';
+import { CargoDocente } from '../models/CargoDocente';
 
 const urlH='https://gpr-mec-espe.azurewebsites.net/api/v1/';
 //const urlH="http://localhost:8080/api/v1/"
@@ -29,6 +30,10 @@ export class CargoService {
 
   public crearCargo(cargo:Cargo){
     return this.http.post<Cargo>(urlH+"crearCargo",cargo); 
+  }
+
+  public obtenerCargosDocente(codigoDocente:number): Observable<Cargo[]>{
+    return this.http.get<Cargo[]>(`${urlH}listarCargoDocente/${codigoDocente}`); 
   }
 
 }

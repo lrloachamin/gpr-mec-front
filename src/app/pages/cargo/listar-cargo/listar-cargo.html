@@ -8,7 +8,6 @@
         <tr>
           <th>Nombre del Cargo</th>
           <th>Descripción del Cargo</th>
-          <th>Perfil</th>
           <th>Acción</th>
         </tr>
       </thead>
@@ -16,8 +15,6 @@
         <tr *ngFor="let cargo of cargos">
           <td>{{ cargo.nombreCargo }}</td>
           <td>{{ cargo.descriCargo }}</td>
-          <td>{{ cargo.nombrePerfilCargo }}</td>
-
           <td>
             <button (click)="editar(cargo)" class="btn btn-warning btn-sm">Editar</button>
           </td>

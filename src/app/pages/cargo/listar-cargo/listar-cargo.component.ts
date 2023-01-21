@@ -39,6 +39,6 @@ export class ListarCargoComponent implements OnInit {
 
   editar(cargo:Cargo){
     //this.cargoService.setProyecto(proy);
-    this.router.navigate(['editar-proyecto']);
+    this.router.navigate(['editar-cargo']);
   }
 }

@@ -95,7 +95,7 @@ export class NavbarComponent implements OnInit{
           this.objmenu=new menus(element.codigoOpcion.descOpcion,element.codigoOpcion.urlOpcion)
           this.menusAdministrativo.push(this.objmenu)
           break;
-        case "Tareas":
+        case "Actividades":
           this.objmenu=new menus(element.codigoOpcion.descOpcion,element.codigoOpcion.urlOpcion)
           this.menusTareas.push(this.objmenu)
           break;

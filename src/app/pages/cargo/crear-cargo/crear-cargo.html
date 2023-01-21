@@ -6,29 +6,17 @@
       <form (ngSubmit)="f.form.valid && save()" #f="ngForm">
         <div class="form-group">
           <label for="nombreCargo"> <mat-icon>card_travel</mat-icon>Nombre del Cargo:</label>
-          <input [(ngModel)]="cargo.nombreCargo" id="nombreCargo" name="nombreCargo" type="text" class="form-control" required />
+          <input [(ngModel)]="cargo.nombreCargo" id="nombreCargo" name="nombreCargo" type="text" class="form-control"
+            required />
         </div>
         <div class="form-group">
           <label for="descriCargo"><mat-icon>description</mat-icon>Descripción del Cargo:</label>
-          <input [(ngModel)]="cargo.descriCargo" id="descriCargo" name="descriCargo" type="text" class="form-control" required />
+          <input [(ngModel)]="cargo.descriCargo" id="descriCargo" name="descriCargo" type="text" class="form-control"
+            required />
         </div>
-        <!--<div class="form-group">
-          <label for="">:</label>
-          <p>
-            <select name="codCargoPadre" [(ngModel)]="cargo.codCargoPadre">
-              <option [ngValue]="cargoModel" *ngFor="let cargoModel of cargos">{{cargoModel.nombreCargo}}</option>
-            </select>
-          </p>
-        </div>-->
         <div class="form-group">
-          <label for="accountPerfil"><mat-icon>account_circle</mat-icon> Perfil del cargo:</label>
-          <p>
-            <select name="codCargoPadre" [(ngModel)]="cargo.codPerfilPadre" id="accountPerfil" class="form-select">
-              <option [ngValue]="perfil.codigoPerfil" *ngFor="let perfil of perfiles">{{perfil.descPerfil}}</option>
-            </select>
-          </p>
+          <button type="submit" class="btn btn-primary btn-sm form-control">Guardar</button>
         </div>
-        <button type="submit" class="btn btn-primary btn-sm form-control">Guardar</button>
       </form>
     </div>
   </div>
