@@ -10,7 +10,7 @@ import { UsuarioService } from 'src/app/servicios/usuario.service';
 })
 export class DocenteComponent implements OnInit {
 
-  listaDocentes:any
+  listaDocentes:any[]=[];
   filterpost:any
   cargaaprobado!:boolean;
   codigoUsuario:any;
@@ -67,6 +67,9 @@ export class DocenteComponent implements OnInit {
   }
   procesarDocentes(resp: any){
     this.listaDocentes=resp.docenteResponse.docente
+    this.listaDocentes.forEach(docente => {
+      
+    })
   }
 
 }
