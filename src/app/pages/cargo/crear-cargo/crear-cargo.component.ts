@@ -47,12 +47,11 @@ export class CrearCargoComponent implements OnInit {
   }
 
   save(){ 
-    console.log(this.cargo);
-    /*this.cargoService.crearCargo(this.cargo)
+    this.cargoService.crearCargo(this.cargo)
     .subscribe(data=>{
       confirm("Se agrego con éxito!!");
-      this.router.navigate(["listar-proyectos"]);
-    })*/
+      this.router.navigate(["listar-cargos"]);
+    })
   }
 
 }

@@ -12,7 +12,7 @@ import { UsuarioperfilService } from 'src/app/servicios/usuarioperfil.service';
   styleUrls:['./editar-cargo.component.css']
 })
 export class EditarCargoComponent implements OnInit {
-  cargo: Cargo = {};
+  cargo: any = {};
   //getCargos$: Observable<Cargo[]>;
   cargos: Cargo[]=[];
   perfil:Perfil= {};
@@ -24,6 +24,12 @@ export class EditarCargoComponent implements OnInit {
     private perfilesService:UsuarioperfilService,
     private cargoService: CargoService
     ) {
+      this.cargoService.cargo$.subscribe((res) => {
+        this.cargo = res;
+        if (this.cargo == null) {
+          this.back();
+        }
+      });
       //this.getCargos$ = this.cargoService.obtenerCargosModel();
       this.getPerfiles$ = this.perfilesService.obtenerPerfiles();
   }
@@ -31,6 +37,10 @@ export class EditarCargoComponent implements OnInit {
   ngOnInit(): void {
     //this.getCargos();
     this.getPerfiles();
+  }
+
+  back() {
+    this.router.navigate(['listar-cargos']);
   }
 
   getCargos(){
@@ -47,12 +57,11 @@ export class EditarCargoComponent implements OnInit {
   }
 
   save(){ 
-    console.log(this.cargo);
-    /*this.cargoService.crearCargo(this.cargo)
+    this.cargoService.actualizarCargo(this.cargo)
     .subscribe(data=>{
-      confirm("Se agrego con éxito!!");
-      this.router.navigate(["listar-proyectos"]);
-    })*/
+      confirm("Se modificaron sus datos con éxito!!");
+      this.router.navigate(["listar-cargos"]);
+    })
   }
 
 }
