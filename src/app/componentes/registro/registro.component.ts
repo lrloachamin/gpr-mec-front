@@ -78,8 +78,8 @@ export class RegistroComponent implements OnInit {
     this.listaCargos.forEach(cargo => {
       cargo.checked=false;
     });
-    console.log("Data booeam");
-    console.log(this.listaCargos);
+    //console.log("Data booeam");
+    //console.log(this.listaCargos);
   }
 
   guardar(){

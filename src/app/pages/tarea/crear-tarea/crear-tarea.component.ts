@@ -44,19 +44,21 @@ const pesoTarea: any[] = [
 
 @Component({
   selector: 'app-crear-tarea',
-  templateUrl: './crear-tarea.html'
+  templateUrl: './crear-tarea.html',
+  styleUrls:['./crear-tarea.component.css']
+  
 })
 
 export class CrearTareaComponent implements OnInit {
   //tarea: TareaDocente = {};
   getProyectos$: Observable<Proyecto[]>;
-  descripcionIndicador: string="";
+  descripcionIndicador: string = "";
   getDocentes$: Observable<Docente[]>;
   validTypes: any[] = [];
   tareaDocente: TareaDocente = {};
   tarea: Tarea = {};
-  indicador: Indicador= {};
-  indicadores: Indicador[]= [];
+  indicador: Indicador = {};
+  indicadores: Indicador[] = [];
   proyectos: Proyecto[] = [];
   docentes: Docente[] = [];
   docentesAsignados: any[] = [];
@@ -65,115 +67,146 @@ export class CrearTareaComponent implements OnInit {
   pesoTarea: any[];
   getIndicadores$: Observable<Indicador[]>;
   tareaDocenteProyecto: TareaDocenteProyecto = {};
-  ckequearIndicador: Boolean= false;
+  ckequearIndicador: Boolean = false;
   getCargos$: Observable<Cargo[]>;
-  cargos: Cargo[]=[];
+  cargos: Cargo[] = [];
   cargo: Cargo = {};
 
   selectedFiles: any;
   imageName = "";
 
-  codCargo:any;
+  codCargo: any;
+  codDocente: any;
 
   constructor(
-    private router:Router,
-    private cargoService:CargoService,
-    private tareaService:TareaService,
+    private router: Router,
+    private cargoService: CargoService,
+    private tareaService: TareaService,
     private proyectoService: ProyectoService
-    ) {
-      
-      this.codCargo=localStorage.getItem('codCargo');
-      this.getProyectos$ = this.proyectoService.obtenerProyectos();
-      this.getCargos$ = this.cargoService.obtenerCargosPorPerfil(this.codCargo);
-      this.getDocentes$ = new Observable;
-      this.prioridades = prioridadTarea;
-      this.pesoTarea = pesoTarea;
-      this.getIndicadores$ = this.tareaService.obtenerIndicadores();
+  ) {
+
+    //this.codCargo = localStorage.getItem('codCargo');
+    this.codDocente = localStorage.getItem('codigoDocente');
+    this.getProyectos$ = this.proyectoService.obtenerProyectos();
+    this.getCargos$ = this.cargoService.obtenerCargosModel();
+    this.getDocentes$ = new Observable;
+    this.prioridades = prioridadTarea;
+    this.pesoTarea = pesoTarea;
+    this.getIndicadores$ = this.tareaService.obtenerIndicadores();
   }
 
   ngOnInit(): void {
     this.getProyectos();
     this.getCargos();
-    //this.getDocentes();
     this.getIndicadores();
   }
 
   getProyectos() {
-    this.getProyectos$.subscribe(proyectos =>{
+    this.getProyectos$.subscribe(proyectos => {
       this.proyectos = proyectos;
     });
   }
 
   getCargos() {
-    this.getCargos$.subscribe(cargos =>{
+    this.getCargos$.subscribe(cargos => {
       this.cargos = cargos;
     });
   }
 
-  getDocentes(){
-    this.getDocentes$.subscribe(docentes =>{
-      this.docentes = docentes;  
+  getIndicadores() {
+    this.getIndicadores$.subscribe(indicadores => {
+      this.indicadores = indicadores;
     });
   }
 
-  getIndicadores(){
-    this.getIndicadores$.subscribe(indicadores =>{
-      this.indicadores = indicadores;  
-    });
-  }
-
-  save(){
+  save() {
     this.tarea.idDocenteRevisor = localStorage.getItem('idDocenteRevisor');
     this.tarea.nombreDocenteRevisor = localStorage.getItem('nombreDocenteRevisor');
     this.tareaDocenteProyecto.tarea = this.tarea;
     this.tareaDocenteProyecto.docentes = this.docentesAsignados;
     this.tareaDocenteProyecto.indicadors = this.indicadoresAsignados;
-    if(this.selectedFiles ==undefined){
+    if (this.selectedFiles == undefined) {
       this.tareaService.crearTarea(this.tareaDocenteProyecto)
-      .subscribe(data=>{
-        confirm("Se creo la tarea!!");
-        this.router.navigate(["listar-tareas"]);
-      })
-    }else{
-      this.tareaService.crearTareaConArchivo(this.tareaDocenteProyecto,this.selectedFiles[0])
-      .subscribe(data=>{
-        confirm("Se creo la tarea!!");
-        this.router.navigate(["listar-tareas"]);
-      })
+        .subscribe(data => {
+          confirm("Se creo la tarea!!");
+          this.router.navigate(["listar-tareas"]);
+        })
+    } else {
+      this.tareaService.crearTareaConArchivo(this.tareaDocenteProyecto, this.selectedFiles[0])
+        .subscribe(data => {
+          confirm("Se creo la tarea!!");
+          this.router.navigate(["listar-tareas"]);
+        })
     }
   }
-  
-  agregarElementos(){
+
+  /*agregarElementos() {
     this.docentesAsignados.push(this.tareaDocente.codigoDocente);
+    
+  }
+  eliminarElementos() {
+    this.docentesAsignados = this.docentesAsignados.filter((item) => item !== this.tareaDocente.codigoDocente);
+  }
+  */
+
+  cambiarCheckDocente(docente: Docente) {
+    docente.checked = !docente.checked;
+    if (!docente.checked)
+      this.docentesAsignados = this.docentesAsignados.filter((item) => item.codigoDocente !== docente.codigoDocente);
+    else
+      this.docentesAsignados.push(docente);
   }
 
-  eliminarElementos(){
-    this.docentesAsignados=this.docentesAsignados.filter((item) => item !== this.tareaDocente.codigoDocente );
+  cambiarTodosDocentes() {
+    this.docentes.forEach(docente => {
+      docente.checked = !docente.checked;
+      if (!docente.checked)
+        this.docentesAsignados = this.docentesAsignados.filter((item) => item.codigoDocente !== docente.codigoDocente);
+      else
+        this.docentesAsignados.push(docente);
+    });
   }
-
-  agregarIndicador(){
+  agregarIndicador() {
+    let indicador:Indicador = {
+      codigoIndicador: this.indicador.codigoIndicador,
+      nombreIndicador: this.indicador.nombreIndicador,
+      estadoIndicador: this.indicador.estadoIndicador,
+      descripcionIndicador: this.descripcionIndicador
+    }
     this.indicador.descripcionIndicador = this.descripcionIndicador;
     this.descripcionIndicador = "";
-    this.indicadoresAsignados.push(this.indicador);
+    this.indicadoresAsignados.push(indicador);
     this.ckequearIndicador = false;
   }
 
-  eliminarIndicador(){
-    this.indicadoresAsignados=this.indicadoresAsignados.filter((item) => item !== this.indicador );
+  eliminarIndicador(indicador:Indicador) {
+    this.indicadoresAsignados = this.indicadoresAsignados.filter((item) => ((item.descripcionIndicador !== indicador.descripcionIndicador) || (item.codigoIndicador !== indicador.codigoIndicador)));
   }
 
-  visualizarIndicador(){
+  visualizarIndicador() {
     this.ckequearIndicador = true;
   }
 
-  buscarDocentesPorCargo(){
-    this.getDocentes$ = this.tareaService.obtenerDocentesPorCargo(this.cargo.codCargo);
-    this.getDocentes$.subscribe(docentes =>{
-      this.docentes = docentes;  
+  buscarDocentesPorCargo() {
+    this.getDocentes$ = this.tareaService.obtenerDocentesPorCargo(this.cargo.codCargo, this.codDocente);
+    this.getDocentes$.subscribe(docentes => {
+      this.docentes = docentes;
+      if (this.docentesAsignados.length == 0) {
+        this.docentes.forEach(docente => {
+          docente.checked = false;
+        });
+      } else {
+        this.docentes.forEach(docente => {
+          docente.checked = false;
+          if (this.docentesAsignados.find((item) => item.codigoDocente === docente.codigoDocente)) {
+            docente.checked = true;
+          }
+        });
+      }
     });
   }
 
-  selectFiles(event:any) {
+  selectFiles(event: any) {
     this.imageName = event.target.files[0].name;
     this.selectedFiles = event.target.files;
   }

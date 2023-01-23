@@ -65,7 +65,7 @@ export class CrearSubTareaComponent implements OnInit {
   getIndicadores$: Observable<Indicador[]>;
   tareaDocenteProyecto: TareaDocenteProyecto = {};
   ckequearIndicador: Boolean= false;
-  getCargos$: Observable<Cargo[]>;
+  //getCargos$: Observable<Cargo[]>;
   cargos: Cargo[]=[];
   cargo: Cargo = {};
 
@@ -79,7 +79,7 @@ export class CrearSubTareaComponent implements OnInit {
     private tareaService:TareaService
     ) {
       this.codCargo=localStorage.getItem('codCargo');
-      this.getCargos$ = this.cargoService.obtenerCargosPorPerfil(this.codCargo);
+      //this.getCargos$ = this.cargoService.obtenerCargosPorPerfil(this.codCargo);
       this.getDocentes$ = new Observable;
       this.prioridades = prioridadTarea;
       this.pesoTarea = pesoTarea;
@@ -100,7 +100,7 @@ export class CrearSubTareaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCargos();
+  //  this.getCargos();
     this.getIndicadores();
   }
 
@@ -108,11 +108,11 @@ export class CrearSubTareaComponent implements OnInit {
     this.router.navigate(['listar-tareas']);
   }
 
-  getCargos() {
+  /*getCargos() {
     this.getCargos$.subscribe(cargos =>{
       this.cargos = cargos;
     });
-  }
+  }*/
 
   getDocentes(){
     this.getDocentes$.subscribe(docentes =>{
@@ -171,7 +171,7 @@ export class CrearSubTareaComponent implements OnInit {
   }
 
   buscarDocentesPorCargo(){
-    this.getDocentes$ = this.tareaService.obtenerDocentesPorCargo(this.cargo.codCargo);
+    this.getDocentes$ = this.tareaService.obtenerDocentesPorCargo(this.cargo.codCargo,this.cargo.codCargo);
     this.getDocentes$.subscribe(docentes =>{
       this.docentes = docentes;  
     });

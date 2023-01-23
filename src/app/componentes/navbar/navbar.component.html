@@ -11,7 +11,7 @@
 				
 				<li  class="nav-item dropdown">
 					<a class="nav-link active dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-					  Administrativo
+						<mat-icon>supervised_user_circle</mat-icon>Administrativo
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
 						<li *ngFor="let item of menusAdministrativo">
@@ -23,7 +23,7 @@
 
 				  <li class="nav-item dropdown">
 					<a class="nav-link active dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-					  Perfil
+						<mat-icon>account_circle</mat-icon>Perfil
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
 						<li *ngFor="let item of menusCuenta">
@@ -35,7 +35,7 @@
 
 				  <li  class="nav-item dropdown">
 					<a class="nav-link active dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-					  Actividades
+						<mat-icon>assignment_ind</mat-icon>Actividades
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
 						<li *ngFor="let item of menusTareas">
@@ -47,12 +47,11 @@
 
 				  <li class="nav-item dropdown">
 					<a class="nav-link active dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-					  Reporte
+						<mat-icon>assignment</mat-icon>Reporte
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
 						<li *ngFor="let item of menusReportes">
 							<a class="dropdown-item" routerLink="{{item.url}}">{{item.nombre}}</a>
-							
 						</li>
 					</ul>
 				  </li>

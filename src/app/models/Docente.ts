@@ -17,4 +17,5 @@ export type Docente = {
   cargaHoraria?: number;
   claseEstiloProgress?: string;
   cargoDocenteList?:CargoDocente;
+  checked?:boolean;
 };

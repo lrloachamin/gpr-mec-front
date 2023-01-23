@@ -97,8 +97,8 @@ export class TareaService {
     return this.http.get<Docente[]>(`${TAREA_DOCENTE}/listarDocentes`); 
   }
 
-  public obtenerDocentesPorCargo(idCargo:any): Observable<Docente[]>{
-    return this.http.get<Docente[]>(`${TAREA_DOCENTE}/listarDocentesPorCargo/${idCargo}`); 
+  public obtenerDocentesPorCargo(idCargo:any,codigoDocente:any): Observable<Docente[]>{
+    return this.http.get<Docente[]>(`${TAREA_DOCENTE}/listarDocentesPorCargo/${idCargo}/${codigoDocente}`); 
   }
 
   public obtenerIndicadores(): Observable<Indicador[]>{
