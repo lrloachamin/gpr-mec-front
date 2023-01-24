@@ -3,7 +3,7 @@
 </nav>
 
   <div class="row" >
-    <div class="imageLeft col-8">
+    <div class="imageLeft col-8" style="padding: 10px;padding-left: 20px;">
       <img src="https://uar.espe.edu.ec/wp-content/uploads/2020/09/Espe-Sangolgui.jpg" alt="" width="100%" height="100%">
     </div>
   <div class="abs-center col-4" style="display: flex;">
@@ -37,7 +37,7 @@
           *ngIf="formulario2.get('password')?.errors?.['required'] && formulario2.get('password')?.touched">Complete
           este campo</p>
       </div>
-      <button type="submit" class="btn btn-primary" routerLinkActive="router-link-active">Ingresar</button>
+      <button type="submit" class="btn btn-primary btn-sm form-control" routerLinkActive="router-link-active">Ingresar</button>
       <hr>
       <a [routerLink]="['/registro']">Registrar </a> <br/>
       <a [routerLink]="['/password-olvidado']">¿Olvido su contraseña?</a>

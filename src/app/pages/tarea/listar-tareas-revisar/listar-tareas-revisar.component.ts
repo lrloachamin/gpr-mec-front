@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { FormBuilder, AbstractControl } from '@angular/forms';
 import jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
-import {formatDate} from '@angular/common';
+import { formatDate } from '@angular/common';
 
 export interface PeriodicElement {
   name: string;
@@ -31,7 +31,7 @@ export class ListarTareasRevisarComponent implements OnInit {
   //sum:number=0;
 
   //
-  displayedColumns: string[] = ['id', 'revisor', 'proceso', 'proyecto', 'tarea','tareaIndicadors', 'prioridad', 'peso', 'fechaInicio', 'fechaVencimiento', 'responsable','pdf'];
+  displayedColumns: string[] = ['id', 'revisor', 'proceso', 'proyecto', 'tarea', 'tareaIndicadors', 'prioridad', 'peso', 'fechaInicio', 'fechaVencimiento', 'responsable', 'pdf'];
   //dataSource = new MatTableDataSource(ELEMENT_DATA);
   dataSource: any;
 
@@ -87,8 +87,6 @@ export class ListarTareasRevisarComponent implements OnInit {
       responsable: ''
     })
     this.formControl.valueChanges.subscribe(value => {
-      console.log(value);
-      
       const filter = {
         ...value, revisor: value.revisor.trim().toLowerCase(), proceso: value.proceso.trim().toLowerCase(),
         proyecto: value.proyecto.trim().toLowerCase(), tarea: value.tarea.trim().toLowerCase(),
@@ -102,7 +100,7 @@ export class ListarTareasRevisarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  convertirDataPdf(){
+  convertirDataPdf() {
     /*
     var doc = new jspdf('landscape', 'pt', 'a4');
     var margin =10;
@@ -119,14 +117,14 @@ export class ListarTareasRevisarComponent implements OnInit {
           doc.output('dataurlnewwindow',{filename:'dataPdf.pdf'})
         }
       })
-    */  
+    */
     const DATA = document.getElementById('dataPdf');
     const doc = new jspdf('p', 'pt', 'a4');
     const options = {
       background: 'white',
       scale: 3
     };
-    if(DATA){
+    if (DATA) {
       html2canvas(DATA, options).then((canvas) => {
 
         const img = canvas.toDataURL('image/PNG');
@@ -142,7 +140,7 @@ export class ListarTareasRevisarComponent implements OnInit {
       }).then((docResult) => {
         docResult.save(`${formatDate(new Date(), 'yyyy/MM/dd', 'en')}_reporteTarea.pdf`);
       });
-    } 
+    }
     /*var data = document.getElementById("dataPdf");
     if(data)
       html2canvas(data).then(canvas=>{

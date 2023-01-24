@@ -11,6 +11,18 @@ import { TareaDocenteProyecto } from 'src/app/models/TareaDocenteProyecto';
 import { CargoService } from 'src/app/servicios/cargo.service';
 import { ProyectoService } from 'src/app/servicios/proyecto.service';
 import { TareaService } from 'src/app/servicios/tarea.service';
+import { MessageService } from 'primeng/api';
+
+const tipoTarea: any[] = [
+  {
+    "id": "TAREA",
+    "name": "TAREA"
+  },
+  {
+    "id": "SOLICITUD",
+    "name": "SOLICITUD"
+  }
+]
 
 const prioridadTarea: any[] = [
   {
@@ -45,8 +57,7 @@ const pesoTarea: any[] = [
 @Component({
   selector: 'app-crear-tarea',
   templateUrl: './crear-tarea.html',
-  styleUrls:['./crear-tarea.component.css']
-  
+  styleUrls: ['./crear-tarea.component.css']
 })
 
 export class CrearTareaComponent implements OnInit {
@@ -65,13 +76,14 @@ export class CrearTareaComponent implements OnInit {
   indicadoresAsignados: any[] = [];
   prioridades: any[];
   pesoTarea: any[];
+  tipoTarea: any[];
   getIndicadores$: Observable<Indicador[]>;
   tareaDocenteProyecto: TareaDocenteProyecto = {};
   ckequearIndicador: Boolean = false;
   getCargos$: Observable<Cargo[]>;
   cargos: Cargo[] = [];
   cargo: Cargo = {};
-
+  checkTipoTarea: Boolean = true;
   selectedFiles: any;
   imageName = "";
 
@@ -82,7 +94,8 @@ export class CrearTareaComponent implements OnInit {
     private router: Router,
     private cargoService: CargoService,
     private tareaService: TareaService,
-    private proyectoService: ProyectoService
+    private proyectoService: ProyectoService,
+    private messageService: MessageService
   ) {
 
     //this.codCargo = localStorage.getItem('codCargo');
@@ -92,6 +105,7 @@ export class CrearTareaComponent implements OnInit {
     this.getDocentes$ = new Observable;
     this.prioridades = prioridadTarea;
     this.pesoTarea = pesoTarea;
+    this.tipoTarea = tipoTarea;
     this.getIndicadores$ = this.tareaService.obtenerIndicadores();
   }
 
@@ -126,16 +140,50 @@ export class CrearTareaComponent implements OnInit {
     this.tareaDocenteProyecto.docentes = this.docentesAsignados;
     this.tareaDocenteProyecto.indicadors = this.indicadoresAsignados;
     if (this.selectedFiles == undefined) {
-      this.tareaService.crearTarea(this.tareaDocenteProyecto)
-        .subscribe(data => {
-          confirm("Se creo la tarea!!");
-          this.router.navigate(["listar-tareas"]);
-        })
+      this.tareaService.crearTarea(this.tareaDocenteProyecto).subscribe({
+        next: (data) => {
+          this.messageService.add({
+            severity: 'success', 
+            summary: 'Éxito', 
+            detail: 'La tarea ha sido creada con éxito'
+          });
+          this.router.navigate(["listar-tareas"])
+          setTimeout(() => {                        
+            
+          }, 1500);
+        },
+        error: (err) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: err?.message ?? 'Algo ha salido mal'
+          });
+        },
+        complete: () => {
+          // this.isLoading = false;
+        },
+      })
     } else {
       this.tareaService.crearTareaConArchivo(this.tareaDocenteProyecto, this.selectedFiles[0])
-        .subscribe(data => {
-          confirm("Se creo la tarea!!");
-          this.router.navigate(["listar-tareas"]);
+        .subscribe({
+          next: (data) => {
+            this.messageService.add({
+              severity: 'success', 
+              summary: 'Éxito', 
+              detail: 'La tarea ha sido creada con éxito'
+            });
+            this.router.navigate(["listar-tareas"]);
+          },
+          error: (err) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: err?.message ?? 'Algo ha salido mal'
+            });
+          },
+          complete: () => {
+            // this.isLoading = false;
+          },
         })
     }
   }
@@ -167,7 +215,7 @@ export class CrearTareaComponent implements OnInit {
     });
   }
   agregarIndicador() {
-    let indicador:Indicador = {
+    let indicador: Indicador = {
       codigoIndicador: this.indicador.codigoIndicador,
       nombreIndicador: this.indicador.nombreIndicador,
       estadoIndicador: this.indicador.estadoIndicador,
@@ -179,7 +227,7 @@ export class CrearTareaComponent implements OnInit {
     this.ckequearIndicador = false;
   }
 
-  eliminarIndicador(indicador:Indicador) {
+  eliminarIndicador(indicador: Indicador) {
     this.indicadoresAsignados = this.indicadoresAsignados.filter((item) => ((item.descripcionIndicador !== indicador.descripcionIndicador) || (item.codigoIndicador !== indicador.codigoIndicador)));
   }
 
@@ -211,4 +259,14 @@ export class CrearTareaComponent implements OnInit {
     this.selectedFiles = event.target.files;
   }
 
+  detectarCambioActividad() {
+    if (this.tarea.tipoTarea == "SOLICITUD") {
+      this.tarea.fechaEntregaTarea = undefined;
+      this.tarea.pesoTarea = undefined;
+      this.tarea.valorPesoTarea = undefined;
+      this.checkTipoTarea = false;
+    }
+    else if (this.tarea.tipoTarea == "TAREA")
+      this.checkTipoTarea = true;
+  }
 }

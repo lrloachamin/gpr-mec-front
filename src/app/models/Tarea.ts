@@ -4,6 +4,7 @@ import { TareaDocente } from "./TareaDocente";
 export type Tarea = {
   codigoTarea?: number;
   nombreTarea?: string;
+  tipoTarea?: string;
   fechaCreaciontarea?: Date;
   prioridadTarea?: string;
   observacionTarea?: string;

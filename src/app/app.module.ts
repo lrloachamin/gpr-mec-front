@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {ToastModule} from 'primeng/toast';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -51,6 +52,7 @@ import { PasswordOlvidadoComponent } from './pages/usuario/password-olvidado/pas
 import { CrearCargoComponent } from './pages/cargo/crear-cargo/crear-cargo.component';
 import { EditarCargoComponent } from './pages/cargo/editar-cargo/editar-cargo.component';
 import { ListarCargoComponent } from './pages/cargo/listar-cargo/listar-cargo.component';
+import { MessageService } from 'primeng/api';
 
 
 @NgModule({
@@ -104,11 +106,12 @@ import { ListarCargoComponent } from './pages/cargo/listar-cargo/listar-cargo.co
     MatTableModule,
     NgxAbstractControlAsModule,
     MatInputModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    ToastModule
     //ComponentsModule
     //PagesModule
   ],
-  providers: [ProyectoService],
+  providers: [ProyectoService,MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

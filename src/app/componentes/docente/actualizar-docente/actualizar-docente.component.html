@@ -85,8 +85,9 @@
             
             
   
-        <button type="submit" [disabled]="formularioActDoc.invalid  || !validadorCedula"  class="btn btn-primary" >Actualizar</button>
-        <button *ngIf="tipoUsuario === 'admin'" type="button" (click)="cancelarActualizar()" class="btn btn-primary" >Volver</button>
+        <button type="submit" [disabled]="formularioActDoc.invalid  || !validadorCedula"  class="btn btn-primary btn-sm form-control" >Actualizar</button>
+        <br><br>
+        <button *ngIf="tipoUsuario === 'admin'" type="button" (click)="cancelarActualizar()" class="btn btn-primary btn-sm form-control" >Volver</button>
 
 
       </form>
