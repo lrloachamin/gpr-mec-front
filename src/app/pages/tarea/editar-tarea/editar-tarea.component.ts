@@ -296,7 +296,7 @@ export class EditarTareaComponent implements OnInit {
 
     //this.codCargo = localStorage.getItem('codCargo');
     this.codDocente = localStorage.getItem('codigoDocente');
-    this.getProyectos$ = this.proyectoService.obtenerProyectos();
+    this.getProyectos$ = this.proyectoService.listarProyectosActivos();
     this.getCargos$ = this.cargoService.obtenerCargosModel();
     this.getDocentes$ = new Observable;
     this.prioridades = prioridadTarea;

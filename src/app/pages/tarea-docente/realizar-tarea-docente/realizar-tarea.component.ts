@@ -1,74 +1,3 @@
-/*import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Indicador } from 'src/app/models/Indicador';
-import { Tarea } from 'src/app/models/Tarea';
-import { TareaIndicador } from 'src/app/models/TareaIndicador';
-import { TareaService } from 'src/app/servicios/tarea.service';
-
-@Component({
-  selector: 'app-realizar-tarea',
-  templateUrl: './realizar-tarea.html'
-})
-export class RealizarTareaComponent implements OnInit {
-  indicadoresAsignados: any[] = [];
-  valorIndicadores:any[] = [];
-  getIndicadorTarea$: Observable<TareaIndicador[]>;
-  tareaDocente: any = {};
-  tarea: Tarea = {};
-  tareaIndicadors:TareaIndicador[]=[];
-
-  constructor(
-    private router:Router,
-    private tareaService:TareaService
-    ) {
-      this.tareaService.tareaDocente$.subscribe((res) => {
-        this.tareaDocente = res;
-        if (this.tareaDocente == null) {
-          this.back();
-        }
-        this.tarea = this.tareaDocente.codigoTarea;
-        
-        
-      });
-      this.getIndicadorTarea$ = this.tareaService.obtenerIndicadoresTarea(this.tareaDocente.codigoTareaDocente);
-      //this.indicadoresAsignados  = this.tareaDocente.tareaIndicadorList;
-  }
-
-  ngOnInit(): void {
-    this.getIndicadorTarea();
-  }
-
-  getIndicadorTarea() {
-    this.getIndicadorTarea$.subscribe(tareasIndicador =>{
-      tareasIndicador.forEach(t => {
-        this.indicadoresAsignados.push(t);
-      });
-    });
-  }
-
-  save(){
-    this.tareaService.guardarTareaAsignadaAlDocente(this.tareaIndicadors)
-    .subscribe(data=>{
-      confirm("Se guardaron sus datos con éxito!!");
-      this.router.navigate(["listar-tareas-docente"]);
-    })
-  }
-
-  back() {
-    this.router.navigate(['listar-tareas-docente']);
-  }
-
-  asignarIndicador(tareaIndicador:any){
-    if(!this.tareaIndicadors.includes(tareaIndicador.codigoTareaIndicador))
-      this.tareaIndicadors=this.tareaIndicadors.filter((item) => item.codigoTareaIndicador !== tareaIndicador.codigoTareaIndicador );
-    this.tareaIndicadors.push(tareaIndicador);
-  }
-
-}
-*/
-
-
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
@@ -78,6 +7,7 @@ import { Router } from '@angular/router';
 import { TareaIndicador } from 'src/app/models/TareaIndicador';
 import { Tarea } from 'src/app/models/Tarea';
 import { TareaIndicadorFile } from 'src/app/models/TareaIndicadorFile';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-realizar-tarea',
@@ -111,7 +41,8 @@ export class RealizarTareaComponent implements OnInit {
   constructor(
     private uploadFilesService: UploadFilesService,
     private router:Router,
-    private tareaService:TareaService
+    private tareaService:TareaService,
+    private messageService: MessageService
     ) {
       this.descPerfil=localStorage.getItem('descPerfil');
       this.tareaService.tareaDocente$.subscribe((res) => {
@@ -173,15 +104,51 @@ export class RealizarTareaComponent implements OnInit {
     //
     if(this.selectedFiles ==undefined){
       this.tareaService.guardarTareaAsignadaAlDocente(this.tareaIndicadors,this.tareaDocente.codigoTareaDocente)
-      .subscribe(data=>{
-        confirm("Se guardaron sus datos con éxito!!");
-        this.router.navigate(["listar-tareas-docente"]);
+      .subscribe({
+        next: (data) => {
+          this.messageService.add({
+            severity: 'success', 
+            summary: 'Éxito', 
+            detail: 'La Actividad ha sido subida con éxito'
+          });
+          setTimeout(() => {                        
+            this.router.navigate(["listar-tareas-docente"])
+          }, 1500);
+        },
+        error: (err) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: err?.message ?? ' Error al subir la Actividad'
+          });
+        },
+        complete: () => {
+          // this.isLoading = false;
+        },
       })
     }else{
       this.tareaService.guardarArchivoTareaAsignadaAlDocente(this.selectedFiles[0],this.tareaIndicadors,this.tareaDocente.codigoTareaDocente)
-      .subscribe(data=>{
-        confirm("Se guardaron sus datos con éxito!!");
-        this.router.navigate(["listar-tareas-docente"]);
+      .subscribe({
+        next: (data) => {
+          this.messageService.add({
+            severity: 'success', 
+            summary: 'Éxito', 
+            detail: 'La tarea ha sido creada con éxito'
+          });
+          setTimeout(() => {                        
+            this.router.navigate(["listar-tareas"])
+          }, 1500);
+        },
+        error: (err) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: err?.message ?? ' Error al crear la tarea'
+          });
+        },
+        complete: () => {
+          // this.isLoading = false;
+        },
       })
     }
   }

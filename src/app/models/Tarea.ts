@@ -8,7 +8,7 @@ export type Tarea = {
   fechaCreaciontarea?: Date;
   prioridadTarea?: string;
   observacionTarea?: string;
-  descripicionTarea?: string;//indicador numerico,etc
+  //descripicionTarea?: string;//indicador numerico,etc
   estadoTarea?: string;
   codigoProyecto?: Proyecto |null;
   fechaEntregaTarea?: Date |null|string;

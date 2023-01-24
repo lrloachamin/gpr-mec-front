@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { TareaIndicador } from 'src/app/models/TareaIndicador';
 import { Tarea } from 'src/app/models/Tarea';
 import { TareaIndicadorFile } from 'src/app/models/TareaIndicadorFile';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-revisar-tarea',
@@ -41,7 +42,8 @@ export class RevisarTareaComponent implements OnInit {
   constructor(
     private uploadFilesService: UploadFilesService,
     private router:Router,
-    private tareaService:TareaService
+    private tareaService:TareaService,
+    private messageService: MessageService
     ) {
       this.tareaService.tareaDocente$.subscribe((res) => {
         this.tareaDocente = res;
@@ -57,7 +59,6 @@ export class RevisarTareaComponent implements OnInit {
 
   ngOnInit(): void {
     this.tareaDocente.descripcionTareadocente = "";
-    //this.fileInfos = this.uploadFilesService.getFiles();
     this.getIndicadorTarea();
     this.getFileGuia();
     this.getFileModel();
@@ -102,12 +103,27 @@ export class RevisarTareaComponent implements OnInit {
 
   aprobarTarea(){
     this.tareaService.aprobarTareaDocente(this.tareaDocente)
-    .subscribe(data=>{
-      
-      this.router.navigate(["tareas-entregadas"]);
-    },
-    err => {
-      console.log("hubo un error");
+    .subscribe({
+      next: (data) => {
+        this.messageService.add({
+          severity: 'success', 
+          summary: 'Éxito', 
+          detail: 'La Actividad ha sido subida con éxito'
+        });
+        setTimeout(() => {                        
+          this.router.navigate(["tareas-entregadas"])
+        }, 1500);
+      },
+      error: (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err?.message ?? ' Error al aprobar la Actividad'
+        });
+      },
+      complete: () => {
+        // this.isLoading = false;
+      },
     })
   }
 
@@ -120,8 +136,31 @@ export class RevisarTareaComponent implements OnInit {
   denegarTareaDocente(){
     
     this.tareaService.denegarTareaDocente(this.tareaDocente)
-    .subscribe(data=>{
-      this.router.navigate(["tareas-entregadas"]);
+    .subscribe({
+      next: (data) => {
+        this.messageService.add({
+          severity: 'success', 
+          summary: 'Éxito', 
+          detail: 'La Actividad ha sido Denegada con éxito'
+        });
+        setTimeout(() => {                        
+          this.router.navigate(["tareas-entregadas"])
+        }, 1500);
+      },
+      error: (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err?.message ?? ' Error al aprobar la Actividad'
+        });
+      },
+      complete: () => {
+        // this.isLoading = false;
+      },
     })
+  }
+
+  cancelarTareaDocente(){
+    this.checkButton = false;
   }
 }

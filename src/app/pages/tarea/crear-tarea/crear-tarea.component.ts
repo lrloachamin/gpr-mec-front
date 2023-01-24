@@ -100,7 +100,7 @@ export class CrearTareaComponent implements OnInit {
 
     //this.codCargo = localStorage.getItem('codCargo');
     this.codDocente = localStorage.getItem('codigoDocente');
-    this.getProyectos$ = this.proyectoService.obtenerProyectos();
+    this.getProyectos$ = this.proyectoService.listarProyectosActivos();
     this.getCargos$ = this.cargoService.obtenerCargosModel();
     this.getDocentes$ = new Observable;
     this.prioridades = prioridadTarea;
@@ -147,16 +147,15 @@ export class CrearTareaComponent implements OnInit {
             summary: 'Éxito', 
             detail: 'La tarea ha sido creada con éxito'
           });
-          this.router.navigate(["listar-tareas"])
           setTimeout(() => {                        
-            
+            this.router.navigate(["listar-tareas"])
           }, 1500);
         },
         error: (err) => {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: err?.message ?? 'Algo ha salido mal'
+            detail: err?.message ?? ' Error al crear la tarea'
           });
         },
         complete: () => {

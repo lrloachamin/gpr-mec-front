@@ -22,6 +22,10 @@ export class ProyectoService {
     return this.http.get<Proyecto[]>(`${PROYECTO}/listarProyectos`); 
   }
 
+  public listarProyectosActivos(): Observable<Proyecto[]>{
+    return this.http.get<Proyecto[]>(`${PROYECTO}/listarProyectosActivos`); 
+  }
+
   public crearProyecto(proyecto:Proyecto){
     return this.http.post<Proyecto>(PROYECTO,proyecto); 
   }

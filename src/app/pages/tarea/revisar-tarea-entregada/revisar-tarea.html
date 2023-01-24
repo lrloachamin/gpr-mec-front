@@ -1,93 +1,111 @@
 <app-navbar></app-navbar>
-<div class="container col-md-4">
-  <div class="card">
-    <div class="card-header">
-      <h3>Realizar Tarea</h3>
-    </div>
-    <div class="card-body">
-       <div class="form-group">
-          <label for="">Nombre de la Tarea:</label>
-          <span *ngIf="tarea">{{ tarea.nombreTarea }}</span>
+<p-toast position="top-right" [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"></p-toast>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-5" style="margin: auto;">
+      <h2 style="text-align: center;"><mat-icon>assignment_ind</mat-icon> Revisar Actividad</h2>
+      <form (ngSubmit)="f.form.valid" #f="ngForm">
+        <div class="form-group">
+          <label for="">Nombre de la Actividad:</label>
+          <span>{{ tarea.nombreTarea }}</span>
+        </div>
+        <div class="form-group">
+          <label for="">Tipo de Actividad:</label>
+          <span>{{ tarea.tipoTarea }}</span>
         </div>
         <div class="form-group">
           <label for="">Proyecto:</label>
-          <span *ngIf="tarea">{{ tarea.codigoProyecto?.nombreProyecto }}</span>
+          <span>{{ tarea.codigoProyecto?.nombreProyecto }}</span>
         </div>
         <div class="form-group">
-          <label for="">Responsable:</label>
-          <span *ngIf="tarea">{{ tareaDocente.codigoDocente?.nombreDocente }}  {{ tareaDocente.codigoDocente?.apellidoDocente }}</span>
+          <label for="">Fecha de Creación:</label>
+          <span>{{ tarea.fechaCreaciontarea | date:"short":'+00:00' }}</span>
         </div>
-        <div class="form-group">
+        <div class="form-group" *ngIf="tarea.fechaEntregaTarea">
           <label for="">Fecha de Entrega:</label>
-          <span *ngIf="tarea">{{ tarea.fechaEntregaTarea |date:"short":'+00:00' }}</span>
+          <span>{{ tarea.fechaEntregaTarea | date:"short":'+00:00'}}</span>
         </div>
         <div class="form-group">
-          <label for="">Prioridad de la tarea:</label>
-          <span *ngIf="tarea">{{ tarea.prioridadTarea }}</span>
+          <label for="">Prioridad de la Actividad:</label>
+          <span>{{ tarea.prioridadTarea }}</span>
         </div>
-        <h2>Indicadores:</h2>
-        <ul>
-          <li *ngFor="let i of indicadoresAsignados">
-            <span>Descripción de Indicador:{{ i.descripcionTareaIndicador}}<br/></span>
-            <span>Tipo de Variable: {{ i.indicadorCODIGOINDICADOR.nombreIndicador }} <br/></span>
-            <span>Valor ingresado: {{ i.valorIndicador }}</span>
-          </li>
-        </ul>
-        <div id="box4" *ngIf="tarea.nombreArchivoTarea!=null || tarea.nombreArchivoTarea!=''">
+        <div class="form-group">
+          <label for="">Peso de la Actividad:</label>
+          <span>{{ tarea.valorPesoTarea +" "+ tarea.pesoTarea}}</span>
+        </div>
+        <div class="form-group">
+          <label for="">Docente revisor:</label>
+          <span>{{ tarea.nombreDocenteRevisor}}</span>
+        </div>
+        <div class="form-group" *ngIf="tarea.observacionTarea">
+          <label for="">Observación</label>
+          <span>{{ tarea.observacionTarea }}</span>
+        </div>
+        <div class="form-group">
+          <h2>Indicadores:</h2>
+          <ul>
+            <li *ngFor="let i of indicadoresAsignados">
+              <span>Descripción de Indicador:{{ i.descripcionTareaIndicador}}<br /></span>
+              <span>Tipo de Variable: {{ i.indicadorCODIGOINDICADOR.nombreIndicador }} <br /></span>
+              <span>Valor ingresado: {{ i.valorIndicador }}</span>
+            </li>
+          </ul>
+        </div>
+        <div id="box4" *ngIf="tarea.nombreArchivoTarea">
           <mat-card>
-              <mat-card-header>
-                  <mat-card-title>Archivo Guía</mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
-                  <ul >
-                      <li>
-                        <mat-icon>archive</mat-icon>
-                        <a href="{{fileModelClassGuia.url}}">{{fileModelClassGuia.name}}</a>
-                          
-                      </li>
-                  </ul>
-              </mat-card-content>
+            <mat-card-header>
+              <mat-card-title>Archivo Guía</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <ul>
+                <li>
+                  <mat-icon>archive</mat-icon>
+                  <a href="{{fileModelClassGuia.url}}">{{fileModelClassGuia.name}}</a>
+
+                </li>
+              </ul>
+            </mat-card-content>
           </mat-card>
         </div>
 
-        <div id="box4" *ngIf="tareaDocente.archivoTareaDocente!=null ||tareaDocente.archivoTareaDocente!=''">
+        <div id="box4" *ngIf="tareaDocente.archivoTareaDocente">
           <mat-card>
-              <mat-card-header>
-                  <mat-card-title>Archivo Subido</mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
-                  <ul >
-                      <li>
-                          <mat-icon>picture_as_pdf</mat-icon>
-                          <a href="{{fileModelClass.url}}">{{fileModelClass.name}}</a>
-                      </li>
-                  </ul>
-              </mat-card-content>
+            <mat-card-header>
+              <mat-card-title>Archivo Subido</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <ul>
+                <li>
+                  <mat-icon>picture_as_pdf</mat-icon>
+                  <a href="{{fileModelClass.url}}">{{fileModelClass.name}}</a>
+                </li>
+              </ul>
+            </mat-card-content>
           </mat-card>
         </div>
-        <!--
-        <div id="box4">
-          <mat-card>
-              <mat-card-header>
-                  <mat-card-title>Lista de Archivos</mat-card-title>
-              </mat-card-header>
-              <mat-card-content>
-                  <ul>
-                      <li *ngFor="let file of fileInfos | async">
-                          <a href="{{file.url}}">{{file.name}}</a>
-                      </li>
-                  </ul>
-              </mat-card-content>
-          </mat-card>
-      </div>-->
-        <button type="submit" class="btn btn-danger" (click)="aprobarTarea()">Aprobar tarea</button>
-        <button type="button" class="btn btn-danger" (click)="denegarTarea()">Denegar tarea</button>
-        
-      <div *ngIf="checkButton">
-        <input type="text" [(ngModel)]="tareaDocente.descripcionTareadocente" name="descripcionTareadocente" type="text" class="form-control"/>
-        <input type="button" class="btn btn-danger" (click)="denegarTareaDocente()" value="rechazarTarea"/>
-      </div>
+        <div class="form-group" *ngIf="!checkButton">
+          <button type="button" class="btn btn-primary btn-sm form-control" (click)="aprobarTarea()">Aprobar
+            tarea</button><br><br>
+          <button type="button" class="btn btn-danger btn-sm form-control" (click)="denegarTarea()">Denegar
+            tarea</button>
+        </div>
+        <div *ngIf="checkButton" class="form-group">
+          <label for="">Motivo del rechazo de la Actividad (Opcional)</label>
+          <input type="text" [(ngModel)]="tareaDocente.descripcionTareadocente" name="descripcionTareadocente"
+            type="text" class="form-control" />
+        </div>
+        <div *ngIf="checkButton" class="form-group">
+          <div class="row justify-content-around">
+            <div class="col-sm-6">
+              <button type="button" class="btn btn-danger btn-sm form-control" (click)="denegarTareaDocente()">Rechazar
+                Tarea</button>
+            </div>
+            <div class="col-sm-6">
+              <button type="button" class="btn btn-dark btn-sm form-control" (click)="cancelarTareaDocente()">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>
-
