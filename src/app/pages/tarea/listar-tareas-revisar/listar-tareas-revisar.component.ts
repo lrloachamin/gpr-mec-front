@@ -31,7 +31,7 @@ export class ListarTareasRevisarComponent implements OnInit {
   //sum:number=0;
 
   //
-  displayedColumns: string[] = ['id', 'revisor', 'proceso', 'proyecto', 'tarea', 'tareaIndicadors', 'prioridad', 'peso', 'fechaInicio', 'fechaVencimiento', 'responsable', 'pdf'];
+  displayedColumns: string[] = ['id', 'revisor', 'proceso', 'proyecto', 'tarea', 'tipoTarea', 'tareaIndicadors', 'prioridad', 'peso', 'fechaInicio', 'fechaVencimiento', 'responsable', 'pdf'];
   //dataSource = new MatTableDataSource(ELEMENT_DATA);
   dataSource: any;
 
@@ -71,7 +71,8 @@ export class ListarTareasRevisarComponent implements OnInit {
       const h = !filter.fechaInicio || data.revisor.fechaInicio().includes(filter.fechaInicio);
       const i = !filter.fechaVencimiento || data.fechaVencimiento.toLowerCase().includes(filter.fechaVencimiento);
       const j = !filter.responsable || data.responsable.toLowerCase().includes(filter.responsable);
-      return a && b && c && d && e && f && g && h && i && j;
+      const k = !filter.tipoTarea || data.tipoTarea.toLowerCase().includes(filter.tipoTarea);
+      return a && b && c && d && e && f && g && h && i && j && k;
     }) as (PeriodicElement: any, string: any) => boolean;
 
     this.formControl = formBuilder.group({
@@ -80,6 +81,7 @@ export class ListarTareasRevisarComponent implements OnInit {
       proceso: '',
       proyecto: '',
       tarea: '',
+      tipoTarea: '',
       prioridad: '',
       peso: '',
       fechaInicio: '',
@@ -90,8 +92,8 @@ export class ListarTareasRevisarComponent implements OnInit {
       const filter = {
         ...value, revisor: value.revisor.trim().toLowerCase(), proceso: value.proceso.trim().toLowerCase(),
         proyecto: value.proyecto.trim().toLowerCase(), tarea: value.tarea.trim().toLowerCase(),
-        prioridad: value.prioridad.trim().toLowerCase(), peso: value.peso.trim().toLowerCase(),
-        responsable: value.responsable.trim().toLowerCase()
+        tipoTarea: value.tipoTarea.trim().toLowerCase(), prioridad: value.prioridad.trim().toLowerCase(),
+        peso: value.peso.trim().toLowerCase(), responsable: value.responsable.trim().toLowerCase()
       } as string;
       this.dataSource.filter = filter;
     });

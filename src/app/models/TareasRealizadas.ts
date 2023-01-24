@@ -2,6 +2,7 @@ import { TareaIndicador } from "./TareaIndicador";
 
 export type TareasRealizadas = {
     nombreDocenteRevisor?: string;
+    tipoTarea?: string;
     tipoProceso?: string;
     nombreProyecto?: string;
     nombreTarea?: string;
