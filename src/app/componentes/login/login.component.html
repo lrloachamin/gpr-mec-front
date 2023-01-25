@@ -2,16 +2,16 @@
   <span class="titulo">Sistemas GPR - MECANICA</span>
 </nav>
 
-  <div class="row" >
-    <div class="imageLeft col-8" style="padding: 10px;padding-left: 20px;">
-      <img src="https://uar.espe.edu.ec/wp-content/uploads/2020/09/Espe-Sangolgui.jpg" alt="" width="100%" height="100%">
-    </div>
+<div class="row">
+  <div class="imageLeft col-8" style="padding: 10px;padding-left: 20px;">
+    <img src="https://uar.espe.edu.ec/wp-content/uploads/2020/09/Espe-Sangolgui.jpg" alt="" width="100%" height="100%">
+  </div>
   <div class="abs-center col-4" style="display: flex;">
     <form [formGroup]="formulario2" (ngSubmit)="consultar()" class="border p-3 form">
       <div class="imagenUsuario">
         <img src="https://cdn-icons-png.flaticon.com/512/64/64572.png">
-    </div>
-    <!--<span style="font-size: 25px;">
+      </div>
+      <!--<span style="font-size: 25px;">
         Login
       </span>
       <hr>
@@ -37,9 +37,10 @@
           *ngIf="formulario2.get('password')?.errors?.['required'] && formulario2.get('password')?.touched">Complete
           este campo</p>
       </div>
-      <button type="submit" class="btn btn-primary btn-sm form-control" routerLinkActive="router-link-active">Ingresar</button>
+      <button type="submit" class="btn btn-primary btn-sm form-control"
+        routerLinkActive="router-link-active">Ingresar</button>
       <hr>
-      <a [routerLink]="['/registro']">Registrar </a> <br/>
+      <a [routerLink]="['/registro']">Registrar </a> <br />
       <a [routerLink]="['/password-olvidado']">¿Olvido su contraseña?</a>
     </form>
   </div>

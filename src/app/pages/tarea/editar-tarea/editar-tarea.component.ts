@@ -255,6 +255,8 @@ const pesoTarea: any[] = [
 })
 
 export class EditarTareaComponent implements OnInit {
+  blockedDocument: boolean = false;
+  visualBlockedDocument: boolean = true;
   //tarea: TareaDocente = {};
   pipe = new DatePipe('en-US');
   getProyectos$: Observable<Proyecto[]>;
@@ -306,8 +308,9 @@ export class EditarTareaComponent implements OnInit {
     this.tareaService.tareas$.subscribe((res) => {
       this.tareaDocenteProyecto = res;
       if (this.tareaDocenteProyecto == null) {
+        this.visualBlockedDocument = false;
         this.back();
-      }
+      }else{
       this.tarea = this.tareaDocenteProyecto.tarea;
       if (this.tarea.fechaEntregaTarea) {
         //this.tarea.fechaEntregaTarea = new Date(this.tarea.fechaEntregaTarea);
@@ -315,7 +318,7 @@ export class EditarTareaComponent implements OnInit {
       }
       this.indicadoresAsignados = this.tareaDocenteProyecto.indicadors;
       this.docentesAsignados = this.tareaDocenteProyecto.docentes;
-
+    }
       //this.tareaDocente.fechaEntrega = new Date(this.tareaDocente.fechaEntrega);
       //this.tareaDocente.fechaEntrega = this.pipe.transform(this.tareaDocente.fechaEntrega, 'yyyy-MM-ddTHH:mm:ss');
     });
@@ -357,6 +360,7 @@ export class EditarTareaComponent implements OnInit {
   }
 
   save() {
+    this.blockedDocument = true;//Spinner
     this.tarea.idDocenteRevisor = localStorage.getItem('idDocenteRevisor');
     this.tarea.nombreDocenteRevisor = localStorage.getItem('nombreDocenteRevisor');
     this.tareaDocenteProyecto.tarea = this.tarea;
@@ -371,9 +375,11 @@ export class EditarTareaComponent implements OnInit {
               summary: 'Éxito',
               detail: 'La tarea ha sido modificada con éxito'
             });
-            setTimeout(() => {                        
+            setTimeout(() => {        
+              this.blockedDocument = false;                
               this.router.navigate(["listar-tareas"])
-            }, 1500);
+            }, 2000);
+
           },
           error: (err) => {
             this.messageService.add({
@@ -381,17 +387,18 @@ export class EditarTareaComponent implements OnInit {
               summary: 'Error',
               detail: err?.message ?? 'Algo ha salido mal'
             });
+            this.blockedDocument = false; 
           },
           complete: () => {
             // this.isLoading = false;
           },
         })
     } else {
-      this.tareaService.crearTareaConArchivo(this.tareaDocenteProyecto, this.selectedFiles[0])
+      /*this.tareaService.crearTareaConArchivo(this.tareaDocenteProyecto, this.selectedFiles[0])
         .subscribe(data => {
           confirm("Se creo la tarea!!");
           this.router.navigate(["listar-tareas"]);
-        })
+        })*/
     }
   }
 
@@ -476,4 +483,11 @@ export class EditarTareaComponent implements OnInit {
     else if (this.tarea.tipoTarea == "TAREA")
       this.checkTipoTarea = true;
   }
+
+  blockDocument(){
+    this.blockedDocument = true;
+    setTimeout(() => {
+        this.blockedDocument = false;
+    }, 3000);
+}
 }

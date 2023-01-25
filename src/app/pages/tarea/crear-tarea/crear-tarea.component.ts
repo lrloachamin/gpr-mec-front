@@ -61,6 +61,7 @@ const pesoTarea: any[] = [
 })
 
 export class CrearTareaComponent implements OnInit {
+  blockedDocument: boolean = false;
   //tarea: TareaDocente = {};
   getProyectos$: Observable<Proyecto[]>;
   descripcionIndicador: string = "";
@@ -134,6 +135,7 @@ export class CrearTareaComponent implements OnInit {
   }
 
   save() {
+    this.blockedDocument = true;   
     this.tarea.idDocenteRevisor = localStorage.getItem('idDocenteRevisor');
     this.tarea.nombreDocenteRevisor = localStorage.getItem('nombreDocenteRevisor');
     this.tareaDocenteProyecto.tarea = this.tarea;
@@ -147,16 +149,18 @@ export class CrearTareaComponent implements OnInit {
             summary: 'Éxito', 
             detail: 'La tarea ha sido creada con éxito'
           });
-          setTimeout(() => {                        
+          setTimeout(() => {   
+            this.blockedDocument = false;                     
             this.router.navigate(["listar-tareas"])
-          }, 1500);
+          }, 2000);
         },
         error: (err) => {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: err?.message ?? ' Error al crear la tarea'
+            detail: err?.message ?? ' Error al crear la Actividad'
           });
+          this.blockedDocument = false;
         },
         complete: () => {
           // this.isLoading = false;
@@ -171,14 +175,18 @@ export class CrearTareaComponent implements OnInit {
               summary: 'Éxito', 
               detail: 'La tarea ha sido creada con éxito'
             });
-            this.router.navigate(["listar-tareas"]);
+            setTimeout(() => {   
+              this.blockedDocument = false;                     
+              this.router.navigate(["listar-tareas"])
+            }, 2000);
           },
           error: (err) => {
             this.messageService.add({
               severity: 'error',
               summary: 'Error',
-              detail: err?.message ?? 'Algo ha salido mal'
+              detail: err?.message ?? ' Error al crear la Actividad'
             });
+            this.blockedDocument = false;
           },
           complete: () => {
             // this.isLoading = false;

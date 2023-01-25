@@ -53,6 +53,7 @@ import { CrearCargoComponent } from './pages/cargo/crear-cargo/crear-cargo.compo
 import { EditarCargoComponent } from './pages/cargo/editar-cargo/editar-cargo.component';
 import { ListarCargoComponent } from './pages/cargo/listar-cargo/listar-cargo.component';
 import { MessageService } from 'primeng/api';
+import {BlockUIModule} from 'primeng/blockui';
 
 
 @NgModule({
@@ -107,7 +108,8 @@ import { MessageService } from 'primeng/api';
     NgxAbstractControlAsModule,
     MatInputModule,
     ProgressSpinnerModule,
-    ToastModule
+    ToastModule,
+    BlockUIModule
     //ComponentsModule
     //PagesModule
   ],

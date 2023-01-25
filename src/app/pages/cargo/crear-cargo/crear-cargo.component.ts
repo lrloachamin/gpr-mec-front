@@ -5,6 +5,7 @@ import { Cargo } from 'src/app/models/Cargo';
 import { Perfil } from 'src/app/models/Perfil';
 import { CargoService } from 'src/app/servicios/cargo.service';
 import { UsuarioperfilService } from 'src/app/servicios/usuarioperfil.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-crear-cargo',
@@ -12,6 +13,7 @@ import { UsuarioperfilService } from 'src/app/servicios/usuarioperfil.service';
   styleUrls:['./crear-cargo.component.css']
 })
 export class CrearCargoComponent implements OnInit {
+  blockedDocument: boolean = false;
   cargo: Cargo = {};
   //getCargos$: Observable<Cargo[]>;
   cargos: Cargo[]=[];
@@ -22,7 +24,8 @@ export class CrearCargoComponent implements OnInit {
   constructor(
     private router:Router,
     private perfilesService:UsuarioperfilService,
-    private cargoService: CargoService
+    private cargoService: CargoService,
+    private messageService: MessageService
     ) {
       //this.getCargos$ = this.cargoService.obtenerCargosModel();
       this.getPerfiles$ = this.perfilesService.obtenerPerfiles();
@@ -47,10 +50,31 @@ export class CrearCargoComponent implements OnInit {
   }
 
   save(){ 
+    this.blockedDocument = true; 
     this.cargoService.crearCargo(this.cargo)
-    .subscribe(data=>{
-      confirm("Se agrego con éxito!!");
-      this.router.navigate(["listar-cargos"]);
+    .subscribe({
+      next: (data) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Éxito',
+          detail: 'El cargo ha sido creado con éxito'
+        });
+        setTimeout(() => {
+          this.blockedDocument = false; 
+          this.router.navigate(["listar-cargos"])
+        }, 2000);
+      },
+      error: (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err?.message ?? ' Error al crear el cargo'
+        });
+        this.blockedDocument = false; 
+      },
+      complete: () => {
+        // this.isLoading = false;
+      },
     })
   }
 

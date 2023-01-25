@@ -15,47 +15,48 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./realizar-tarea.component.css']
 })
 export class RealizarTareaComponent implements OnInit {
-
+  blockedDocument: boolean = false;
   indicadoresAsignados: any[] = [];
-  valorIndicadores:any[] = [];
+  valorIndicadores: any[] = [];
   getIndicadorTarea$: Observable<TareaIndicador[]>;
   tareaDocente: any = {};
   tarea: Tarea = {};
-  tareaIndicadors:TareaIndicador[]=[];
+  tareaIndicadors: TareaIndicador[] = [];
 
   selectedFiles: any;
   selectedFile: any;
   //Es el array que contiene los items para mostrar el progreso de subida de cada archivo
-  progressInfo:any = [];
+  progressInfo: any = [];
   message = '';
   imageName = "";
-  descPerfil:any;
+  descPerfil: any;
 
   //fileInfos: Observable<any>= new Observable;
-  fileModel$: Observable<any>= new Observable;
-  fileModelGuia$: Observable<any>= new Observable;
-  fileModelClass:any={}
-  fileModelClassGuia:any={}
-  tareaIndicadorFile: TareaIndicadorFile={};
+  fileModel$: Observable<any> = new Observable;
+  fileModelGuia$: Observable<any> = new Observable;
+  fileModelClass: any = {}
+  fileModelClassGuia: any = {}
+  tareaIndicadorFile: TareaIndicadorFile = {};
 
   constructor(
     private uploadFilesService: UploadFilesService,
-    private router:Router,
-    private tareaService:TareaService,
+    private router: Router,
+    private tareaService: TareaService,
     private messageService: MessageService
-    ) {
-      this.descPerfil=localStorage.getItem('descPerfil');
-      this.tareaService.tareaDocente$.subscribe((res) => {
-        this.tareaDocente = res;
-        if (this.tareaDocente == null) {
-          this.back();
-        }
+  ) {
+    this.descPerfil = localStorage.getItem('descPerfil');
+    this.tareaService.tareaDocente$.subscribe((res) => {
+      this.tareaDocente = res;
+      if (this.tareaDocente == null) {
+        this.back();
+      } else {
         this.tarea = this.tareaDocente.codigoTarea;
-      });
-      this.getIndicadorTarea$ = this.tareaService.obtenerIndicadoresTarea(this.tareaDocente.codigoTareaDocente);
-      this.fileModelGuia$ = this.uploadFilesService.getFileGuia(this.tarea.codigoTarea);
-      this.fileModel$ = this.uploadFilesService.getFileModel(this.tareaDocente.codigoTareaDocente);
-    }
+      }
+    });
+    this.getIndicadorTarea$ = this.tareaService.obtenerIndicadoresTarea(this.tareaDocente.codigoTareaDocente);
+    this.fileModelGuia$ = this.uploadFilesService.getFileGuia(this.tarea.codigoTarea);
+    this.fileModel$ = this.uploadFilesService.getFileModel(this.tareaDocente.codigoTareaDocente);
+  }
 
   ngOnInit(): void {
     //this.fileInfos = this.uploadFilesService.getFiles();
@@ -65,7 +66,7 @@ export class RealizarTareaComponent implements OnInit {
   }
 
   getIndicadorTarea() {
-    this.getIndicadorTarea$.subscribe(tareasIndicador =>{
+    this.getIndicadorTarea$.subscribe(tareasIndicador => {
       tareasIndicador.forEach(t => {
         this.indicadoresAsignados.push(t);
       });
@@ -73,18 +74,19 @@ export class RealizarTareaComponent implements OnInit {
   }
 
   getFileModel() {
-    this.fileModel$.subscribe(res =>{
+    this.fileModel$.subscribe(res => {
       this.fileModelClass = res;
     });
   }
 
   getFileGuia() {
-    this.fileModelGuia$.subscribe(res =>{
+    this.fileModelGuia$.subscribe(res => {
       this.fileModelClassGuia = res;
     });
   }
 
-  save(){
+  save() {
+    this.blockedDocument = true;
     this.tareaIndicadorFile.tareaIndicador = this.tareaIndicadors;
     /*this.tareaService.guardarTareaAsignadaAlDocente(this.tareaIndicadors)
     .subscribe(data=>{
@@ -102,54 +104,58 @@ export class RealizarTareaComponent implements OnInit {
     });
     */
     //
-    if(this.selectedFiles ==undefined){
-      this.tareaService.guardarTareaAsignadaAlDocente(this.tareaIndicadors,this.tareaDocente.codigoTareaDocente)
-      .subscribe({
-        next: (data) => {
-          this.messageService.add({
-            severity: 'success', 
-            summary: 'Éxito', 
-            detail: 'La Actividad ha sido subida con éxito'
-          });
-          setTimeout(() => {                        
-            this.router.navigate(["listar-tareas-docente"])
-          }, 1500);
-        },
-        error: (err) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: err?.message ?? ' Error al subir la Actividad'
-          });
-        },
-        complete: () => {
-          // this.isLoading = false;
-        },
-      })
-    }else{
-      this.tareaService.guardarArchivoTareaAsignadaAlDocente(this.selectedFiles[0],this.tareaIndicadors,this.tareaDocente.codigoTareaDocente)
-      .subscribe({
-        next: (data) => {
-          this.messageService.add({
-            severity: 'success', 
-            summary: 'Éxito', 
-            detail: 'La tarea ha sido creada con éxito'
-          });
-          setTimeout(() => {                        
-            this.router.navigate(["listar-tareas"])
-          }, 1500);
-        },
-        error: (err) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: err?.message ?? ' Error al crear la tarea'
-          });
-        },
-        complete: () => {
-          // this.isLoading = false;
-        },
-      })
+    if (this.selectedFiles == undefined) {
+      this.tareaService.guardarTareaAsignadaAlDocente(this.tareaIndicadors, this.tareaDocente.codigoTareaDocente)
+        .subscribe({
+          next: (data) => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Éxito',
+              detail: 'La Actividad ha sido subida con éxito'
+            });
+            setTimeout(() => {
+              this.blockedDocument = false;
+              this.router.navigate(["listar-tareas-docente"])
+            }, 2000);
+          },
+          error: (err) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: err?.message ?? ' Error al subir la Actividad'
+            });
+            this.blockedDocument = false;
+          },
+          complete: () => {
+            // this.isLoading = false;
+          },
+        })
+    } else {
+      this.tareaService.guardarArchivoTareaAsignadaAlDocente(this.selectedFiles[0], this.tareaIndicadors, this.tareaDocente.codigoTareaDocente)
+        .subscribe({
+          next: (data) => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Éxito',
+              detail: 'La Actividad ha sido creada con éxito'
+            });
+            setTimeout(() => {
+              this.blockedDocument = false;
+              this.router.navigate(["listar-tareas"])
+            }, 2000);
+          },
+          error: (err) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: err?.message ?? ' Error al crear la tarea'
+            });
+            this.blockedDocument = false;
+          },
+          complete: () => {
+            // this.isLoading = false;
+          },
+        })
     }
   }
 
@@ -157,13 +163,13 @@ export class RealizarTareaComponent implements OnInit {
     this.router.navigate(['listar-tareas-docente']);
   }
 
-  asignarIndicador(tareaIndicador:any){
-    if(!this.tareaIndicadors.includes(tareaIndicador.codigoTareaIndicador))
-      this.tareaIndicadors=this.tareaIndicadors.filter((item) => item.codigoTareaIndicador !== tareaIndicador.codigoTareaIndicador );
+  asignarIndicador(tareaIndicador: any) {
+    if (!this.tareaIndicadors.includes(tareaIndicador.codigoTareaIndicador))
+      this.tareaIndicadors = this.tareaIndicadors.filter((item) => item.codigoTareaIndicador !== tareaIndicador.codigoTareaIndicador);
     this.tareaIndicadors.push(tareaIndicador);
   }
 
-  selectFiles(event:any) {
+  selectFiles(event: any) {
     this.progressInfo = [];
     //event.target.files.length == 1 ? this.imageName = event.target.files[0].name : this.imageName = event.target.files.length + " archivos";
     this.imageName = event.target.files[0].name;
@@ -204,8 +210,8 @@ export class RealizarTareaComponent implements OnInit {
     });
   */}
 
-  crearSubTarea(){
+  /*crearSubTarea(){
     this.tareaService.setTareaModel(this.tarea);
     this.router.navigate(['crear-subTarea']);
-  }
+  }*/
 }

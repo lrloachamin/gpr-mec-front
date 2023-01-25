@@ -1,6 +1,13 @@
 <app-navbar></app-navbar>
+<p-toast position="top-right" [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"></p-toast>
+<p-blockUI *ngIf="visualBlockedDocument" [blocked]="blockedDocument" (baseZIndex)="3"></p-blockUI>
 <div class="container">
   <div class="row justify-content-center">
+    <div class="overlay">
+      <p-progressSpinner *ngIf="blockedDocument"
+        [style]="{width: '150px', height: '150px', margin:'auto'}"
+        styleClass="custom-spinner"></p-progressSpinner>
+    </div>
     <div class="col-md-5" style="margin: auto;">
       <h3 style="text-align: center;"><mat-icon>device_hub</mat-icon>Editar Datos del Proceso</h3>
       <form (ngSubmit)="f.form.valid && save()" #f="ngForm">

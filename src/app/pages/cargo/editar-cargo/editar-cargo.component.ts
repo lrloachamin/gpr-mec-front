@@ -5,6 +5,7 @@ import { Cargo } from 'src/app/models/Cargo';
 import { Perfil } from 'src/app/models/Perfil';
 import { CargoService } from 'src/app/servicios/cargo.service';
 import { UsuarioperfilService } from 'src/app/servicios/usuarioperfil.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-editar-cargo',
@@ -12,6 +13,8 @@ import { UsuarioperfilService } from 'src/app/servicios/usuarioperfil.service';
   styleUrls:['./editar-cargo.component.css']
 })
 export class EditarCargoComponent implements OnInit {
+  blockedDocument: boolean = false;
+  visualBlockedDocument: boolean = true;
   cargo: any = {};
   //getCargos$: Observable<Cargo[]>;
   cargos: Cargo[]=[];
@@ -22,11 +25,13 @@ export class EditarCargoComponent implements OnInit {
   constructor(
     private router:Router,
     private perfilesService:UsuarioperfilService,
-    private cargoService: CargoService
+    private cargoService: CargoService,
+    private messageService: MessageService
     ) {
       this.cargoService.cargo$.subscribe((res) => {
         this.cargo = res;
         if (this.cargo == null) {
+          this.visualBlockedDocument = false;
           this.back();
         }
       });
@@ -57,10 +62,31 @@ export class EditarCargoComponent implements OnInit {
   }
 
   save(){ 
+    this.blockedDocument = true;
     this.cargoService.actualizarCargo(this.cargo)
-    .subscribe(data=>{
-      confirm("Se modificaron sus datos con éxito!!");
-      this.router.navigate(["listar-cargos"]);
+    .subscribe({
+      next: (data) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Éxito',
+          detail: 'Los datos del cargo han sido modificados con éxito'
+        });
+        setTimeout(() => {
+          this.blockedDocument = false; 
+          this.router.navigate(["listar-cargos"])
+        }, 2000);
+      },
+      error: (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err?.message ?? ' Error al editar los datos del cargo'
+        });
+        this.blockedDocument = false; 
+      },
+      complete: () => {
+        // this.isLoading = false;
+      },
     })
   }
 

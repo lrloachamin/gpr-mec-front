@@ -15,7 +15,7 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./revisar-tarea.component.css']
 })
 export class RevisarTareaComponent implements OnInit {
-
+  blockedDocument: boolean = false;
   checkButton:Boolean = false;
   indicadoresAsignados: any[] = [];
   valorIndicadores:any[] = [];
@@ -49,8 +49,8 @@ export class RevisarTareaComponent implements OnInit {
         this.tareaDocente = res;
         if (this.tareaDocente == null) {
           this.back();
-        }
-        this.tarea = this.tareaDocente.codigoTarea;
+        }else
+          this.tarea = this.tareaDocente.codigoTarea;
       });
       this.getIndicadorTarea$ = this.tareaService.obtenerIndicadoresTarea(this.tareaDocente.codigoTareaDocente);
       this.fileModelGuia$ = this.uploadFilesService.getFileGuia(this.tarea.codigoTarea);
@@ -102,6 +102,7 @@ export class RevisarTareaComponent implements OnInit {
   }
 
   aprobarTarea(){
+    this.blockedDocument = true;
     this.tareaService.aprobarTareaDocente(this.tareaDocente)
     .subscribe({
       next: (data) => {
@@ -110,9 +111,10 @@ export class RevisarTareaComponent implements OnInit {
           summary: 'Éxito', 
           detail: 'La Actividad ha sido subida con éxito'
         });
-        setTimeout(() => {                        
+        setTimeout(() => {  
+          this.blockedDocument = false;                      
           this.router.navigate(["tareas-entregadas"])
-        }, 1500);
+        }, 2000);
       },
       error: (err) => {
         this.messageService.add({
@@ -134,7 +136,7 @@ export class RevisarTareaComponent implements OnInit {
   }
 
   denegarTareaDocente(){
-    
+    this.blockedDocument = true;
     this.tareaService.denegarTareaDocente(this.tareaDocente)
     .subscribe({
       next: (data) => {
@@ -143,9 +145,10 @@ export class RevisarTareaComponent implements OnInit {
           summary: 'Éxito', 
           detail: 'La Actividad ha sido Denegada con éxito'
         });
-        setTimeout(() => {                        
+        setTimeout(() => {    
+          this.blockedDocument = false;                    
           this.router.navigate(["tareas-entregadas"])
-        }, 1500);
+        }, 2000);
       },
       error: (err) => {
         this.messageService.add({
@@ -153,6 +156,7 @@ export class RevisarTareaComponent implements OnInit {
           summary: 'Error',
           detail: err?.message ?? ' Error al aprobar la Actividad'
         });
+        this.blockedDocument = false; 
       },
       complete: () => {
         // this.isLoading = false;

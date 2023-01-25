@@ -8,6 +8,7 @@
       <thead class="table-dark">
         <tr>
           <th>Actividad</th>
+          <th>Tipo de Actividad</th>
           <th>Prioridad de la Actividad</th>
           <th>Fecha Límite de Entrega</th>
           <!--<th>Responsable</th>-->
@@ -18,6 +19,7 @@
       <tbody>
         <tr *ngFor="let tarea of tareasDocenteProyecto">
           <td>{{ tarea.tarea?.nombreTarea }}</td>
+          <td>{{ tarea.tarea?.tipoTarea }}</td>
           <td>{{ tarea.tarea?.prioridadTarea }}</td>
           <td>{{ tarea.tarea?.fechaEntregaTarea | date:"short":'+00:00'}}</td>
           <!--<td>{{ tarea.codigoDocente?.nombreDocente }} {{ tarea.codigoDocente?.apellidoDocente }} </td>-->

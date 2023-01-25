@@ -5,6 +5,7 @@ import { Proyecto } from 'src/app/models/Proyecto';
 import { TipoProceso } from 'src/app/models/TipoProceso';
 import { ProyectoService } from 'src/app/servicios/proyecto.service';
 import { TipoProcesoService } from 'src/app/servicios/tipo-proceso.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-crear-proyectos',
@@ -12,6 +13,7 @@ import { TipoProcesoService } from 'src/app/servicios/tipo-proceso.service';
   styleUrls:['./crear-proyecto.component.css']
 })
 export class CrearProyectosComponent implements OnInit {
+  blockedDocument: boolean = false;
   proyecto: Proyecto = {};
   getProcesos$: Observable<TipoProceso[]>;
   tipoProcesos: TipoProceso[]=[];
@@ -19,7 +21,8 @@ export class CrearProyectosComponent implements OnInit {
   constructor(
     private router:Router,
     private proyectoService:ProyectoService,
-    private tipoProcesoService: TipoProcesoService
+    private tipoProcesoService: TipoProcesoService,
+    private messageService: MessageService
     ) {
       this.getProcesos$ = this.tipoProcesoService.obtenerTipoProcesos();
   }
@@ -35,10 +38,31 @@ export class CrearProyectosComponent implements OnInit {
   }
 
   save(){
+    this.blockedDocument = true; 
     this.proyectoService.crearProyecto(this.proyecto)
-    .subscribe(data=>{
-      confirm("Se agrego con éxito!!");
-      this.router.navigate(["listar-proyectos"]);
+    .subscribe({
+      next: (data) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Éxito',
+          detail: 'El proyecto ha sido creada con éxito'
+        });
+        setTimeout(() => {
+          this.blockedDocument = false; 
+          this.router.navigate(["listar-proyectos"])
+        }, 2000);
+      },
+      error: (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err?.message ?? ' Error al crear el proyecto'
+        });
+        this.blockedDocument = false; 
+      },
+      complete: () => {
+        // this.isLoading = false;
+      },
     })
   }
 

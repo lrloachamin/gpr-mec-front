@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TipoProceso } from 'src/app/models/TipoProceso';
 import { TipoProcesoService } from 'src/app/servicios/tipo-proceso.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-crear-tipo-proceso',
@@ -10,9 +11,11 @@ import { TipoProcesoService } from 'src/app/servicios/tipo-proceso.service';
 })
 export class CrearTipoProcesoComponent implements OnInit {
   tipoProceso: TipoProceso = {};
+  blockedDocument: boolean = false;
   constructor(
     private router:Router,
-    private tipoProcesoService:TipoProcesoService
+    private tipoProcesoService:TipoProcesoService,
+    private messageService: MessageService
     ) {
   }
 
@@ -20,10 +23,31 @@ export class CrearTipoProcesoComponent implements OnInit {
   }
 
   save(){
+    this.blockedDocument = true; 
     this.tipoProcesoService.crear(this.tipoProceso)
-    .subscribe(data=>{
-      confirm("Se agrego con éxito!!");
-      this.router.navigate(["listar-tipos-procesos"]);
+    .subscribe({
+      next: (data) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Éxito',
+          detail: 'El proceso ha sido creado con éxito'
+        });
+        setTimeout(() => {
+          this.blockedDocument = false; 
+          this.router.navigate(["listar-tipos-procesos"])
+        }, 2000);
+      },
+      error: (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err?.message ?? ' Error al crear el proceso'
+        });
+        this.blockedDocument = false; 
+      },
+      complete: () => {
+        // this.isLoading = false;
+      },
     })
   }
 
