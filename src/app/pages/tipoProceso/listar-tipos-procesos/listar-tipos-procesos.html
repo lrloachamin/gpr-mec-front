@@ -9,6 +9,7 @@
         <tr>
           <th>Proceso</th>
           <th>Descripción</th>
+          <th>Estado</th>
           <th>Acción</th>
         </tr>
       </thead>
@@ -20,8 +21,11 @@
             <span *ngSwitchCase="''">Sin descripción</span>
             <span *ngSwitchDefault>{{ tipoProceso.descripcionTipoProceso }}</span>
           </td>
+          <td>{{ tipoProceso.estadoTipoProceso}}</td>
           <td>
             <button (click)="editar(tipoProceso)" class="btn btn-warning btn-sm">Editar</button>
+            <button (click)="cambiarEstadoProceso(tipoProceso)" class="btn btn-dark btn-sm" style="margin-left: 10px;">Cambiar
+              Estado</button>
           </td>
         </tr>
       </tbody>

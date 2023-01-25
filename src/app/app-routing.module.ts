@@ -14,7 +14,6 @@ import { ListarCargoComponent } from './pages/cargo/listar-cargo/listar-cargo.co
 import { CrearProyectosComponent } from './pages/proyecto/crear-proyectos/crear-proyectos.component';
 import { EditarProyectoComponent } from './pages/proyecto/editar-proyecto/editar-proyecto.component';
 import { ListarProyectosComponent } from './pages/proyecto/listar-proyectos/listar-proyectos.component';
-import { CrearSubTareaComponent } from './pages/tarea-docente/crear-subtarea/crear-subtarea.component';
 import { ListarTareasDocenteComponent } from './pages/tarea-docente/listar-tareas-docente/listar-tareas-docente.component';
 import { RealizarTareaComponent } from './pages/tarea-docente/realizar-tarea-docente/realizar-tarea.component';
 import { CrearTareaComponent } from './pages/tarea/crear-tarea/crear-tarea.component';
@@ -56,7 +55,6 @@ const routes: Routes = [
   {path: 'listar-tipos-procesos', component:ListarTiposProcesosComponent,canActivate:[AuthGuard]},
   {path: 'crear-tipo-proceso', component:CrearTipoProcesoComponent,canActivate:[AuthGuard]},
   {path: 'editar-tipo-proceso', component:EditarTipoProcesoComponent,canActivate:[AuthGuard]},
-  {path: 'crear-subTarea', component:CrearSubTareaComponent,canActivate:[AuthGuard]},
   {path: 'listar-tareas-revisar', component:ListarTareasRevisarComponent,canActivate:[AuthGuard]},
   {path: 'listar-logueo-usuarios', component:ListarLogueoUsuariosComponent,canActivate:[AuthGuard]},
   {path: 'listar-cargos', component:ListarCargoComponent,canActivate:[AuthGuard]},

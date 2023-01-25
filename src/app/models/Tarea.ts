@@ -18,6 +18,6 @@ export type Tarea = {
   valorPesoTarea?:number;
   idDocenteRevisor?: string|null;
   nombreDocenteRevisor?: string|null;
-  codigoTareaPadre?:Tarea|null;
+  //codigoTareaPadre?:Tarea|null;
   tareaDocenteList?:TareaDocente[] ;
 };

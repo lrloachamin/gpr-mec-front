@@ -10,7 +10,7 @@ export type Docente = {
   cedulaDocente?: string;
   telefonoDocente?: string;
   correoDocente?: string;
-  codCargo?:Cargo;
+  //codCargo?:Cargo;
   numLogueo?: number;
   tareaDocenteList?: TareaDocente[];
   cantidadTarea?: number;

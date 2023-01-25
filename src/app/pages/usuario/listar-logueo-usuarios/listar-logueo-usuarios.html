@@ -1,11 +1,11 @@
 <app-navbar></app-navbar>
 <div class="container">
-  <h2 style="text-align: center;">Logueos Realizados</h2>
+  <h2 style="text-align: center;">Control de inicios de sesion</h2>
   <div class="table-responsive">
     <table class="table table-hover text-center table-sm">
       <thead class="table-dark">
         <tr>
-          <th>Cargo</th>
+          <!--<th>Cargo</th>-->
           <th>Docente</th>
           <th>Cantidad</th>
           <th>Logueos</th>
@@ -13,7 +13,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let docente of docentes"><!--*ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'"-->
-          <td >{{ docente.codCargo?.nombreCargo }}</td>
+          <!--<td >{{ docente.codCargo?.nombreCargo }}</td>-->
           <td>{{ docente.nombreDocente }} {{
             docente.apellidoDocente }}</td>
           <td>{{ docente.numLogueo}} <span

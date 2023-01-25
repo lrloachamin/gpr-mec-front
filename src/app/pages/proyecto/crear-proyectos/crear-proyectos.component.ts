@@ -24,7 +24,7 @@ export class CrearProyectosComponent implements OnInit {
     private tipoProcesoService: TipoProcesoService,
     private messageService: MessageService
     ) {
-      this.getProcesos$ = this.tipoProcesoService.obtenerTipoProcesos();
+      this.getProcesos$ = this.tipoProcesoService.obtenerTipoProcesosActivos();
   }
 
   ngOnInit(): void {

@@ -115,7 +115,12 @@ export class NavbarComponent implements OnInit{
      //console.log(this.menusAdministrativo)
      
 
-    })
+    }
+    )
+    
+    if(this.menusTareas.length!=0){
+      this.menusTareas.sort((x, y) => x.nombre.localeCompare(y.nombre)).reverse();
+    }
     /*
     console.log(this.menusAdministrativo)
     console.log(this.menusTareas)

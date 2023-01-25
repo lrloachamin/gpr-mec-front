@@ -22,6 +22,10 @@ export class TipoProcesoService {
     return this.http.get<TipoProceso[]>(`${TIPO_PROCESO}/listarTiposProcesos`); 
   }
 
+  public obtenerTipoProcesosActivos(): Observable<TipoProceso[]>{
+    return this.http.get<TipoProceso[]>(`${TIPO_PROCESO}/listarTiposProcesosActivos`); 
+  }
+
   public crear<TipoProceso>(tipoProceso:TipoProceso){
     return this.http.post<TipoProceso>(TIPO_PROCESO,tipoProceso); 
   }
@@ -32,6 +36,10 @@ export class TipoProcesoService {
 
   public editarTipoProceso(tipoProceso:TipoProceso){
     return this.http.put<TipoProceso>(`${TIPO_PROCESO}/modificar`, tipoProceso);
+  }
+
+  public cambiarEstadoProceso(codigoTipoProceso:any){
+    return this.http.put<TipoProceso>(`${TIPO_PROCESO}/cambiarEstado/${codigoTipoProceso}`, codigoTipoProceso);
   }
 
 }

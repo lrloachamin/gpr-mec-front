@@ -3,13 +3,27 @@
 </nav>
 
 <div class="row">
-  <div class="imageLeft col-8" style="padding: 10px;padding-left: 20px;">
-    <img src="https://uar.espe.edu.ec/wp-content/uploads/2020/09/Espe-Sangolgui.jpg" alt="" width="100%" height="100%">
+  <div class="imageLeft col-md-8 col-sm-6">
+    <!--<img src="https://uar.espe.edu.ec/wp-content/uploads/2020/09/Espe-Sangolgui.jpg" alt="" width="100%" height="100%">-->
+    <div class="contenedor">
+      <div class="slider-frame">
+        <ul>
+            <li><img src="https://uar.espe.edu.ec/wp-content/uploads/2020/09/Espe-Sangolgui.jpg"
+                    alt=""></li>
+            <li><img src="https://supercomputacion.espe.edu.ec/wp-content/uploads/2015/03/PANORAMICA-ESPE.jpg" alt=""></li>
+            <li><img src="https://www.espe.edu.ec/wp-content/uploads/slider/cache/1df7ba634766f535589faa0e3e58f0d6/ESPE-Matriz-Sangolqui.png" alt="">
+            </li>
+            <li><img src="https://upload.wikimedia.org/wikipedia/commons/3/37/ESPE_campus_sangolqui.JPG" alt=""></li>
+        </ul>
+    </div>
+    </div>
+    
   </div>
-  <div class="abs-center col-4" style="display: flex;">
+  <div class="abs-center col-md-4 col-sm-6" style="display: flex;">
     <form [formGroup]="formulario2" (ngSubmit)="consultar()" class="border p-3 form">
       <div class="imagenUsuario">
-        <img src="https://cdn-icons-png.flaticon.com/512/64/64572.png">
+        <!--<img src="https://cdn-icons-png.flaticon.com/512/64/64572.png">-->
+        <img src="https://www.pngfind.com/pngs/m/93-938537_png-file-fa-user-circle-o-transparent-png.png">
       </div>
       <!--<span style="font-size: 25px;">
         Login

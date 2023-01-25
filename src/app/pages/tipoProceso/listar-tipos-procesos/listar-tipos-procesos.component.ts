@@ -40,4 +40,12 @@ export class ListarTiposProcesosComponent implements OnInit {
     this.tipoProcesoService.setTipoProceso(tipoProceso);
     this.router.navigate(['editar-tipo-proceso']);
   }
+
+  cambiarEstadoProceso(proceso:TipoProceso){
+    this.tipoProcesoService.cambiarEstadoProceso(proceso.codigoTipoProceso)
+    .subscribe(data=>{
+      confirm("Se cambio el estado del Proceso: "+proceso.nombreTipoProceso);
+      this.getTiposProcesos();
+    })
+  }
 }

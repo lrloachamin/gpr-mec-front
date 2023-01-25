@@ -41,7 +41,6 @@ import { ListarTareasAsignadasComponent } from './pages/tarea/listar-tareas-asig
 import { ListarTiposProcesosComponent } from './pages/tipoProceso/listar-tipos-procesos/listar-tipos-procesos.component';
 import { EditarTipoProcesoComponent } from './pages/tipoProceso/editar-tipo-proceso/editar-tipo-proceso';
 import { CrearTipoProcesoComponent } from './pages/tipoProceso/crear-tipo-proceso/crear-tipo-proceso.component';
-import { CrearSubTareaComponent } from './pages/tarea-docente/crear-subtarea/crear-subtarea.component';
 import { ListarTareasRevisarComponent } from './pages/tarea/listar-tareas-revisar/listar-tareas-revisar.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
@@ -83,7 +82,6 @@ import {BlockUIModule} from 'primeng/blockui';
     ListarTiposProcesosComponent,
     EditarTipoProcesoComponent,
     CrearTipoProcesoComponent,
-    CrearSubTareaComponent,
     ListarTareasRevisarComponent,
     ListarLogueoUsuariosComponent,
     PasswordOlvidadoComponent,
