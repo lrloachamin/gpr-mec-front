@@ -49,7 +49,7 @@
             <li *ngFor="let i of indicadoresAsignados">
               <span>Descripción de Indicador:{{ i.descripcionTareaIndicador}}<br /></span>
               <span>Tipo de Variable: {{ i.indicadorCODIGOINDICADOR.nombreIndicador }} <br /></span>
-              <span>Valor ingresado: {{ i.valorIndicador }}</span>
+              <span>Valor ingresado: {{ i.valorIndicador }}</span> <span *ngIf="i.indicadorCODIGOINDICADOR.nombreIndicador=='PORCENTAJE'">Valor ingresado: {{ i.valorIndicador }}</span>
             </li>
           </ul>
         </div>
