@@ -14,7 +14,8 @@
       <tbody>
         <tr *ngFor="let cargo of cargos">
           <td>{{ cargo.nombreCargo }}</td>
-          <td>{{ cargo.descriCargo }}</td>
+          <td *ngIf="cargo.descriCargo">{{ cargo.descriCargo }}</td>
+          <td *ngIf="!cargo.descriCargo">Sin observaciones</td>
           <td>
             <button (click)="editar(cargo)" class="btn btn-warning btn-sm">Editar</button>
           </td>
