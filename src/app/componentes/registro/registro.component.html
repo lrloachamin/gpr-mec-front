@@ -15,7 +15,7 @@
             <label for="cedula" style="font-weight: bold;">Cédula:</label>
             <input type="number" name="cedula" id="cedula" class="form-control" [(ngModel)]="cedulaI"
               (change)="validadorDeCedula(cedulaI);validarUsuarioRepetido(cedulaI);cargardocentecedula(cedulaI)"
-              formControlName="cedula" onKeyPress="if(this.value.length==10) return false;">
+              formControlName="cedula">
             <small class="text-danger"
               *ngIf="formulario.get('cedula')?.errors?.['required'] && formulario.get('cedula')?.touched">Complete este
               campo</small>

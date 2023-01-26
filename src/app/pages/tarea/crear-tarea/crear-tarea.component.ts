@@ -62,6 +62,7 @@ const pesoTarea: any[] = [
 
 export class CrearTareaComponent implements OnInit {
   blockedDocument: boolean = false;
+  ckequearIndicadorBooleano:boolean = true;
   //tarea: TareaDocente = {};
   getProyectos$: Observable<Proyecto[]>;
   descripcionIndicador: string = "";
@@ -135,6 +136,22 @@ export class CrearTareaComponent implements OnInit {
   }
 
   save() {
+    /*let fecha = new Date();
+    let fecha2;
+    if(this.tarea.fechaEntregaTarea)
+      fecha2 = new Date(this.tarea.fechaEntregaTarea)
+    if(fecha2)
+      if(fecha2<=fecha)
+      alert("feca no valida")
+      else
+      alert("feca valida")
+      
+    if(this.indicadoresAsignados.length==0)
+      alert("Ningún indicador Asignado")
+    
+    if(this.docentesAsignados.length==0)
+      alert("Ningún Docente Asignado")
+    */
     this.blockedDocument = true;   
     this.tarea.idDocenteRevisor = localStorage.getItem('idDocenteRevisor');
     this.tarea.nombreDocenteRevisor = localStorage.getItem('nombreDocenteRevisor');
@@ -212,6 +229,12 @@ export class CrearTareaComponent implements OnInit {
       this.docentesAsignados.push(docente);
   }
 
+  cambiarCkequearIndicadorBooleano(){
+    if(this.indicador.nombreIndicador=='BOOLEANO')
+    this.ckequearIndicadorBooleano=false;
+    else
+    this.ckequearIndicadorBooleano=true;
+  }
   cambiarTodosDocentes() {
     this.docentes.forEach(docente => {
       docente.checked = !docente.checked;

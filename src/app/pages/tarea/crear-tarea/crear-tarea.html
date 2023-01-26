@@ -53,20 +53,24 @@
         <div class="form-group">
           <hr>
           <h2>Indicadores:</h2>
-          <button *ngIf="!ckequearIndicador" type="button" style="background-color: rgb(21, 156, 77);border-radius: 4px;"><mat-icon
-              (click)="visualizarIndicador()" style="color: blanchedalmond">add</mat-icon></button><!--<input type="button" (click)="visualizarIndicador()" class=""
+          <button *ngIf="!ckequearIndicador" type="button"
+            style="background-color: rgb(21, 156, 77);border-radius: 4px;"><mat-icon (click)="visualizarIndicador()"
+              style="color: blanchedalmond">add</mat-icon></button><!--<input type="button" (click)="visualizarIndicador()" class=""
             value="Agregar Indicador" />-->
         </div>
         <div class="form-group" *ngIf="ckequearIndicador">
           <label for="">Seleccione un Indicador:</label>
           <p>
-            <select name="indicador" [(ngModel)]="indicador" class="form-select">
+            <select name="indicador" [(ngModel)]="indicador" class="form-select"
+              (change)="cambiarCkequearIndicadorBooleano()">
               <option [ngValue]="ind" *ngFor="let ind of indicadores">{{ind.nombreIndicador}}</option>
             </select>
           </p>
-          <label for="">Ingrese una Descripción del Indicador:</label>
-          <input [(ngModel)]="descripcionIndicador" name="descripcionIndicador" type="text" class="form-control"
-            required />
+          <div *ngIf="ckequearIndicadorBooleano">
+            <label for="">Ingrese una Descripción del Indicador:</label>
+            <input [(ngModel)]="descripcionIndicador" name="descripcionIndicador" type="text" class="form-control"
+              required />
+          </div>
           <div class="form-group">
             <button type="button" (click)="agregarIndicador()" class="btn btn-primary btn-sm form-control">Guardar
               Indicador</button>
