@@ -3,6 +3,11 @@
 <p-blockUI [blocked]="blockedDocument" (baseZIndex)="3"></p-blockUI>
 <div class="container">
   <div class="row justify-content-center">
+    <div class="overlay">
+      <p-progressSpinner *ngIf="blockedDocument"
+        [style]="{width: '150px', height: '150px', margin:'auto'}"
+        styleClass="custom-spinner"></p-progressSpinner>
+    </div>
     <div class="col-md-5" style="margin: auto;">
       <h2 style="text-align: center;"><mat-icon>assignment_ind</mat-icon> Realizar Actividad</h2>
       <form (ngSubmit)="f.form.valid" #f="ngForm">

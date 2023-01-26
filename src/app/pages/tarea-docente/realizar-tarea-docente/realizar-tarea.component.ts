@@ -137,7 +137,7 @@ export class RealizarTareaComponent implements OnInit {
             this.messageService.add({
               severity: 'success',
               summary: 'Éxito',
-              detail: 'La Actividad ha sido creada con éxito'
+              detail: 'La Actividad ha sido subida con éxito'
             });
             setTimeout(() => {
               this.blockedDocument = false;
