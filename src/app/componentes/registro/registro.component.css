@@ -5,6 +5,19 @@
     font-size: 15px;
 
 }*/
+form{
+    background: hsla(170, 44%, 69%, 1);
+
+    background: linear-gradient(90deg, hsla(170, 44%, 69%, 1) 0%, hsla(229, 32%, 76%, 1) 100%);
+    
+    background: -moz-linear-gradient(90deg, hsla(170, 44%, 69%, 1) 0%, hsla(229, 32%, 76%, 1) 100%);
+    
+    background: -webkit-linear-gradient(90deg, hsla(170, 44%, 69%, 1) 0%, hsla(229, 32%, 76%, 1) 100%);
+    
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#8FD3C8", endColorstr="#ADB4D5", GradientType=1 );
+}
+
+
 
 .container{
     width: 100%;
