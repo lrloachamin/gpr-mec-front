@@ -45,6 +45,7 @@
         <div class="form-group">
           <h2 style="text-align: center;">Indicadores:</h2>
             <span *ngFor="let i of indicadoresAsignados">
+              <hr>
               <label>Tipo de Indicador: </label><span>{{ i.indicadorCODIGOINDICADOR.nombreIndicador }}</span><br />
               <label>Descripción del Indicador: </label><span>{{ i.descripcionTareaIndicador}}</span>
               <input *ngIf="i.indicadorCODIGOINDICADOR.nombreIndicador=='NUMÉRICO'" [(ngModel)]="i.valorIndicador"
@@ -60,8 +61,7 @@
                 <label for="ckeck">Actividad Realizada</label>
                 <input id="ckeck" [value]="'Tarea Realizada'" [(ngModel)]="i.valorIndicador"
                   [name]="i.codigoTareaIndicador" (change)="asignarIndicador(i)" type="radio" />
-                <br />
-                <label for="noCheck">Actividad no Realizada</label>
+                <label for="noCheck" style="margin-left: 10px;">Actividad no Realizada</label>
                 <input id="noCheck" [value]="'Tarea no Realizada'" [(ngModel)]="i.valorIndicador"
                   [name]="i.codigoTareaIndicador" (change)="asignarIndicador(i)" type="radio" />
               </div>
