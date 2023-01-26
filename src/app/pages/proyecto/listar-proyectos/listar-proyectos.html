@@ -20,7 +20,8 @@
           <td>{{ proyecto.tipoProceso?.nombreTipoProceso }}</td>
           <td>{{ proyecto.nombreProyecto }}</td>
           <td>{{ proyecto.fechaCreacionproyecto | date: "dd-MM-yyyy" }}</td>
-          <td>{{ proyecto.descripcionProyecto }}</td>
+          <td *ngIf="proyecto.descripcionProyecto">{{ proyecto.descripcionProyecto }}</td>
+          <td *ngIf="!proyecto.descripcionProyecto">Sin descripción</td>
           <td [ngSwitch]="proyecto.estadoProyecto">
             <span *ngSwitchCase="'ACT'">ACTIVO</span>
             <span *ngSwitchDefault>INACTIVO</span>
