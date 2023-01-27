@@ -312,7 +312,7 @@ export class EditarTareaComponent implements OnInit {
         this.back();
       } else {
         this.tarea = this.tareaDocenteProyecto.tarea;
-        if(this.tarea.tipoTarea=="SOLICITUD")
+        if (this.tarea.tipoTarea == "SOLICITUD")
           this.checkTipoTarea = false;
         if (this.tarea.fechaEntregaTarea) {
           //this.tarea.fechaEntregaTarea = new Date(this.tarea.fechaEntregaTarea);
@@ -375,7 +375,7 @@ export class EditarTareaComponent implements OnInit {
             this.messageService.add({
               severity: 'success',
               summary: 'Éxito',
-              detail: 'La tarea ha sido modificada con éxito'
+              detail: 'La Actividad ha sido modificada con éxito'
             });
             setTimeout(() => {
               this.blockedDocument = false;
@@ -387,7 +387,7 @@ export class EditarTareaComponent implements OnInit {
             this.messageService.add({
               severity: 'error',
               summary: 'Error',
-              detail: err?.message ?? 'Algo ha salido mal'
+              detail: err?.message ?? ' Error al editar la Actividad'
             });
             this.blockedDocument = false;
           },
@@ -396,11 +396,32 @@ export class EditarTareaComponent implements OnInit {
           },
         })
     } else {
-      /*this.tareaService.crearTareaConArchivo(this.tareaDocenteProyecto, this.selectedFiles[0])
-        .subscribe(data => {
-          confirm("Se creo la tarea!!");
-          this.router.navigate(["listar-tareas"]);
-        })*/
+      this.tareaService.editarTareaConArchivo(this.tareaDocenteProyecto,this.selectedFiles[0])
+        .subscribe({
+          next: (data) => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Éxito',
+              detail: 'La Actividad ha sido modificada con éxito'
+            });
+            setTimeout(() => {
+              this.blockedDocument = false;
+              this.router.navigate(["listar-tareas"])
+            }, 2000);
+
+          },
+          error: (err) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: err?.message ?? ' Error al editar la Actividad'
+            });
+            this.blockedDocument = false;
+          },
+          complete: () => {
+            // this.isLoading = false;
+          },
+        })
     }
   }
 
