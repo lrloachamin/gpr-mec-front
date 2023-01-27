@@ -54,7 +54,7 @@
         </div>
 
         <div class="form-group mb-3">
-          <label for="telefono" style="font-weight: bold;">Telefono:</label>
+          <label for="telefono" style="font-weight: bold;">Teléfono:</label>
           <input [(ngModel)]="docTelefono" type="telefono" name="telefono" id="telefono" class="form-control"
             formControlName="telefono" onKeyPress="if(this.value.length==10) return false;">
           <small class="text-danger"
@@ -75,7 +75,7 @@
         </div>
 
         <div class="form-group mb-3">
-          <label for="cargo" style="font-weight: bold;">Genero:</label>
+          <label for="cargo" style="font-weight: bold;">Género:</label>
           <select class="form-select" formControlName="sexo" [(ngModel)]="docSexo">
             <option value="">Seleccionar</option>
             <option [value]="sexos" *ngFor="let sexos of comboSexo" [selected]="sexos === docSexo">

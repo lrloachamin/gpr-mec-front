@@ -51,7 +51,7 @@ export class RegistroComponent implements OnInit {
   iniciarFormulario() {
 
     this.comboSexo = ["FEMENINO", "MASCULINO", "OTRO"]
-    this.comboPuestoTrabajo = ["TÉCNICO DE LABPORATORIO", "TIEMPO COMPLETO", "TIEMPO PARCIAL"]
+    this.comboPuestoTrabajo = ["TÉCNICO DE LABORATORIO", "TIEMPO COMPLETO", "TIEMPO PARCIAL"]
     this.formulario = this.fb.group({
       id: ['', Validators.required],
       nombres: ['', Validators.required],
@@ -114,12 +114,12 @@ export class RegistroComponent implements OnInit {
       uploaddata.append('sexooDocente', data.sexo);
       uploaddata.append('puestoDocente', data.puesto);
       uploaddata.append('cargosAsignados', JSON.stringify(data.cargosAsignados));
-
+      
       this._docente.registrarUsuario(uploaddata).subscribe((data: any) => {
         //console.log(data);
         if (data.metadata.code = "000") {
           this.tituloMensajeVal = "Usuario Creado Correctamente"
-          this.mensaje = "Espere hasta que el administrador acepte sus solicitud! ";
+          this.mensaje = "Espere hasta que el administrador acepte su solicitud! ";
         } else {
           this.tituloMensajeVal = "Error"
           this.mensaje = "Ha ocurrido un error al crear el usuario, Contactese con su administrador!"
@@ -231,7 +231,7 @@ export class RegistroComponent implements OnInit {
   asignarCargoPorPuesto(puestoDocenteM: string) {
     let OpcionSeleccionada: string;
     this.cargosAsignados = [];
-    if (puestoDocenteM == "TÉCNICO DE LABPORATORIO")//"TÉCNICO DE LABPORATORIO","TIEMPO COMPLETO","TIEMPO PARCIAL"
+    if (puestoDocenteM == "TÉCNICO DE LABORATORIO")//"TÉCNICO DE LABPORATORIO","TIEMPO COMPLETO","TIEMPO PARCIAL"
       OpcionSeleccionada = "Técnico de Laboratorio";
     else if (puestoDocenteM == "TIEMPO COMPLETO" || puestoDocenteM == "TIEMPO PARCIAL")//"TÉCNICO DE LABPORATORIO","TIEMPO COMPLETO","TIEMPO PARCIAL"
       OpcionSeleccionada = "Docente";

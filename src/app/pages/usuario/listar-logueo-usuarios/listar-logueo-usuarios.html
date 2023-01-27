@@ -14,8 +14,9 @@
       <tbody>
         <tr *ngFor="let docente of docentes">
           <td>
-            <span *ngFor="let cargoDocente of docente.cargoDocenteList">
-              <span><br />- {{ cargoDocente.codCargo?.nombreCargo}}</span>
+            <span *ngFor="let cargoDocente of docente.cargoDocenteList;index as i">
+              <br *ngIf="i!=0">
+              <span>- {{ cargoDocente.codCargo?.nombreCargo}}</span>
             </span>
           </td>
           <td>{{ docente.nombreDocente }} {{

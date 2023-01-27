@@ -164,7 +164,7 @@ export class CrearTareaComponent implements OnInit {
           this.messageService.add({
             severity: 'success', 
             summary: 'Éxito', 
-            detail: 'La tarea ha sido creada con éxito'
+            detail: 'La Actividad ha sido creada con éxito'
           });
           setTimeout(() => {   
             this.blockedDocument = false;                     
@@ -190,7 +190,7 @@ export class CrearTareaComponent implements OnInit {
             this.messageService.add({
               severity: 'success', 
               summary: 'Éxito', 
-              detail: 'La tarea ha sido creada con éxito'
+              detail: 'La Actividad ha sido creada con éxito'
             });
             setTimeout(() => {   
               this.blockedDocument = false;                     

@@ -77,7 +77,7 @@ export class ActualizarDocenteComponent implements OnInit {
 
   iniciarFormulario() {
 
-    this.comboSexo = ["Femenino", "Masculino", "Otro"]
+    this.comboSexo =  ["FEMENINO", "MASCULINO", "OTRO"]
     this.formularioActDoc = this.fb.group({
       nombres: ['', Validators.required],
       apellidos: ['', Validators.required],

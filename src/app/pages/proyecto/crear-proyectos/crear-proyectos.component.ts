@@ -49,7 +49,7 @@ export class CrearProyectosComponent implements OnInit {
         this.messageService.add({
           severity: 'success',
           summary: 'Éxito',
-          detail: 'El proyecto ha sido creada con éxito'
+          detail: 'El proyecto ha sido creado con éxito'
         });
         setTimeout(() => {
           this.blockedDocument = false; 
