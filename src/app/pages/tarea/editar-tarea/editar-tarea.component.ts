@@ -310,15 +310,15 @@ export class EditarTareaComponent implements OnInit {
       if (this.tareaDocenteProyecto == null) {
         this.visualBlockedDocument = false;
         this.back();
-      }else{
-      this.tarea = this.tareaDocenteProyecto.tarea;
-      if (this.tarea.fechaEntregaTarea) {
-        //this.tarea.fechaEntregaTarea = new Date(this.tarea.fechaEntregaTarea);
-        this.tarea.fechaEntregaTarea = this.pipe.transform(this.tarea.fechaEntregaTarea, 'yyyy-MM-ddTHH:mm:ss', 'UTC');
+      } else {
+        this.tarea = this.tareaDocenteProyecto.tarea;
+        if (this.tarea.fechaEntregaTarea) {
+          //this.tarea.fechaEntregaTarea = new Date(this.tarea.fechaEntregaTarea);
+          this.tarea.fechaEntregaTarea = this.pipe.transform(this.tarea.fechaEntregaTarea, 'yyyy-MM-ddTHH:mm:ss', 'UTC');
+        }
+        this.indicadoresAsignados = this.tareaDocenteProyecto.indicadors;
+        this.docentesAsignados = this.tareaDocenteProyecto.docentes;
       }
-      this.indicadoresAsignados = this.tareaDocenteProyecto.indicadors;
-      this.docentesAsignados = this.tareaDocenteProyecto.docentes;
-    }
       //this.tareaDocente.fechaEntrega = new Date(this.tareaDocente.fechaEntrega);
       //this.tareaDocente.fechaEntrega = this.pipe.transform(this.tareaDocente.fechaEntrega, 'yyyy-MM-ddTHH:mm:ss');
     });
@@ -375,8 +375,8 @@ export class EditarTareaComponent implements OnInit {
               summary: 'Éxito',
               detail: 'La tarea ha sido modificada con éxito'
             });
-            setTimeout(() => {        
-              this.blockedDocument = false;                
+            setTimeout(() => {
+              this.blockedDocument = false;
               this.router.navigate(["listar-tareas"])
             }, 2000);
 
@@ -387,7 +387,7 @@ export class EditarTareaComponent implements OnInit {
               summary: 'Error',
               detail: err?.message ?? 'Algo ha salido mal'
             });
-            this.blockedDocument = false; 
+            this.blockedDocument = false;
           },
           complete: () => {
             // this.isLoading = false;
@@ -484,10 +484,13 @@ export class EditarTareaComponent implements OnInit {
       this.checkTipoTarea = true;
   }
 
-  blockDocument(){
+  blockDocument() {
     this.blockedDocument = true;
     setTimeout(() => {
-        this.blockedDocument = false;
+      this.blockedDocument = false;
     }, 3000);
-}
+  }
+  regresar() {
+    this.router.navigate(["listar-tareas"])
+  }
 }

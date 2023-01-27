@@ -37,6 +37,10 @@ export class CrearProyectosComponent implements OnInit {
     });
   }
 
+  regresar() {
+    this.router.navigate(["listar-proyectos"])
+  }
+
   save(){
     this.blockedDocument = true; 
     this.proyectoService.crearProyecto(this.proyecto)

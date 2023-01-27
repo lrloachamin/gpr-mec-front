@@ -77,7 +77,6 @@
           <div class="form-group mb-3">
             <label for="sexo" style="font-weight: bold;">Sexo:</label>
             <select class="form-select" formControlName="sexo" [(ngModel)]="sexoDocenteM">
-              <option value="">Seleccionar</option>
               <option [value]="sexos" *ngFor="let sexos of comboSexo" [selected]="sexos === sexoDocenteM">
                 {{sexos}}
               </option>
@@ -85,13 +84,22 @@
           </div>
 
 
-          <div class="form-group mb-3">
+          <!--<div class="form-group mb-3">
             <label for="puesto" style="font-weight: bold;">Puesto Trabajo:</label>
             <input [(ngModel)]="puestoDocenteM" type="text" name="puesto" id="puesto" class="form-control"
               formControlName="puesto">
             <small class="text-danger"
               *ngIf="formulario.get('puesto')?.errors?.['required'] && formulario.get('puesto')?.touched">Complete este
               campo</small>
+          </div>-->
+
+          <div class="form-group mb-3">
+            <label for="puesto" style="font-weight: bold;">Puesto de Trabajo:</label>
+            <select class="form-select" formControlName="puesto" [(ngModel)]="puestoDocenteM" required (change)="asignarCargoPorPuesto(puestoDocenteM)" >
+              <option [value]="puestos" *ngFor="let puestos of comboPuestoTrabajo" [selected]="puestos === puestoDocenteM">
+                {{puestos}}
+              </option>
+            </select>
           </div>
 
           <!--<div class="form-group mb-3">
@@ -107,7 +115,7 @@
           <div class="form-group mb-3">
             <label for="cargo" style="font-weight: bold;">Cargo:</label>
             <div *ngFor="let cargo of listaCargos">
-              <input (change)="cambiarCheckCargo(cargo)" type="checkbox"><span> {{cargo.nombreCargo}}</span>
+              <input (change)="cambiarCheckCargo(cargo)" type="checkbox" [id]="cargo.codCargo"><span> {{cargo.nombreCargo}}</span>
             </div>
           </div>
 
@@ -117,7 +125,6 @@
           <button style="margin-top: 10px;" type="button" [routerLink]="['/login']"
             class="btn btn-dark btn-sm form-control">Iniciar
             Sesión</button>
-
         </form>
       </div>
     </div>
@@ -135,7 +142,6 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" (click)="cerrarModal()"
               data-bs-dismiss="modal">Cerrar</button>
-
           </div>
         </div>
       </div>

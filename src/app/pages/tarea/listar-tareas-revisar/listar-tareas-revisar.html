@@ -76,7 +76,8 @@
               indicador.descripcionTareaIndicador}}: </span>
             <span *ngIf="!indicador.descripcionTareaIndicador" style="color:rgb(207, 243, 235)">{{
               indicador.valorIndicador}} </span>
-            <span *ngIf="indicador.descripcionTareaIndicador">{{ indicador.valorIndicador}} </span>
+            <span *ngIf="indicador.descripcionTareaIndicador && indicador.indicadorCODIGOINDICADOR.nombreIndicador=='PORCENTAJE'">{{ indicador.valorIndicador}} %</span>
+            <span *ngIf="indicador.descripcionTareaIndicador && indicador.indicadorCODIGOINDICADOR.nombreIndicador!='PORCENTAJE'">{{ indicador.valorIndicador}} </span>
           </span>
         </td>
       </ng-container>

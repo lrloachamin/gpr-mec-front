@@ -13,7 +13,7 @@
           <th>Fecha Límite de Entrega</th>
           <!--<th>Responsable</th>-->
           <th>Proyecto</th>
-          <th></th>
+          <th>Acción</th>
         </tr>
       </thead>
       <tbody>
@@ -25,7 +25,7 @@
           <!--<td>{{ tarea.codigoDocente?.nombreDocente }} {{ tarea.codigoDocente?.apellidoDocente }} </td>-->
           <td>{{ tarea.tarea?.codigoProyecto?.nombreProyecto }}</td>
           <td>
-            <button (click)="editarTarea(tarea)" class="btn btn-warning btn-sm">Editar</button>
+            <button *ngIf="tarea.tarea?.estadoTarea== 'A'" (click)="editarTarea(tarea)" class="btn btn-warning btn-sm">Editar</button>
           </td>
         </tr>
       </tbody>

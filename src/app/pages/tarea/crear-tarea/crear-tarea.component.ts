@@ -212,6 +212,10 @@ export class CrearTareaComponent implements OnInit {
     }
   }
 
+  regresar() {
+    this.router.navigate(["listar-tareas"])
+  }
+
   /*agregarElementos() {
     this.docentesAsignados.push(this.tareaDocente.codigoDocente);
     

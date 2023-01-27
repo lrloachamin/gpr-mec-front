@@ -6,15 +6,16 @@
 
 }*/
 form{
-    background: hsla(169, 50%, 80%, 1);
+    background: hsla(220, 6%, 90%, 1);
 
-    background: linear-gradient(90deg, hsla(169, 50%, 80%, 1) 0%, hsla(230, 41%, 80%, 1) 100%);
+    background: linear-gradient(90deg, hsla(220, 6%, 90%, 1) 50%, hsla(216, 14%, 58%, 1) 100%);
     
-    background: -moz-linear-gradient(90deg, hsla(169, 50%, 80%, 1) 0%, hsla(230, 41%, 80%, 1) 100%);
+    background: -moz-linear-gradient(90deg, hsla(220, 6%, 90%, 1) 50%, hsla(216, 14%, 58%, 1) 100%);
     
-    background: -webkit-linear-gradient(90deg, hsla(169, 50%, 80%, 1) 0%, hsla(230, 41%, 80%, 1) 100%);
+    background: -webkit-linear-gradient(90deg, hsla(220, 6%, 90%, 1) 50%, hsla(216, 14%, 58%, 1) 100%);
     
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#B4E6DD", endColorstr="#B8BFE1", GradientType=1 );}
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#E3E4E6", endColorstr="#8490A2", GradientType=1 );
+}
 
 
 

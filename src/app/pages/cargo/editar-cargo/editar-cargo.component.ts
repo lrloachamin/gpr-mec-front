@@ -61,6 +61,10 @@ export class EditarCargoComponent implements OnInit {
     });
   }
 
+  regresar() {
+    this.router.navigate(["listar-cargos"])
+  }
+
   save(){ 
     this.blockedDocument = true;
     this.cargoService.actualizarCargo(this.cargo)

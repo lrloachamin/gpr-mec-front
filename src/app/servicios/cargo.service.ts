@@ -46,6 +46,7 @@ export class CargoService {
   public actualizarCargo(cargo:Cargo): Observable<String>{
     return this.http.put<String>(`${urlH}modificarCargo`, cargo);
   }
+  
 
 }
 

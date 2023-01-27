@@ -109,7 +109,7 @@ export class RevisarTareaComponent implements OnInit {
         this.messageService.add({
           severity: 'success', 
           summary: 'Éxito', 
-          detail: 'La Actividad ha sido subida con éxito'
+          detail: 'La Actividad ha sido aprobada con éxito'
         });
         setTimeout(() => {  
           this.blockedDocument = false;                      
@@ -127,6 +127,10 @@ export class RevisarTareaComponent implements OnInit {
         // this.isLoading = false;
       },
     })
+  }
+
+  regresar() {
+    this.router.navigate(["tareas-entregadas"])
   }
 
   deleteFile(){}
@@ -154,7 +158,7 @@ export class RevisarTareaComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: err?.message ?? ' Error al aprobar la Actividad'
+          detail: err?.message ?? ' Error al denegar la Actividad'
         });
         this.blockedDocument = false; 
       },

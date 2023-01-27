@@ -19,5 +19,9 @@ form{
 }
 
 mat-icon{
-	font-size: 18px;;
+	font-size: 18px;
+}
+
+.icon-regresar{
+    font-size: 30px;
 }

@@ -59,6 +59,10 @@ export class EditarTipoProcesoComponent implements OnInit {
     })
   }
 
+  regresar() {
+    this.router.navigate(["listar-tipos-procesos"])
+  }
+
   back() {
     this.router.navigate(['listar-tipos-procesos']);
   }

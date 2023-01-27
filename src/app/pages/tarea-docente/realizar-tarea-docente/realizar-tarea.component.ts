@@ -141,14 +141,14 @@ export class RealizarTareaComponent implements OnInit {
             });
             setTimeout(() => {
               this.blockedDocument = false;
-              this.router.navigate(["listar-tareas"])
+              this.router.navigate(["listar-tareas-docente"])
             }, 2000);
           },
           error: (err) => {
             this.messageService.add({
               severity: 'error',
               summary: 'Error',
-              detail: err?.message ?? ' Error al crear la tarea'
+              detail: err?.message ?? ' Error al subir la Actividad'
             });
             this.blockedDocument = false;
           },
@@ -163,6 +163,10 @@ export class RealizarTareaComponent implements OnInit {
     this.router.navigate(['listar-tareas-docente']);
   }
 
+  regresar() {
+    this.router.navigate(["listar-tareas-docente"])
+  }
+  
   asignarIndicador(tareaIndicador: any) {
     if (!this.tareaIndicadors.includes(tareaIndicador.codigoTareaIndicador))
       this.tareaIndicadors = this.tareaIndicadors.filter((item) => item.codigoTareaIndicador !== tareaIndicador.codigoTareaIndicador);

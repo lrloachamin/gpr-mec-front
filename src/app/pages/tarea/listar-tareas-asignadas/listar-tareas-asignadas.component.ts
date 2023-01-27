@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { TareaService } from 'src/app/servicios/tarea.service';
 import { TareaDocente } from 'src/app/models/TareaDocente';
 import { Docente } from 'src/app/models/Docente';
+import { CargoDocente } from 'src/app/models/CargoDocente';
 
 @Component({
   selector: 'app-listar-tareas-asignadas',
@@ -17,12 +18,14 @@ export class ListarTareasAsignadasComponent implements OnInit {
   getTareaDocente$: Observable<TareaDocente[]>;
   tareaDocentes: any[] = [];
   pesoTarea:any;
+  getCargoTarea$: Observable<CargoDocente[]>;
 
   constructor(
     private tareaService: TareaService,
     private router: Router,
   ) {
     this.getTareaDocente$ = new Observable;
+    this.getCargoTarea$ = new Observable;
     this.getDocente$ = this.tareaService.obtenerDocentes();
   }
 
@@ -38,6 +41,8 @@ export class ListarTareasAsignadasComponent implements OnInit {
       this.getTareaDocente$ = this.tareaService.obtenerTareasAsignadasDocentes(t.codigoDocente);
       this.getTareasDocente(t);  
       //t.tareaDocenteList = this.tareaDocentes;
+      this.getCargoTarea$ = this.tareaService.obtenerCargoDocentePorCodDocente(t.codigoDocente);
+        this.getCargoDocente(t);
       });
     });
   }
@@ -81,4 +86,10 @@ export class ListarTareasAsignadasComponent implements OnInit {
       }
     })
   }    
+
+  getCargoDocente(docente: Docente) {
+    this.getCargoTarea$.subscribe(cargosTarea => {
+      docente.cargoDocenteList = cargosTarea;
+    });
+  }
 }

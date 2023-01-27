@@ -1,25 +1,28 @@
 <app-navbar></app-navbar>
 <div class="container">
-  <h2 style="text-align: center;">Control de inicios de sesion</h2>
+  <h2 style="text-align: center;">Control de Inicios de Sesión</h2>
   <div class="table-responsive">
     <table class="table table-hover text-center table-sm">
       <thead class="table-dark">
         <tr>
-          <!--<th>Cargo</th>-->
+          <th>Cargo</th>
           <th>Docente</th>
           <th>Cantidad</th>
           <th>Logueos</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let docente of docentes"><!--*ngIf="docente.codCargo?.nombreCargo!='Director de Departamento'"-->
-          <!--<td >{{ docente.codCargo?.nombreCargo }}</td>-->
+        <tr *ngFor="let docente of docentes">
+          <td>
+            <span *ngFor="let cargoDocente of docente.cargoDocenteList">
+              <span><br />- {{ cargoDocente.codCargo?.nombreCargo}}</span>
+            </span>
+          </td>
           <td>{{ docente.nombreDocente }} {{
             docente.apellidoDocente }}</td>
-          <td>{{ docente.numLogueo}} <span
-              *ngIf="docente.numLogueo==null">0</span></td>
-          <td><progress max="100"
-              value="{{ docente.numLogueo}}" class="{{ docente.claseEstiloProgress}}"></progress></td>
+          <td>{{ docente.numLogueo}} <span *ngIf="docente.numLogueo==null">0</span></td>
+          <td><progress max="100" value="{{ docente.numLogueo}}" class="{{ docente.claseEstiloProgress}}"></progress>
+          </td>
         </tr>
       </tbody>
     </table>
