@@ -231,7 +231,7 @@ export class RegistroComponent implements OnInit {
   asignarCargoPorPuesto(puestoDocenteM: string) {
     let OpcionSeleccionada: string;
     this.cargosAsignados = [];
-    if (puestoDocenteM == "TÉCNICO DE LABORATORIO")//"TÉCNICO DE LABPORATORIO","TIEMPO COMPLETO","TIEMPO PARCIAL"
+    if (puestoDocenteM == "TECNICO LABORATORIO")//"TÉCNICO DE LABPORATORIO","TIEMPO COMPLETO","TIEMPO PARCIAL"
       OpcionSeleccionada = "Técnico de Laboratorio";
     else if (puestoDocenteM == "TIEMPO COMPLETO" || puestoDocenteM == "TIEMPO PARCIAL")//"TÉCNICO DE LABPORATORIO","TIEMPO COMPLETO","TIEMPO PARCIAL"
       OpcionSeleccionada = "Docente";
