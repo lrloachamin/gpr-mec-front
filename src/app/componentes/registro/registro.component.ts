@@ -51,7 +51,7 @@ export class RegistroComponent implements OnInit {
   iniciarFormulario() {
 
     this.comboSexo = ["FEMENINO", "MASCULINO", "OTRO"]
-    this.comboPuestoTrabajo = ["TÉCNICO DE LABORATORIO", "TIEMPO COMPLETO", "TIEMPO PARCIAL"]
+    this.comboPuestoTrabajo = ["TECNICO LABORATORIO", "TIEMPO COMPLETO", "TIEMPO PARCIAL"]
     this.formulario = this.fb.group({
       id: ['', Validators.required],
       nombres: ['', Validators.required],
