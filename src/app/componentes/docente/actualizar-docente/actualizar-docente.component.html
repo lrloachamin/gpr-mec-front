@@ -85,13 +85,22 @@
         </div>
 
 
-        <div class="form-group mb-3">
+        <!--<div class="form-group mb-3">
           <label for="puesto" style="font-weight: bold;">Puesto Trabajo:</label>
           <input [(ngModel)]="docPuestoTrabajo" type="text" name="puesto" id="puesto" class="form-control"
             formControlName="puesto">
           <small class="text-danger"
             *ngIf="formularioActDoc.get('puesto')?.errors?.['required'] && formularioActDoc.get('puesto')?.touched">Complete
             este campo</small>
+        </div>-->
+
+        <div class="form-group mb-3">
+          <label for="puesto" style="font-weight: bold;">Puesto de Trabajo:</label>
+          <select class="form-select" formControlName="puesto" [(ngModel)]="docPuestoTrabajo" required (change)="asignarCargoPorPuesto(docPuestoTrabajo)" >
+            <option [value]="puestos" *ngFor="let puestos of comboPuestoTrabajo" [selected]="puestos === docPuestoTrabajo">
+              {{puestos}}
+            </option>
+          </select>
         </div>
 
 
@@ -106,7 +115,7 @@
         <div class="form-group mb-3">
           <label for="cargo" style="font-weight: bold;">Cargo:</label>
           <div *ngFor="let cargo of listaCargos">
-            <input (click)="cambiarCheckCargo(cargo)" [(ngModel)]="cargo.checked" [ngModelOptions]="{standalone: true}"
+            <input (click)="cambiarCheckCargo(cargo)" [id]="cargo.codCargo" [(ngModel)]="cargo.checked" [ngModelOptions]="{standalone: true}"
               type="checkbox"><span> {{cargo.nombreCargo}}</span>
           </div>
         </div>

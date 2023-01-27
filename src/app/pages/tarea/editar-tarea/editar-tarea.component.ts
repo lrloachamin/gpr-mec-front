@@ -312,6 +312,8 @@ export class EditarTareaComponent implements OnInit {
         this.back();
       } else {
         this.tarea = this.tareaDocenteProyecto.tarea;
+        if(this.tarea.tipoTarea=="SOLICITUD")
+          this.checkTipoTarea = false;
         if (this.tarea.fechaEntregaTarea) {
           //this.tarea.fechaEntregaTarea = new Date(this.tarea.fechaEntregaTarea);
           this.tarea.fechaEntregaTarea = this.pipe.transform(this.tarea.fechaEntregaTarea, 'yyyy-MM-ddTHH:mm:ss', 'UTC');

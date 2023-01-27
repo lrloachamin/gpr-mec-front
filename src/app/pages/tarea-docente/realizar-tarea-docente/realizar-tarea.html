@@ -36,7 +36,7 @@
           <label for="">Prioridad de la Actividad:</label>
           <span>{{ tarea.prioridadTarea }}</span>
         </div>
-        <div class="form-group">
+        <div class="form-group" *ngIf="tarea.pesoTarea">
           <label for="">Peso de la Actividad:</label>
           <span>{{ tarea.valorPesoTarea +" "+ tarea.pesoTarea}}</span>
         </div>
@@ -65,10 +65,10 @@
                 class="form-control" />
               <div *ngIf="i.indicadorCODIGOINDICADOR.nombreIndicador=='BOOLEANO'">
                 <label for="ckeck">Actividad Realizada</label>
-                <input id="ckeck" [value]="'Tarea Realizada'" [(ngModel)]="i.valorIndicador"
+                <input id="ckeck" [value]="'Actividad Realizada'" [(ngModel)]="i.valorIndicador"
                   [name]="i.codigoTareaIndicador" (change)="asignarIndicador(i)" type="radio" />
                 <label for="noCheck" style="margin-left: 10px;">Actividad no Realizada</label>
-                <input id="noCheck" [value]="'Tarea no Realizada'" [(ngModel)]="i.valorIndicador"
+                <input id="noCheck" [value]="'Actividad no Realizada'" [(ngModel)]="i.valorIndicador"
                   [name]="i.codigoTareaIndicador" (change)="asignarIndicador(i)" type="radio" />
               </div>
             </span>

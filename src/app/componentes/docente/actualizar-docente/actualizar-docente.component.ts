@@ -30,6 +30,7 @@ export class ActualizarDocenteComponent implements OnInit {
   cargosAsignados: Cargo[] = [];
 
   comboSexo: any;
+  comboPuestoTrabajo:any;
 
   //variables de validacion
   validadorCedula: any;
@@ -77,7 +78,8 @@ export class ActualizarDocenteComponent implements OnInit {
 
   iniciarFormulario() {
 
-    this.comboSexo =  ["FEMENINO", "MASCULINO", "OTRO"]
+    this.comboSexo =  ["FEMENINO", "MASCULINO", "OTRO"];
+    this.comboPuestoTrabajo = ["TECNICO LABORATORIO", "TIEMPO COMPLETO", "TIEMPO PARCIAL"];
     this.formularioActDoc = this.fb.group({
       nombres: ['', Validators.required],
       apellidos: ['', Validators.required],
@@ -194,5 +196,35 @@ export class ActualizarDocenteComponent implements OnInit {
       this.cargosAsignados = this.cargosAsignados.filter((item) => item.codCargo !== cargo.codCargo);
     else
       this.cargosAsignados.push(cargo);
+  }
+
+  asignarCargoPorPuesto(puestoDocenteM: string) {
+    let OpcionSeleccionada: string;
+    let OpcionDeseleccionada: string;
+    if (puestoDocenteM == "TECNICO LABORATORIO"){//"TÉCNICO DE LABPORATORIO","TIEMPO COMPLETO","TIEMPO PARCIAL"
+      OpcionSeleccionada = "Técnico de Laboratorio";
+      OpcionDeseleccionada ="Docente";
+    }else if (puestoDocenteM == "TIEMPO COMPLETO" || puestoDocenteM == "TIEMPO PARCIAL"){//"TÉCNICO DE LABPORATORIO","TIEMPO COMPLETO","TIEMPO PARCIAL"
+      OpcionSeleccionada = "Docente";
+      OpcionDeseleccionada ="Técnico de Laboratorio";
+    }
+    this.listaCargos.forEach(cargo => {
+      if (cargo.nombreCargo == OpcionSeleccionada) {
+        if(cargo.codCargo){
+          let miCheckbox = document.getElementById(cargo.codCargo?.toString()) as HTMLInputElement;
+            miCheckbox.checked = true;
+        }
+        cargo.checked = true;
+        this.cargosAsignados.push(cargo);
+      }
+      if (cargo.nombreCargo == OpcionDeseleccionada){
+        if(cargo.codCargo){
+          let miCheckbox = document.getElementById(cargo.codCargo?.toString()) as HTMLInputElement;
+            miCheckbox.checked = false;
+        }
+        cargo.checked = false;
+        this.cargosAsignados = this.cargosAsignados.filter((item) => item.codCargo !== cargo.codCargo);
+      }
+    });
   }
 }
