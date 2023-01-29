@@ -12,6 +12,7 @@ import { CargoService } from 'src/app/servicios/cargo.service';
 import { ProyectoService } from 'src/app/servicios/proyecto.service';
 import { TareaService } from 'src/app/servicios/tarea.service';
 import { MessageService } from 'primeng/api';
+import { DatePipe } from '@angular/common';
 
 const MAXIMO_TAMANIO_FILE: number = 5//MB;
 const tipoTarea: any[] = [
@@ -62,6 +63,7 @@ const pesoTarea: any[] = [
 })
 
 export class CrearTareaComponent implements OnInit {
+  pipe = new DatePipe('en-US');
   blockedDocument: boolean = false;
   ckequearIndicadorBooleano: boolean = true;
   //tarea: TareaDocente = {};
@@ -201,6 +203,7 @@ export class CrearTareaComponent implements OnInit {
     this.tarea.idDocenteRevisor = localStorage.getItem('idDocenteRevisor');
     this.tarea.nombreDocenteRevisor = localStorage.getItem('nombreDocenteRevisor');
     this.tarea.fechaCreaciontarea = new Date();
+    this.tarea.fechaEntregaTarea = this.pipe.transform(this.tarea.fechaEntregaTarea, 'yyyy-MM-ddTHH:mm:ss', 'UTC');
     this.tareaDocenteProyecto.tarea = this.tarea;
     this.tareaDocenteProyecto.docentes = this.docentesAsignados;
     this.tareaDocenteProyecto.indicadors = this.indicadoresAsignados;
