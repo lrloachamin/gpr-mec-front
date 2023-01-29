@@ -190,8 +190,10 @@ export class EditarTareaComponent implements OnInit {
 
 }*/
 
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { Observable } from 'rxjs';
 import { Cargo } from 'src/app/models/Cargo';
 import { Docente } from 'src/app/models/Docente';
@@ -199,12 +201,9 @@ import { Indicador } from 'src/app/models/Indicador';
 import { Proyecto } from 'src/app/models/Proyecto';
 import { Tarea } from 'src/app/models/Tarea';
 import { TareaDocente } from 'src/app/models/TareaDocente';
-import { TareaDocenteProyecto } from 'src/app/models/TareaDocenteProyecto';
 import { CargoService } from 'src/app/servicios/cargo.service';
 import { ProyectoService } from 'src/app/servicios/proyecto.service';
 import { TareaService } from 'src/app/servicios/tarea.service';
-import { DatePipe } from '@angular/common';
-import { MessageService } from 'primeng/api';
 
 const tipoTarea: any[] = [
   {

@@ -14,8 +14,9 @@
       <tbody>
         <tr *ngFor="let docente of docentes">
           <td>
-            <span *ngFor="let cargoDocente of docente.cargoDocenteList">
-              <span><br />- {{ cargoDocente.codCargo?.nombreCargo}}</span>
+            <span *ngFor="let cargoDocente of docente.cargoDocenteList;index as i">
+              <br *ngIf="i!=0">
+              <span> - {{ cargoDocente.codCargo?.nombreCargo}}</span>
             </span>
           </td>
           <td>{{ docente.nombreDocente }} {{
@@ -26,12 +27,12 @@
               <span *ngSwitchCase="1">({{docente.cantidadTarea}} Actividad)</span>
               <span *ngSwitchDefault>({{docente.cantidadTarea}} Actividades)</span>
             </span>
-            <span *ngFor="let tareaDocente of docente.tareaDocenteList"> <!--style="list-style: none;"-->
-              <span><br />- {{ tareaDocente.codigoTarea?.nombreTarea}}</span>
+            <span *ngFor="let tareaDocente of docente.tareaDocenteList;index as i"> <!--style="list-style: none;"-->
+              <span><br>- {{ tareaDocente.codigoTarea?.nombreTarea}}</span>
             </span>
           </td>
-          <td><progress max="100"
-              value="{{ docente.cargaHoraria}}" class="{{ docente.claseEstiloProgress}}"></progress></td>
+          <td><progress max="100" value="{{ docente.cargaHoraria}}" class="{{ docente.claseEstiloProgress}}"></progress>
+          </td>
         </tr>
       </tbody>
     </table>
