@@ -13,6 +13,7 @@ import { ProyectoService } from 'src/app/servicios/proyecto.service';
 import { TareaService } from 'src/app/servicios/tarea.service';
 import { MessageService } from 'primeng/api';
 
+const MAXIMO_TAMANIO_FILE: number = 5//MB;
 const tipoTarea: any[] = [
   {
     "id": "TAREA",
@@ -99,8 +100,6 @@ export class CrearTareaComponent implements OnInit {
     private proyectoService: ProyectoService,
     private messageService: MessageService
   ) {
-
-    //this.codCargo = localStorage.getItem('codCargo');
     this.codDocente = localStorage.getItem('codigoDocente');
     this.getProyectos$ = this.proyectoService.listarProyectosActivos();
     this.getCargos$ = this.cargoService.obtenerCargosModel();
@@ -170,7 +169,7 @@ export class CrearTareaComponent implements OnInit {
       }
     }
 
-    if(this.indicadoresAsignados.length==0){
+    if (this.indicadoresAsignados.length == 0) {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
@@ -178,8 +177,8 @@ export class CrearTareaComponent implements OnInit {
       });
       return;
     }
-    
-    if(this.docentesAsignados.length==0){
+
+    if (this.docentesAsignados.length == 0) {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
@@ -187,8 +186,18 @@ export class CrearTareaComponent implements OnInit {
       });
       return;
     }
+    
+    if (this.selectedFiles != undefined)
+      if (this.selectedFiles[0].size / 1024 / 1024 > MAXIMO_TAMANIO_FILE) {//5MB
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'El archivo supera el tamaño especificado'
+        });
+        return;
+      }
 
-    this.blockedDocument = true;   
+    this.blockedDocument = true;
     this.tarea.idDocenteRevisor = localStorage.getItem('idDocenteRevisor');
     this.tarea.nombreDocenteRevisor = localStorage.getItem('nombreDocenteRevisor');
     this.tarea.fechaCreaciontarea = new Date();
@@ -199,12 +208,12 @@ export class CrearTareaComponent implements OnInit {
       this.tareaService.crearTarea(this.tareaDocenteProyecto).subscribe({
         next: (data) => {
           this.messageService.add({
-            severity: 'success', 
-            summary: 'Éxito', 
+            severity: 'success',
+            summary: 'Éxito',
             detail: 'La Actividad ha sido creada con éxito'
           });
-          setTimeout(() => {   
-            this.blockedDocument = false;                     
+          setTimeout(() => {
+            this.blockedDocument = false;
             this.router.navigate(["listar-tareas"])
           }, 2000);
         },
@@ -225,12 +234,12 @@ export class CrearTareaComponent implements OnInit {
         .subscribe({
           next: (data) => {
             this.messageService.add({
-              severity: 'success', 
-              summary: 'Éxito', 
+              severity: 'success',
+              summary: 'Éxito',
               detail: 'La Actividad ha sido creada con éxito'
             });
-            setTimeout(() => {   
-              this.blockedDocument = false;                     
+            setTimeout(() => {
+              this.blockedDocument = false;
               this.router.navigate(["listar-tareas"])
             }, 2000);
           },
@@ -243,7 +252,6 @@ export class CrearTareaComponent implements OnInit {
             this.blockedDocument = false;
           },
           complete: () => {
-            // this.isLoading = false;
           },
         })
     }

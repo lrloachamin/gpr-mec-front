@@ -74,8 +74,11 @@
             </span>
         </div>
         <div id="box2">
-          <input type="button" id="selectButton" mat-raised-button (click)="fileInput.click()" style="border-radius: 3px;"
+          <label>Archivo de Respaldo -- Máximo 5MB:</label>
+          <p>
+            <input type="button" id="selectButton" mat-raised-button (click)="fileInput.click()" style="border-radius: 3px;"
             value="...Seleccione el archivo PDF de Respaldo..." class="btn btn-dark btn-sm form-control" />
+          </p>
           <input #fileInput type="file" hidden (change)="selectFiles($event)" />
           <span *ngIf="imageName">{{imageName}}</span>
         </div>

@@ -9,6 +9,8 @@ import { Tarea } from 'src/app/models/Tarea';
 import { TareaIndicadorFile } from 'src/app/models/TareaIndicadorFile';
 import { MessageService } from 'primeng/api';
 
+const MAXIMO_TAMANIO_FILE:number = 5//5MB;
+
 @Component({
   selector: 'app-realizar-tarea',
   templateUrl: './realizar-tarea.html',
@@ -86,6 +88,24 @@ export class RealizarTareaComponent implements OnInit {
   }
 
   save() {
+    if (this.selectedFiles != undefined){
+      if(this.selectedFiles[0].type != "application/pdf"){
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'El archivo debe estar en Formato PDF'
+        });
+        return;
+      }
+      if (this.selectedFiles[0].size / 1024 / 1024 > MAXIMO_TAMANIO_FILE) {//5MB
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'El archivo supera el tamaño especificado'
+        });
+        return;
+      }
+    }
     this.blockedDocument = true;
     this.tareaIndicadorFile.tareaIndicador = this.tareaIndicadors;
     /*this.tareaService.guardarTareaAsignadaAlDocente(this.tareaIndicadors)

@@ -205,6 +205,7 @@ import { CargoService } from 'src/app/servicios/cargo.service';
 import { ProyectoService } from 'src/app/servicios/proyecto.service';
 import { TareaService } from 'src/app/servicios/tarea.service';
 
+const MAXIMO_TAMANIO_FILE:number = 5//5MB;
 const tipoTarea: any[] = [
   {
     "id": "TAREA",
@@ -361,6 +362,68 @@ export class EditarTareaComponent implements OnInit {
   }
 
   save() {
+    if (!this.tarea.nombreTarea || !this.tarea.tipoTarea || !this.tarea.codigoProyecto || !this.tarea.prioridadTarea || !this.cargo.codCargo) {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Verifique que todos los campos se encuentren llenos'
+      });
+      return;
+    }
+    if (this.tarea.tipoTarea == "TAREA") {
+      if (!this.tarea.pesoTarea || !this.tarea.valorPesoTarea || !this.tarea.fechaEntregaTarea) {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Verifique que todos los campos se encuentren llenos'
+        });
+        return;
+      }
+      if (this.tarea.fechaEntregaTarea) {
+        let fechaActual = new Date();
+        let fechaIngresada;
+        if (this.tarea.fechaEntregaTarea)
+          fechaIngresada = new Date(this.tarea.fechaEntregaTarea)
+        if (fechaIngresada)
+          if (fechaIngresada <= fechaActual) {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: 'Verifique que la Fecha de Entrega de la Actividad sea mayor a la Fecha actual'
+            });
+            return;
+          }
+      }
+    }
+
+    /*if(this.indicadoresAsignados.length==0){
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'No se ha agregado ningún indicador a la Actividad'
+      });
+      return;
+    }*/
+    
+    if(this.docentesAsignados.length==0){
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'No se ha agregado ningún docente a la Actividad'
+      });
+      return;
+    }
+
+    if (this.selectedFiles != undefined)
+      if (this.selectedFiles[0].size / 1024 / 1024 > MAXIMO_TAMANIO_FILE) {//5MB
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'El archivo supera el tamaño especificado'
+        });
+        return;
+      }
+
     this.blockedDocument = true;//Spinner
     this.tarea.idDocenteRevisor = localStorage.getItem('idDocenteRevisor');
     this.tarea.nombreDocenteRevisor = localStorage.getItem('nombreDocenteRevisor');
