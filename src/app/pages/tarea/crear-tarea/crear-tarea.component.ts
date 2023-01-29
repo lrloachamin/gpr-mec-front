@@ -136,14 +136,6 @@ export class CrearTareaComponent implements OnInit {
   }
 
   save() {
-    /*l
-      
-    if(this.indicadoresAsignados.length==0)
-      alert("Ningún indicador Asignado")
-    
-    if(this.docentesAsignados.length==0)
-      alert("Ningún Docente Asignado")
-    */
     if (!this.tarea.nombreTarea || !this.tarea.tipoTarea || !this.tarea.codigoProyecto || !this.tarea.prioridadTarea || !this.cargo.codCargo) {
       this.messageService.add({
         severity: 'error',
@@ -177,6 +169,25 @@ export class CrearTareaComponent implements OnInit {
           }
       }
     }
+
+    if(this.indicadoresAsignados.length==0){
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'No se ha agregado ningún indicador a la Actividad'
+      });
+      return;
+    }
+    
+    if(this.docentesAsignados.length==0){
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'No se ha agregado ningún docente a la Actividad'
+      });
+      return;
+    }
+
     this.blockedDocument = true;   
     this.tarea.idDocenteRevisor = localStorage.getItem('idDocenteRevisor');
     this.tarea.nombreDocenteRevisor = localStorage.getItem('nombreDocenteRevisor');
