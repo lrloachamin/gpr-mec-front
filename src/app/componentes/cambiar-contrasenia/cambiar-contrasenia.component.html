@@ -42,7 +42,7 @@
 
                 <small *ngIf="!validaroPass" class="text-danger">Las contraseñas no coinciden</small>
             </div>
-            <button type="submit" [disabled]="formularioContrasenia.invalid  || !validaroPass" class="btn btn-primary"
+            <button type="submit" [disabled]="formularioContrasenia.invalid  || !validaroPass" class="btn btn-primary btn-sm form-control"
                 routerLinkActive="router-link-active">Guardar</button>
         </form>
     </div>
