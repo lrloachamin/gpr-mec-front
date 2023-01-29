@@ -23,7 +23,7 @@
             </div>
             <div class="form-group mb-3">
                 <label for="passwordNew" style="font-weight: bold;">Contraseña Nueva:</label>
-                <input pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$" type="password" name="passwordNew"
+                <input pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,32}$" type="password" name="passwordNew"
                     id="passwordNew" class="form-control" [(ngModel)]="passwordNewI"
                     (change)="validadorContrasenia(passwordNewI,passwordConf);validarCadenaContrasenia()"
                     formControlName="passwordNew">
