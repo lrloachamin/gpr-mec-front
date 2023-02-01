@@ -28,7 +28,7 @@
               <span *ngSwitchDefault>({{docente.cantidadTarea}} Actividades)</span>
             </span>
             <span *ngFor="let tareaDocente of docente.tareaDocenteList;index as i"> <!--style="list-style: none;"-->
-              <span><br>- {{ tareaDocente.codigoTarea?.nombreTarea}}</span>
+              <span><br>- {{ tareaDocente.codigoTarea?.nombreTarea}}</span><span *ngIf="tareaDocente.codigoTarea?.pesoTarea"> -->{{ tareaDocente.codigoTarea?.valorPesoTarea +" "+ tareaDocente.codigoTarea?.pesoTarea }}</span>
             </span>
           </td>
           <td><progress max="100" value="{{ docente.cargaHoraria}}" class="{{ docente.claseEstiloProgress}}"></progress>
