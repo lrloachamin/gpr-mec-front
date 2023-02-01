@@ -23,7 +23,7 @@
             docente.apellidoDocente }}</td>
           <td>
             <span [ngSwitch]="docente.cantidadTarea">
-              <span *ngSwitchCase="0">(Ningúna Actividad)</span>
+              <!--<span *ngSwitchCase="0">(Ningúna Actividad)</span>-->
               <span *ngSwitchCase="1">({{docente.cantidadTarea}} Actividad)</span>
               <span *ngSwitchDefault>({{docente.cantidadTarea}} Actividades)</span>
             </span>

@@ -26,7 +26,7 @@ export class ListarTareasAsignadasComponent implements OnInit {
   ) {
     this.getTareaDocente$ = new Observable;
     this.getCargoTarea$ = new Observable;
-    this.getDocente$ = this.tareaService.obtenerDocentes();
+    this.getDocente$ = this.tareaService.listarDocentesTareasAsignadas();
   }
 
   ngOnInit(): void {
