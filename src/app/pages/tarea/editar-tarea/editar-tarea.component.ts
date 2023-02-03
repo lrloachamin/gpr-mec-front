@@ -362,7 +362,7 @@ export class EditarTareaComponent implements OnInit {
   }
 
   save() {
-    if (!this.tarea.nombreTarea || !this.tarea.tipoTarea || !this.tarea.codigoProyecto || !this.tarea.prioridadTarea || !this.cargo.codCargo) {
+    if (!this.tarea.nombreTarea || !this.tarea.tipoTarea || !this.tarea.codigoProyecto || !this.tarea.prioridadTarea) {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
