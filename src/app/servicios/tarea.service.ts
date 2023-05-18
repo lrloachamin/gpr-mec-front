@@ -13,8 +13,8 @@ import { Tarea } from '../models/Tarea';
 import { TareasRealizadas } from '../models/TareasRealizadas';
 import { CargoDocente } from '../models/CargoDocente';
 
-//const URL='http://localhost:8080';
-const URL="https://gpr-mec-espe.azurewebsites.net"
+const URL='http://localhost:8080';
+//const URL="https://gpr-mec-espe.azurewebsites.net"
 const TAREA_DOCENTE = URL + '/tareaDocente';
 
 @Injectable({
@@ -28,6 +28,10 @@ export class TareaService {
   tareaDocente$ = this.tareaDocente$$.asObservable();
   private proyecto$$ = new BehaviorSubject<Proyecto | null>(null);
   proyecto$ = this.proyecto$$.asObservable();
+
+  private proyectoModel$$ = new BehaviorSubject<Proyecto | null>(null);
+  proyectoModel$ = this.proyectoModel$$.asObservable();
+
   private tarea$$ = new BehaviorSubject<Tarea | null>(null);
   tarea$ = this.tarea$$.asObservable();
   private tareasDocente$$ = new BehaviorSubject<any[]  |undefined>(undefined);
@@ -37,6 +41,10 @@ export class TareaService {
 
   public obtenerTareas(idDocente:string): Observable<TareaDocenteProyecto[]>{
     return this.http.get<TareaDocenteProyecto[]>(`${TAREA_DOCENTE}/listarTareas/${idDocente}`); 
+  }
+  
+  public obtenerTareasPorProyecto(idDocente:string,idProyecto:any): Observable<TareaDocenteProyecto[]>{
+    return this.http.get<TareaDocenteProyecto[]>(`${TAREA_DOCENTE}/listarTareasPorProyecto/${idDocente}/${idProyecto}`); 
   }
 
   public obtenerTareasEntregadas(idDocente:string): Observable<TareaDocente[]>{
@@ -58,7 +66,7 @@ export class TareaService {
   public obtenerTodasTareasRevisar():Observable<TareasRealizadas[]>{
     return this.http.get<TareasRealizadas[]>(`${TAREA_DOCENTE}/listarTodasTareasRevisadas`); 
   }
-
+  
   public crearTareaConArchivo(tarea:TareaDocenteProyecto,file:File){
     const formData: FormData = new FormData();
     formData.append("tareaDocenteProyecto",JSON.stringify(tarea));
@@ -80,6 +88,10 @@ export class TareaService {
 
   public setProyecto(proyecto: Proyecto) {
     this.proyecto$$.next(proyecto);
+  }
+
+  public setProyectoModel(proyecto: Proyecto) {
+    this.proyectoModel$$.next(proyecto);
   }
 
   public setTareaModel(tarea: Tarea) {

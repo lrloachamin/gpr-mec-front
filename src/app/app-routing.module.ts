@@ -29,6 +29,8 @@ import { ListarTiposProcesosComponent } from './pages/tipoProceso/listar-tipos-p
 import { ListarLogueoUsuariosComponent } from './pages/usuario/listar-logueo-usuarios/listar-logueo-usuarios.component';
 import { PasswordOlvidadoComponent } from './pages/usuario/password-olvidado/password-olvidado.component';
 import { AuthGuard } from './shared/auth.guard';
+import { ListarTareasProgramadasComponent } from './pages/tarea/listar-tareas-programadas/listar-tareas-programadas.component';
+import { CrearTareaProgramadaComponent } from './pages/tarea/crear-tarea-programada/crear-tarea-programada.component';
 
 const routes: Routes = [
  {path: '', redirectTo:'/login' ,pathMatch:'full'},
@@ -60,6 +62,8 @@ const routes: Routes = [
   {path: 'listar-cargos', component:ListarCargoComponent,canActivate:[AuthGuard]},
   {path: 'crear-cargo', component:CrearCargoComponent,canActivate:[AuthGuard]},
   {path: 'editar-cargo', component:EditarCargoComponent,canActivate:[AuthGuard]},
+  {path: 'listar-tareas-programadas', component:ListarTareasProgramadasComponent,canActivate:[AuthGuard]},
+  {path: 'crear-tarea-programada', component:CrearTareaProgramadaComponent,canActivate:[AuthGuard]},
   {path: '**', component:LoginComponent}
 ];
 
